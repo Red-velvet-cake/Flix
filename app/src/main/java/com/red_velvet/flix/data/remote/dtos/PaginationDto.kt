@@ -2,7 +2,7 @@ package com.red_velvet.flix.data.remote.dtos
 
 import com.google.gson.annotations.SerializedName
 
-data class PaginationResponse<T>(
+data class PaginationDto<T>(
     @SerializedName("page")
     val page: Int?,
     @SerializedName("results")
