@@ -7,5 +7,5 @@ data class AvatarDto(
     @SerializedName("gravatar")
     val gravatar: GravatarDto?,
     @SerializedName("tmdb")
-    val tmdb: TmdbDto?
+    val avatarPath: AvatarPathDto?
 )
