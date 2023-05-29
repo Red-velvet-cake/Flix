@@ -13,12 +13,12 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 object SharedPrefsModule {
     @Provides
-    fun getSharedPrefsUtil(@ApplicationContext context : Context) : SharedPreferences
-    {
-        return context.getSharedPreferences("sharedPrefsName" , Context.MODE_PRIVATE)
+    fun getSharedPrefsUtil(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences("sharedPrefsName", Context.MODE_PRIVATE)
     }
+
     @Provides
-    fun getSharedPrefs(sharedPrefs : SharedPreferences) : SharedPrefs {
+    fun getSharedPrefs(sharedPrefs: SharedPreferences): SharedPrefs {
         return SharedPrefs(sharedPrefs)
     }
 }
