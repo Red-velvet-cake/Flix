@@ -3,7 +3,7 @@ package com.red_velvet.flix.data.remote.dtos
 
 import com.google.gson.annotations.SerializedName
 
-data class ErrorResponseDto(
+data class ApiResponse(
     @SerializedName("status_code")
     val statusCode: Int?,
     @SerializedName("status_message")
