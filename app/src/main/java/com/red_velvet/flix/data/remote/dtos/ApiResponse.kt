@@ -9,5 +9,7 @@ data class ApiResponse(
     @SerializedName("status_message")
     val statusMessage: String?,
     @SerializedName("success")
-    val success: Boolean?
+    val success: Boolean?,
+    @SerializedName("list_id")
+    val listId: Int?
 )

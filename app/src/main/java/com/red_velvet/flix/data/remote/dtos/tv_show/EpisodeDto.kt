@@ -3,11 +3,15 @@ package com.red_velvet.flix.data.remote.dtos.tv_show
 
 import com.google.gson.annotations.SerializedName
 
-data class LastEpisodeToAirDto(
+data class EpisodeDto(
     @SerializedName("air_date")
     val airDate: String?,
+    @SerializedName("crew")
+    val crew: List<CrewDto?>?,
     @SerializedName("episode_number")
     val episodeNumber: Int?,
+    @SerializedName("guest_stars")
+    val guestStars: List<GuestStarDto?>?,
     @SerializedName("id")
     val id: Int?,
     @SerializedName("name")
@@ -25,7 +29,7 @@ data class LastEpisodeToAirDto(
     @SerializedName("still_path")
     val stillPath: String?,
     @SerializedName("vote_average")
-    val voteAverage: Int?,
+    val voteAverage: Double?,
     @SerializedName("vote_count")
     val voteCount: Int?
 )

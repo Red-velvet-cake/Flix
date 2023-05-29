@@ -31,7 +31,7 @@ data class TvShowDetailsDto(
     @SerializedName("last_air_date")
     val lastAirDate: String?,
     @SerializedName("last_episode_to_air")
-    val lastEpisodeToAir: LastEpisodeToAirDto?,
+    val lastEpisodeToAir: EpisodeDto?,
     @SerializedName("name")
     val name: String?,
     @SerializedName("networks")

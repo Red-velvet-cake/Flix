@@ -3,7 +3,7 @@ package com.red_velvet.flix.data.remote.dtos.tv_show
 
 import com.google.gson.annotations.SerializedName
 
-data class TvShowDto(
+data class TVShowDto(
     @SerializedName("backdrop_path")
     val backdropPath: String?,
     @SerializedName("first_air_date")
