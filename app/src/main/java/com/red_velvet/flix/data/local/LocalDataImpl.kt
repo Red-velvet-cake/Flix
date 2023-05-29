@@ -1,6 +1,8 @@
 package com.red_velvet.flix.data.local
 
-class LocalDataImpl : LocalData {
+import javax.inject.Inject
+
+class LocalDataImpl@Inject constructor(sharedPrefs: SharedPrefs) : LocalData {
     override fun setPrefs(key: String, value: String) {
         TODO("Not yet implemented")
     }
