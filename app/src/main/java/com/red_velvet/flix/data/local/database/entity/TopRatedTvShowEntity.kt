@@ -2,11 +2,10 @@ package com.red_velvet.flix.data.local.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
 @Entity
-data class TvShow(
-    @PrimaryKey (autoGenerate = true) val id : Long,
-    val title : String ,
+data class TopRatedTvShowEntity(
+    @PrimaryKey(autoGenerate = true) val id : Long,
+    val title : String,
     val originalLanguage : String,
     val overview: String,
     val imageUrl : String,

@@ -2,21 +2,35 @@ package com.red_velvet.flix.data.local.database
 
 import androidx.room.Insert
 import androidx.room.Query
-import com.red_velvet.flix.data.local.database.entity.MovieEntity
-import com.red_velvet.flix.data.local.database.entity.TvShow
+import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
+import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
+import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
+import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
 import kotlinx.coroutines.flow.Flow
 
 interface MovieDao {
     @Insert
-    suspend fun insertMovie(movie:MovieEntity)
+    suspend fun insertPopularMovie(popularMovieEntity: PopularMovieEntity)
+
     @Insert
-    suspend fun insertAllMovies(movie: List<MovieEntity>)
-    @Query("select * from MovieEntity")
-    fun getMovie(): Flow<MovieEntity>
+    suspend fun insertTopRatedMovie(topRatedMovieEntity: TopRatedMovieEntity)
+
     @Insert
-    suspend fun insertTvShow(tvShow: TvShow)
+    suspend fun insertNowPlayingMovie(nowPlayingMovieEntity: NowPlayingMovieEntity)
+
     @Insert
-    suspend fun insertAllTvShow(movie: List<TvShow>)
-    @Query("select * from TvShow")
-    fun getTvShow(): Flow<TvShow>
+    suspend fun insertUpcomingMovie(popularMovieEntity: PopularMovieEntity)
+
+    @Query("SELECT * FROM PopularMovieEntity")
+    fun getPopularTvShow(): Flow<List<PopularMovieEntity>>
+
+    @Query("SELECT * FROM TopRatedMovieEntity")
+    fun getTopRatedTvShow(): Flow<List<TopRatedMovieEntity>>
+
+    @Query("SELECT * FROM NowPlayingMovieEntity")
+    fun getOnTheAirTvShow(): Flow<List<NowPlayingMovieEntity>>
+
+    @Query("SELECT * FROM UpcomingMovieEntity")
+    fun getAiringTodayTvShow(): Flow<List<UpcomingMovieEntity>>
+
 }
