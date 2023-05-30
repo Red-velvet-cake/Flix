@@ -10,6 +10,7 @@ import com.red_velvet.flix.data.local.database.entity.PopularTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
+import com.red_velvet.flix.data.local.database.entity.UserEntity
 
 @Database(
     entities = [
@@ -20,10 +21,12 @@ import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
         PopularMovieEntity::class,
         PopularTvShowEntity::class,
         TopRatedTvShowEntity::class,
-        TopRatedMovieEntity::class
+        TopRatedMovieEntity::class,
+        UserEntity::class
     ], version = 1
 )
 abstract class MovieDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
     abstract fun tvShowDao(): TvShowDao
+    abstract fun userDataDao(): UserDataDao
 }
