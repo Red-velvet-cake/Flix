@@ -1,5 +1,6 @@
 package com.red_velvet.flix.data.local.database
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
@@ -7,7 +8,7 @@ import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
 import kotlinx.coroutines.flow.Flow
-
+@Dao
 interface MovieDao {
     @Insert
     suspend fun insertPopularMovie(popularMovieEntity: PopularMovieEntity)

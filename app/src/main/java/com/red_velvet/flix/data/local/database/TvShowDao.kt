@@ -1,5 +1,6 @@
 package com.red_velvet.flix.data.local.database
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -8,7 +9,7 @@ import com.red_velvet.flix.data.local.database.entity.OnTheAirTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.PopularTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedTvShowEntity
 import kotlinx.coroutines.flow.Flow
-
+@Dao
 interface TvShowDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPopularTvShow(popularTvShowEntity: PopularTvShowEntity)
