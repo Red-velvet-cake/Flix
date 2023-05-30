@@ -10,7 +10,7 @@ class AuthorizationInterceptor : Interceptor {
 
     private val apiKey: String = BuildConfig.API_KEY
 
-    // TODO: Jalal should give me some dependency so I can get these values from there
+    // TODO: Jalal should give me a dependency, so that I can get these values from there
     private val requestToken: String = ""
     private val sessionId: String = ""
 
