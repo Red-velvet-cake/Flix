@@ -2,9 +2,9 @@ package com.red_velvet.flix.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.red_velvet.flix.data.local.database.dto.MovieDao
-import com.red_velvet.flix.data.local.database.dto.TvShowDao
-import com.red_velvet.flix.data.local.database.dto.UserDataDao
+import com.red_velvet.flix.data.local.database.dao.MovieDao
+import com.red_velvet.flix.data.local.database.dao.TvShowDao
+import com.red_velvet.flix.data.local.database.dao.UserDataDao
 import com.red_velvet.flix.data.local.database.entity.AirngTodayTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
 import com.red_velvet.flix.data.local.database.entity.OnTheAirTvShowEntity
