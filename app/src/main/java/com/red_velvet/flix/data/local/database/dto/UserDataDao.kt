@@ -1,4 +1,4 @@
-package com.red_velvet.flix.data.local.database
+package com.red_velvet.flix.data.local.database.dto
 
 import androidx.room.Dao
 import androidx.room.Insert
