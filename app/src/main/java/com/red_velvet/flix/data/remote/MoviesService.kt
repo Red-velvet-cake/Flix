@@ -14,7 +14,9 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.HTTP
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -26,13 +28,15 @@ interface MoviesService {
     @POST("authentication/token/validate_with_login")
     suspend fun validateRequestTokenWithLogin(@Body loginRequest: LoginRequest): Response<TokenDto>
 
+    @FormUrlEncoded
     @POST("authentication/session/new")
     suspend fun createSession(@Field("request_token") requestToken: String): Response<SessionDto>
 
     @GET("authentication/guest_session/new")
     suspend fun createGuestSession(): Response<GestSessionDto>
 
-    @DELETE("authentication/session")
+    @FormUrlEncoded
+    @HTTP(method = "DELETE", path = "authentication/session", hasBody = true)
     suspend fun deleteSession(@Field("session_id") sessionId: String): Response<ApiResponse>
 
 
@@ -91,12 +95,13 @@ interface MoviesService {
     ): Response<TrailersDto>
 
     @GET("movie/{movie_id}/recommendations")
-    suspend fun getRecommendations(
+    suspend fun getMovieRecommendations(
         @Path("movie_id") movieId: Int,
         @Query("page") page: Int = 1,
         @Query("language") language: String = "en-US"
     ): Response<PaginationDto<MovieDto>>
 
+    @FormUrlEncoded
     @POST("movie/{movie_id}/rating")
     suspend fun rateMovie(
         @Path("movie_id") movieId: Int,
@@ -187,6 +192,7 @@ interface MoviesService {
         @Query("language") language: String = "en-US"
     ): Response<PaginationDto<ReviewDto>>
 
+    @FormUrlEncoded
     @POST("tv/{series_id}/rating")
     suspend fun rateTVShow(
         @Path("series_id") seriesId: Int,
@@ -243,6 +249,7 @@ interface MoviesService {
         @Query("language") language: String = "en-US"
     ): Response<TrailersDto>
 
+    @FormUrlEncoded
     @POST("tv/{series_id}/season/{season_number}/episode/{episode_number}/rating")
     suspend fun getEpisodeRating(
         @Path("series_id") seriesId: Int,
@@ -318,12 +325,14 @@ interface MoviesService {
     @GET("list/{list_id}")
     suspend fun getListDetails(@Path("list_id") listId: Int): Response<CustomListDetailsDto>
 
+    @FormUrlEncoded
     @POST("list/{list_id}/remove_item")
     suspend fun removeItemFromList(
         @Path("list_id") listId: Int,
         @Field("media_id") mediaId: Int
     ): Response<ApiResponse>
 
+    @FormUrlEncoded
     @POST("list/{list_id}/add_item")
     suspend fun addItemToList(
         @Path("list_id") listId: Int,
@@ -333,10 +342,10 @@ interface MoviesService {
 
     @GET("search/multi")
     suspend fun search(
+        @Query("query") query: String,
         @Query("include_adult") includeAdult: Boolean = false,
         @Query("language") language: String = "en-US",
         @Query("page") page: Int = 1,
-        @Query("query") query: String,
     ): Response<PaginationDto<MovieDto>>
 
     @GET("search/movie")
