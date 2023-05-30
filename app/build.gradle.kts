@@ -1,3 +1,5 @@
+import java.util.Properties
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     id("com.android.application")
@@ -7,6 +9,8 @@ plugins {
     id("com.google.dagger.hilt.android")
 }
 
+val localProperties = Properties()
+localProperties.load(rootProject.file("local.properties").inputStream())
 
 android {
     namespace = "com.red_velvet.flix"
@@ -20,6 +24,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_KEY", localProperties.getProperty("API_KEY") ?: "\"\"")
+        buildConfigField("String", "BASE_URL", localProperties.getProperty("BASE_URL") ?: "\"\"")
     }
 
     buildTypes {
@@ -38,7 +45,7 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-    dataBinding{
+    dataBinding {
         enable = true
     }
     buildFeatures {
