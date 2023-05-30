@@ -7,9 +7,9 @@ import okhttp3.Response
 
 class AuthorizationInterceptor : Interceptor {
 
-    private val apiKey: String = "3302125369739e2ee7068474d8dcfa30"
-    private val requestToken: String = "deb24ae7536a28bdc527bc73b55ea0ed7694321a"
-    private val sessionId: String = "013b053dbf80bb460d03dacc524f59f877203bde"
+    private val apiKey: String = ""
+    private val requestToken: String = ""
+    private val sessionId: String = ""
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
