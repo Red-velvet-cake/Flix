@@ -1,5 +1,6 @@
 package com.red_velvet.flix.di
 
+import com.red_velvet.flix.BuildConfig
 import com.red_velvet.flix.data.remote.AuthorizationInterceptor
 import com.red_velvet.flix.data.remote.MoviesService
 import dagger.Module
@@ -28,7 +29,7 @@ object NetworkModule {
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
+            .baseUrl(BuildConfig.BASE_URL)
             .client(client)
             .addConverterFactory(gsonConverterFactory)
             .build()
