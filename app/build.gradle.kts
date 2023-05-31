@@ -26,7 +26,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "API_KEY", localProperties.getProperty("API_KEY") ?: "\"\"")
-        buildConfigField("String", "BASE_URL", localProperties.getProperty("BASE_URL") ?: "\"\"")
+        buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+        buildConfigField("String", "IMAGE_BASE_PATH", "\"https://image.tmdb.org/t/p/w500/\"")
     }
 
     buildTypes {
@@ -98,7 +99,7 @@ dependencies {
     val room_version = "2.5.1"
     implementation("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
-    implementation ("androidx.room:room-ktx:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
     //dagger hilt
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
