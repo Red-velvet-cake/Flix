@@ -2,13 +2,11 @@ package com.red_velvet.flix.domain.mapper
 
 import com.red_velvet.flix.BuildConfig
 import com.red_velvet.flix.data.remote.dtos.movie.MovieDetailsDto
-import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
-import com.red_velvet.flix.domain.model.Movie
 import com.red_velvet.flix.domain.model.MovieDetails
 import com.red_velvet.flix.domain.utils.orFalse
 import com.red_velvet.flix.domain.utils.orZero
 
-fun MovieDetailsDto.toMovie(): MovieDetails {
+fun MovieDetailsDto.toMovieDetails(): MovieDetails {
     return MovieDetails(
         id = id.orZero(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + backdropPath,
