@@ -18,7 +18,7 @@ fun TvShowDetailsDto.toModel(): TvShowDetails {
         numberOfSeasons = numberOfSeasons.orZero(),
         overview = overview.orEmpty(),
         popularity = popularity.orZero(),
-        seasons = seasons?.map { it.toModel() }.toList(),
+        seasons = seasons?.map { it?.toModel()!! }.orEmpty(),
         type = type.orEmpty(),
         voteAverage = voteAverage.orZero()
     )

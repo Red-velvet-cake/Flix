@@ -9,7 +9,7 @@ import com.red_velvet.flix.domain.utils.orZero
 fun KeywordsDto.toModel(): Keywords {
     return Keywords(
         id = id.orZero(),
-        keywords = keywords?.map { it?.toModel()!! } ?: emptyList()
+        keywords = keywords?.map { it?.toModel()!! }.orEmpty()
     )
 }
 

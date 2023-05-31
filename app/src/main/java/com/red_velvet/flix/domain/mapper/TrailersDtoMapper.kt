@@ -5,7 +5,7 @@ import com.red_velvet.flix.data.remote.dtos.trailer.TrailersDto
 import com.red_velvet.flix.domain.model.Trailer
 
 fun TrailersDto.toModel(): List<Trailer> {
-    return results?.map { it?.toModel()!! } ?: emptyList()
+    return results?.map { it?.toModel()!! }.orEmpty()
 }
 
 fun TrailerDetailsDto.toModel(): Trailer {
