@@ -1,11 +1,11 @@
-package com.red_velvet.flix.domain.mapper
+package com.red_velvet.flix.domain.mapper.movie
 
 import com.red_velvet.flix.BuildConfig
 import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
 import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
-import com.red_velvet.flix.domain.model.Movie
+import com.red_velvet.flix.domain.model.movie.Movie
 import com.red_velvet.flix.domain.utils.orZero
 
 fun MovieDto.toMovie(): Movie {
