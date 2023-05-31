@@ -7,13 +7,21 @@ import javax.inject.Inject
 
 class SharedPrefs @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
-    suspend fun setToken(key : String, value : String)
+    suspend fun setToken( value : String)
     {
-        withContext(Dispatchers.IO){ sharedPreferences.edit().putString(key , value).apply()}
+        withContext(Dispatchers.IO){ sharedPreferences.edit().putString("TOKEN" , value).apply()}
     }
-    suspend fun getToken(key : String) : String?
+    suspend fun getToken() : String?
     {
-        return withContext(Dispatchers.IO){ sharedPreferences.getString(key , null)}
+        return withContext(Dispatchers.IO){ sharedPreferences.getString("TOKEN" , null)}
+    }
+    suspend fun setSessionId(value : String)
+    {
+        withContext(Dispatchers.IO){ sharedPreferences.edit().putString("SESSION_ID" , value).apply()}
+    }
+    suspend fun getSessionId() : String?
+    {
+        return withContext(Dispatchers.IO){ sharedPreferences.getString("SESSION_ID" , null)}
     }
 
 }
