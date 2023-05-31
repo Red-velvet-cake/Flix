@@ -1,4 +1,6 @@
-package com.red_velvet.flix.domain.model.movie
+package com.red_velvet.flix.domain.model
+
+import com.red_velvet.flix.domain.model.movie.AuthorDetails
 
 
 data class Review(

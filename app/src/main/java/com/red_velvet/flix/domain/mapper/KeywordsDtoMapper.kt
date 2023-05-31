@@ -1,9 +1,9 @@
-package com.red_velvet.flix.domain.mapper.movie
+package com.red_velvet.flix.domain.mapper
 
 import com.red_velvet.flix.data.remote.dtos.movie.KeywordDto
 import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
-import com.red_velvet.flix.domain.model.movie.Keyword
-import com.red_velvet.flix.domain.model.movie.Keywords
+import com.red_velvet.flix.domain.model.Keyword
+import com.red_velvet.flix.domain.model.Keywords
 import com.red_velvet.flix.domain.utils.orZero
 
 fun KeywordsDto.toKeyword(): Keywords {

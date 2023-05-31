@@ -1,8 +1,8 @@
-package com.red_velvet.flix.domain.mapper.movie
+package com.red_velvet.flix.domain.mapper
 
 import com.red_velvet.flix.data.remote.dtos.trailer.TrailerDetailsDto
 import com.red_velvet.flix.data.remote.dtos.trailer.TrailersDto
-import com.red_velvet.flix.domain.model.movie.Trailer
+import com.red_velvet.flix.domain.model.Trailer
 
 fun TrailersDto.toTrailerList(): List<Trailer> {
     return results?.map { it?.toTrailerDetails()!! } ?: emptyList()
