@@ -6,7 +6,7 @@ import com.red_velvet.flix.domain.model.movie.MovieDetails
 import com.red_velvet.flix.domain.utils.orFalse
 import com.red_velvet.flix.domain.utils.orZero
 
-fun MovieDetailsDto.toMovieDetails(): MovieDetails {
+fun MovieDetailsDto.toModel(): MovieDetails {
     return MovieDetails(
         id = id.orZero(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + backdropPath,

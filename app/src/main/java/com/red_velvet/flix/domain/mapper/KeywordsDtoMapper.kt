@@ -6,14 +6,14 @@ import com.red_velvet.flix.domain.model.Keyword
 import com.red_velvet.flix.domain.model.Keywords
 import com.red_velvet.flix.domain.utils.orZero
 
-fun KeywordsDto.toKeyword(): Keywords {
+fun KeywordsDto.toModel(): Keywords {
     return Keywords(
         id = id.orZero(),
-        keywords = keywords?.map { it?.toKeyword()!! } ?: emptyList()
+        keywords = keywords?.map { it?.toModel()!! } ?: emptyList()
     )
 }
 
-fun KeywordDto.toKeyword(): Keyword {
+fun KeywordDto.toModel(): Keyword {
     return Keyword(
         id = id.orZero(),
         name = name.orEmpty()

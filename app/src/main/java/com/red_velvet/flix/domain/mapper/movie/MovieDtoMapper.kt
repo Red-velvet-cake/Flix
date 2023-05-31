@@ -8,7 +8,7 @@ import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
 import com.red_velvet.flix.domain.model.movie.Movie
 import com.red_velvet.flix.domain.utils.orZero
 
-fun MovieDto.toMovie(): Movie {
+fun MovieDto.toModel(): Movie {
     return Movie(
         id = id.orZero(),
         title = title.orEmpty(),
@@ -19,8 +19,8 @@ fun MovieDto.toMovie(): Movie {
     )
 }
 
-fun List<MovieDto>.toMovieList(): List<Movie> {
-    return map { it.toMovie() }
+fun List<MovieDto>.toModelList(): List<Movie> {
+    return map { it.toModel() }
 }
 
 

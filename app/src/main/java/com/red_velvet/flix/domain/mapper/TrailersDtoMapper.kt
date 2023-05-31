@@ -4,11 +4,11 @@ import com.red_velvet.flix.data.remote.dtos.trailer.TrailerDetailsDto
 import com.red_velvet.flix.data.remote.dtos.trailer.TrailersDto
 import com.red_velvet.flix.domain.model.Trailer
 
-fun TrailersDto.toTrailerList(): List<Trailer> {
-    return results?.map { it?.toTrailerDetails()!! } ?: emptyList()
+fun TrailersDto.toModel(): List<Trailer> {
+    return results?.map { it?.toModel()!! } ?: emptyList()
 }
 
-fun TrailerDetailsDto.toTrailerDetails(): Trailer {
+fun TrailerDetailsDto.toModel(): Trailer {
     return Trailer(
         id = id.orEmpty(),
         key = key.orEmpty(),

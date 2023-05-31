@@ -7,10 +7,10 @@ import com.red_velvet.flix.domain.model.Review
 import com.red_velvet.flix.domain.utils.orZero
 
 
-fun ReviewDto.toReview(): Review {
+fun ReviewDto.toModel(): Review {
     return Review(
         id = id.orEmpty(),
-        author = authorDetails?.toAuthorDetails()!!,
+        author = authorDetails?.toModel()!!,
         content = content.orEmpty(),
         createdAt = createdAt.orEmpty(),
         updatedAt = updatedAt.orEmpty(),
@@ -20,7 +20,7 @@ fun ReviewDto.toReview(): Review {
     )
 }
 
-fun AuthorDetailsDto.toAuthorDetails(): AuthorDetails {
+fun AuthorDetailsDto.toModel(): AuthorDetails {
     return AuthorDetails(
         avatarPath = avatarPath.orEmpty(),
         name = name.orEmpty(),
