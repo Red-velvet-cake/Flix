@@ -8,3 +8,4 @@ fun Float?.orZero(): Float = this ?: 0f
 
 fun Long?.orZero(): Long = this ?: 0L
 
+fun Boolean?.orFalse(): Boolean = this ?: false
