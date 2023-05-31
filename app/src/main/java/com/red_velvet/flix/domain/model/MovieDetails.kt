@@ -8,7 +8,7 @@ data class MovieDetails(
     val genres: String,
     val imdbId: String,
     val overview: String,
-    val releaseDate: String,
+    val date: String,
     val runtime: Int,
     val title: String,
     val video: Boolean,
