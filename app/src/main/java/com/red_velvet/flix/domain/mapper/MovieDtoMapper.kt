@@ -6,15 +6,16 @@ import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
 import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
 import com.red_velvet.flix.domain.model.Movie
+import com.red_velvet.flix.domain.utils.orZero
 
 fun MovieDto.toMovie(): Movie {
     return Movie(
-        id = id ?: 0,
-        title = title ?: "",
+        id = id.orZero(),
+        title = title.orEmpty(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
-        popularity = popularity ?: 0.0,
-        releaseDate = releaseDate ?: "",
-        voteAverage = voteAverage ?: 0.0
+        popularity = popularity.orZero(),
+        releaseDate = releaseDate.orEmpty(),
+        voteAverage = voteAverage.orZero()
     )
 }
 
@@ -25,12 +26,12 @@ fun List<MovieDto>.toMovieList(): List<Movie> {
 
 fun MovieDto.toPopularMovieEntity(): PopularMovieEntity {
     return PopularMovieEntity(
-        id = (id ?: 0).toLong(),
-        title = title ?: "",
-        originalLanguage = originalLanguage ?: "",
-        overview = overview ?: "",
+        id = id.orZero().toLong(),
+        title = title.orEmpty(),
+        originalLanguage = originalLanguage.orEmpty(),
+        overview = overview.orEmpty(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
-        date = releaseDate ?: ""
+        date = releaseDate.orEmpty()
     )
 }
 
@@ -41,12 +42,12 @@ fun List<MovieDto>.toPopularMovieEntityList(): List<PopularMovieEntity> {
 
 fun MovieDto.toUpcomingMovieEntity(): UpcomingMovieEntity {
     return UpcomingMovieEntity(
-        id = (id ?: 0).toLong(),
-        title = title ?: "",
-        originalLanguage = originalLanguage ?: "",
-        overview = overview ?: "",
+        id = id.orZero().toLong(),
+        title = title.orEmpty(),
+        originalLanguage = originalLanguage.orEmpty(),
+        overview = overview.orEmpty(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
-        date = releaseDate ?: ""
+        date = releaseDate.orEmpty()
     )
 }
 
@@ -56,12 +57,12 @@ fun List<MovieDto>.toUpcomingMovieEntityList(): List<UpcomingMovieEntity> {
 
 fun MovieDto.toTopRatedMovieEntity(): TopRatedMovieEntity {
     return TopRatedMovieEntity(
-        id = (id ?: 0).toLong(),
-        title = title ?: "",
-        originalLanguage = originalLanguage ?: "",
-        overview = overview ?: "",
+        id = id.orZero().toLong(),
+        title = title.orEmpty(),
+        originalLanguage = originalLanguage.orEmpty(),
+        overview = overview.orEmpty(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
-        date = releaseDate ?: ""
+        date = releaseDate.orEmpty()
     )
 }
 
