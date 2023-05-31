@@ -8,7 +8,7 @@ import com.red_velvet.flix.domain.utils.orZero
 fun SessionDetailsDto.toModel(): SessionDetails {
     return SessionDetails(
         airDate = airDate.orEmpty(),
-        episodes = episodes?.map { it?.toModel() }.orEmpty(),
+        episodes = episodes?.map { it?.toModel()!! }.orEmpty(),
         id = id.orEmpty(),
         seasonId = seasonId.orZero(),
         name = name.orEmpty(),

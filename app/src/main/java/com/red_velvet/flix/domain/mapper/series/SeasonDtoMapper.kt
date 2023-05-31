@@ -14,7 +14,5 @@ fun SeasonDto.toModel(): Season {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
         seasonNumber = seasonNumber.orZero(),
         airDate = airDate.orEmpty(),
-        episodes = episodes?.map { it?.toModel() }.orEmpty()
-
     )
 }

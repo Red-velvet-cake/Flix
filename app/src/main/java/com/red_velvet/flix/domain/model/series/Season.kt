@@ -9,5 +9,4 @@ data class Season(
     val imageUrl: String,
     val seasonNumber: Int,
     val airDate: String,
-    val episodes: List<Episode>,
 )
