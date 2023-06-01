@@ -251,7 +251,7 @@ interface MoviesService {
 
     @FormUrlEncoded
     @POST("tv/{series_id}/season/{season_number}/episode/{episode_number}/rating")
-    suspend fun getEpisodeRating(
+    suspend fun rateEpisode(
         @Path("series_id") seriesId: Int,
         @Path("season_number") seasonNumber: Int,
         @Path("episode_number") episodeNumber: Int,

@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class AirngTodayTvShowEntity(
+data class AiringTodayTvShowEntity(
     @PrimaryKey(autoGenerate = true) val id: Long,
     val title: String,
     val originalLanguage: String,

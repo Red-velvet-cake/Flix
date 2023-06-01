@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.red_velvet.flix.data.local.database.entity.UserEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDataDao {
@@ -12,5 +11,5 @@ interface UserDataDao {
     suspend fun insertUserData(userEntity: UserEntity)
 
     @Query("SELECT * FROM UserEntity")
-    fun getUserData(): Flow<UserEntity>
+    suspend fun getUserData(): UserEntity
 }

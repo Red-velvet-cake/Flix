@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.red_velvet.flix.data.local.database.dao.MovieDao
 import com.red_velvet.flix.data.local.database.dao.TvShowDao
 import com.red_velvet.flix.data.local.database.dao.UserDataDao
-import com.red_velvet.flix.data.local.database.entity.AirngTodayTvShowEntity
+import com.red_velvet.flix.data.local.database.entity.AiringTodayTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
 import com.red_velvet.flix.data.local.database.entity.OnTheAirTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
@@ -17,7 +17,7 @@ import com.red_velvet.flix.data.local.database.entity.UserEntity
 
 @Database(
     entities = [
-        AirngTodayTvShowEntity::class,
+        AiringTodayTvShowEntity::class,
         NowPlayingMovieEntity::class,
         OnTheAirTvShowEntity::class,
         UpcomingMovieEntity::class,
