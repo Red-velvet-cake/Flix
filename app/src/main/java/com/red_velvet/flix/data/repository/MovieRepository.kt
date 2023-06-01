@@ -29,31 +29,31 @@ interface MovieRepository {
 
     suspend fun insertNowPlayingMovie()
 
-    suspend fun getPopularMovies(
+     fun getPopularMovies(
         page: Int,
         region: String?,
         language: String
     ): Flow<List<PopularMovieEntity>>
 
-    suspend fun getUpcomingMovies(
+     fun getUpcomingMovies(
         page: Int,
         region: String?,
         language: String
     ): Flow<List<UpcomingMovieEntity>>
 
-    suspend fun getNowPlayingMovies(
+     fun getNowPlayingMovies(
         page: Int,
         region: String?,
         language: String
     ): Flow<List<NowPlayingMovieEntity>>
 
-    suspend fun getTopRatedMovies(
+     fun getTopRatedMovies(
         page: Int = 1,
         region: String?,
         language: String
     ): Flow<List<TopRatedMovieEntity>>
 
-    suspend fun getMovieDetails(movieId: Int): Flow<List<MovieDetailEntity>>
+     fun getMovieDetails(movieId: Int): Flow<List<MovieDetailEntity>>
 
     suspend fun getLatestMovie(movieId: Int): List<MovieDto>?
 
@@ -83,7 +83,7 @@ interface MovieRepository {
         movieId: Int,
         page: Int,
         language: String
-    ): Flow<ReviewDto>?
+    ): List<ReviewDto>?
 
     suspend fun getMoviesWatchlist(
         accountId: Int,

@@ -1,6 +1,7 @@
 package com.red_velvet.flix.data.repository
 
 import com.red_velvet.flix.data.local.database.dao.MovieDao
+import com.red_velvet.flix.data.local.database.entity.MovieDetailEntity
 import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
 import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
@@ -16,15 +17,16 @@ import javax.inject.Inject
 
 class MovieRepositoryImp @Inject constructor(
     private val moviesService: MoviesService,
-    private val movieDao: MovieDao
-): MovieRepository {
+    private val movieDao: MovieDao,
+//    +
+) : MovieRepository {
     override suspend fun insertPopularMovie() {
-       val popularMovies = moviesService.getPopularMovies().body()
+        val popularMovies = moviesService.getPopularMovies().body()
         popularMovies?.items
     }
 
     override suspend fun insertTopRatedMovie() {
-       val topRatedMovie = moviesService.getTopRatedMovies().body()
+        val topRatedMovie = moviesService.getTopRatedMovies().body()
         topRatedMovie?.items
     }
 
@@ -39,7 +41,7 @@ class MovieRepositoryImp @Inject constructor(
         nowPlayingMovie?.items
     }
 
-    override suspend fun getPopularMovies(
+    override fun getPopularMovies(
         page: Int,
         region: String?,
         language: String
@@ -47,7 +49,7 @@ class MovieRepositoryImp @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getUpcomingMovies(
+    override fun getUpcomingMovies(
         page: Int,
         region: String?,
         language: String
@@ -55,7 +57,7 @@ class MovieRepositoryImp @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getNowPlayingMovies(
+    override fun getNowPlayingMovies(
         page: Int,
         region: String?,
         language: String
@@ -63,7 +65,7 @@ class MovieRepositoryImp @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getTopRatedMovies(
+    override fun getTopRatedMovies(
         page: Int,
         region: String?,
         language: String
@@ -71,9 +73,10 @@ class MovieRepositoryImp @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getMovieDetails(movieId: Int): List<MovieDetailsDto>? {
+    override fun getMovieDetails(movieId: Int): Flow<List<MovieDetailEntity>> {
         TODO("Not yet implemented")
     }
+
 
     override suspend fun getLatestMovie(movieId: Int): List<MovieDto>? {
         TODO("Not yet implemented")
