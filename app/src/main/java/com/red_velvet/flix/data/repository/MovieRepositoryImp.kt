@@ -6,6 +6,7 @@ import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
 import com.red_velvet.flix.data.remote.MoviesService
+import com.red_velvet.flix.data.remote.dtos.ApiResponse
 import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
 import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
 import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
@@ -78,15 +79,15 @@ class MovieRepositoryImp @Inject constructor(
         page: Int,
         language: String?
     ): List<MovieDto> {
-        TODO("Not yet implemented")
+        return moviesService.getMovieRecommendations(movieId).body()?.items!!
     }
 
-    override suspend fun rateMovie(movieId: Int, rating: Double) {
-        TODO("Not yet implemented")
+    override suspend fun rateMovie(movieId: Int, rating: Double):ApiResponse {
+        return moviesService.rateMovie(movieId, rating).body()!!
     }
 
-    override suspend fun deleteMovieRating(movieId: Int) {
-        TODO("Not yet implemented")
+    override suspend fun deleteMovieRating(movieId: Int): ApiResponse {
+        return moviesService.deleteMovieRating(movieId).body()!!
     }
 
     override suspend fun getMovieReviews(
@@ -94,7 +95,7 @@ class MovieRepositoryImp @Inject constructor(
         page: Int,
         language: String?
     ): List<ReviewDto> {
-        TODO("Not yet implemented")
+        return moviesService.getMovieReviews(movieId, page).body()?.items!!
     }
 
     override suspend fun getMoviesWatchlist(
@@ -103,7 +104,7 @@ class MovieRepositoryImp @Inject constructor(
         page: Int,
         sortBy: String?
     ): List<MovieDto> {
-        TODO("Not yet implemented")
+        return moviesService.getMoviesWatchlist(accountId).body()?.items!!
     }
 
     override suspend fun getFavoriteMovies(
@@ -112,7 +113,7 @@ class MovieRepositoryImp @Inject constructor(
         page: Int,
         sortBy: String?
     ): List<MovieDto> {
-        TODO("Not yet implemented")
+       return moviesService.getFavoriteMovies(accountId).body()?.items!!
     }
 
     override suspend fun search(
@@ -121,7 +122,7 @@ class MovieRepositoryImp @Inject constructor(
         language: String?,
         page: Int
     ): List<MovieDto> {
-        TODO("Not yet implemented")
+        return moviesService.search(query, includeAdult).body()?.items!!
     }
 
     override suspend fun getMoviesByKeyword(
@@ -131,7 +132,7 @@ class MovieRepositoryImp @Inject constructor(
         page: Int,
         region: String?
     ): List<MovieDto> {
-        TODO("Not yet implemented")
+        return moviesService.getMoviesByKeyword(keywordId).body()?.items!!
     }
 
     override suspend fun discoverMovies(
@@ -169,7 +170,7 @@ class MovieRepositoryImp @Inject constructor(
         withoutCompanies: String?,
         year: Int?
     ): List<MovieDto> {
-        TODO("Not yet implemented")
+       return moviesService.discoverMovies(includeAdult, includeVideo).body()?.items!!
     }
 
 }

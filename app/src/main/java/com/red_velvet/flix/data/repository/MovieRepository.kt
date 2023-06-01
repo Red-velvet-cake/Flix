@@ -5,6 +5,7 @@ import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
 import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
+import com.red_velvet.flix.data.remote.dtos.ApiResponse
 import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
 import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
 import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
@@ -62,9 +63,9 @@ interface MovieRepository {
         language: String? = null
     ): List<MovieDto>
 
-    suspend fun rateMovie(movieId: Int, rating: Double)
+    suspend fun rateMovie(movieId: Int, rating: Double): ApiResponse
 
-    suspend fun deleteMovieRating(movieId: Int)
+    suspend fun deleteMovieRating(movieId: Int): ApiResponse
 
     suspend fun getMovieReviews(
         movieId: Int,
