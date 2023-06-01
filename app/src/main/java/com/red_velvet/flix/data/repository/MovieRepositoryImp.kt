@@ -53,7 +53,7 @@ class MovieRepositoryImp @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getMovieKeywords(movieId: Int): List<KeywordsDto> {
+    override suspend fun getMovieKeywords(movieId: Int): KeywordsDto {
         TODO("Not yet implemented")
     }
 

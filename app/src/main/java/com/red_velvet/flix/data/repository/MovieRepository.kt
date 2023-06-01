@@ -40,7 +40,7 @@ interface MovieRepository {
 
     suspend fun getMovieDetails(movieId: Int): MovieDto
 
-    suspend fun getMovieKeywords(movieId: Int): List<KeywordsDto>
+    suspend fun getMovieKeywords(movieId: Int): KeywordsDto
 
     suspend fun getSimilarMovies(
         movieId: Int,
