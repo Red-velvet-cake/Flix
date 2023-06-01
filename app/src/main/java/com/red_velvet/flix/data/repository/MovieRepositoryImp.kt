@@ -1,14 +1,12 @@
 package com.red_velvet.flix.data.repository
 
 import com.red_velvet.flix.data.local.database.dao.MovieDao
-import com.red_velvet.flix.data.local.database.entity.MovieDetailEntity
 import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
 import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
-import com.red_velvet.flix.data.remote.dtos.movie.MovieDetailsDto
 import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
 import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
 import com.red_velvet.flix.data.remote.dtos.trailer.TrailersDto
@@ -18,7 +16,7 @@ import javax.inject.Inject
 class MovieRepositoryImp @Inject constructor(
     private val moviesService: MoviesService,
     private val movieDao: MovieDao,
-) : MovieRepository {
+) : MovieRepository, BaseRepository() {
     override fun getPopularMovies(
         page: Int,
         region: String?,
@@ -52,11 +50,11 @@ class MovieRepositoryImp @Inject constructor(
     }
 
     override suspend fun getMovieDetails(movieId: Int): MovieDto {
-        TODO("Not yet implemented")
+       return moviesService.getMovieDetails(movieId).body()!!
     }
 
-    override suspend fun getMovieKeywords(movieId: Int): List<KeywordsDto> {
-        TODO("Not yet implemented")
+    override suspend fun getMovieKeywords(movieId: Int): KeywordsDto {
+        return moviesService.getMovieKeywords(movieId).body()!!
     }
 
     override suspend fun getSimilarMovies(
@@ -64,15 +62,15 @@ class MovieRepositoryImp @Inject constructor(
         page: Int,
         language: String?
     ): List<MovieDto> {
-        TODO("Not yet implemented")
+       return moviesService.getSimilarMovies(movieId).body()?.items!!
     }
 
-    override suspend fun getMovieTrailers(movieId: Int, language: String?): List<TrailersDto> {
-        TODO("Not yet implemented")
+    override suspend fun getMovieTrailers(movieId: Int, language: String?): TrailersDto {
+        return moviesService.getMovieTrailers(movieId).body()!!
     }
 
-    override suspend fun getLatestMovie(): List<MovieDto> {
-        TODO("Not yet implemented")
+    override suspend fun getLatestMovie(): MovieDto {
+        return moviesService.getLatestMovie().body()!!
     }
 
     override suspend fun getMovieRecommendations(
