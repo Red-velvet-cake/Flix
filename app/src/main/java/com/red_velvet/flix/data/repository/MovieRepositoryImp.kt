@@ -1,14 +1,12 @@
 package com.red_velvet.flix.data.repository
 
 import com.red_velvet.flix.data.local.database.dao.MovieDao
-import com.red_velvet.flix.data.local.database.entity.MovieDetailEntity
 import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
 import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
-import com.red_velvet.flix.data.remote.dtos.movie.MovieDetailsDto
 import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
 import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
 import com.red_velvet.flix.data.remote.dtos.trailer.TrailersDto
@@ -67,7 +65,7 @@ class MovieRepositoryImp @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getMovieTrailers(movieId: Int, language: String?): List<TrailersDto> {
+    override suspend fun getMovieTrailers(movieId: Int, language: String?): TrailersDto {
         TODO("Not yet implemented")
     }
 

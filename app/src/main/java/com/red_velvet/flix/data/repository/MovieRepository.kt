@@ -1,22 +1,15 @@
 package com.red_velvet.flix.data.repository
 
 
-import com.red_velvet.flix.data.local.database.entity.MovieDetailEntity
 import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
 import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
-import com.red_velvet.flix.data.remote.dtos.PaginationDto
 import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
-import com.red_velvet.flix.data.remote.dtos.movie.MovieDetailsDto
 import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
 import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
 import com.red_velvet.flix.data.remote.dtos.trailer.TrailersDto
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
 
 
 interface MovieRepository {
@@ -58,7 +51,7 @@ interface MovieRepository {
     suspend fun getMovieTrailers(
         movieId: Int,
         language: String? = null
-    ): List<TrailersDto>
+    ): TrailersDto
 
     suspend fun getLatestMovie(): List<MovieDto>
 
