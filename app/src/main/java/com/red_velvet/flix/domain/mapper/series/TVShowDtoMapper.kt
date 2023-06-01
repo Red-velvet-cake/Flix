@@ -32,7 +32,9 @@ fun TVShowDto.toPopularTvShowEntity(): PopularTvShowEntity {
         originalLanguage = originalLanguage.orEmpty(),
         overview = overview.orEmpty(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
-        date = firstAirDate.orEmpty()
+        date = firstAirDate.orEmpty(),
+        popularity = popularity.orZero(),
+        voteAverage = voteAverage.orZero()
     )
 }
 
@@ -47,7 +49,9 @@ fun TVShowDto.toTopRatedTvShowEntity(): TopRatedTvShowEntity {
         originalLanguage = originalLanguage.orEmpty(),
         overview = overview.orEmpty(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
-        date = firstAirDate.orEmpty()
+        date = firstAirDate.orEmpty(),
+        popularity = popularity.orZero(),
+        voteAverage = voteAverage.orZero()
     )
 }
 
@@ -63,7 +67,10 @@ fun TVShowDto.toAirngTodayTvShowEntity(): AiringTodayTvShowEntity {
         originalLanguage = originalLanguage.orEmpty(),
         overview = overview.orEmpty(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
-        date = firstAirDate.orEmpty()
+        date = firstAirDate.orEmpty(),
+        popularity = popularity.orZero(),
+        voteAverage = voteAverage.orZero()
+
     )
 }
 
@@ -78,7 +85,9 @@ fun TVShowDto.toOnTheAirTvShowEntity(): OnTheAirTvShowEntity {
         originalLanguage = originalLanguage.orEmpty(),
         overview = overview.orEmpty(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
-        date = firstAirDate.orEmpty()
+        date = firstAirDate.orEmpty(),
+        popularity = popularity.orZero(),
+        voteAverage = voteAverage.orZero()
     )
 }
 
