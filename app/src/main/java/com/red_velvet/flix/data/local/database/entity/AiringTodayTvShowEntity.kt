@@ -11,4 +11,6 @@ data class AiringTodayTvShowEntity(
     val overview: String,
     val imageUrl: String,
     val date: String,
+    val popularity: Double,
+    val voteAverage: Double,
 )
