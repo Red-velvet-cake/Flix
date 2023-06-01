@@ -1,6 +1,7 @@
 package com.red_velvet.flix.domain.usecase
 
 import com.red_velvet.flix.data.repository.MovieRepository
+import com.red_velvet.flix.domain.mapper.toModel
 import com.red_velvet.flix.domain.model.Review
 import javax.inject.Inject
 
@@ -12,7 +13,7 @@ class GetMovieReviewsUsecase @Inject constructor(
         page: Int = 1,
         language: String? = null
     ): List<Review> {
-        TODO("Create mapper for Review")
-//        return movieRepository.getMovieReviews(movieId, page, language).toModel()
+        return movieRepository.getMovieReviews(movieId, page, language)
+            .toModel()
     }
 }

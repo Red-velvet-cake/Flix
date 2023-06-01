@@ -68,37 +68,3 @@ fun MovieDto.toTopRatedMovieEntity(): TopRatedMovieEntity {
 fun List<MovieDto>.toTopRatedMovieEntityList(): List<TopRatedMovieEntity> {
     return map { it.toTopRatedMovieEntity() }
 }
-
-fun PopularMovieEntity.toModel(): Movie {
-    return Movie(
-        id = id.toInt(),
-        title = title,
-        imageUrl = BuildConfig.IMAGE_BASE_PATH + imageUrl,
-        popularity = 0.0,
-        releaseDate = date,
-        voteAverage = 0.0
-    )
-}
-
-
-fun UpcomingMovieEntity.toModel(): Movie {
-    return Movie(
-        id = id.toInt(),
-        title = title,
-        imageUrl = BuildConfig.IMAGE_BASE_PATH + imageUrl,
-        popularity = 0.0,
-        releaseDate = date,
-        voteAverage = 0.0
-    )
-}
-
-fun TopRatedMovieEntity.toModel(): Movie {
-    return Movie(
-        id = id.toInt(),
-        title = title,
-        imageUrl = BuildConfig.IMAGE_BASE_PATH + imageUrl,
-        popularity = 0.0,
-        releaseDate = date,
-        voteAverage = 0.0
-    )
-}
