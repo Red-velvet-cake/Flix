@@ -19,7 +19,7 @@ fun MovieDto.toModel(): Movie {
     )
 }
 
-fun List<MovieDto>.toModelList(): List<Movie> {
+fun List<MovieDto>.toModel(): List<Movie> {
     return map { it.toModel() }
 }
 
