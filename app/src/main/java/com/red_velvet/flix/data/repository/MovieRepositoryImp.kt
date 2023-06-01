@@ -18,33 +18,11 @@ import javax.inject.Inject
 class MovieRepositoryImp @Inject constructor(
     private val moviesService: MoviesService,
     private val movieDao: MovieDao,
-//    +
 ) : MovieRepository {
-    override suspend fun insertPopularMovie() {
-        val popularMovies = moviesService.getPopularMovies().body()
-        popularMovies?.items
-    }
-
-    override suspend fun insertTopRatedMovie() {
-        val topRatedMovie = moviesService.getTopRatedMovies().body()
-        topRatedMovie?.items
-    }
-
-    override suspend fun insertUpcomingMovie() {
-        val upcomingMovie = moviesService.getUpcomingMovies().body()
-        upcomingMovie?.items
-
-    }
-
-    override suspend fun insertNowPlayingMovie() {
-        val nowPlayingMovie = moviesService.getNowPlayingMovies().body()
-        nowPlayingMovie?.items
-    }
-
     override fun getPopularMovies(
         page: Int,
         region: String?,
-        language: String
+        language: String?
     ): Flow<List<PopularMovieEntity>> {
         TODO("Not yet implemented")
     }
@@ -52,7 +30,7 @@ class MovieRepositoryImp @Inject constructor(
     override fun getUpcomingMovies(
         page: Int,
         region: String?,
-        language: String
+        language: String?
     ): Flow<List<UpcomingMovieEntity>> {
         TODO("Not yet implemented")
     }
@@ -60,7 +38,7 @@ class MovieRepositoryImp @Inject constructor(
     override fun getNowPlayingMovies(
         page: Int,
         region: String?,
-        language: String
+        language: String?
     ): Flow<List<NowPlayingMovieEntity>> {
         TODO("Not yet implemented")
     }
@@ -68,45 +46,40 @@ class MovieRepositoryImp @Inject constructor(
     override fun getTopRatedMovies(
         page: Int,
         region: String?,
-        language: String
+        language: String?
     ): Flow<List<TopRatedMovieEntity>> {
         TODO("Not yet implemented")
     }
 
-    override fun getMovieDetails(movieId: Int): Flow<List<MovieDetailEntity>> {
+    override suspend fun getMovieDetails(movieId: Int): MovieDto {
         TODO("Not yet implemented")
     }
 
-
-    override suspend fun getLatestMovie(movieId: Int): List<MovieDto>? {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getLatestMovie(): List<MovieDto>? {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getMovieKeywords(movieId: Int): List<KeywordsDto>? {
+    override suspend fun getMovieKeywords(movieId: Int): List<KeywordsDto> {
         TODO("Not yet implemented")
     }
 
     override suspend fun getSimilarMovies(
         movieId: Int,
         page: Int,
-        language: String
-    ): List<MovieDto>? {
+        language: String?
+    ): List<MovieDto> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getMovieTrailers(movieId: Int, language: String): List<TrailersDto>? {
+    override suspend fun getMovieTrailers(movieId: Int, language: String?): List<TrailersDto> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getLatestMovie(): List<MovieDto> {
         TODO("Not yet implemented")
     }
 
     override suspend fun getMovieRecommendations(
         movieId: Int,
         page: Int,
-        language: String
-    ): List<MovieDto>? {
+        language: String?
+    ): List<MovieDto> {
         TODO("Not yet implemented")
     }
 
@@ -121,64 +94,52 @@ class MovieRepositoryImp @Inject constructor(
     override suspend fun getMovieReviews(
         movieId: Int,
         page: Int,
-        language: String
-    ): List<ReviewDto>? {
+        language: String?
+    ): List<ReviewDto> {
         TODO("Not yet implemented")
     }
 
     override suspend fun getMoviesWatchlist(
         accountId: Int,
-        language: String,
+        language: String?,
         page: Int,
-        sortBy: String
-    ): List<MovieDto>? {
+        sortBy: String?
+    ): List<MovieDto> {
         TODO("Not yet implemented")
     }
 
     override suspend fun getFavoriteMovies(
         accountId: Int,
-        language: String,
+        language: String?,
         page: Int,
-        sortBy: String
-    ): List<MovieDto>? {
+        sortBy: String?
+    ): List<MovieDto> {
         TODO("Not yet implemented")
     }
 
     override suspend fun search(
         query: String,
         includeAdult: Boolean,
-        language: String,
+        language: String?,
         page: Int
-    ): List<MovieDto>? {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun searchMovies(
-        query: String,
-        includeAdult: Boolean,
-        language: String,
-        primaryReleaseYear: Int?,
-        page: Int,
-        region: String?,
-        year: Int?
-    ): List<MovieDto>? {
+    ): List<MovieDto> {
         TODO("Not yet implemented")
     }
 
     override suspend fun getMoviesByKeyword(
         keywordId: Int,
         includeAdult: Boolean,
-        language: String,
+        language: String?,
         page: Int,
         region: String?
-    ): List<MovieDto>? {
+    ): List<MovieDto> {
         TODO("Not yet implemented")
     }
 
     override suspend fun discoverMovies(
         includeAdult: Boolean,
         includeVideo: Boolean,
-        language: String,
+        language: String?,
         page: Int,
         primaryReleaseYear: Int?,
         primaryReleaseDateGte: String?,
@@ -209,9 +170,8 @@ class MovieRepositoryImp @Inject constructor(
         withoutWatchProviders: String?,
         withoutCompanies: String?,
         year: Int?
-    ): List<MovieDto>? {
+    ): List<MovieDto> {
         TODO("Not yet implemented")
     }
-
 
 }

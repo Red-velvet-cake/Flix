@@ -21,59 +21,52 @@ import retrofit2.http.Query
 
 interface MovieRepository {
 
-    suspend fun insertPopularMovie()
-
-    suspend fun insertTopRatedMovie()
-
-    suspend fun insertUpcomingMovie()
-
-    suspend fun insertNowPlayingMovie()
-
-     fun getPopularMovies(
-        page: Int,
-        region: String?,
-        language: String
+    fun getPopularMovies(
+        page: Int = 1,
+        region: String? = null,
+        language: String? = null
     ): Flow<List<PopularMovieEntity>>
 
-     fun getUpcomingMovies(
-        page: Int,
-        region: String?,
-        language: String
+    fun getUpcomingMovies(
+        page: Int = 1,
+        region: String? = null,
+        language: String? = null
     ): Flow<List<UpcomingMovieEntity>>
 
-     fun getNowPlayingMovies(
-        page: Int,
-        region: String?,
-        language: String
+    fun getNowPlayingMovies(
+        page: Int = 1,
+        region: String? = null,
+        language: String? = null
     ): Flow<List<NowPlayingMovieEntity>>
 
-     fun getTopRatedMovies(
+    fun getTopRatedMovies(
         page: Int = 1,
-        region: String?,
-        language: String
+        region: String? = null,
+        language: String? = null
     ): Flow<List<TopRatedMovieEntity>>
 
-     fun getMovieDetails(movieId: Int): Flow<List<MovieDetailEntity>>
+    suspend fun getMovieDetails(movieId: Int): MovieDto
 
-    suspend fun getLatestMovie(movieId: Int): List<MovieDto>?
-
-    suspend fun getMovieKeywords(movieId: Int): List<KeywordsDto>?
+    suspend fun getMovieKeywords(movieId: Int): List<KeywordsDto>
 
     suspend fun getSimilarMovies(
         movieId: Int,
-        page: Int,
-        language: String
-    ): List<MovieDto>?
+        page: Int = 1,
+        language: String? = null
+    ): List<MovieDto>
 
-    suspend fun getMovieTrailers(movieId: Int, language: String): List<TrailersDto>?
+    suspend fun getMovieTrailers(
+        movieId: Int,
+        language: String? = null
+    ): List<TrailersDto>
 
-    suspend fun getLatestMovie(): List<MovieDto>?
+    suspend fun getLatestMovie(): List<MovieDto>
 
     suspend fun getMovieRecommendations(
         movieId: Int,
         page: Int = 1,
-        language: String
-    ): List<MovieDto>?
+        language: String? = null
+    ): List<MovieDto>
 
     suspend fun rateMovie(movieId: Int, rating: Double)
 
@@ -81,83 +74,72 @@ interface MovieRepository {
 
     suspend fun getMovieReviews(
         movieId: Int,
-        page: Int,
-        language: String
-    ): List<ReviewDto>?
+        page: Int = 1,
+        language: String? = null
+    ): List<ReviewDto>
 
     suspend fun getMoviesWatchlist(
         accountId: Int,
-        language: String,
-        page: Int,
-        sortBy: String
-    ): List<MovieDto>?
+        language: String? = null,
+        page: Int = 1,
+        sortBy: String? = null
+    ): List<MovieDto>
 
     suspend fun getFavoriteMovies(
         accountId: Int,
-        language: String,
-        page: Int,
-        sortBy: String
-    ): List<MovieDto>?
+        language: String? = null,
+        page: Int = 1,
+        sortBy: String? = null
+    ): List<MovieDto>
 
     suspend fun search(
         query: String,
-        includeAdult: Boolean,
-        language: String,
-        page: Int,
-    ): List<MovieDto>?
-
-    @GET("search/movie")
-    suspend fun searchMovies(
-        query: String,
-        includeAdult: Boolean,
-        language: String,
-        primaryReleaseYear: Int?,
-        page: Int,
-        region: String?,
-        year: Int?
-    ): List<MovieDto>?
+        includeAdult: Boolean = false,
+        language: String? = null,
+        page: Int = 1,
+    ): List<MovieDto>
 
     suspend fun getMoviesByKeyword(
         keywordId: Int,
         includeAdult: Boolean = false,
-        language: String = "en-US",
+        language: String? = null,
         page: Int = 1,
         region: String? = null
-    ): List<MovieDto>?
+    ): List<MovieDto>
 
     suspend fun discoverMovies(
-        includeAdult: Boolean,
+        includeAdult: Boolean = false,
         includeVideo: Boolean,
-        language: String,
-        page: Int,
-        primaryReleaseYear: Int?,
-        primaryReleaseDateGte: String?,
-        primaryReleaseDateLte: String?,
-        region: String?,
-        releaseDateGte: String?,
-        releaseDateLte: String?,
+        language: String? = null,
+        page: Int = 1,
+        primaryReleaseYear: Int? = null,
+        primaryReleaseDateGte: String? = null,
+        primaryReleaseDateLte: String? = null,
+        region: String? = null,
+        releaseDateGte: String? = null,
+        releaseDateLte: String? = null,
         sortBy: String,
-        voteAverageGte: Double?,
-        voteAverageLte: Double?,
-        voteCountGte: Int?,
-        voteCountLte: Int?,
-        watchRegion: String?,
-        withCast: String?,
-        withCrew: String?,
-        withGenres: String?,
-        withKeywords: String?,
-        withOriginCountry: String?,
-        withOriginalLanguage: String?,
-        withPeople: String?,
-        withReleaseType: Int?,
-        withRuntimeGte: Int?,
-        withRuntimeLte: Int?,
-        withWatchMonetizationTypes: String?,
-        withWatchProviders: String?,
-        withoutGenres: String?,
-        withoutKeywords: String?,
-        withoutWatchProviders: String?,
-        withoutCompanies: String?,
-        year: Int?
-    ): List<MovieDto>?
+        voteAverageGte: Double? = null,
+        voteAverageLte: Double? = null,
+        voteCountGte: Int? = null,
+        voteCountLte: Int? = null,
+        watchRegion: String? = null,
+        withCast: String? = null,
+        withCrew: String? = null,
+        withGenres: String? = null,
+        withKeywords: String? = null,
+        withOriginCountry: String? = null,
+        withOriginalLanguage: String? = null,
+        withPeople: String? = null,
+        withReleaseType: Int? = null,
+        withRuntimeGte: Int? = null,
+        withRuntimeLte: Int? = null,
+        withWatchMonetizationTypes: String? = null,
+        withWatchProviders: String? = null,
+        withoutGenres: String? = null,
+        withoutKeywords: String? = null,
+        withoutWatchProviders: String? = null,
+        withoutCompanies: String? = null,
+        year: Int? = null
+    ): List<MovieDto>
 }
