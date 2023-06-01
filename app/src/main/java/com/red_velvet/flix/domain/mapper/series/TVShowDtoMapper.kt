@@ -1,7 +1,7 @@
 package com.red_velvet.flix.domain.mapper.series
 
 import com.red_velvet.flix.BuildConfig
-import com.red_velvet.flix.data.local.database.entity.AirngTodayTvShowEntity
+import com.red_velvet.flix.data.local.database.entity.AiringTodayTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.OnTheAirTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.PopularTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedTvShowEntity
@@ -56,8 +56,8 @@ fun List<TVShowDto>.toTopRatedTvShowEntityList(): List<TopRatedTvShowEntity> {
 }
 
 
-fun TVShowDto.toAirngTodayTvShowEntity(): AirngTodayTvShowEntity {
-    return AirngTodayTvShowEntity(
+fun TVShowDto.toAirngTodayTvShowEntity(): AiringTodayTvShowEntity {
+    return AiringTodayTvShowEntity(
         id = id.orZero().toLong(),
         title = name.orEmpty(),
         originalLanguage = originalLanguage.orEmpty(),
@@ -67,7 +67,7 @@ fun TVShowDto.toAirngTodayTvShowEntity(): AirngTodayTvShowEntity {
     )
 }
 
-fun List<TVShowDto>.toAirngTodayTvShowEntityList(): List<AirngTodayTvShowEntity> {
+fun List<TVShowDto>.toAiringTodayTvShowEntityList(): List<AiringTodayTvShowEntity> {
     return map { it.toAirngTodayTvShowEntity() }
 }
 

@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.red_velvet.flix.data.local.database.entity.AirngTodayTvShowEntity
+import com.red_velvet.flix.data.local.database.entity.AiringTodayTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.OnTheAirTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.PopularTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedTvShowEntity
@@ -12,16 +12,16 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TvShowDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPopularTvShow(popularTvShowEntity: PopularTvShowEntity)
+    suspend fun insertPopularTvShows(popularTvShowEntities: List<PopularTvShowEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTopRatedTvShow(topRatedTvShowEntity: TopRatedTvShowEntity)
+    suspend fun insertTopRatedTvShows(topRatedTvShowEntities: List<TopRatedTvShowEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOnTheAirTvShow(onTheAirTvShowEntity: OnTheAirTvShowEntity)
+    suspend fun insertOnTheAirTvShows(onTheAirTvShowEntities: List<OnTheAirTvShowEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAiringTodayTvShow(airngTodayTvShowEntity: AirngTodayTvShowEntity)
+    suspend fun insertAiringTodayTvShows(airingTodayTvShowEntities: List<AiringTodayTvShowEntity>)
 
     @Query("SELECT * FROM PopularTvShowEntity")
     fun getPopularTvShow(): Flow<List<PopularTvShowEntity>>
@@ -32,6 +32,6 @@ interface TvShowDao {
     @Query("SELECT * FROM OnTheAirTvShowEntity")
     fun getOnTheAirTvShow(): Flow<List<OnTheAirTvShowEntity>>
 
-    @Query("SELECT * FROM AirngTodayTvShowEntity")
-    fun getAiringTodayTvShow(): Flow<List<AirngTodayTvShowEntity>>
+    @Query("SELECT * FROM AiringTodayTvShowEntity")
+    fun getAiringTodayTvShow(): Flow<List<AiringTodayTvShowEntity>>
 }

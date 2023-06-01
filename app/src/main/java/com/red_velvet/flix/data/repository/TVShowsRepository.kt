@@ -1,6 +1,6 @@
 package com.red_velvet.flix.data.repository
 
-import com.red_velvet.flix.data.local.database.entity.AirngTodayTvShowEntity
+import com.red_velvet.flix.data.local.database.entity.AiringTodayTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.OnTheAirTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.PopularTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedTvShowEntity
@@ -17,78 +17,70 @@ import kotlinx.coroutines.flow.Flow
 
 interface TVShowsRepository {
 
-    suspend fun insertPopularTvShow(popularTvShowEntity: PopularTvShowEntity)
-
-    suspend fun insertTopRatedTvShow(topRatedTvShowEntity: TopRatedTvShowEntity)
-
-    suspend fun insertOnTheAirTvShow(onTheAirTvShowEntity: OnTheAirTvShowEntity)
-
-    suspend fun insertAiringTodayTvShow(airngTodayTvShowEntity: AirngTodayTvShowEntity)
-
     suspend fun getPopularTvShow(): Flow<List<PopularTvShowEntity>>
 
     suspend fun getTopRatedTvShow(): Flow<List<TopRatedTvShowEntity>>
 
     suspend fun getOnTheAirTvShow(): Flow<List<OnTheAirTvShowEntity>>
 
-    suspend fun getAiringTodayTvShow(): Flow<List<AirngTodayTvShowEntity>>
+    suspend fun getAiringTodayTvShow(): Flow<List<AiringTodayTvShowEntity>>
 
     suspend fun getTVShowRecommendations(
         seriesId: Int,
-        page: Int,
-    ): PaginationDto<TVShowDto?>?
+        page: Int = 1,
+    ): PaginationDto<TVShowDto?>
 
-    suspend fun getLatestTVShow(): TVShowDto?
+    suspend fun getLatestTVShow(): TVShowDto
 
-    suspend fun getTVShowKeywords(seriesId: Int): KeywordsDto?
+    suspend fun getTVShowKeywords(seriesId: Int): KeywordsDto
 
     suspend fun getTVShowReviews(
         seriesId: Int,
         page: Int,
-    ): PaginationDto<ReviewDto?>?
+    ): PaginationDto<ReviewDto?>
 
     suspend fun rateTVShow(
         seriesId: Int,
         rating: Double
-    ): ApiResponse?
+    ): ApiResponse
 
     suspend fun getSeasonDetails(
         seriesId: Int,
         seasonNumber: Int,
-    ): SeasonDto?
+    ): SeasonDto
 
     suspend fun getSeasonImages(
         seriesId: Int,
         seasonNumber: Int,
-    ): ImagesDto?
+    ): ImagesDto
 
     suspend fun getTVShowVideos(
         seriesId: Int,
-    ): TrailersDto?
+    ): TrailersDto
 
     suspend fun getEpisodeDetails(
         seriesId: Int,
         seasonNumber: Int,
         episodeNumber: Int,
-    ): EpisodeDto?
+    ): EpisodeDto
 
     suspend fun getEpisodeImages(
         seriesId: Int,
         seasonNumber: Int,
         episodeNumber: Int,
-    ): ImagesDto?
+    ): ImagesDto
 
     suspend fun getEpisodeVideos(
         seriesId: Int,
         seasonNumber: Int,
         episodeNumber: Int,
-    ): TrailersDto?
+    ): TrailersDto
 
-    suspend fun getEpisodeRating(
+    suspend fun rateEpisode(
         seriesId: Int,
         seasonNumber: Int,
         episodeNumber: Int,
         rating: Double
-    ): ApiResponse?
+    ): ApiResponse
 
 }
