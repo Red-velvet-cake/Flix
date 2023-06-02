@@ -1,7 +1,6 @@
 package com.red_velvet.flix.data.repository
 
 import com.red_velvet.flix.data.local.database.dao.MovieDao
-import com.red_velvet.flix.data.local.database.entity.MovieDetailEntity
 import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
 import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
@@ -9,14 +8,13 @@ import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.remote.dtos.ApiResponse
 import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
-import com.red_velvet.flix.data.remote.dtos.movie.MovieDetailsDto
 import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
 import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
 import com.red_velvet.flix.data.remote.dtos.trailer.TrailersDto
-import com.red_velvet.flix.domain.mapper.movie.toNowPlayingMovieEntity
-import com.red_velvet.flix.domain.mapper.movie.toPopularMovieEntity
-import com.red_velvet.flix.domain.mapper.movie.toTopRatedMovieEntity
-import com.red_velvet.flix.domain.mapper.movie.toUpcomingMovieEntity
+import com.red_velvet.flix.domain.mapper.movie.toNowPlayingMovieEntityList
+import com.red_velvet.flix.domain.mapper.movie.toPopularMovieEntityList
+import com.red_velvet.flix.domain.mapper.movie.toTopRatedMovieEntityList
+import com.red_velvet.flix.domain.mapper.movie.toUpcomingMovieEntityList
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -26,7 +24,7 @@ class MovieRepositoryImp @Inject constructor(
 ) : MovieRepository, BaseRepository() {
 
     override fun getPopularMovies(
-        page: Int, region: String?, language: String?
+        page: Int? , region: String?, language: String?
     ): Flow<List<PopularMovieEntity>> {
         return movieDao.getPopularMovies()
     }
@@ -34,18 +32,17 @@ class MovieRepositoryImp @Inject constructor(
     override suspend fun refreshPopularMovies() {
         moviesService.getPopularMovies().let { popularMoviesResponse ->
             if (popularMoviesResponse.isSuccessful) {
-                popularMoviesResponse.body()?.items?.map {
-                    it.toPopularMovieEntity()
-                }.let {
-                    movieDao.insertPopularMovies(it!!)
-                }
+                popularMoviesResponse.body()?.items?.toPopularMovieEntityList()
+                    .let {
+                        movieDao.insertPopularMovies(it!!)
+                    }
             }
         }
     }
 
 
     override fun getUpcomingMovies(
-        page: Int, region: String?, language: String?
+        page: Int? , region: String?, language: String?
     ): Flow<List<UpcomingMovieEntity>> {
         return movieDao.getUpcomingMovies()
     }
@@ -53,19 +50,17 @@ class MovieRepositoryImp @Inject constructor(
     override suspend fun refreshUpcomingMovies() {
         moviesService.getUpcomingMovies().let { upcomingMoviesResponse ->
             if (upcomingMoviesResponse.isSuccessful) {
-
-                upcomingMoviesResponse.body()?.items?.map {
-                    it.toUpcomingMovieEntity()
-                }.let {
-                    movieDao.insertUpcomingMovies(it!!)
-                }
+                upcomingMoviesResponse.body()?.items?.toUpcomingMovieEntityList()
+                    .let {
+                        movieDao.insertUpcomingMovies(it!!)
+                    }
             }
         }
     }
 
 
     override fun getNowPlayingMovies(
-        page: Int, region: String?, language: String?
+        page: Int? , region: String?, language: String?
     ): Flow<List<NowPlayingMovieEntity>> {
         return movieDao.getNowPlayingMovies()
     }
@@ -73,17 +68,16 @@ class MovieRepositoryImp @Inject constructor(
     override suspend fun refreshNowPlayingMovies() {
         moviesService.getUpcomingMovies().let { nowPlayingMoviesResponse ->
             if (nowPlayingMoviesResponse.isSuccessful) {
-                nowPlayingMoviesResponse.body()?.items?.map {
-                    it.toNowPlayingMovieEntity()
-                }.let {
-                    movieDao.insertNowPlayingMovies(it!!)
-                }
+                nowPlayingMoviesResponse.body()?.items?.toNowPlayingMovieEntityList()
+                    .let {
+                        movieDao.insertNowPlayingMovies(it!!)
+                    }
             }
         }
     }
 
     override fun getTopRatedMovies(
-        page: Int, region: String?, language: String?
+        page: Int? , region: String?, language: String?
     ): Flow<List<TopRatedMovieEntity>> {
         return movieDao.getTopRatedMovies()
     }
@@ -91,43 +85,30 @@ class MovieRepositoryImp @Inject constructor(
     override suspend fun refreshTopRatedMovies() {
         moviesService.getUpcomingMovies().let { topRatedMoviesResponse ->
             if (topRatedMoviesResponse.isSuccessful) {
-                topRatedMoviesResponse.body()?.items?.map {
-                    it.toTopRatedMovieEntity()
-                }.let {
-                    movieDao.insertTopRatedMovies(it!!)
-                }
+                topRatedMoviesResponse.body()?.items?.toTopRatedMovieEntityList()
+                    .let {
+                        movieDao.insertTopRatedMovies(it!!)
+                    }
             }
         }
     }
 
-    override suspend fun getMovieDetails(movieId: Int): Flow<List<MovieDetailEntity>> {
-
+    override suspend fun getMovieDetails(movieId: Int): MovieDto {
+        return moviesService.getMovieDetails(movieId).body()!!
     }
-
-    override suspend fun refreshMovieDetails() {
-        moviesService.getUpcomingMovies().let { movieDetailsResponse ->
-            if (movieDetailsResponse.isSuccessful) {
-                movieDetailsResponse.body()?.items?.map {
-                    it.toMove()
-                }.let {
-                    movieDao.insertTopRatedMovies(it!!)
-                }
-            }
-        }
-
-    }
+    
 
     override suspend fun getMovieKeywords(movieId: Int): KeywordsDto {
         return moviesService.getMovieKeywords(movieId).body()!!
     }
 
     override suspend fun getSimilarMovies(
-        movieId: Int, page: Int, language: String
+        movieId: Int, page: Int? , language: String?
     ): List<MovieDto> {
         return moviesService.getSimilarMovies(movieId, page, language).body()?.items!!
     }
 
-    override suspend fun getMovieTrailers(movieId: Int, language: String): TrailersDto {
+    override suspend fun getMovieTrailers(movieId: Int, language: String?): TrailersDto {
         return moviesService.getMovieTrailers(movieId, language).body()!!
     }
 
@@ -136,7 +117,8 @@ class MovieRepositoryImp @Inject constructor(
     }
 
     override suspend fun getMovieRecommendations(
-        movieId: Int, page: Int, language: String
+        movieId: Int, page: Int? , language: String?
+
     ): List<MovieDto> {
         return moviesService.getMovieRecommendations(movieId, page, language).body()?.items!!
     }
@@ -150,13 +132,16 @@ class MovieRepositoryImp @Inject constructor(
     }
 
     override suspend fun getMovieReviews(
-        movieId: Int, page: Int, language: String
+        movieId: Int, page: Int? , language: String?
     ): List<ReviewDto> {
         return moviesService.getMovieReviews(movieId, page, language).body()?.items!!
     }
 
     override suspend fun getMoviesWatchlist(
-        accountId: Int, language: String, page: Int, sortBy: String
+        accountId: Int,
+        language: String?,
+        page: Int? ,
+        sortBy: String?
     ): List<MovieDto> {
         return moviesService.getMoviesWatchlist(
             accountId, language, page, sortBy
@@ -164,7 +149,10 @@ class MovieRepositoryImp @Inject constructor(
     }
 
     override suspend fun getFavoriteMovies(
-        accountId: Int, language: String, page: Int, sortBy: String
+        accountId: Int,
+        language: String?,
+        page: Int? ,
+        sortBy: String?
     ): List<MovieDto> {
         return moviesService.getFavoriteMovies(
             accountId, language, page, sortBy
@@ -172,7 +160,7 @@ class MovieRepositoryImp @Inject constructor(
     }
 
     override suspend fun search(
-        query: String, includeAdult: Boolean, language: String, page: Int
+        query: String, includeAdult: Boolean, language: String?, page: Int? 
     ): List<MovieDto> {
         return moviesService.search(
             query, includeAdult, language, page
@@ -180,7 +168,7 @@ class MovieRepositoryImp @Inject constructor(
     }
 
     override suspend fun getMoviesByKeyword(
-        keywordId: Int, includeAdult: Boolean, language: String, page: Int, region: String?
+        keywordId: Int, includeAdult: Boolean, language: String?, page: Int? , region: String?
     ): List<MovieDto> {
         return moviesService.getMoviesByKeyword(
             keywordId,
@@ -194,7 +182,7 @@ class MovieRepositoryImp @Inject constructor(
         includeAdult: Boolean,
         includeVideo: Boolean,
         language: String?,
-        page: Int,
+        page: Int? ,
         primaryReleaseYear: Int?,
         primaryReleaseDateGte: String?,
         primaryReleaseDateLte: String?,
