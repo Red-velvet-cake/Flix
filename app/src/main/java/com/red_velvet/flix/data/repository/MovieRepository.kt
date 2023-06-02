@@ -1,15 +1,18 @@
 package com.red_velvet.flix.data.repository
 
 
+import com.red_velvet.flix.data.local.database.entity.MovieDetailEntity
 import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
 import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
+import com.red_velvet.flix.data.remote.dtos.ApiResponse
 import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
 import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
 import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
 import com.red_velvet.flix.data.remote.dtos.trailer.TrailersDto
 import kotlinx.coroutines.flow.Flow
+
 
 
 interface MovieRepository {
@@ -20,11 +23,15 @@ interface MovieRepository {
         language: String? = null
     ): Flow<List<PopularMovieEntity>>
 
+    suspend fun refreshPopularMovies()
+
     fun getUpcomingMovies(
         page: Int? = null,
         region: String? = null,
         language: String? = null
     ): Flow<List<UpcomingMovieEntity>>
+
+    suspend fun refreshUpcomingMovies()
 
     fun getNowPlayingMovies(
         page: Int? = null,
@@ -32,13 +39,18 @@ interface MovieRepository {
         language: String? = null
     ): Flow<List<NowPlayingMovieEntity>>
 
+    suspend fun refreshNowPlayingMovies()
+
     fun getTopRatedMovies(
         page: Int? = null,
         region: String? = null,
         language: String? = null
     ): Flow<List<TopRatedMovieEntity>>
 
+    suspend fun refreshTopRatedMovies()
+
     suspend fun getMovieDetails(movieId: Int): MovieDto
+    
 
     suspend fun getMovieKeywords(movieId: Int): KeywordsDto
 
@@ -53,7 +65,7 @@ interface MovieRepository {
         language: String? = null
     ): TrailersDto
 
-    suspend fun getLatestMovie(): List<MovieDto>
+    suspend fun getLatestMovie(): MovieDto
 
     suspend fun getMovieRecommendations(
         movieId: Int,
@@ -61,9 +73,9 @@ interface MovieRepository {
         language: String? = null
     ): List<MovieDto>
 
-    suspend fun rateMovie(movieId: Int, rating: Double)
+    suspend fun rateMovie(movieId: Int, rating: Double): ApiResponse
 
-    suspend fun deleteMovieRating(movieId: Int)
+    suspend fun deleteMovieRating(movieId: Int): ApiResponse
 
     suspend fun getMovieReviews(
         movieId: Int,
