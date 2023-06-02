@@ -94,48 +94,95 @@ class MovieRepositoryImp @Inject constructor(
     }
 
     override suspend fun getMovieDetails(movieId: Int): MovieDto {
-        return moviesService.getMovieDetails(movieId).body()!!
+        val response = moviesService.getMovieDetails(movieId)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
     
 
     override suspend fun getMovieKeywords(movieId: Int): KeywordsDto {
-        return moviesService.getMovieKeywords(movieId).body()!!
+        val response = moviesService.getMovieKeywords(movieId)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun getSimilarMovies(
-        movieId: Int, page: Int? , language: String?
+        movieId: Int,
+        page: Int?,
+        language: String?
     ): List<MovieDto> {
-        return moviesService.getSimilarMovies(movieId, page, language).body()?.items!!
-    }
+        val response = moviesService.getSimilarMovies(movieId, page, language)
+        if (response.isSuccessful) {
+            return response.body()?.items!!
+        } else {
+            throw Throwable(response.message())
+        }    }
 
     override suspend fun getMovieTrailers(movieId: Int, language: String?): TrailersDto {
-        return moviesService.getMovieTrailers(movieId, language).body()!!
+        val response = moviesService.getMovieTrailers(movieId, language)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun getLatestMovie(): MovieDto {
-        return moviesService.getLatestMovie().body()!!
+        val response = moviesService.getLatestMovie()
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun getMovieRecommendations(
-        movieId: Int, page: Int? , language: String?
-
+        movieId: Int,
+        page: Int?,
+        language: String?
     ): List<MovieDto> {
-        return moviesService.getMovieRecommendations(movieId, page, language).body()?.items!!
+        val response = moviesService.getMovieRecommendations(movieId, page, language)
+        if (response.isSuccessful) {
+            return response.body()?.items!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun rateMovie(movieId: Int, rating: Double): ApiResponse {
-        return moviesService.rateMovie(movieId, rating).body()!!
+        val response = moviesService.rateMovie(movieId, rating)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun deleteMovieRating(movieId: Int): ApiResponse {
-        return moviesService.deleteMovieRating(movieId).body()!!
-    }
+        val response = moviesService.deleteMovieRating(movieId)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }    }
 
     override suspend fun getMovieReviews(
-        movieId: Int, page: Int? , language: String?
+        movieId: Int,
+        page: Int?,
+        language: String?
     ): List<ReviewDto> {
-        return moviesService.getMovieReviews(movieId, page, language).body()?.items!!
-    }
+        val response = moviesService.getMovieReviews(movieId, page, language)
+        if (response.isSuccessful) {
+            return response.body()?.items!!
+        } else {
+            throw Throwable(response.message())
+        }    }
 
     override suspend fun getMoviesWatchlist(
         accountId: Int,
@@ -143,9 +190,12 @@ class MovieRepositoryImp @Inject constructor(
         page: Int? ,
         sortBy: String?
     ): List<MovieDto> {
-        return moviesService.getMoviesWatchlist(
-            accountId, language, page, sortBy
-        ).body()?.items!!
+        val response = moviesService.getMoviesWatchlist(accountId, language, page, sortBy)
+        if (response.isSuccessful) {
+            return response.body()?.items!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun getFavoriteMovies(
@@ -154,28 +204,45 @@ class MovieRepositoryImp @Inject constructor(
         page: Int? ,
         sortBy: String?
     ): List<MovieDto> {
-        return moviesService.getFavoriteMovies(
-            accountId, language, page, sortBy
-        ).body()?.items!!
+        val response = moviesService.getFavoriteMovies(accountId, language, page, sortBy)
+        if (response.isSuccessful) {
+            return response.body()?.items!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun search(
-        query: String, includeAdult: Boolean, language: String?, page: Int? 
+        query: String,
+        includeAdult: Boolean,
+        language: String?,
+        page: Int?
     ): List<MovieDto> {
-        return moviesService.search(
-            query, includeAdult, language, page
-        ).body()?.items!!
+        val response = moviesService.search(query, includeAdult, language, page)
+        if (response.isSuccessful) {
+            return response.body()?.items!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun getMoviesByKeyword(
-        keywordId: Int, includeAdult: Boolean, language: String?, page: Int? , region: String?
+        keywordId: Int,
+        includeAdult: Boolean,
+        language: String?,
+        page: Int?,
+        region: String?
     ): List<MovieDto> {
-        return moviesService.getMoviesByKeyword(
-            keywordId,
+        val response = moviesService.getMoviesByKeyword(keywordId,
             includeAdult,
             language,
             page,
-        ).body()?.items!!
+            region)
+        if (response.isSuccessful) {
+            return response.body()?.items!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun discoverMovies(
@@ -213,8 +280,7 @@ class MovieRepositoryImp @Inject constructor(
         withoutCompanies: String?,
         year: Int?
     ): List<MovieDto> {
-        return moviesService.discoverMovies(
-            includeAdult,
+        val response = moviesService.discoverMovies(includeAdult,
             includeVideo,
             language,
             page,
@@ -246,8 +312,12 @@ class MovieRepositoryImp @Inject constructor(
             withoutKeywords,
             withoutWatchProviders,
             withoutCompanies,
-            year
-        ).body()?.items!!
+            year)
+        if (response.isSuccessful) {
+            return response.body()?.items!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
 }
