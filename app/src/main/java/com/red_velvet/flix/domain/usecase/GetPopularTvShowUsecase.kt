@@ -10,7 +10,7 @@ import javax.inject.Inject
 class GetPopularTvShowUsecase @Inject constructor(private val tvShowsRepository: TVShowsRepository) {
     suspend fun getPopularTvShow(): Flow<List<TVShow>> {
         return tvShowsRepository.getPopularTvShow().map {
-            it.toPopularTvShowModelList()
+            it.toModel()
         }
     }
 }

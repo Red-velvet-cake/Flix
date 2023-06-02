@@ -10,7 +10,7 @@ import javax.inject.Inject
 class GetOnTheAirTvShowUsecase @Inject constructor(private val tvShowsRepository: TVShowsRepository) {
     suspend fun getOnTheAirTVShow(): Flow<List<TVShow>> {
         return tvShowsRepository.getOnTheAirTvShow().map {
-            it.toOnTheAirTvShowModelList()
+            it.toModel()
         }
     }
 }
