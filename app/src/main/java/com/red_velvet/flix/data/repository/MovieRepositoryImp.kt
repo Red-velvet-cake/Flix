@@ -9,6 +9,7 @@ import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.remote.dtos.ApiResponse
 import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
+import com.red_velvet.flix.data.remote.dtos.movie.MovieDetailsDto
 import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
 import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
 import com.red_velvet.flix.data.remote.dtos.trailer.TrailersDto
@@ -192,7 +193,7 @@ class MovieRepositoryImp @Inject constructor(
     override suspend fun discoverMovies(
         includeAdult: Boolean,
         includeVideo: Boolean,
-        language: String,
+        language: String?,
         page: Int,
         primaryReleaseYear: Int?,
         primaryReleaseDateGte: String?,

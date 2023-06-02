@@ -1,8 +1,9 @@
 package com.red_velvet.flix.data.repository
 
+import com.red_velvet.flix.data.local.database.dao.TvShowDao
 import com.red_velvet.flix.data.local.database.entity.*
+import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.remote.dtos.ApiResponse
-import com.red_velvet.flix.data.remote.dtos.PaginationDto
 import com.red_velvet.flix.data.remote.dtos.image.ImagesDto
 import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
 import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
@@ -11,78 +12,135 @@ import com.red_velvet.flix.data.remote.dtos.tv_show.EpisodeDto
 import com.red_velvet.flix.data.remote.dtos.tv_show.SeasonDto
 import com.red_velvet.flix.data.remote.dtos.tv_show.TVShowDto
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
+import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class TVShowsRepositoryImpl : TVShowsRepository {
+class TVShowsRepositoryImpl @Inject constructor(
+    private val apiService: MoviesService,
+    private val tvShowDao: TvShowDao,
+) : TVShowsRepository {
     override suspend fun getPopularTvShow(): Flow<List<PopularTvShowEntity>> {
-        TODO("Not yet implemented")
-    }
-
-    protected suspend fun <I, O> wrap(
-        function: suspend () -> Response<I>,
-        mapper: (I) -> O
-    ): O {
-        val response = function()
-        return if (response.isSuccessful) {
-            response.body()?.let { mapper(it) } ?: throw Throwable()
-        } else {
-            throw Throwable("response is not successful")
+        return flow {
+            emit(tvShowDao.getPopularTvShow())
         }
     }
-    override suspend fun getTopRatedTvShow(): Flow<List<TopRatedTvShowEntity>> {
-        TODO("Not yet implemented")
+
+    override fun getTopRatedTvShow(): Flow<List<TopRatedTvShowEntity>> {
+        return flow {
+            emit(tvShowDao.getTopRatedTvShow())
+        }
+
     }
 
     override suspend fun getOnTheAirTvShow(): Flow<List<OnTheAirTvShowEntity>> {
-        TODO("Not yet implemented")
+        return flow {
+            emit(tvShowDao.getOnTheAirTvShow())
+        }
     }
 
     override suspend fun getAiringTodayTvShow(): Flow<List<AiringTodayTvShowEntity>> {
-        TODO("Not yet implemented")
+        return flow {
+            emit(tvShowDao.getAiringTodayTvShow())
+        }
     }
 
-    override suspend fun getTVShowRecommendations(seriesId: Int, page: Int): PaginationDto<TVShowDto?> {
-        TODO("Not yet implemented")
+    override suspend fun getTVShowRecommendations(seriesId: Int, page: Int): List<TVShowDto> {
+        val response = apiService.getTVShowRecommendations(seriesId, page)
+        if (response.isSuccessful) {
+            return response.body()?.items!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun getLatestTVShow(): TVShowDto {
-        TODO("Not yet implemented")
+        val response = apiService.getLatestTVShow()
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun getTVShowKeywords(seriesId: Int): KeywordsDto {
-        TODO("Not yet implemented")
+        val response = apiService.getTVShowKeywords(seriesId)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
-    override suspend fun getTVShowReviews(seriesId: Int, page: Int): PaginationDto<ReviewDto?> {
-        TODO("Not yet implemented")
+    override suspend fun getTVShowReviews(seriesId: Int, page: Int): List<ReviewDto> {
+        val response = apiService.getTVShowReviews(seriesId, page)
+        if (response.isSuccessful) {
+            return response.body()?.items!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun rateTVShow(seriesId: Int, rating: Double): ApiResponse {
-        TODO("Not yet implemented")
+        val response = apiService.rateTVShow(seriesId, rating)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun getSeasonDetails(seriesId: Int, seasonNumber: Int): SeasonDto {
-        TODO("Not yet implemented")
+        val response = apiService.getSeasonDetails(seriesId, seasonNumber)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun getSeasonImages(seriesId: Int, seasonNumber: Int): ImagesDto {
-        TODO("Not yet implemented")
+        val response = apiService.getSeasonImages(seriesId, seasonNumber)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun getTVShowVideos(seriesId: Int): TrailersDto {
-        TODO("Not yet implemented")
+        val response = apiService.getTVShowVideos(seriesId)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun getEpisodeDetails(seriesId: Int, seasonNumber: Int, episodeNumber: Int): EpisodeDto {
-        TODO("Not yet implemented")
+        val response = apiService.getEpisodeDetails(seriesId, seasonNumber, episodeNumber)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun getEpisodeImages(seriesId: Int, seasonNumber: Int, episodeNumber: Int): ImagesDto {
-        TODO("Not yet implemented")
+        val response = apiService.getEpisodeImages(seriesId, seasonNumber, episodeNumber)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun getEpisodeVideos(seriesId: Int, seasonNumber: Int, episodeNumber: Int): TrailersDto {
-        TODO("Not yet implemented")
+        val response = apiService.getEpisodeVideos(seriesId, seasonNumber, episodeNumber)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
 
     override suspend fun rateEpisode(
@@ -91,7 +149,13 @@ class TVShowsRepositoryImpl : TVShowsRepository {
         episodeNumber: Int,
         rating: Double
     ): ApiResponse {
-        TODO("Not yet implemented")
+        val response = apiService.rateEpisode(seriesId, seasonNumber, episodeNumber, rating)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
+        }
     }
+
 
 }

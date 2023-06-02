@@ -1,7 +1,6 @@
 package com.red_velvet.flix.data.repository
 
 
-import com.red_velvet.flix.data.local.database.entity.MovieDetailEntity
 import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
 import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
