@@ -55,11 +55,9 @@ fun List<PopularMovieEntity>.toModel(): List<Movie> {
     return map { it.toModel() }
 }
 
-
 fun List<UpcomingMovieEntity>.toModel(): List<Movie> {
     return map { it.toModel() }
 }
-
 
 fun List<TopRatedMovieEntity>.toModel(): List<Movie> {
     return map { it.toModel() }
