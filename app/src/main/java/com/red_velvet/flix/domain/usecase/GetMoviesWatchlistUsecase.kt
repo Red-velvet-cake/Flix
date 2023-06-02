@@ -11,7 +11,7 @@ class GetMoviesWatchlistUsecase @Inject constructor(
     suspend operator fun invoke(
         accountId: Int,
         language: String? = null,
-        page: Int = 1,
+        page: Int? = null,
         sortBy: String? = null
     ): List<Movie> {
         return movieRepository.getMoviesWatchlist(accountId, language, page, sortBy)

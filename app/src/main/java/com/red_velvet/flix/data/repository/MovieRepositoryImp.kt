@@ -24,7 +24,7 @@ class MovieRepositoryImp @Inject constructor(
 ) : MovieRepository, BaseRepository() {
 
     override fun getPopularMovies(
-        page: Int? , region: String?, language: String?
+        page: Int?, region: String?, language: String?
     ): Flow<List<PopularMovieEntity>> {
         return movieDao.getPopularMovies()
     }
@@ -42,7 +42,7 @@ class MovieRepositoryImp @Inject constructor(
 
 
     override fun getUpcomingMovies(
-        page: Int? , region: String?, language: String?
+        page: Int?, region: String?, language: String?
     ): Flow<List<UpcomingMovieEntity>> {
         return movieDao.getUpcomingMovies()
     }
@@ -60,7 +60,7 @@ class MovieRepositoryImp @Inject constructor(
 
 
     override fun getNowPlayingMovies(
-        page: Int? , region: String?, language: String?
+        page: Int?, region: String?, language: String?
     ): Flow<List<NowPlayingMovieEntity>> {
         return movieDao.getNowPlayingMovies()
     }
@@ -77,7 +77,7 @@ class MovieRepositoryImp @Inject constructor(
     }
 
     override fun getTopRatedMovies(
-        page: Int? , region: String?, language: String?
+        page: Int?, region: String?, language: String?
     ): Flow<List<TopRatedMovieEntity>> {
         return movieDao.getTopRatedMovies()
     }
@@ -101,7 +101,7 @@ class MovieRepositoryImp @Inject constructor(
             throw Throwable(response.message())
         }
     }
-    
+
 
     override suspend fun getMovieKeywords(movieId: Int): KeywordsDto {
         val response = moviesService.getMovieKeywords(movieId)
@@ -122,7 +122,8 @@ class MovieRepositoryImp @Inject constructor(
             return response.body()?.items!!
         } else {
             throw Throwable(response.message())
-        }    }
+        }
+    }
 
     override suspend fun getMovieTrailers(movieId: Int, language: String?): TrailersDto {
         val response = moviesService.getMovieTrailers(movieId, language)
@@ -170,7 +171,8 @@ class MovieRepositoryImp @Inject constructor(
             return response.body()!!
         } else {
             throw Throwable(response.message())
-        }    }
+        }
+    }
 
     override suspend fun getMovieReviews(
         movieId: Int,
@@ -182,12 +184,13 @@ class MovieRepositoryImp @Inject constructor(
             return response.body()?.items!!
         } else {
             throw Throwable(response.message())
-        }    }
+        }
+    }
 
     override suspend fun getMoviesWatchlist(
         accountId: Int,
         language: String?,
-        page: Int? ,
+        page: Int?,
         sortBy: String?
     ): List<MovieDto> {
         val response = moviesService.getMoviesWatchlist(accountId, language, page, sortBy)
@@ -201,7 +204,7 @@ class MovieRepositoryImp @Inject constructor(
     override suspend fun getFavoriteMovies(
         accountId: Int,
         language: String?,
-        page: Int? ,
+        page: Int?,
         sortBy: String?
     ): List<MovieDto> {
         val response = moviesService.getFavoriteMovies(accountId, language, page, sortBy)
@@ -233,11 +236,13 @@ class MovieRepositoryImp @Inject constructor(
         page: Int?,
         region: String?
     ): List<MovieDto> {
-        val response = moviesService.getMoviesByKeyword(keywordId,
+        val response = moviesService.getMoviesByKeyword(
+            keywordId,
             includeAdult,
             language,
             page,
-            region)
+            region
+        )
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
@@ -249,14 +254,14 @@ class MovieRepositoryImp @Inject constructor(
         includeAdult: Boolean,
         includeVideo: Boolean,
         language: String?,
-        page: Int? ,
+        page: Int?,
         primaryReleaseYear: Int?,
         primaryReleaseDateGte: String?,
         primaryReleaseDateLte: String?,
         region: String?,
         releaseDateGte: String?,
         releaseDateLte: String?,
-        sortBy: String,
+        sortBy: String?,
         voteAverageGte: Double?,
         voteAverageLte: Double?,
         voteCountGte: Int?,
@@ -280,7 +285,8 @@ class MovieRepositoryImp @Inject constructor(
         withoutCompanies: String?,
         year: Int?
     ): List<MovieDto> {
-        val response = moviesService.discoverMovies(includeAdult,
+        val response = moviesService.discoverMovies(
+            includeAdult,
             includeVideo,
             language,
             page,
@@ -312,7 +318,8 @@ class MovieRepositoryImp @Inject constructor(
             withoutKeywords,
             withoutWatchProviders,
             withoutCompanies,
-            year)
+            year
+        )
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {

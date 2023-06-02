@@ -10,7 +10,7 @@ class GetMovieReviewsUsecase @Inject constructor(
 ) {
     suspend operator fun invoke(
         movieId: Int,
-        page: Int = 1,
+        page: Int? = null,
         language: String? = null
     ): List<Review> {
         return movieRepository.getMovieReviews(movieId, page, language)

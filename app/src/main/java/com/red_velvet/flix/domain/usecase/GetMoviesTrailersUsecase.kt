@@ -12,6 +12,7 @@ class GetMoviesTrailersUsecase @Inject constructor(
         movieId: Int,
         language: String? = null
     ): List<Trailer> {
-        return movieRepository.getMovieTrailers(movieId, language).toModel()
+        return movieRepository.getMovieTrailers(movieId, language)
+            .toModel()
     }
 }
