@@ -11,27 +11,27 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MovieDao {
     @Insert
-    suspend fun insertPopularMovie(popularMovieEntity: List<PopularMovieEntity>)
+    suspend fun insertPopularMovies(popularMovieEntities: List<PopularMovieEntity>)
 
     @Insert
-    suspend fun insertTopRatedMovie(topRatedMovieEntity: List<TopRatedMovieEntity>)
+    suspend fun insertTopRatedMovies(topRatedMovieEntities: List<TopRatedMovieEntity>)
 
     @Insert
-    suspend fun insertNowPlayingMovie(nowPlayingMovieEntity: List<NowPlayingMovieEntity>)
+    suspend fun insertNowPlayingMovies(nowPlayingMovieEntities: List<NowPlayingMovieEntity>)
 
     @Insert
-    suspend fun insertUpcomingMovie(popularMovieEntity: List<PopularMovieEntity>)
+    suspend fun insertUpcomingMovies(upcomingMovieEntities: List<UpcomingMovieEntity>)
 
     @Query("SELECT * FROM PopularMovieEntity")
-    fun getPopularTvShow(): Flow<List<PopularMovieEntity>>
+    fun getPopularMovies(): Flow<List<PopularMovieEntity>>
 
     @Query("SELECT * FROM TopRatedMovieEntity")
-    fun getTopRatedTvShow(): Flow<List<TopRatedMovieEntity>>
+    fun getTopRatedMovies(): Flow<List<TopRatedMovieEntity>>
 
     @Query("SELECT * FROM NowPlayingMovieEntity")
-    fun getOnTheAirTvShow(): Flow<List<NowPlayingMovieEntity>>
+    fun getNowPlayingMovies(): Flow<List<NowPlayingMovieEntity>>
 
     @Query("SELECT * FROM UpcomingMovieEntity")
-    fun getAiringTodayTvShow(): Flow<List<UpcomingMovieEntity>>
+    fun getUpcomingMovies(): Flow<List<UpcomingMovieEntity>>
 
 }
