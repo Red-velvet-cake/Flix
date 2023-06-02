@@ -5,7 +5,6 @@ import com.red_velvet.flix.data.local.database.entity.OnTheAirTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.PopularTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedTvShowEntity
 import com.red_velvet.flix.data.remote.dtos.ApiResponse
-import com.red_velvet.flix.data.remote.dtos.PaginationDto
 import com.red_velvet.flix.data.remote.dtos.image.ImagesDto
 import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
 import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
@@ -28,7 +27,7 @@ interface TVShowsRepository {
     suspend fun getTVShowRecommendations(
         seriesId: Int,
         page: Int = 1,
-    ): PaginationDto<TVShowDto>
+    ): List<TVShowDto>
 
     suspend fun getLatestTVShow(): TVShowDto
 
@@ -37,7 +36,7 @@ interface TVShowsRepository {
     suspend fun getTVShowReviews(
         seriesId: Int,
         page: Int,
-    ): PaginationDto<ReviewDto>
+    ): List<ReviewDto>
 
     suspend fun rateTVShow(
         seriesId: Int,

@@ -4,7 +4,6 @@ import com.red_velvet.flix.data.local.database.dao.TvShowDao
 import com.red_velvet.flix.data.local.database.entity.*
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.remote.dtos.ApiResponse
-import com.red_velvet.flix.data.remote.dtos.PaginationDto
 import com.red_velvet.flix.data.remote.dtos.image.ImagesDto
 import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
 import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
@@ -14,7 +13,6 @@ import com.red_velvet.flix.data.remote.dtos.tv_show.SeasonDto
 import com.red_velvet.flix.data.remote.dtos.tv_show.TVShowDto
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import retrofit2.Response
 import javax.inject.Inject
 
 class TVShowsRepositoryImpl @Inject constructor(
@@ -46,69 +44,102 @@ class TVShowsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getTVShowRecommendations(seriesId: Int, page: Int): PaginationDto<TVShowDto> {
-        return wrap {
-            apiService.getTVShowRecommendations(seriesId, page)
+    override suspend fun getTVShowRecommendations(seriesId: Int, page: Int): List<TVShowDto> {
+        val response = apiService.getTVShowRecommendations(seriesId, page)
+        if (response.isSuccessful) {
+            return response.body()?.items!!
+        } else {
+            throw Throwable()
         }
     }
 
     override suspend fun getLatestTVShow(): TVShowDto {
-        return wrap {
-            apiService.getLatestTVShow()
+        val response = apiService.getLatestTVShow()
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable()
         }
     }
 
     override suspend fun getTVShowKeywords(seriesId: Int): KeywordsDto {
-        return wrap {
-            apiService.getTVShowKeywords(seriesId)
+        val response = apiService.getTVShowKeywords(seriesId)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable()
         }
     }
 
-    override suspend fun getTVShowReviews(seriesId: Int, page: Int): PaginationDto<ReviewDto> {
-        return wrap {
-            apiService.getTVShowReviews(seriesId, page)
+    override suspend fun getTVShowReviews(seriesId: Int, page: Int): List<ReviewDto> {
+        val response = apiService.getTVShowReviews(seriesId, page)
+        if (response.isSuccessful) {
+            return response.body()?.items!!
+        } else {
+            throw Throwable()
         }
     }
 
     override suspend fun rateTVShow(seriesId: Int, rating: Double): ApiResponse {
-        return wrap {
-            apiService.rateTVShow(seriesId, rating)
+        val response = apiService.rateTVShow(seriesId, rating)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable()
         }
     }
 
     override suspend fun getSeasonDetails(seriesId: Int, seasonNumber: Int): SeasonDto {
-        return wrap {
-            apiService.getSeasonDetails(seriesId, seasonNumber)
+        val response = apiService.getSeasonDetails(seriesId, seasonNumber)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable()
         }
     }
 
     override suspend fun getSeasonImages(seriesId: Int, seasonNumber: Int): ImagesDto {
-        return wrap {
-            apiService.getSeasonImages(seriesId, seasonNumber)
+        val response = apiService.getSeasonImages(seriesId, seasonNumber)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable(response.message())
         }
     }
 
     override suspend fun getTVShowVideos(seriesId: Int): TrailersDto {
-        return wrap {
-            apiService.getTVShowVideos(seriesId)
+        val response = apiService.getTVShowVideos(seriesId)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable()
         }
     }
 
     override suspend fun getEpisodeDetails(seriesId: Int, seasonNumber: Int, episodeNumber: Int): EpisodeDto {
-        return wrap {
-            apiService.getEpisodeDetails(seriesId, seasonNumber, episodeNumber)
+        val response = apiService.getEpisodeDetails(seriesId, seasonNumber, episodeNumber)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable()
         }
     }
 
     override suspend fun getEpisodeImages(seriesId: Int, seasonNumber: Int, episodeNumber: Int): ImagesDto {
-        return wrap {
-            apiService.getEpisodeImages(seriesId, seasonNumber, episodeNumber)
+        val response = apiService.getEpisodeImages(seriesId, seasonNumber, episodeNumber)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable()
         }
     }
 
     override suspend fun getEpisodeVideos(seriesId: Int, seasonNumber: Int, episodeNumber: Int): TrailersDto {
-        return wrap {
-            apiService.getEpisodeVideos(seriesId, seasonNumber, episodeNumber)
+        val response = apiService.getEpisodeVideos(seriesId, seasonNumber, episodeNumber)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable()
         }
     }
 
@@ -118,17 +149,13 @@ class TVShowsRepositoryImpl @Inject constructor(
         episodeNumber: Int,
         rating: Double
     ): ApiResponse {
-        return wrap {
-            apiService.rateEpisode(seriesId, seasonNumber, episodeNumber, rating)
-        }
-    }
-
-    private suspend fun <T> wrap(request: suspend () -> Response<T>): T {
-        val response = request()
+        val response = apiService.rateEpisode(seriesId, seasonNumber, episodeNumber, rating)
         if (response.isSuccessful) {
             return response.body()!!
         } else {
             throw Throwable()
         }
     }
+
+
 }
