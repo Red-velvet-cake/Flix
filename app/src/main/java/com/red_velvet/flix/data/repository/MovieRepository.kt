@@ -71,7 +71,7 @@ interface MovieRepository {
         language: String? = null
     ): List<MovieDto>
 
-    suspend fun rateMovie(movieId: Int, rating: Double): ApiResponse
+    suspend fun rateMovie(movieId: Int, rating: Double)
 
     suspend fun deleteMovieRating(movieId: Int): ApiResponse
 

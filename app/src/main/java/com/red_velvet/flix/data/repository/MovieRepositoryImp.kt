@@ -156,13 +156,8 @@ class MovieRepositoryImp @Inject constructor(
         }
     }
 
-    override suspend fun rateMovie(movieId: Int, rating: Double): ApiResponse {
-        val response = moviesService.rateMovie(movieId, rating)
-        if (response.isSuccessful) {
-            return response.body()!!
-        } else {
-            throw Throwable(response.message())
-        }
+    override suspend fun rateMovie(movieId: Int, rating: Double) {
+        moviesService.rateMovie(movieId, rating)
     }
 
     override suspend fun deleteMovieRating(movieId: Int): ApiResponse {
