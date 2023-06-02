@@ -379,7 +379,7 @@ interface MoviesService {
 
 
     @GET("account")
-    suspend fun getAccountDetails(@Query("session_id") sessionId: String? = ""): Response<AccountDto>
+    suspend fun getAccountDetails(): Response<AccountDto>
 
     @POST("account/{account_id}/favorite")
     suspend fun markAsFavorite(
