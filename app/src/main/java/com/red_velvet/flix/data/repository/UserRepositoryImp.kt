@@ -1,9 +1,7 @@
 package com.red_velvet.flix.data.repository
 
-import com.red_velvet.flix.data.DataClassParser
 import com.red_velvet.flix.data.local.sharedPrefs.SharedPrefs
 import com.red_velvet.flix.data.remote.MoviesService
-import com.red_velvet.flix.data.remote.dtos.ApiResponse
 import com.red_velvet.flix.data.remote.dtos.account.AccountDto
 import com.red_velvet.flix.data.remote.dtos.auth.LoginRequest
 import javax.inject.Inject
@@ -11,35 +9,25 @@ import javax.inject.Inject
 class UserRepositoryImp @Inject constructor(
     private val service: MoviesService,
     private val sharedPrefs: SharedPrefs,
-    private val dataClassParser: DataClassParser
 ) : UserRepository {
-    override suspend fun login(userName: String, password: String): Boolean? {
-        return try {
+    override suspend fun login(userName: String, password: String) {
             val validateRequestTokenWithLogin =
                 service.validateRequestTokenWithLogin(
                     LoginRequest(
                         userName,
                         password,
-                        requestToken = null
+                        sharedPrefs.getToken()
                     )
                 )
             if (validateRequestTokenWithLogin.isSuccessful) {
-                validateRequestTokenWithLogin.body()?.requestToken?.let { createSession(it) }
-                true
+               sharedPrefs.getToken()?.let { createSession(it) }
             } else {
-                val errorResponse = dataClassParser.parseFromJson(
-                    validateRequestTokenWithLogin.errorBody()?.string(), ApiResponse::class.java
-                )
-                throw Throwable(errorResponse.statusMessage)
+                throw Throwable(validateRequestTokenWithLogin.message())
             }
-
-        } catch (e: Exception) {
-            throw Throwable(e)
-        }
     }
 
     override suspend fun logout() {
-        sharedPrefs.getToken()
+        sharedPrefs.clearSessionId()
     }
 
     override suspend fun getAccountDetails(): AccountDto? {
@@ -55,15 +43,21 @@ class UserRepositoryImp @Inject constructor(
     }
 
     private suspend fun createSession(requestToken: String) {
-        val sessionResponse = service.createSession(requestToken).body()
-        if (sessionResponse?.success == true) {
-            saveSessionId(sessionResponse.sessionId.toString())
+        val sessionResponse = service.createSession(requestToken)
+        if (sessionResponse.isSuccessful) {
+            sharedPrefs.setSessionId(sessionResponse.body()?.sessionId!!)
+        } else {
+            throw Exception(sessionResponse.message())
         }
     }
 
-    private suspend fun getRequestToken(): String {
+    private suspend fun refreshRequestToken() {
         val tokenResponse = service.getRequestToken()
-        return tokenResponse.body()?.requestToken.toString()
+        if (tokenResponse.isSuccessful) {
+            sharedPrefs.setToken(tokenResponse.body()?.requestToken!!)
+        } else {
+            throw Exception(tokenResponse.message())
+        }
     }
 
 }
