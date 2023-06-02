@@ -49,7 +49,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable()
+            throw Throwable(response.message())
         }
     }
 
@@ -58,7 +58,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable()
+            throw Throwable(response.message())
         }
     }
 
@@ -67,7 +67,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable()
+            throw Throwable(response.message())
         }
     }
 
@@ -76,7 +76,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable()
+            throw Throwable(response.message())
         }
     }
 
@@ -85,7 +85,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable()
+            throw Throwable(response.message())
         }
     }
 
@@ -94,7 +94,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable()
+            throw Throwable(response.message())
         }
     }
 
@@ -112,7 +112,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable()
+            throw Throwable(response.message())
         }
     }
 
@@ -121,7 +121,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable()
+            throw Throwable(response.message())
         }
     }
 
@@ -130,7 +130,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable()
+            throw Throwable(response.message())
         }
     }
 
@@ -139,7 +139,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable()
+            throw Throwable(response.message())
         }
     }
 
@@ -153,7 +153,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable()
+            throw Throwable(response.message())
         }
     }
 
