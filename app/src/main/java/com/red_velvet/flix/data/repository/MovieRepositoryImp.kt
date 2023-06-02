@@ -6,139 +6,183 @@ import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
 import com.red_velvet.flix.data.remote.MoviesService
+import com.red_velvet.flix.data.remote.dtos.ApiResponse
 import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
 import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
 import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
 import com.red_velvet.flix.data.remote.dtos.trailer.TrailersDto
+import com.red_velvet.flix.domain.mapper.movie.toNowPlayingMovieEntityList
+import com.red_velvet.flix.domain.mapper.movie.toPopularMovieEntityList
+import com.red_velvet.flix.domain.mapper.movie.toTopRatedMovieEntityList
+import com.red_velvet.flix.domain.mapper.movie.toUpcomingMovieEntityList
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MovieRepositoryImp @Inject constructor(
     private val moviesService: MoviesService,
     private val movieDao: MovieDao,
-) : MovieRepository {
+) : MovieRepository, BaseRepository() {
+
     override fun getPopularMovies(
-        page: Int,
-        region: String?,
-        language: String?
+        page: Int? , region: String?, language: String?
     ): Flow<List<PopularMovieEntity>> {
-        TODO("Not yet implemented")
+        return movieDao.getPopularMovies()
     }
+
+    override suspend fun refreshPopularMovies() {
+        moviesService.getPopularMovies().let { popularMoviesResponse ->
+            if (popularMoviesResponse.isSuccessful) {
+                popularMoviesResponse.body()?.items?.toPopularMovieEntityList()
+                    .let {
+                        movieDao.insertPopularMovies(it!!)
+                    }
+            }
+        }
+    }
+
 
     override fun getUpcomingMovies(
-        page: Int,
-        region: String?,
-        language: String?
+        page: Int? , region: String?, language: String?
     ): Flow<List<UpcomingMovieEntity>> {
-        TODO("Not yet implemented")
+        return movieDao.getUpcomingMovies()
     }
 
+    override suspend fun refreshUpcomingMovies() {
+        moviesService.getUpcomingMovies().let { upcomingMoviesResponse ->
+            if (upcomingMoviesResponse.isSuccessful) {
+                upcomingMoviesResponse.body()?.items?.toUpcomingMovieEntityList()
+                    .let {
+                        movieDao.insertUpcomingMovies(it!!)
+                    }
+            }
+        }
+    }
+
+
     override fun getNowPlayingMovies(
-        page: Int,
-        region: String?,
-        language: String?
+        page: Int? , region: String?, language: String?
     ): Flow<List<NowPlayingMovieEntity>> {
-        TODO("Not yet implemented")
+        return movieDao.getNowPlayingMovies()
+    }
+
+    override suspend fun refreshNowPlayingMovies() {
+        moviesService.getUpcomingMovies().let { nowPlayingMoviesResponse ->
+            if (nowPlayingMoviesResponse.isSuccessful) {
+                nowPlayingMoviesResponse.body()?.items?.toNowPlayingMovieEntityList()
+                    .let {
+                        movieDao.insertNowPlayingMovies(it!!)
+                    }
+            }
+        }
     }
 
     override fun getTopRatedMovies(
-        page: Int,
-        region: String?,
-        language: String?
+        page: Int? , region: String?, language: String?
     ): Flow<List<TopRatedMovieEntity>> {
-        TODO("Not yet implemented")
+        return movieDao.getTopRatedMovies()
+    }
+
+    override suspend fun refreshTopRatedMovies() {
+        moviesService.getUpcomingMovies().let { topRatedMoviesResponse ->
+            if (topRatedMoviesResponse.isSuccessful) {
+                topRatedMoviesResponse.body()?.items?.toTopRatedMovieEntityList()
+                    .let {
+                        movieDao.insertTopRatedMovies(it!!)
+                    }
+            }
+        }
     }
 
     override suspend fun getMovieDetails(movieId: Int): MovieDto {
-        TODO("Not yet implemented")
+        return moviesService.getMovieDetails(movieId).body()!!
     }
+    
 
     override suspend fun getMovieKeywords(movieId: Int): KeywordsDto {
-        TODO("Not yet implemented")
+        return moviesService.getMovieKeywords(movieId).body()!!
     }
 
     override suspend fun getSimilarMovies(
-        movieId: Int,
-        page: Int,
-        language: String?
+        movieId: Int, page: Int? , language: String?
     ): List<MovieDto> {
-        TODO("Not yet implemented")
+        return moviesService.getSimilarMovies(movieId, page, language).body()?.items!!
     }
 
     override suspend fun getMovieTrailers(movieId: Int, language: String?): TrailersDto {
-        TODO("Not yet implemented")
+        return moviesService.getMovieTrailers(movieId, language).body()!!
     }
 
-    override suspend fun getLatestMovie(): List<MovieDto> {
-        TODO("Not yet implemented")
+    override suspend fun getLatestMovie(): MovieDto {
+        return moviesService.getLatestMovie().body()!!
     }
 
     override suspend fun getMovieRecommendations(
-        movieId: Int,
-        page: Int,
-        language: String?
+        movieId: Int, page: Int? , language: String?
+
     ): List<MovieDto> {
-        TODO("Not yet implemented")
+        return moviesService.getMovieRecommendations(movieId, page, language).body()?.items!!
     }
 
-    override suspend fun rateMovie(movieId: Int, rating: Double) {
-        TODO("Not yet implemented")
+    override suspend fun rateMovie(movieId: Int, rating: Double): ApiResponse {
+        return moviesService.rateMovie(movieId, rating).body()!!
     }
 
-    override suspend fun deleteMovieRating(movieId: Int) {
-        TODO("Not yet implemented")
+    override suspend fun deleteMovieRating(movieId: Int): ApiResponse {
+        return moviesService.deleteMovieRating(movieId).body()!!
     }
 
     override suspend fun getMovieReviews(
-        movieId: Int,
-        page: Int,
-        language: String?
+        movieId: Int, page: Int? , language: String?
     ): List<ReviewDto> {
-        TODO("Not yet implemented")
+        return moviesService.getMovieReviews(movieId, page, language).body()?.items!!
     }
 
     override suspend fun getMoviesWatchlist(
         accountId: Int,
         language: String?,
-        page: Int,
+        page: Int? ,
         sortBy: String?
     ): List<MovieDto> {
-        TODO("Not yet implemented")
+        return moviesService.getMoviesWatchlist(
+            accountId, language, page, sortBy
+        ).body()?.items!!
     }
 
     override suspend fun getFavoriteMovies(
         accountId: Int,
         language: String?,
-        page: Int,
+        page: Int? ,
         sortBy: String?
     ): List<MovieDto> {
-        TODO("Not yet implemented")
+        return moviesService.getFavoriteMovies(
+            accountId, language, page, sortBy
+        ).body()?.items!!
     }
 
     override suspend fun search(
-        query: String,
-        includeAdult: Boolean,
-        language: String?,
-        page: Int
+        query: String, includeAdult: Boolean, language: String?, page: Int? 
     ): List<MovieDto> {
-        TODO("Not yet implemented")
+        return moviesService.search(
+            query, includeAdult, language, page
+        ).body()?.items!!
     }
 
     override suspend fun getMoviesByKeyword(
-        keywordId: Int,
-        includeAdult: Boolean,
-        language: String?,
-        page: Int,
-        region: String?
+        keywordId: Int, includeAdult: Boolean, language: String?, page: Int? , region: String?
     ): List<MovieDto> {
-        TODO("Not yet implemented")
+        return moviesService.getMoviesByKeyword(
+            keywordId,
+            includeAdult,
+            language,
+            page,
+        ).body()?.items!!
     }
 
     override suspend fun discoverMovies(
         includeAdult: Boolean,
         includeVideo: Boolean,
         language: String?,
-        page: Int,
+        page: Int? ,
         primaryReleaseYear: Int?,
         primaryReleaseDateGte: String?,
         primaryReleaseDateLte: String?,
@@ -169,7 +213,41 @@ class MovieRepositoryImp @Inject constructor(
         withoutCompanies: String?,
         year: Int?
     ): List<MovieDto> {
-        TODO("Not yet implemented")
+        return moviesService.discoverMovies(
+            includeAdult,
+            includeVideo,
+            language,
+            page,
+            primaryReleaseYear,
+            primaryReleaseDateGte,
+            primaryReleaseDateLte,
+            region,
+            releaseDateGte,
+            releaseDateLte,
+            sortBy,
+            voteAverageGte,
+            voteAverageLte,
+            voteCountGte,
+            voteCountLte,
+            watchRegion,
+            withCast,
+            withCrew,
+            withGenres,
+            withKeywords,
+            withOriginCountry,
+            withOriginalLanguage,
+            withPeople,
+            withReleaseType,
+            withRuntimeGte,
+            withRuntimeLte,
+            withWatchMonetizationTypes,
+            withWatchProviders,
+            withoutGenres,
+            withoutKeywords,
+            withoutWatchProviders,
+            withoutCompanies,
+            year
+        ).body()?.items!!
     }
 
 }
