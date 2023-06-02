@@ -19,7 +19,7 @@ interface TVShowsRepository {
 
     suspend fun getPopularTvShow(): Flow<List<PopularTvShowEntity>>
 
-    suspend fun getTopRatedTvShow(): Flow<List<TopRatedTvShowEntity>>
+    fun getTopRatedTvShow(): Flow<List<TopRatedTvShowEntity>>
 
     suspend fun getOnTheAirTvShow(): Flow<List<OnTheAirTvShowEntity>>
 
@@ -28,7 +28,7 @@ interface TVShowsRepository {
     suspend fun getTVShowRecommendations(
         seriesId: Int,
         page: Int = 1,
-    ): PaginationDto<TVShowDto?>
+    ): PaginationDto<TVShowDto>
 
     suspend fun getLatestTVShow(): TVShowDto
 
@@ -37,7 +37,7 @@ interface TVShowsRepository {
     suspend fun getTVShowReviews(
         seriesId: Int,
         page: Int,
-    ): PaginationDto<ReviewDto?>
+    ): PaginationDto<ReviewDto>
 
     suspend fun rateTVShow(
         seriesId: Int,

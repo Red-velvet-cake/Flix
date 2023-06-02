@@ -9,6 +9,7 @@ import com.red_velvet.flix.data.local.database.entity.OnTheAirTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.PopularTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedTvShowEntity
 import kotlinx.coroutines.flow.Flow
+
 @Dao
 interface TvShowDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -24,14 +25,14 @@ interface TvShowDao {
     suspend fun insertAiringTodayTvShows(airingTodayTvShowEntities: List<AiringTodayTvShowEntity>)
 
     @Query("SELECT * FROM PopularTvShowEntity")
-    fun getPopularTvShow(): Flow<List<PopularTvShowEntity>>
+    suspend fun getPopularTvShow(): List<PopularTvShowEntity>
 
     @Query("SELECT * FROM TopRatedTvShowEntity")
-    fun getTopRatedTvShow(): Flow<List<TopRatedTvShowEntity>>
+    suspend fun getTopRatedTvShow(): List<TopRatedTvShowEntity>
 
     @Query("SELECT * FROM OnTheAirTvShowEntity")
-    fun getOnTheAirTvShow(): Flow<List<OnTheAirTvShowEntity>>
+    suspend fun getOnTheAirTvShow(): List<OnTheAirTvShowEntity>
 
     @Query("SELECT * FROM AiringTodayTvShowEntity")
-    fun getAiringTodayTvShow(): Flow<List<AiringTodayTvShowEntity>>
+    suspend fun getAiringTodayTvShow(): List<AiringTodayTvShowEntity>
 }
