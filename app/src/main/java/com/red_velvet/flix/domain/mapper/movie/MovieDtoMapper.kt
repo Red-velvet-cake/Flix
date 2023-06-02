@@ -1,6 +1,7 @@
 package com.red_velvet.flix.domain.mapper.movie
 
 import com.red_velvet.flix.BuildConfig
+import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
 import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
@@ -67,4 +68,19 @@ fun MovieDto.toTopRatedMovieEntity(): TopRatedMovieEntity {
 
 fun List<MovieDto>.toTopRatedMovieEntityList(): List<TopRatedMovieEntity> {
     return map { it.toTopRatedMovieEntity() }
+}
+fun MovieDto.toNowPlayingMovieEntity(): NowPlayingMovieEntity {
+
+    return  NowPlayingMovieEntity(
+        id = id.orZero().toLong(),
+        title = title.orEmpty(),
+        originalLanguage = originalLanguage.orEmpty(),
+        overview = overview.orEmpty(),
+        imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
+        date = releaseDate.orEmpty()
+    )
+}
+
+fun List<MovieDto>.toNowPlayingMovieEntityList(): List<NowPlayingMovieEntity>{
+    return map { it.toNowPlayingMovieEntity() }
 }
