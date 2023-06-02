@@ -7,8 +7,7 @@ import javax.inject.Inject
 
 class GetTVShowReviewsUsecase @Inject constructor(private val tvShowsRepository: TVShowsRepository) {
     suspend operator fun invoke(seriesId: Int, page: Int = 1): List<Review> {
-        return tvShowsRepository.getTVShowReviews(seriesId, page).map {
-            it.toModel()
-        }
+        return tvShowsRepository.getTVShowReviews(seriesId, page)
+            .map { it.toModel() }
     }
 }

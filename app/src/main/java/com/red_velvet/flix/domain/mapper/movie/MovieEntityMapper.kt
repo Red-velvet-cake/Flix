@@ -51,20 +51,18 @@ fun NowPlayingMovieEntity.toModel(): Movie {
     )
 }
 
-fun List<PopularMovieEntity>.toModel(): List<Movie> {
+fun List<PopularMovieEntity>.toPopularMoviesModels(): List<Movie> {
     return map { it.toModel() }
 }
 
-
-fun List<UpcomingMovieEntity>.toModel(): List<Movie> {
+fun List<UpcomingMovieEntity>.toUpcomingMoviesModels(): List<Movie> {
     return map { it.toModel() }
 }
 
-
-fun List<TopRatedMovieEntity>.toModel(): List<Movie> {
+fun List<TopRatedMovieEntity>.toTopRatedMoviesModels(): List<Movie> {
     return map { it.toModel() }
 }
 
-fun List<NowPlayingMovieEntity>.toModel(): List<Movie> {
+fun List<NowPlayingMovieEntity>.toNowPlayingMoviesModels(): List<Movie> {
     return map { it.toModel() }
 }
