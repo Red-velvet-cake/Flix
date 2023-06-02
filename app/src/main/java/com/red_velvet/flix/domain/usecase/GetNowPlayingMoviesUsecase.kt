@@ -11,7 +11,7 @@ class GetNowPlayingMoviesUsecase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
     suspend operator fun invoke(
-        page: Int = 1,
+        page: Int? = null,
         region: String? = null,
         language: String? = null
     ): Flow<List<Movie>> {

@@ -12,7 +12,7 @@ class GetMoviesByKeywordUsecase @Inject constructor(
         keywordId: Int,
         includeAdult: Boolean = false,
         language: String? = null,
-        page: Int = 1,
+        page: Int? = null,
         region: String? = null
     ): List<Movie> {
         return movieRepository.getMoviesByKeyword(keywordId, includeAdult, language, page, region)

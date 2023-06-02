@@ -12,7 +12,7 @@ class SearchUsecase @Inject constructor(
         query: String,
         includeAdult: Boolean = false,
         language: String? = null,
-        page: Int = 1,
+        page: Int? = null
     ): List<Movie> {
         return movieRepository.search(query, includeAdult, language, page)
             .toModel()
