@@ -378,8 +378,8 @@ interface MoviesService {
     ): Response<PaginationDto<TVShowDto>>
 
 
-    @GET("account/{account_id}")
-    suspend fun getAccountDetails(@Path("account_id") accountId: Int): Response<AccountDto>
+    @GET("account")
+    suspend fun getAccountDetails(@Path("session_id") sessionId: String? = ""): Response<AccountDto>
 
     @POST("account/{account_id}/favorite")
     suspend fun markAsFavorite(
