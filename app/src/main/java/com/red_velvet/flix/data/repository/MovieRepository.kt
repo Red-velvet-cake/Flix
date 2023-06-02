@@ -15,25 +15,25 @@ import kotlinx.coroutines.flow.Flow
 interface MovieRepository {
 
     fun getPopularMovies(
-        page: Int = 1,
+        page: Int? = null,
         region: String? = null,
         language: String? = null
     ): Flow<List<PopularMovieEntity>>
 
     fun getUpcomingMovies(
-        page: Int = 1,
+        page: Int? = null,
         region: String? = null,
         language: String? = null
     ): Flow<List<UpcomingMovieEntity>>
 
     fun getNowPlayingMovies(
-        page: Int = 1,
+        page: Int? = null,
         region: String? = null,
         language: String? = null
     ): Flow<List<NowPlayingMovieEntity>>
 
     fun getTopRatedMovies(
-        page: Int = 1,
+        page: Int? = null,
         region: String? = null,
         language: String? = null
     ): Flow<List<TopRatedMovieEntity>>
@@ -44,7 +44,7 @@ interface MovieRepository {
 
     suspend fun getSimilarMovies(
         movieId: Int,
-        page: Int = 1,
+        page: Int? = null,
         language: String? = null
     ): List<MovieDto>
 
@@ -57,7 +57,7 @@ interface MovieRepository {
 
     suspend fun getMovieRecommendations(
         movieId: Int,
-        page: Int = 1,
+        page: Int? = null,
         language: String? = null
     ): List<MovieDto>
 
@@ -67,21 +67,21 @@ interface MovieRepository {
 
     suspend fun getMovieReviews(
         movieId: Int,
-        page: Int = 1,
+        page: Int? = null,
         language: String? = null
     ): List<ReviewDto>
 
     suspend fun getMoviesWatchlist(
         accountId: Int,
         language: String? = null,
-        page: Int = 1,
+        page: Int? = null,
         sortBy: String? = null
     ): List<MovieDto>
 
     suspend fun getFavoriteMovies(
         accountId: Int,
         language: String? = null,
-        page: Int = 1,
+        page: Int? = null,
         sortBy: String? = null
     ): List<MovieDto>
 
@@ -89,14 +89,14 @@ interface MovieRepository {
         query: String,
         includeAdult: Boolean = false,
         language: String? = null,
-        page: Int = 1,
+        page: Int? = null,
     ): List<MovieDto>
 
     suspend fun getMoviesByKeyword(
         keywordId: Int,
         includeAdult: Boolean = false,
         language: String? = null,
-        page: Int = 1,
+        page: Int? = null,
         region: String? = null
     ): List<MovieDto>
 
@@ -104,14 +104,14 @@ interface MovieRepository {
         includeAdult: Boolean = false,
         includeVideo: Boolean,
         language: String? = null,
-        page: Int = 1,
+        page: Int? = null,
         primaryReleaseYear: Int? = null,
         primaryReleaseDateGte: String? = null,
         primaryReleaseDateLte: String? = null,
         region: String? = null,
         releaseDateGte: String? = null,
         releaseDateLte: String? = null,
-        sortBy: String,
+        sortBy: String? = null,
         voteAverageGte: Double? = null,
         voteAverageLte: Double? = null,
         voteCountGte: Int? = null,

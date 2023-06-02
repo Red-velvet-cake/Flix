@@ -42,36 +42,36 @@ interface MoviesService {
 
     @GET("movie/popular")
     suspend fun getPopularMovies(
-        @Query("page") page: Int = 1,
+        @Query("page") page: Int? = 1,
         @Query("region") region: String? = null,
-        @Query("language") language: String = "en-US"
+        @Query("language") language: String? = "en-US"
     ): Response<PaginationDto<MovieDto>>
 
     @GET("movie/upcoming")
     suspend fun getUpcomingMovies(
-        @Query("page") page: Int = 1,
+        @Query("page") page: Int? = 1,
         @Query("region") region: String? = null,
-        @Query("language") language: String = "en-US"
+        @Query("language") language: String? = "en-US"
     ): Response<PaginationDto<MovieDto>>
 
     @GET("movie/top_rated")
     suspend fun getTopRatedMovies(
-        @Query("page") page: Int = 1,
+        @Query("page") page: Int? = 1,
         @Query("region") region: String? = null,
-        @Query("language") language: String = "en-US"
+        @Query("language") language: String? = "en-US"
     ): Response<PaginationDto<MovieDto>>
 
     @GET("movie/now_playing")
     suspend fun getNowPlayingMovies(
-        @Query("page") page: Int = 1,
+        @Query("page") page: Int? = 1,
         @Query("region") region: String? = null,
-        @Query("language") language: String = "en-US"
+        @Query("language") language: String? = "en-US"
     ): Response<PaginationDto<MovieDto>>
 
     @GET("movie/{movie_id}")
     suspend fun getMovieDetails(
         @Path("movie_id") movieId: Int,
-        @Query("language") language: String = "en-US",
+        @Query("language") language: String? = "en-US",
         @Query("append_to_response") appendToResponse: String? = null
     ): Response<MovieDto>
 
@@ -81,8 +81,8 @@ interface MoviesService {
     @GET("movie/{movie_id}/similar")
     suspend fun getSimilarMovies(
         @Path("movie_id") movieId: Int,
-        @Query("page") page: Int = 1,
-        @Query("language") language: String = "en-US"
+        @Query("page") page: Int? = 1,
+        @Query("language") language: String? = "en-US"
     ): Response<PaginationDto<MovieDto>>
 
     @GET("movie/{movie_id}/keywords")
@@ -91,14 +91,14 @@ interface MoviesService {
     @GET("movie/{movie_id}/videos")
     suspend fun getMovieTrailers(
         @Path("movie_id") movieId: Int,
-        @Query("language") language: String = "en-US"
+        @Query("language") language: String? = "en-US"
     ): Response<TrailersDto>
 
     @GET("movie/{movie_id}/recommendations")
     suspend fun getMovieRecommendations(
         @Path("movie_id") movieId: Int,
-        @Query("page") page: Int = 1,
-        @Query("language") language: String = "en-US"
+        @Query("page") page: Int? = 1,
+        @Query("language") language: String? = "en-US"
     ): Response<PaginationDto<MovieDto>>
 
     @FormUrlEncoded
@@ -114,56 +114,56 @@ interface MoviesService {
     @GET("movie/{movie_id}/reviews")
     suspend fun getMovieReviews(
         @Path("movie_id") movieId: Int,
-        @Query("page") page: Int = 1,
-        @Query("language") language: String = "en-US"
+        @Query("page") page: Int? = 1,
+        @Query("language") language: String? = "en-US"
     ): Response<PaginationDto<ReviewDto>>
 
 
     @GET("tv/on_the_air")
     suspend fun getOnTheAirSeries(
-        @Query("page") page: Int = 1,
-        @Query("language") language: String = "en-US",
+        @Query("page") page: Int? = 1,
+        @Query("language") language: String? = "en-US",
         @Query("timezone") timezone: String? = null
     ): Response<PaginationDto<TVShowDto>>
 
     @GET("tv/airing_today")
     suspend fun getAiringTodaySeries(
-        @Query("page") page: Int = 1,
-        @Query("language") language: String = "en-US",
+        @Query("page") page: Int? = 1,
+        @Query("language") language: String? = "en-US",
         @Query("timezone") timezone: String? = null
     ): Response<PaginationDto<TVShowDto>>
 
     @GET("tv/popular")
     suspend fun getPopularSeries(
-        @Query("page") page: Int = 1,
-        @Query("language") language: String = "en-US"
+        @Query("page") page: Int? = 1,
+        @Query("language") language: String? = "en-US"
     ): Response<PaginationDto<TVShowDto>>
 
     @GET("tv/top_rated")
     suspend fun getTopRatedSeries(
-        @Query("page") page: Int = 1,
-        @Query("language") language: String = "en-US"
+        @Query("page") page: Int? = 1,
+        @Query("language") language: String? = "en-US"
     ): Response<PaginationDto<TVShowDto>>
 
     @GET("tv/{tv_id}")
     suspend fun getTVShowDetails(
         @Path("tv_id") tvId: Int,
         @Query("append_to_response") appendToResponse: String? = null,
-        @Query("language") language: String = "en-US"
+        @Query("language") language: String? = "en-US"
     ): Response<TVShowDto>
 
     @GET("tv/{series_id}/images")
     suspend fun getTVShowImages(
         @Path("series_id") seriesId: Int,
-        @Query("language") language: String = "en-US",
+        @Query("language") language: String? = "en-US",
         @Query("include_image_language") includeImageLanguage: String? = null
     ): Response<ImagesDto>
 
     @GET("tv/{tv_id}/similar")
     suspend fun getSimilarTVShows(
         @Path("tv_id") tvId: Int,
-        @Query("page") page: Int = 1,
-        @Query("language") language: String = "en-US"
+        @Query("page") page: Int? = 1,
+        @Query("language") language: String? = "en-US"
     ): Response<PaginationDto<TVShowDto>>
 
     @GET("tv/{series_id}/videos")
@@ -175,8 +175,8 @@ interface MoviesService {
     @GET("tv/{series_id}/recommendations")
     suspend fun getTVShowRecommendations(
         @Path("series_id") seriesId: Int,
-        @Query("page") page: Int = 1,
-        @Query("language") language: String = "en-US"
+        @Query("page") page: Int? = 1,
+        @Query("language") language: String? = "en-US"
     ): Response<PaginationDto<TVShowDto>>
 
     @GET("tv/latest")
@@ -188,8 +188,8 @@ interface MoviesService {
     @GET("tv/{series_id}/reviews")
     suspend fun getTVShowReviews(
         @Path("series_id") seriesId: Int,
-        @Query("page") page: Int = 1,
-        @Query("language") language: String = "en-US"
+        @Query("page") page: Int? = 1,
+        @Query("language") language: String? = "en-US"
     ): Response<PaginationDto<ReviewDto>>
 
     @FormUrlEncoded
@@ -204,14 +204,14 @@ interface MoviesService {
         @Path("series_id") seriesId: Int,
         @Path("season_number") seasonNumber: Int,
         @Query("append_to_response") appendToResponse: String? = null,
-        @Query("language") language: String = "en-US"
+        @Query("language") language: String? = "en-US"
     ): Response<SeasonDto>
 
     @GET("tv/{series_id}/season/{season_number}/images")
     suspend fun getSeasonImages(
         @Path("series_id") seriesId: Int,
         @Path("season_number") seasonNumber: Int,
-        @Query("language") language: String = "en-US",
+        @Query("language") language: String? = "en-US",
         @Query("include_image_language") includeImageLanguage: String? = null
     ): Response<ImagesDto>
 
@@ -219,7 +219,7 @@ interface MoviesService {
     suspend fun getTVShowVideos(
         @Path("series_id") seriesId: Int,
         @Query("include_video_language") includeVideoLanguage: String? = null,
-        @Query("language") language: String = "en-US"
+        @Query("language") language: String? = "en-US"
     ): Response<TrailersDto>
 
     @GET("tv/{series_id}/season/{season_number}/episode/{episode_number}")
@@ -228,7 +228,7 @@ interface MoviesService {
         @Path("season_number") seasonNumber: Int,
         @Path("episode_number") episodeNumber: Int,
         @Query("append_to_response") appendToResponse: String? = null,
-        @Query("language") language: String = "en-US"
+        @Query("language") language: String? = "en-US"
     ): Response<EpisodeDto>
 
     @GET("tv/{series_id}/season/{season_number}/episode/{episode_number}/images")
@@ -236,7 +236,7 @@ interface MoviesService {
         @Path("series_id") seriesId: Int,
         @Path("season_number") seasonNumber: Int,
         @Path("episode_number") episodeNumber: Int,
-        @Query("language") language: String = "en-US",
+        @Query("language") language: String? = "en-US",
         @Query("include_image_language") includeImageLanguage: String? = null
     ): Response<ImagesDto>
 
@@ -246,7 +246,7 @@ interface MoviesService {
         @Path("season_number") seasonNumber: Int,
         @Path("episode_number") episodeNumber: Int,
         @Query("include_video_language") includeVideoLanguage: String? = null,
-        @Query("language") language: String = "en-US"
+        @Query("language") language: String? = "en-US"
     ): Response<TrailersDto>
 
     @FormUrlEncoded
@@ -263,15 +263,15 @@ interface MoviesService {
     suspend fun discoverMovies(
         @Query("include_adult") includeAdult: Boolean = false,
         @Query("include_video") includeVideo: Boolean = false,
-        @Query("language") language: String = "en-US",
-        @Query("page") page: Int = 1,
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1,
         @Query("primary_release_year") primaryReleaseYear: Int? = null,
         @Query("primary_release_date.gte") primaryReleaseDateGte: String? = null,
         @Query("primary_release_date.lte") primaryReleaseDateLte: String? = null,
         @Query("region") region: String? = null,
         @Query("release_date.gte") releaseDateGte: String? = null,
         @Query("release_date.lte") releaseDateLte: String? = null,
-        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("sort_by") sortBy: String? = "popularity.desc",
         @Query("vote_average.gte") voteAverageGte: Double? = null,
         @Query("vote_average.lte") voteAverageLte: Double? = null,
         @Query("vote_count.gte") voteCountGte: Int? = null,
@@ -304,8 +304,8 @@ interface MoviesService {
     suspend fun getMoviesByKeyword(
         @Path("keyword_id") keywordId: Int,
         @Query("include_adult") includeAdult: Boolean = false,
-        @Query("language") language: String = "en-US",
-        @Query("page") page: Int = 1,
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1,
         @Query("region") region: String? = null
     ): Response<PaginationDto<MovieDto>>
 
@@ -344,17 +344,17 @@ interface MoviesService {
     suspend fun search(
         @Query("query") query: String,
         @Query("include_adult") includeAdult: Boolean = false,
-        @Query("language") language: String = "en-US",
-        @Query("page") page: Int = 1,
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1,
     ): Response<PaginationDto<MovieDto>>
 
     @GET("search/movie")
     suspend fun searchMovies(
         @Query("query") query: String,
         @Query("include_adult") includeAdult: Boolean = false,
-        @Query("language") language: String = "en-US",
+        @Query("language") language: String? = "en-US",
         @Query("primary_release_year") primaryReleaseYear: Int? = null,
-        @Query("page") page: Int = 1,
+        @Query("page") page: Int? = 1,
         @Query("region") region: String? = null,
         @Query("year") year: Int? = null
     ): Response<PaginationDto<MovieDto>>
@@ -363,8 +363,8 @@ interface MoviesService {
     suspend fun searchPeople(
         @Query("query") query: String,
         @Query("include_adult") includeAdult: Boolean = false,
-        @Query("language") language: String = "en-US",
-        @Query("page") page: Int = 1,
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1,
     ): Response<PaginationDto<PersonDto>>
 
     @GET("search/tv")
@@ -372,8 +372,8 @@ interface MoviesService {
         @Query("query") query: String,
         @Query("first_air_date_year") firstAirDateYear: Int? = null,
         @Query("include_adult") includeAdult: Boolean = false,
-        @Query("language") language: String = "en-US",
-        @Query("page") page: Int = 1,
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1,
         @Query("year") year: Int? = null
     ): Response<PaginationDto<TVShowDto>>
 
@@ -390,17 +390,17 @@ interface MoviesService {
     @GET("account/{account_id}/favorite/tv")
     suspend fun getFavoriteTvShows(
         @Path("account_id") accountId: Int,
-        @Query("language") language: String = "en-US",
-        @Query("page") page: Int = 1,
-        @Query("sort_by") sortBy: String = "created_at.asc"
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1,
+        @Query("sort_by") sortBy: String? = "created_at.asc"
     ): Response<PaginationDto<TVShowDto>>
 
     @GET("account/{account_id}/favorite/movies")
     suspend fun getFavoriteMovies(
         @Path("account_id") accountId: Int,
-        @Query("language") language: String = "en-US",
-        @Query("page") page: Int = 1,
-        @Query("sort_by") sortBy: String = "created_at.asc"
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1,
+        @Query("sort_by") sortBy: String? = "created_at.asc"
     ): Response<PaginationDto<MovieDto>>
 
     @POST("account/{account_id}/watchlist")
@@ -412,16 +412,16 @@ interface MoviesService {
     @GET("account/{account_id}/watchlist/tv")
     suspend fun getTvShowsWatchlist(
         @Path("account_id") accountId: Int,
-        @Query("language") language: String = "en-US",
-        @Query("page") page: Int = 1,
-        @Query("sort_by") sortBy: String = "created_at.asc"
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1,
+        @Query("sort_by") sortBy: String? = "created_at.asc"
     ): Response<PaginationDto<TVShowDto>>
 
     @GET("account/{account_id}/watchlist/movies")
     suspend fun getMoviesWatchlist(
         @Path("account_id") accountId: Int,
-        @Query("language") language: String = "en-US",
-        @Query("page") page: Int = 1,
-        @Query("sort_by") sortBy: String = "created_at.asc"
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1,
+        @Query("sort_by") sortBy: String? = "created_at.asc"
     ): Response<PaginationDto<MovieDto>>
 }
