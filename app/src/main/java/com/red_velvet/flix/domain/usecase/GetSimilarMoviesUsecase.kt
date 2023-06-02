@@ -10,7 +10,7 @@ class GetSimilarMoviesUsecase @Inject constructor(
 ) {
     suspend operator fun invoke(
         movieId: Int,
-        page: Int = 1,
+        page: Int? = null,
         language: String? = null
     ): List<Movie> {
         return movieRepository.getSimilarMovies(movieId, page, language)

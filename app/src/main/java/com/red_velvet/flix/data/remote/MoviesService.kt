@@ -156,7 +156,7 @@ interface MoviesService {
     suspend fun getTVShowImages(
         @Path("series_id") seriesId: Int,
         @Query("language") language: String? = "en-US",
-        @Query("include_image_language") includeImagelanguage: String?? = null
+        @Query("include_image_language") includeImageLanguage: String? = null
     ): Response<ImagesDto>
 
     @GET("tv/{tv_id}/similar")
@@ -169,7 +169,7 @@ interface MoviesService {
     @GET("tv/{series_id}/videos")
     suspend fun getTVShowTrailers(
         @Path("series_id") seriesId: Int,
-        @Query("include_video_language") includeVideolanguage: String?? = null,
+        @Query("include_video_language") includeVideoLanguage: String? = null,
     ): Response<TrailersDto>
 
     @GET("tv/{series_id}/recommendations")
@@ -212,13 +212,13 @@ interface MoviesService {
         @Path("series_id") seriesId: Int,
         @Path("season_number") seasonNumber: Int,
         @Query("language") language: String? = "en-US",
-        @Query("include_image_language") includeImagelanguage: String?? = null
+        @Query("include_image_language") includeImageLanguage: String? = null
     ): Response<ImagesDto>
 
     @GET("tv/{series_id}/videos")
     suspend fun getTVShowVideos(
         @Path("series_id") seriesId: Int,
-        @Query("include_video_language") includeVideolanguage: String?? = null,
+        @Query("include_video_language") includeVideoLanguage: String? = null,
         @Query("language") language: String? = "en-US"
     ): Response<TrailersDto>
 
@@ -237,7 +237,7 @@ interface MoviesService {
         @Path("season_number") seasonNumber: Int,
         @Path("episode_number") episodeNumber: Int,
         @Query("language") language: String? = "en-US",
-        @Query("include_image_language") includeImagelanguage: String?? = null
+        @Query("include_image_language") includeImageLanguage: String? = null
     ): Response<ImagesDto>
 
     @GET("tv/{series_id}/season/{season_number}/episode/{episode_number}/videos")
@@ -245,7 +245,7 @@ interface MoviesService {
         @Path("series_id") seriesId: Int,
         @Path("season_number") seasonNumber: Int,
         @Path("episode_number") episodeNumber: Int,
-        @Query("include_video_language") includeVideolanguage: String?? = null,
+        @Query("include_video_language") includeVideoLanguage: String? = null,
         @Query("language") language: String? = "en-US"
     ): Response<TrailersDto>
 
@@ -263,7 +263,7 @@ interface MoviesService {
     suspend fun discoverMovies(
         @Query("include_adult") includeAdult: Boolean = false,
         @Query("include_video") includeVideo: Boolean = false,
-        @Query("language") language: String?? = "en-US",
+        @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
         @Query("primary_release_year") primaryReleaseYear: Int? = null,
         @Query("primary_release_date.gte") primaryReleaseDateGte: String? = null,
@@ -282,7 +282,7 @@ interface MoviesService {
         @Query("with_genres") withGenres: String? = null,
         @Query("with_keywords") withKeywords: String? = null,
         @Query("with_origin_country") withOriginCountry: String? = null,
-        @Query("with_original_language") withOriginallanguage: String?? = null,
+        @Query("with_original_language") withOriginalLanguage: String? = null,
         @Query("with_people") withPeople: String? = null,
         @Query("with_release_type") withReleaseType: Int? = null,
         @Query("with_runtime.gte") withRuntimeGte: Int? = null,
@@ -379,7 +379,7 @@ interface MoviesService {
 
 
     @GET("account")
-    suspend fun getAccountDetails(@Query("session_id") sessionId: String? = ""): Response<AccountDto>
+    suspend fun getAccountDetails(): Response<AccountDto>
 
     @POST("account/{account_id}/favorite")
     suspend fun markAsFavorite(

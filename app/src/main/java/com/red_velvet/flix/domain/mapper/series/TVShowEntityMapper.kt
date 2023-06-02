@@ -5,7 +5,6 @@ import com.red_velvet.flix.data.local.database.entity.AiringTodayTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.OnTheAirTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.PopularTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedTvShowEntity
-import com.red_velvet.flix.data.remote.dtos.tv_show.TVShowDto
 import com.red_velvet.flix.domain.model.series.TVShow
 
 fun PopularTvShowEntity.toModel(): TVShow {
@@ -18,7 +17,6 @@ fun PopularTvShowEntity.toModel(): TVShow {
         voteAverage = 0.0,
     )
 }
-
 
 fun TopRatedTvShowEntity.toModel(): TVShow {
     return TVShow(
@@ -43,7 +41,6 @@ fun AiringTodayTvShowEntity.toModel(): TVShow {
     )
 }
 
-
 fun OnTheAirTvShowEntity.toModel(): TVShow {
     return TVShow(
         id = id.toInt(),
@@ -54,15 +51,19 @@ fun OnTheAirTvShowEntity.toModel(): TVShow {
         voteAverage = 0.0,
     )
 }
-fun List<PopularTvShowEntity>.toModel(): List<TVShow> {
+
+fun List<PopularTvShowEntity>.toPopularTVShowsModels(): List<TVShow> {
     return map { it.toModel() }
 }
-fun List<TopRatedTvShowEntity>.toModel(): List<TVShow> {
+
+fun List<TopRatedTvShowEntity>.toTopRatedTVShowsModels(): List<TVShow> {
     return map { it.toModel() }
 }
-fun List<AiringTodayTvShowEntity>.toModel(): List<TVShow> {
+
+fun List<AiringTodayTvShowEntity>.toAiringTodayTvShowsModels(): List<TVShow> {
     return map { it.toModel() }
 }
-fun List<OnTheAirTvShowEntity>.toModel(): List<TVShow> {
+
+fun List<OnTheAirTvShowEntity>.toOnTheAirTvShowsModels(): List<TVShow> {
     return map { it.toModel() }
 }

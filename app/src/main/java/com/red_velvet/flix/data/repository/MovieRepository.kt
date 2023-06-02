@@ -1,7 +1,6 @@
 package com.red_velvet.flix.data.repository
 
 
-import com.red_velvet.flix.data.local.database.entity.MovieDetailEntity
 import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
 import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
@@ -12,7 +11,6 @@ import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
 import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
 import com.red_velvet.flix.data.remote.dtos.trailer.TrailersDto
 import kotlinx.coroutines.flow.Flow
-
 
 
 interface MovieRepository {
@@ -50,7 +48,7 @@ interface MovieRepository {
     suspend fun refreshTopRatedMovies()
 
     suspend fun getMovieDetails(movieId: Int): MovieDto
-    
+
 
     suspend fun getMovieKeywords(movieId: Int): KeywordsDto
 
@@ -123,7 +121,7 @@ interface MovieRepository {
         region: String? = null,
         releaseDateGte: String? = null,
         releaseDateLte: String? = null,
-        sortBy: String,
+        sortBy: String? = null,
         voteAverageGte: Double? = null,
         voteAverageLte: Double? = null,
         voteCountGte: Int? = null,
