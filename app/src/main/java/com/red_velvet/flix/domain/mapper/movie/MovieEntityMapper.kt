@@ -18,7 +18,6 @@ fun PopularMovieEntity.toModel(): Movie {
     )
 }
 
-
 fun UpcomingMovieEntity.toModel(): Movie {
     return Movie(
         id = id.toInt(),
