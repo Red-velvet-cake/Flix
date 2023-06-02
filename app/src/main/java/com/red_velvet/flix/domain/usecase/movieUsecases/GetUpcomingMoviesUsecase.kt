@@ -1,4 +1,4 @@
-package com.red_velvet.flix.domain.usecase
+package com.red_velvet.flix.domain.usecase.movieUsecases
 
 import com.red_velvet.flix.data.repository.MovieRepository
 import com.red_velvet.flix.domain.mapper.movie.toModel
@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class GetTopRatedMoviesUsecase @Inject constructor(
+class GetUpcomingMoviesUsecase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
     suspend operator fun invoke(
@@ -15,7 +15,7 @@ class GetTopRatedMoviesUsecase @Inject constructor(
         region: String? = null,
         language: String? = null
     ): Flow<List<Movie>> {
-        return movieRepository.getTopRatedMovies(page, region, language)
+        return movieRepository.getUpcomingMovies(page, region, language)
             .map { it.toModel() }
     }
 }

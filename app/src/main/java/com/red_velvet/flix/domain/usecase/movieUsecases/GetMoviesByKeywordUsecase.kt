@@ -1,20 +1,21 @@
-package com.red_velvet.flix.domain.usecase
+package com.red_velvet.flix.domain.usecase.movieUsecases
 
 import com.red_velvet.flix.data.repository.MovieRepository
 import com.red_velvet.flix.domain.mapper.movie.toModel
 import com.red_velvet.flix.domain.model.movie.Movie
 import javax.inject.Inject
 
-class GetMoviesWatchlistUsecase @Inject constructor(
+class GetMoviesByKeywordUsecase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
     suspend operator fun invoke(
-        accountId: Int,
+        keywordId: Int,
+        includeAdult: Boolean = false,
         language: String? = null,
         page: Int = 1,
-        sortBy: String? = null
+        region: String? = null
     ): List<Movie> {
-        return movieRepository.getMoviesWatchlist(accountId, language, page, sortBy)
+        return movieRepository.getMoviesByKeyword(keywordId, includeAdult, language, page, region)
             .toModel()
     }
 }
