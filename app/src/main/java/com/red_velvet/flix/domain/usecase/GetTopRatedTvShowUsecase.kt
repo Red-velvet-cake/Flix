@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class GetTopRatedTvShowUsecase @Inject constructor(private val tvShowsRepository: TVShowsRepository) {
-    suspend fun getTopRatedTvShow(): Flow<List<TVShow>> {
+    suspend operator fun invoke(): Flow<List<TVShow>> {
         return tvShowsRepository.getTopRatedTvShow().map {
             it.toModel()
         }
