@@ -5,7 +5,7 @@ import com.red_velvet.flix.domain.mapper.toModel
 import com.red_velvet.flix.domain.model.Keywords
 import javax.inject.Inject
 
-class GetTVShowKeywords @Inject constructor(private val tvShowsRepository: TVShowsRepository) {
+class GetTVShowKeywordsUsecase @Inject constructor(private val tvShowsRepository: TVShowsRepository) {
     suspend operator fun invoke(seriesId: Int): Keywords {
         return tvShowsRepository.getTVShowKeywords(seriesId).toModel()
     }
