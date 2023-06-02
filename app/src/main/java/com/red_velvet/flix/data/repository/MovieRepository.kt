@@ -1,6 +1,7 @@
 package com.red_velvet.flix.data.repository
 
 
+import com.red_velvet.flix.data.local.database.entity.MovieDetailEntity
 import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
 import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
@@ -22,11 +23,15 @@ interface MovieRepository {
         language: String? = null
     ): Flow<List<PopularMovieEntity>>
 
+    suspend fun refreshPopularMovies()
+
     fun getUpcomingMovies(
         page: Int = 1,
         region: String? = null,
         language: String? = null
     ): Flow<List<UpcomingMovieEntity>>
+
+    suspend fun refreshUpcomingMovies()
 
     fun getNowPlayingMovies(
         page: Int = 1,
@@ -34,13 +39,19 @@ interface MovieRepository {
         language: String? = null
     ): Flow<List<NowPlayingMovieEntity>>
 
+    suspend fun refreshNowPlayingMovies()
+
     fun getTopRatedMovies(
         page: Int = 1,
         region: String? = null,
         language: String? = null
     ): Flow<List<TopRatedMovieEntity>>
 
-    suspend fun getMovieDetails(movieId: Int): MovieDto
+    suspend fun refreshTopRatedMovies()
+
+    suspend fun getMovieDetails(movieId: Int): Flow<List<MovieDetailEntity>>
+
+    suspend fun refreshMovieDetails()
 
     suspend fun getMovieKeywords(movieId: Int): KeywordsDto
 
