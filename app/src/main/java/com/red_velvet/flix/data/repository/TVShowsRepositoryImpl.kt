@@ -22,7 +22,9 @@ class TVShowsRepositoryImpl @Inject constructor(
     private val tvShowDao: TvShowDao,
 ) : TVShowsRepository {
     override suspend fun getPopularTvShow(): Flow<List<PopularTvShowEntity>> {
-        TODO("Not yet implemented")
+        return flow {
+            emit(tvShowDao.getPopularTvShow())
+        }
     }
 
     override fun getTopRatedTvShow(): Flow<List<TopRatedTvShowEntity>> {
@@ -41,15 +43,6 @@ class TVShowsRepositoryImpl @Inject constructor(
     override suspend fun getAiringTodayTvShow(): Flow<List<AiringTodayTvShowEntity>> {
         return flow {
             emit(tvShowDao.getAiringTodayTvShow())
-        }
-    }
-
-    private suspend fun <T> wrap(request: suspend () -> Response<T>): T {
-        val response = request()
-        if (response.isSuccessful) {
-            return response.body()!!
-        } else {
-            throw Throwable()
         }
     }
 
@@ -127,6 +120,15 @@ class TVShowsRepositoryImpl @Inject constructor(
     ): ApiResponse {
         return wrap {
             apiService.rateEpisode(seriesId, seasonNumber, episodeNumber, rating)
+        }
+    }
+
+    private suspend fun <T> wrap(request: suspend () -> Response<T>): T {
+        val response = request()
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw Throwable()
         }
     }
 }
