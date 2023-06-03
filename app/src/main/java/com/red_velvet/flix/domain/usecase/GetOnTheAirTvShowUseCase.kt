@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class GetOnTheAirTvShowUsecase @Inject constructor(private val tvShowsRepository: TVShowsRepository) {
+class GetOnTheAirTvShowUseCase @Inject constructor(private val tvShowsRepository: TVShowsRepository) {
     suspend operator fun invoke(): Flow<List<TVShow>> {
         return tvShowsRepository.getOnTheAirTvShow()
             .map { it.toOnTheAirTvShowsModels() }

@@ -5,16 +5,17 @@ import com.red_velvet.flix.domain.mapper.movie.toModel
 import com.red_velvet.flix.domain.model.movie.Movie
 import javax.inject.Inject
 
-class GetFavoriteMoviesUsecase @Inject constructor(
+class GetMoviesByKeywordUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
     suspend operator fun invoke(
-        accountId: Int,
+        keywordId: Int,
+        includeAdult: Boolean = false,
         language: String? = null,
         page: Int? = null,
-        sortBy: String? = null
+        region: String? = null
     ): List<Movie> {
-        return movieRepository.getFavoriteMovies(accountId, language, page, sortBy)
+        return movieRepository.getMoviesByKeyword(keywordId, includeAdult, language, page, region)
             .toModel()
     }
 }

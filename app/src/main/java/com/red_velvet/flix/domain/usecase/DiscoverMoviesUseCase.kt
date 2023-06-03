@@ -5,7 +5,7 @@ import com.red_velvet.flix.domain.mapper.movie.toModel
 import com.red_velvet.flix.domain.model.movie.Movie
 import javax.inject.Inject
 
-class DiscoverMoviesUsecase @Inject constructor(
+class DiscoverMoviesUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
     suspend operator fun invoke(
