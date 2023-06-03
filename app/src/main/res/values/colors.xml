@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="brand_color">#6C5DD3</color>
+    <color name="background_color">#11142D</color>
+    <color name="media_card_background_color">#6C5DD3</color>
+    <color name="media_list_title_color">#ddFFFFFF</color>
+    <color name="media_card_title_color">#b2FFFFFF</color>
+    <color name="media_card_subtitle_color">#60FFFFFF</color>
 </resources>
