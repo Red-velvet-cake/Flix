@@ -3,10 +3,6 @@ package com.red_velvet.flix.di
 import android.content.Context
 import androidx.room.Room
 import com.red_velvet.flix.data.local.database.MovieDatabase
-import com.red_velvet.flix.data.local.database.dao.MovieDao
-import com.red_velvet.flix.data.remote.MoviesService
-import com.red_velvet.flix.data.repository.MovieRepository
-import com.red_velvet.flix.data.repository.MovieRepositoryImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,10 +35,4 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun provideUserDataDao(movieDatabase: MovieDatabase) = movieDatabase.userDataDao()
-
-    @Singleton
-    @Provides
-    fun provideMovieRepository(service: MoviesService, moviesDao: MovieDao): MovieRepository {
-        return MovieRepositoryImp(service, moviesDao)
-    }
 }
