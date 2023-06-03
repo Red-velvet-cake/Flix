@@ -22,6 +22,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{()->listener.onClickMovie(item.id)}"
             android:background="@color/background_color"
     >
 
@@ -36,9 +37,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:background="@color/media_card_background_color"
                 app:layout_constraintTop_toTopOf="parent"
-                android:onClick="@{()->listener.onClickMovie(item.id)}"
-                app:posterImage="@{item.imageUrl}"
                 app:shapeAppearanceOverlay="@style/CardCorners.Medium"/>
+        <!--                app:posterImage="@{item.imageUrl}"-->
 
         <TextView
                 android:id="@+id/media_movie_title"
