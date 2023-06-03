@@ -24,7 +24,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     private fun setAdapter() {
         homeAdapter = HomeAdapter(mutableListOf(), viewModel)
-//        binding.recyclerView.adapter = homeAdapter
+        binding.recyclerView.adapter = homeAdapter
     }
 
     private fun collectHomeData() {
