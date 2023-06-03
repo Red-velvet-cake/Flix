@@ -54,7 +54,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw exceptionHandler.handleException(response.code(), response.errorBody())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -63,7 +63,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw exceptionHandler.handleException(response.code(), response.errorBody())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -72,7 +72,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw exceptionHandler.handleException(response.code(), response.errorBody())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -81,7 +81,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw exceptionHandler.handleException(response.code(), response.errorBody())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -90,7 +90,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw exceptionHandler.handleException(response.code(), response.errorBody())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -99,7 +99,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw exceptionHandler.handleException(response.code(), response.errorBody())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -108,7 +108,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw exceptionHandler.handleException(response.code(), response.errorBody())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -117,7 +117,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw exceptionHandler.handleException(response.code(), response.errorBody())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -130,7 +130,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw exceptionHandler.handleException(response.code(), response.errorBody())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -143,7 +143,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw exceptionHandler.handleException(response.code(), response.errorBody())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -156,7 +156,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw exceptionHandler.handleException(response.code(), response.errorBody())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -170,7 +170,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw exceptionHandler.handleException(response.code(), response.errorBody())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 

@@ -20,7 +20,7 @@ class ExceptionHandler @Inject constructor() {
         }
     }
 
-    fun handleException(
+    fun getException(
         statusCode: Int,
         errorBody: ResponseBody?
     ): Exception {
