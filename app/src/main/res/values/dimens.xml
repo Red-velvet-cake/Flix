@@ -1,3 +1,27 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="media_card_width">104dp</dimen>
+
+
+    <!-- spacing -->
+    <dimen name="spacing_extra_large">32dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_too_small">4dp</dimen>
+    <dimen name="spacing_extra_small">2dp</dimen>
+
+    <!-- radius -->
+    <dimen name="radius_large">24dp</dimen>
+    <dimen name="radius_medium">16dp</dimen>
+    <dimen name="radius_small">8dp</dimen>
+    <dimen name="radius_too_small">4dp</dimen>
+
+    <!-- texts -->
+    <dimen name="text_extra_large">20sp</dimen>
+    <dimen name="text_large">16sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+
+
+
 </resources>
