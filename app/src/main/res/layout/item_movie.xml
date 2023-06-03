@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="listener"
+                type="com.red_velvet.flix.ui.home.adapter.MovieInteractionListener"/>
+
+        <variable
+                name="item"
+                type="com.red_velvet.flix.ui.home.homeUiState.MediaUiState"/>
+
+        <variable
+                name="type"
+                type="com.red_velvet.flix.ui.home.HomeItemsType"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/background_color"
+    >
+
+        <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/media_movie_image"
+                android:layout_width="@dimen/media_card_width"
+                android:layout_height="0dp"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="1:1.4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:background="@color/media_card_background_color"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{()->listener.onClickMovie(item.id)}"
+                app:posterImage="@{item.imageUrl}"
+                app:shapeAppearanceOverlay="@style/CardCorners.Medium"/>
+
+        <TextView
+                android:id="@+id/media_movie_title"
+                style="@style/Medium.Small"
+                tools:text="Now Streaming"
+                android:lines="1"
+                android:ellipsize="end"
+                android:layout_marginTop="@dimen/spacing_too_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.title}"
+                app:layout_constraintStart_toStartOf="@+id/media_movie_image"
+                app:layout_constraintTop_toBottomOf="@+id/media_movie_image"/>
+
+        <TextView
+                android:id="@+id/media_movie_subtitle"
+                style="@style/Regular.Small"
+                tools:text="Now Streaming"
+                android:lines="1"
+                android:ellipsize="end"
+                android:layout_marginTop="@dimen/spacing_extra_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.title}"
+                app:layout_constraintStart_toStartOf="@+id/media_movie_image"
+                app:layout_constraintTop_toBottomOf="@+id/media_movie_title"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
