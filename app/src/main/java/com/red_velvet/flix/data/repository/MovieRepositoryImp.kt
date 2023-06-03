@@ -109,7 +109,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
         }
     }
 
@@ -122,7 +122,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
         }
     }
 
@@ -131,7 +131,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
         }
     }
 
@@ -140,7 +140,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
         }
     }
 
@@ -153,21 +153,21 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
         }
     }
 
     override suspend fun rateMovie(movieId: Int, rating: Double) {
         val response = moviesService.rateMovie(movieId, rating)
         if (!response.isSuccessful) {
-            throw Throwable(response.message())
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
         }
     }
 
     override suspend fun deleteMovieRating(movieId: Int) {
         val response = moviesService.deleteMovieRating(movieId)
         if (!response.isSuccessful) {
-            throw Throwable(response.message())
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
         }
     }
 
@@ -180,7 +180,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
         }
     }
 
@@ -194,7 +194,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
         }
     }
 
@@ -208,7 +208,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
         }
     }
 
@@ -222,7 +222,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
         }
     }
 
@@ -243,7 +243,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
         }
     }
 
@@ -320,7 +320,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
         }
     }
 
