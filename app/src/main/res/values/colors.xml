@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="font_primary">#DEFFFFFF</color>
+    <color name="font_secondary">#B3FFFFFF</color>
+    <color name="font_accent">#61FFFFFF</color>
+    <color name="background">#11142D</color>
+    <color name="Purple100">#6C5DD3</color>
+    <color name="Secondary">#20233C</color>
+    <color name="on_secondary">#414357</color>
+
 </resources>
