@@ -4,34 +4,41 @@ import com.red_velvet.flix.data.local.sharedPrefs.SharedPrefs
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.remote.dtos.account.AccountDto
 import com.red_velvet.flix.data.remote.dtos.auth.LoginRequest
+import com.red_velvet.flix.domain.utils.ExceptionHandler
 import javax.inject.Inject
 
 class UserRepositoryImp @Inject constructor(
     private val service: MoviesService,
     private val sharedPrefs: SharedPrefs,
+    private val exceptionHandler: ExceptionHandler
 ) : UserRepository {
     override suspend fun login(userName: String, password: String) {
-            val validateRequestTokenWithLogin =
-                service.validateRequestTokenWithLogin(
-                    LoginRequest(
-                        userName,
-                        password,
-                        sharedPrefs.getToken()
-                    )
+        val response =
+            service.validateRequestTokenWithLogin(
+                LoginRequest(
+                    userName,
+                    password,
+                    sharedPrefs.getToken()
                 )
-            if (validateRequestTokenWithLogin.isSuccessful) {
-               sharedPrefs.getToken()?.let { createSession(it) }
-            } else {
-                throw Throwable(validateRequestTokenWithLogin.message())
-            }
+            )
+        if (response.isSuccessful) {
+            sharedPrefs.getToken()?.let { createSession(it) }
+        } else {
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
+        }
     }
 
     override suspend fun logout() {
         sharedPrefs.clearSessionId()
     }
 
-    override suspend fun getAccountDetails(): AccountDto? {
-        return service.getAccountDetails().body()
+    override suspend fun getAccountDetails(): AccountDto {
+        val response = service.getAccountDetails()
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
+        }
     }
 
     override suspend fun getSessionId(): String? {
@@ -43,20 +50,20 @@ class UserRepositoryImp @Inject constructor(
     }
 
     private suspend fun createSession(requestToken: String) {
-        val sessionResponse = service.createSession(requestToken)
-        if (sessionResponse.isSuccessful) {
-            sharedPrefs.setSessionId(sessionResponse.body()?.sessionId!!)
+        val response = service.createSession(requestToken)
+        if (response.isSuccessful) {
+            sharedPrefs.setSessionId(response.body()?.sessionId!!)
         } else {
-            throw Exception(sessionResponse.message())
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
         }
     }
 
     private suspend fun refreshRequestToken() {
-        val tokenResponse = service.getRequestToken()
-        if (tokenResponse.isSuccessful) {
-            sharedPrefs.setToken(tokenResponse.body()?.requestToken!!)
+        val response = service.getRequestToken()
+        if (response.isSuccessful) {
+            sharedPrefs.setToken(response.body()?.requestToken!!)
         } else {
-            throw Exception(tokenResponse.message())
+            throw exceptionHandler.handleException(response.code(), response.errorBody())
         }
     }
 
