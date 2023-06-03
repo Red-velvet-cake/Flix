@@ -6,7 +6,6 @@ import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
 import com.red_velvet.flix.data.remote.MoviesService
-import com.red_velvet.flix.data.remote.dtos.ApiResponse
 import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
 import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
 import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
@@ -157,14 +156,15 @@ class MovieRepositoryImp @Inject constructor(
     }
 
     override suspend fun rateMovie(movieId: Int, rating: Double) {
-        moviesService.rateMovie(movieId, rating)
+        val response = moviesService.rateMovie(movieId, rating)
+        if (!response.isSuccessful) {
+            throw Throwable(response.message())
+        }
     }
 
-    override suspend fun deleteMovieRating(movieId: Int): ApiResponse {
+    override suspend fun deleteMovieRating(movieId: Int) {
         val response = moviesService.deleteMovieRating(movieId)
-        if (response.isSuccessful) {
-            return response.body()!!
-        } else {
+        if (!response.isSuccessful) {
             throw Throwable(response.message())
         }
     }
