@@ -1,5 +1,6 @@
 package com.red_velvet.flix.ui.home
 
+import com.red_velvet.flix.domain.model.movie.Movie
 import com.red_velvet.flix.ui.home.homeUiState.MediaUiState
 
 sealed class HomeItem(val priority: Int) {
@@ -17,3 +18,4 @@ sealed class HomeItem(val priority: Int) {
     data class TopRated(val items: List<MediaUiState>, val type: HomeItemsType = HomeItemsType.TOP_RATED) :
         HomeItem(35)
 }
+
