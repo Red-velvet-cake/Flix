@@ -5,5 +5,57 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Flix" parent="Base.Theme.Flix" />
+    <style name="Theme.Flix" parent="Base.Theme.Flix"/>
+
+    <style name="CardCorners">
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="CardCorners.Small">
+        <item name="cornerSize">@dimen/radius_small</item>
+    </style>
+
+    <style name="CardCorners.Medium">
+        <item name="cornerSize">@dimen/radius_medium</item>
+    </style>
+
+    <style name="Regular">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+    </style>
+
+    <style name="Regular.Small">
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textColor">@color/media_card_subtitle_color</item>
+    </style>
+
+    <style name="Regular.Large">
+        <item name="android:textSize">@dimen/text_large</item>
+        <item name="android:textColor">@color/media_card_subtitle_color</item>
+    </style>
+
+
+
+    <style name="Medium">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+    </style>
+
+    <style name="Medium.Small">
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textColor">@color/media_card_title_color</item>
+    </style>
+
+    <style name="SemiBold">
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+    </style>
+
+    <style name="SemiBold.ExtraLarge">
+        <item name="android:textSize">@dimen/text_extra_large</item>
+    </style>
+
+    <style name="SemiBold.Large">
+        <item name="android:textSize">@dimen/text_large</item>
+        <item name="android:textColor">@color/media_list_title_color</item>
+    </style>
+
+
 </resources>

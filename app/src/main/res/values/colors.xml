@@ -11,8 +11,12 @@
     <color name="Secondary">#20233C</color>
     <color name="on_secondary">#414357</color>
     <color name="primary">#7B61FF</color>
-    <color name="background_color">#11142D</color>
-
     <color name="accent_text">#61000000</color>
     <color name="secondary_text">#99000000</color>
+    <color name="brand_color">#6C5DD3</color>
+    <color name="background_color">#11142D</color>
+    <color name="media_card_background_color">#6C5DD3</color>
+    <color name="media_list_title_color">#ddFFFFFF</color>
+    <color name="media_card_title_color">#b2FFFFFF</color>
+    <color name="media_card_subtitle_color">#60FFFFFF</color>
 </resources>
