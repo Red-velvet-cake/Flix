@@ -1,5 +1,6 @@
 package com.red_velvet.flix.ui.home
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.red_velvet.flix.domain.usecase.GetNowPlayingMoviesUsecase
 import com.red_velvet.flix.domain.usecase.GetPopularMoviesUsecase
@@ -43,7 +44,13 @@ class HomeViewModel @Inject constructor(
     private fun getPopularMovies() {
         viewModelScope.launch {
             try {
-                getPopularMoviesUsecase().collect { list ->
+                getPopularMoviesUsecase(
+                    page = 1,
+                    region = "US",
+                    language = "en-US"
+
+                ).collect { list ->
+                    Log.i("HomeViewModel", "getPopularMovies: $list")
                     if (list.isNotEmpty()) {
                         val items = list.toUiState()
                         _homeUiState.update {
@@ -63,9 +70,14 @@ class HomeViewModel @Inject constructor(
     private fun getNowPlayingMovies() {
         viewModelScope.launch {
             try {
-                getNowPlayingMoviesUsecase().collect { list ->
+                getNowPlayingMoviesUsecase(
+                    page = 1
+
+                ).collect { list ->
+                        Log.i("HomeViewModel", "getNowPlayingMovies: $list")
                     if (list.isNotEmpty()) {
                         val items = list.toUiState()
+
                         _homeUiState.update {
                             it.copy(
                                 nowPlayingMovies = HomeItem.NowPlaying(items),
@@ -83,7 +95,10 @@ class HomeViewModel @Inject constructor(
     private fun getUpcomingMovies() {
         viewModelScope.launch {
             try {
-                getUpcomingMoviesUsecase().collect { list ->
+                getUpcomingMoviesUsecase(
+                    page = 1
+                ).collect { list ->
+                    Log.i("HomeViewModel", "getUpcomingMovies: $list")
                     if (list.isNotEmpty()) {
                         val items = list.toUiState()
                         _homeUiState.update {
@@ -103,7 +118,11 @@ class HomeViewModel @Inject constructor(
     private fun getTopRatedMovies() {
         viewModelScope.launch {
             try {
-                getTopRatedMoviesUsecase().collect { list ->
+                getTopRatedMoviesUsecase(
+                    page = 1
+
+                ).collect { list ->
+                    Log.i("HomeViewModel", "getTopRatedMovies: $list")
                     if (list.isNotEmpty()) {
                         val items = list.toUiState()
                         _homeUiState.update {
