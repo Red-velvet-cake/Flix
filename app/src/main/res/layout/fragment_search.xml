@@ -29,7 +29,6 @@
             android:layout_marginHorizontal="@dimen/_16dp"
             android:layout_marginVertical="@dimen/_16dp"
             android:background="@color/Secondary"
-
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:inputType="text"
@@ -147,7 +146,7 @@
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_8dp"
             android:paddingVertical="@dimen/_8dp"
-            app:errorSearch="@{viewModel.uiState.error}"
+            app:errorSearch="@{viewModel.uiState.searchResult}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

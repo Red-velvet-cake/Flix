@@ -8,6 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchFragment: BaseFragment<FragmentSearchBinding, SearchViewModel>() {
+
     override val layoutIdFragment: Int = R.layout.fragment_search
     override val viewModel: SearchViewModel by viewModels()
 
