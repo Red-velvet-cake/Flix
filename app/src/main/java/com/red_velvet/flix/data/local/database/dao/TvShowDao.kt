@@ -25,14 +25,14 @@ interface TvShowDao {
     suspend fun insertAiringTodayTvShows(airingTodayTvShowEntities: List<AiringTodayTvShowEntity>)
 
     @Query("SELECT * FROM PopularTvShowEntity")
-    suspend fun getPopularTvShow(): List<PopularTvShowEntity>
+    suspend fun getPopularTvShow(): Flow<List<PopularTvShowEntity>>
 
     @Query("SELECT * FROM TopRatedTvShowEntity")
-    suspend fun getTopRatedTvShow(): List<TopRatedTvShowEntity>
+    suspend fun getTopRatedTvShow(): Flow<List<TopRatedTvShowEntity>>
 
     @Query("SELECT * FROM OnTheAirTvShowEntity")
-    suspend fun getOnTheAirTvShow(): List<OnTheAirTvShowEntity>
+    suspend fun getOnTheAirTvShow(): Flow<List<OnTheAirTvShowEntity>>
 
     @Query("SELECT * FROM AiringTodayTvShowEntity")
-    suspend fun getAiringTodayTvShow(): List<AiringTodayTvShowEntity>
+    suspend fun getAiringTodayTvShow(): Flow<List<AiringTodayTvShowEntity>>
 }

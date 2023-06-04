@@ -26,7 +26,9 @@ import com.red_velvet.flix.data.local.database.entity.UserEntity
         TopRatedTvShowEntity::class,
         TopRatedMovieEntity::class,
         UserEntity::class
-    ], version = 1
+    ],
+    version = 1,
+    exportSchema = false
 )
 abstract class MovieDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao

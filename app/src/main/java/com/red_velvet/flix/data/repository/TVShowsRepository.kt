@@ -1,85 +1,78 @@
 package com.red_velvet.flix.data.repository
 
-import com.red_velvet.flix.data.local.database.entity.AiringTodayTvShowEntity
-import com.red_velvet.flix.data.local.database.entity.OnTheAirTvShowEntity
-import com.red_velvet.flix.data.local.database.entity.PopularTvShowEntity
-import com.red_velvet.flix.data.local.database.entity.TopRatedTvShowEntity
-import com.red_velvet.flix.data.remote.dtos.ApiResponse
-import com.red_velvet.flix.data.remote.dtos.image.ImagesDto
-import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
-import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
-import com.red_velvet.flix.data.remote.dtos.trailer.TrailersDto
-import com.red_velvet.flix.data.remote.dtos.tv_show.EpisodeDto
-import com.red_velvet.flix.data.remote.dtos.tv_show.SeasonDto
-import com.red_velvet.flix.data.remote.dtos.tv_show.TVShowDto
+import com.red_velvet.flix.domain.model.Review
+import com.red_velvet.flix.domain.model.Trailer
+import com.red_velvet.flix.domain.model.series.Episode
+import com.red_velvet.flix.domain.model.series.Season
+import com.red_velvet.flix.domain.model.series.TVShow
 import kotlinx.coroutines.flow.Flow
 
 interface TVShowsRepository {
 
-    suspend fun getPopularTvShow(): Flow<List<PopularTvShowEntity>>
+    suspend fun getPopularTvShow(): Flow<List<TVShow>>
 
-    fun getTopRatedTvShow(): Flow<List<TopRatedTvShowEntity>>
+    suspend fun getTopRatedTvShow(): Flow<List<TVShow>>
 
-    suspend fun getOnTheAirTvShow(): Flow<List<OnTheAirTvShowEntity>>
+    suspend fun getOnTheAirTvShow(): Flow<List<TVShow>>
 
-    suspend fun getAiringTodayTvShow(): Flow<List<AiringTodayTvShowEntity>>
+    suspend fun getAiringTodayTvShow(): Flow<List<TVShow>>
 
     suspend fun getTVShowRecommendations(
         seriesId: Int,
         page: Int = 1,
-    ): List<TVShowDto>
+    ): List<TVShow>
 
-    suspend fun getLatestTVShow(): TVShowDto
+    suspend fun getLatestTVShow(): TVShow
 
-    suspend fun getTVShowKeywords(seriesId: Int): KeywordsDto
+    suspend fun getTVShowKeywords(seriesId: Int): List<String>
 
     suspend fun getTVShowReviews(
         seriesId: Int,
         page: Int,
-    ): List<ReviewDto>
+    ): List<Review>
 
     suspend fun rateTVShow(
         seriesId: Int,
         rating: Double
-    ): ApiResponse
+    )
 
     suspend fun getSeasonDetails(
         seriesId: Int,
         seasonNumber: Int,
-    ): SeasonDto
+    ): Season
 
     suspend fun getSeasonImages(
         seriesId: Int,
         seasonNumber: Int,
-    ): ImagesDto
+    ): List<String>
 
     suspend fun getTVShowVideos(
         seriesId: Int,
-    ): TrailersDto
+    ): List<Trailer>
 
     suspend fun getEpisodeDetails(
         seriesId: Int,
         seasonNumber: Int,
         episodeNumber: Int,
-    ): EpisodeDto
+    ): Episode
 
     suspend fun getEpisodeImages(
         seriesId: Int,
         seasonNumber: Int,
         episodeNumber: Int,
-    ): ImagesDto
+    ): List<String>
 
     suspend fun getEpisodeVideos(
         seriesId: Int,
         seasonNumber: Int,
         episodeNumber: Int,
-    ): TrailersDto
+    ): List<Trailer>
 
     suspend fun rateEpisode(
         seriesId: Int,
         seasonNumber: Int,
         episodeNumber: Int,
         rating: Double
-    ): ApiResponse
+    )
 
 }

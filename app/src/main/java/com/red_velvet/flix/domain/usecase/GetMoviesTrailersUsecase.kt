@@ -1,7 +1,6 @@
 package com.red_velvet.flix.domain.usecase
 
 import com.red_velvet.flix.data.repository.MovieRepository
-import com.red_velvet.flix.domain.mapper.toModel
 import com.red_velvet.flix.domain.model.Trailer
 import javax.inject.Inject
 
@@ -13,6 +12,5 @@ class GetMoviesTrailersUsecase @Inject constructor(
         language: String? = null
     ): List<Trailer> {
         return movieRepository.getMovieTrailers(movieId, language)
-            .toModel()
     }
 }
