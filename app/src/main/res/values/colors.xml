@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="off_white">#DEFFFFFF</color>
     <color name="white">#FFFFFFFF</color>
     <color name="font_primary">#DEFFFFFF</color>
     <color name="font_secondary">#B3FFFFFF</color>
@@ -9,7 +10,9 @@
     <color name="Purple100">#6C5DD3</color>
     <color name="Secondary">#20233C</color>
     <color name="on_secondary">#414357</color>
-
+    <color name="primary">#7B61FF</color>
+    <color name="accent_text">#61000000</color>
+    <color name="secondary_text">#99000000</color>
     <color name="brand_color">#6C5DD3</color>
     <color name="background_color">#11142D</color>
     <color name="media_card_background_color">#6C5DD3</color>
