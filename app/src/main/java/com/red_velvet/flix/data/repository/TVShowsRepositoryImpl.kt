@@ -1,7 +1,10 @@
 package com.red_velvet.flix.data.repository
 
 import com.red_velvet.flix.data.local.database.dao.TvShowDao
-import com.red_velvet.flix.data.local.database.entity.*
+import com.red_velvet.flix.data.local.database.entity.AiringTodayTvShowEntity
+import com.red_velvet.flix.data.local.database.entity.OnTheAirTvShowEntity
+import com.red_velvet.flix.data.local.database.entity.PopularTvShowEntity
+import com.red_velvet.flix.data.local.database.entity.TopRatedTvShowEntity
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.remote.dtos.ApiResponse
 import com.red_velvet.flix.data.remote.dtos.image.ImagesDto
@@ -11,6 +14,7 @@ import com.red_velvet.flix.data.remote.dtos.trailer.TrailersDto
 import com.red_velvet.flix.data.remote.dtos.tv_show.EpisodeDto
 import com.red_velvet.flix.data.remote.dtos.tv_show.SeasonDto
 import com.red_velvet.flix.data.remote.dtos.tv_show.TVShowDto
+import com.red_velvet.flix.domain.utils.ExceptionHandler
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -18,6 +22,7 @@ import javax.inject.Inject
 class TVShowsRepositoryImpl @Inject constructor(
     private val apiService: MoviesService,
     private val tvShowDao: TvShowDao,
+    private val exceptionHandler: ExceptionHandler
 ) : TVShowsRepository {
     override suspend fun getPopularTvShow(): Flow<List<PopularTvShowEntity>> {
         return flow {
@@ -49,7 +54,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -58,7 +63,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -67,7 +72,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -76,7 +81,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -85,7 +90,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -94,7 +99,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -103,7 +108,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -112,34 +117,46 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
-    override suspend fun getEpisodeDetails(seriesId: Int, seasonNumber: Int, episodeNumber: Int): EpisodeDto {
+    override suspend fun getEpisodeDetails(
+        seriesId: Int,
+        seasonNumber: Int,
+        episodeNumber: Int
+    ): EpisodeDto {
         val response = apiService.getEpisodeDetails(seriesId, seasonNumber, episodeNumber)
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
-    override suspend fun getEpisodeImages(seriesId: Int, seasonNumber: Int, episodeNumber: Int): ImagesDto {
+    override suspend fun getEpisodeImages(
+        seriesId: Int,
+        seasonNumber: Int,
+        episodeNumber: Int
+    ): ImagesDto {
         val response = apiService.getEpisodeImages(seriesId, seasonNumber, episodeNumber)
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
-    override suspend fun getEpisodeVideos(seriesId: Int, seasonNumber: Int, episodeNumber: Int): TrailersDto {
+    override suspend fun getEpisodeVideos(
+        seriesId: Int,
+        seasonNumber: Int,
+        episodeNumber: Int
+    ): TrailersDto {
         val response = apiService.getEpisodeVideos(seriesId, seasonNumber, episodeNumber)
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -153,9 +170,8 @@ class TVShowsRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
-
 
 }

@@ -3,7 +3,6 @@ package com.red_velvet.flix.di
 import android.content.Context
 import androidx.room.Room
 import com.red_velvet.flix.data.local.database.MovieDatabase
-import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,16 +13,26 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
-    @Provides
-    @Singleton
-    fun provideRoom(@ApplicationContext context: Context) = Room.databaseBuilder(
-        context, MovieDatabase::class.java, "movie_database"
-    )
-        .allowMainThreadQueries()
-        .fallbackToDestructiveMigration()
-        .build()
 
     @Provides
     @Singleton
-    fun provideMovieDao(db: MovieDatabase) = db.movieDao()
+    fun provideDatabase(@ApplicationContext context: Context): MovieDatabase {
+        return Room.databaseBuilder(
+            context,
+            MovieDatabase::class.java,
+            "movie_database"
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieDao(movieDatabase: MovieDatabase) = movieDatabase.movieDao()
+
+    @Provides
+    @Singleton
+    fun provideTvShowDao(movieDatabase: MovieDatabase) = movieDatabase.tvShowDao()
+
+    @Provides
+    @Singleton
+    fun provideUserDataDao(movieDatabase: MovieDatabase) = movieDatabase.userDataDao()
 }
