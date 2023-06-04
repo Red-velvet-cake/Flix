@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.red_velvet.flix.ui.search.SearchViewModel" />
+
+        <variable
+            name="mediaTypes"
+            type="com.red_velvet.flix.ui.search.mediaSearchUiState.SearchTypes" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_search"
+            :text="@{viewModel.uiState.searchInput}"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_56dp"
+            android:layout_marginHorizontal="@dimen/_16dp"
+            android:layout_marginVertical="@dimen/_16dp"
+            android:background="@color/Secondary"
+
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/font_accent"
+            android:textColorHint="@color/font_accent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.TextInputLayout.Rounded">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="@dimen/_8dp"
+                android:drawableTint="@color/on_secondary"
+                android:hint="What do you want to watch?"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/text_view_categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16dp"
+            android:text="categories"
+            android:textColor="@color/font_primary"
+            app:layout_constraintStart_toStartOf="@id/text_input_search"
+            app:layout_constraintTop_toBottomOf="@id/text_input_search" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_search_type"
+            style="@style/Widget.Material3.ChipGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8dp"
+            app:layout_constraintStart_toStartOf="@id/text_view_categories"
+            app:layout_constraintTop_toBottomOf="@id/text_view_categories"
+            app:selectionRequired="true"
+            app:showWhenSearch="@{viewModel.uiState.searchInput}"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_selection_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel}"
+                android:paddingHorizontal="@dimen/_8dp"
+                android:paddingVertical="@dimen/_8dp"
+                android:text="All"
+                android:textAlignment="center"
+                android:textColor="@color/font_primary"
+                app:checkedIconEnabled="true"
+                app:chipBackgroundColor="@color/Purple100"
+                app:chipCornerRadius="@dimen/_8dp"
+                app:chipStrokeColor="@color/on_secondary"
+                app:chipStrokeWidth="1dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_selection_movie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel}"
+                android:paddingHorizontal="@dimen/_8dp"
+                android:paddingVertical="@dimen/_8dp"
+                android:text="Movie"
+                android:textAlignment="center"
+                android:textColor="@color/font_primary"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/Secondary"
+                app:chipCornerRadius="@dimen/_8dp"
+                app:chipStrokeColor="@color/on_secondary"
+                app:chipStrokeWidth="1dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_selection_person"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel}"
+                android:paddingHorizontal="@dimen/_8dp"
+                android:paddingVertical="@dimen/_8dp"
+                android:text="Person"
+                android:textAlignment="center"
+                android:textColor="@color/font_primary"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/Secondary"
+                app:chipCornerRadius="@dimen/_8dp"
+                app:chipStrokeColor="@color/on_secondary"
+                app:chipStrokeWidth="1dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_selection_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel}"
+                android:paddingHorizontal="@dimen/_8dp"
+                android:paddingVertical="@dimen/_8dp"
+                android:text="TV"
+                android:textAlignment="center"
+                android:textColor="@color/font_primary"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/Secondary"
+                app:chipCornerRadius="@dimen/_8dp"
+                app:chipStrokeColor="@color/on_secondary"
+                app:chipStrokeWidth="1dp" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_8dp"
+            android:paddingVertical="@dimen/_8dp"
+            app:errorSearch="@{viewModel.uiState.error}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chip_group_search_type"
+            app:loadingSearch="@{viewModel.uiState.loading}"
+            app:searchInput="@{viewModel.uiState.searchInput}"
+            app:spanCount="3"
+            tools:listitem="@layout/item_search" />
+
+        <include
+            android:id="@+id/loading"
+            layout="@layout/loading_search"
+            app:isLoading="@{viewModel.uiState.loading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/error"
+            layout="@layout/error_search"
+            app:isError="@{viewModel.uiState.error.isEmpty()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:viewModel="@{viewModel}" />
+
+        <include
+            android:id="@+id/no_result"
+            layout="@layout/no_internet_connection_search"
+            app:hideWhenBlankSearch="@{viewModel.uiState.searchInput}"
+            app:isListEmpty="@{viewModel.uiState.empty}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
