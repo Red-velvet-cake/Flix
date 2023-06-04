@@ -9,12 +9,14 @@ import com.red_velvet.flix.ui.base.BaseViewModel
 import com.red_velvet.flix.ui.home.adapter.MovieInteractionListener
 import com.red_velvet.flix.ui.home.adapter.toUiState
 import com.red_velvet.flix.ui.home.homeUiState.HomeUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getPopularMoviesUsecase: GetPopularMoviesUsecase,
     private val getNowPlayingMoviesUsecase: GetNowPlayingMoviesUsecase,
@@ -30,7 +32,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getHomeData() {
-        _homeUiState.update { it.copy(isLoading = true) }
+//        _homeUiState.update { it.copy(isLoading = true) }
         getPopularMovies()
         getNowPlayingMovies()
         getUpcomingMovies()
