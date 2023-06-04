@@ -5,7 +5,7 @@ import com.red_velvet.flix.data.local.database.dao.TvShowDao
 import com.red_velvet.flix.data.local.sharedPrefs.SharedPrefs
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.repository.MovieRepository
-import com.red_velvet.flix.data.repository.MovieRepositoryImp
+import com.red_velvet.flix.data.repository.MovieRepositoryImpl
 import com.red_velvet.flix.data.repository.TVShowsRepository
 import com.red_velvet.flix.data.repository.TVShowsRepositoryImpl
 import com.red_velvet.flix.data.repository.UserRepository
@@ -28,7 +28,7 @@ object RepositoryModule {
         movieDao: MovieDao,
         exceptionHandler: ExceptionHandler
     ): MovieRepository {
-        return MovieRepositoryImp(moviesService, movieDao, exceptionHandler)
+        return MovieRepositoryImpl(moviesService, movieDao, exceptionHandler)
     }
 
     @Provides

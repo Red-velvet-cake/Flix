@@ -1,14 +1,10 @@
 package com.red_velvet.flix.data.repository
 
 
-import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
-import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
-import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
-import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
-import com.red_velvet.flix.data.remote.dtos.movie.KeywordsDto
 import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
-import com.red_velvet.flix.data.remote.dtos.review.ReviewDto
-import com.red_velvet.flix.data.remote.dtos.trailer.TrailersDto
+import com.red_velvet.flix.domain.model.Review
+import com.red_velvet.flix.domain.model.Trailer
+import com.red_velvet.flix.domain.model.movie.Movie
 import kotlinx.coroutines.flow.Flow
 
 
@@ -18,7 +14,7 @@ interface MovieRepository {
         page: Int? = null,
         region: String? = null,
         language: String? = null
-    ): Flow<List<PopularMovieEntity>>
+    ): Flow<List<Movie>>
 
     suspend fun refreshPopularMovies()
 
@@ -26,7 +22,7 @@ interface MovieRepository {
         page: Int? = null,
         region: String? = null,
         language: String? = null
-    ): Flow<List<UpcomingMovieEntity>>
+    ): Flow<List<Movie>>
 
     suspend fun refreshUpcomingMovies()
 
@@ -34,7 +30,7 @@ interface MovieRepository {
         page: Int? = null,
         region: String? = null,
         language: String? = null
-    ): Flow<List<NowPlayingMovieEntity>>
+    ): Flow<List<Movie>>
 
     suspend fun refreshNowPlayingMovies()
 
@@ -42,25 +38,25 @@ interface MovieRepository {
         page: Int? = null,
         region: String? = null,
         language: String? = null
-    ): Flow<List<TopRatedMovieEntity>>
+    ): Flow<List<Movie>>
 
     suspend fun refreshTopRatedMovies()
 
-    suspend fun getMovieDetails(movieId: Int): MovieDto
+    suspend fun getMovieDetails(movieId: Int): Movie
 
 
-    suspend fun getMovieKeywords(movieId: Int): KeywordsDto
+    suspend fun getMovieKeywords(movieId: Int): List<String>
 
     suspend fun getSimilarMovies(
         movieId: Int,
         page: Int? = null,
         language: String? = null
-    ): List<MovieDto>
+    ): List<Movie>
 
     suspend fun getMovieTrailers(
         movieId: Int,
         language: String? = null
-    ): TrailersDto
+    ): List<Trailer>
 
     suspend fun getLatestMovie(): MovieDto
 
@@ -68,7 +64,7 @@ interface MovieRepository {
         movieId: Int,
         page: Int? = null,
         language: String? = null
-    ): List<MovieDto>
+    ): List<Movie>
 
     suspend fun rateMovie(movieId: Int, rating: Double)
 
@@ -78,28 +74,28 @@ interface MovieRepository {
         movieId: Int,
         page: Int? = null,
         language: String? = null
-    ): List<ReviewDto>
+    ): List<Review>
 
     suspend fun getMoviesWatchlist(
         accountId: Int,
         language: String? = null,
         page: Int? = null,
         sortBy: String? = null
-    ): List<MovieDto>
+    ): List<Movie>
 
     suspend fun getFavoriteMovies(
         accountId: Int,
         language: String? = null,
         page: Int? = null,
         sortBy: String? = null
-    ): List<MovieDto>
+    ): List<Movie>
 
     suspend fun search(
         query: String,
         includeAdult: Boolean = false,
         language: String? = null,
         page: Int? = null,
-    ): List<MovieDto>
+    ): List<Movie>
 
     suspend fun getMoviesByKeyword(
         keywordId: Int,
@@ -107,7 +103,7 @@ interface MovieRepository {
         language: String? = null,
         page: Int? = null,
         region: String? = null
-    ): List<MovieDto>
+    ): List<Movie>
 
     suspend fun discoverMovies(
         includeAdult: Boolean = false,
@@ -143,5 +139,5 @@ interface MovieRepository {
         withoutWatchProviders: String? = null,
         withoutCompanies: String? = null,
         year: Int? = null
-    ): List<MovieDto>
+    ): List<Movie>
 }
