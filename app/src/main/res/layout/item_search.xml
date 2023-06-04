@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.red_velvet.flix.ui.search.mediaSearchUiState.MediaUiState" />
+
+        <variable
+            name="listener"
+            type="com.red_velvet.flix.ui.search.adapter.MediaSearchInteractionListener" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_4dp"
+        android:layout_marginHorizontal="@dimen/_8dp"
+        android:layout_marginVertical="@dimen/_8dp"
+        android:onClick="@{() -> listener.onClickMediaResult(item)}"
+        app:cardCornerRadius="@dimen/_8dp"
+        app:cardElevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_view_card"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_180dp"
+                android:scaleType="center"
+                android:src="@drawable/rectangle"
+                app:imageURL="@{item.mediaImage}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_4dp"
+                android:layout_marginVertical="@dimen/_4dp"
+                android:ellipsize="end"
+                android:lines="2"
+                android:text="@{item.mediaName}"
+                android:textColor="@color/font_secondary"
+                android:textSize="@dimen/_16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_view_card"
+                tools:text="The Super Mario" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_publish_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_4dp"
+                android:layout_marginVertical="@dimen/_4dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@{item.mediaReleaseDate}"
+                android:textColor="@color/font_accent"
+                android:textSize="@dimen/_16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_title"
+                tools:text="04/05/2023(US)" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>
