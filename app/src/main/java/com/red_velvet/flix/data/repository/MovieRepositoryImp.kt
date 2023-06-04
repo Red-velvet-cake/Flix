@@ -14,13 +14,15 @@ import com.red_velvet.flix.domain.mapper.movie.toNowPlayingMovieEntityList
 import com.red_velvet.flix.domain.mapper.movie.toPopularMovieEntityList
 import com.red_velvet.flix.domain.mapper.movie.toTopRatedMovieEntityList
 import com.red_velvet.flix.domain.mapper.movie.toUpcomingMovieEntityList
+import com.red_velvet.flix.domain.utils.ExceptionHandler
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MovieRepositoryImp @Inject constructor(
     private val moviesService: MoviesService,
     private val movieDao: MovieDao,
-) : MovieRepository, BaseRepository() {
+    private val exceptionHandler: ExceptionHandler
+) : MovieRepository {
 
     override fun getPopularMovies(
         page: Int?, region: String?, language: String?
@@ -97,7 +99,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -107,7 +109,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -120,7 +122,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -129,7 +131,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -138,7 +140,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -151,21 +153,21 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
     override suspend fun rateMovie(movieId: Int, rating: Double) {
         val response = moviesService.rateMovie(movieId, rating)
         if (!response.isSuccessful) {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
     override suspend fun deleteMovieRating(movieId: Int) {
         val response = moviesService.deleteMovieRating(movieId)
         if (!response.isSuccessful) {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -178,7 +180,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -192,7 +194,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -206,7 +208,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -220,7 +222,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -241,7 +243,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
@@ -318,7 +320,7 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful) {
             return response.body()?.items!!
         } else {
-            throw Throwable(response.message())
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 
