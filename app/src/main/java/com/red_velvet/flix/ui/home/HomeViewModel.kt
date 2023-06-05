@@ -1,20 +1,13 @@
 package com.red_velvet.flix.ui.home
 
-import android.util.Log
-import androidx.lifecycle.viewModelScope
+import com.red_velvet.flix.domain.model.movie.Movie
 import com.red_velvet.flix.domain.usecase.GetNowPlayingMoviesUsecase
 import com.red_velvet.flix.domain.usecase.GetPopularMoviesUsecase
 import com.red_velvet.flix.domain.usecase.GetTopRatedMoviesUsecase
 import com.red_velvet.flix.domain.usecase.GetUpcomingMoviesUsecase
 import com.red_velvet.flix.ui.base.BaseViewModel
 import com.red_velvet.flix.ui.home.adapter.MovieInteractionListener
-import com.red_velvet.flix.ui.home.adapter.toUiState
-import com.red_velvet.flix.ui.home.homeUiState.HomeUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,135 +16,82 @@ class HomeViewModel @Inject constructor(
     private val getNowPlayingMoviesUsecase: GetNowPlayingMoviesUsecase,
     private val getUpcomingMoviesUsecase: GetUpcomingMoviesUsecase,
     private val getTopRatedMoviesUsecase: GetTopRatedMoviesUsecase,
-) : BaseViewModel(), MovieInteractionListener {
-
-    private val _homeUiState = MutableStateFlow(HomeUiState())
-    val homeUiState = _homeUiState.asStateFlow()
+) : BaseViewModel<HomeUiState>(), MovieInteractionListener {
 
     init {
         getHomeData()
     }
 
     private fun getHomeData() {
-//        _homeUiState.update { it.copy(isLoading = true) }
         getPopularMovies()
         getNowPlayingMovies()
         getUpcomingMovies()
         getTopRatedMovies()
     }
 
+    private fun getNowPlayingMovies() {
+        tryToExecute(
+            { getNowPlayingMoviesUsecase(1, "US", "en-US") },
+            { list -> handleMoviesSuccess(list, ::modifyNowPlayingMoviesState) },
+            ::onError,
+        )
+    }
+
+    private fun modifyNowPlayingMoviesState(state: HomeUiState, movies: List<Movie>): HomeUiState {
+        return state.copy(nowPlayingMovies = movies.toUiState())
+    }
 
     private fun getPopularMovies() {
-        viewModelScope.launch {
-            try {
-                getPopularMoviesUsecase(
-                    page = 1,
-                    region = "US",
-                    language = "en-US"
-
-                ).collect { list ->
-                    Log.i("HomeViewModel", "getPopularMovies: $list")
-                    if (list.isNotEmpty()) {
-                        val items = list.toUiState()
-                        _homeUiState.update {
-                            it.copy(
-                                popularMovies = HomeItem.Popular(items),
-                                isLoading = false
-                            )
-                        }
-                    }
-                }
-            } catch (th: Throwable) {
-                onError(th.message.toString())
-            }
-        }
+        tryToExecute(
+            { getPopularMoviesUsecase(1, "US", "en-US") },
+            { list -> handleMoviesSuccess(list, ::modifyPopularMoviesState) },
+            ::onError,
+        )
     }
 
-    private fun getNowPlayingMovies() {
-        viewModelScope.launch {
-            try {
-                getNowPlayingMoviesUsecase(
-                    page = 1
-
-                ).collect { list ->
-                        Log.i("HomeViewModel", "getNowPlayingMovies: $list")
-                    if (list.isNotEmpty()) {
-                        val items = list.toUiState()
-
-                        _homeUiState.update {
-                            it.copy(
-                                nowPlayingMovies = HomeItem.NowPlaying(items),
-                                isLoading = false
-                            )
-                        }
-                    }
-                }
-            } catch (th: Throwable) {
-                onError(th.message.toString())
-            }
-        }
+    private fun modifyPopularMoviesState(state: HomeUiState, movies: List<Movie>): HomeUiState {
+        return state.copy(popularMovies = movies.toUiState())
     }
+
 
     private fun getUpcomingMovies() {
-        viewModelScope.launch {
-            try {
-                getUpcomingMoviesUsecase(
-                    page = 1
-                ).collect { list ->
-                    Log.i("HomeViewModel", "getUpcomingMovies: $list")
-                    if (list.isNotEmpty()) {
-                        val items = list.toUiState()
-                        _homeUiState.update {
-                            it.copy(
-                                upcomingMovies = HomeItem.Upcoming(items),
-                                isLoading = false
-                            )
-                        }
-                    }
-                }
-            } catch (th: Throwable) {
-                onError(th.message.toString())
-            }
-        }
+        tryToExecute(
+            { getUpcomingMoviesUsecase(1, "US", "en-US") },
+            { list -> handleMoviesSuccess(list, ::modifyUpcomingMoviesState) },
+            ::onError,
+        )
     }
+
+    private fun modifyUpcomingMoviesState(state: HomeUiState, movies: List<Movie>): HomeUiState {
+        return state.copy(upcomingMovies = movies.toUiState())
+    }
+
 
     private fun getTopRatedMovies() {
-        viewModelScope.launch {
-            try {
-                getTopRatedMoviesUsecase(
-                    page = 1
+        tryToExecute(
+            { getTopRatedMoviesUsecase(1, "US", "en-US") },
+            { list -> handleMoviesSuccess(list, ::modifyTopRatedMoviesState) },
+            ::onError,
+        )
+    }
 
-                ).collect { list ->
-                    Log.i("HomeViewModel", "getTopRatedMovies: $list")
-                    if (list.isNotEmpty()) {
-                        val items = list.toUiState()
-                        _homeUiState.update {
-                            it.copy(
-                                topRatedMovies = HomeItem.TopRated(items),
-                                isLoading = false
-                            )
-                        }
-                    }
-                }
-            } catch (th: Throwable) {
-                onError(th.message.toString())
-            }
+    private fun modifyTopRatedMoviesState(state: HomeUiState, movies: List<Movie>): HomeUiState {
+        return state.copy(topRatedMovies = movies.toUiState())
+    }
+
+    private fun onError(throwable: Throwable) {
+        val errors = _state.value?.error?.toMutableList() ?: mutableListOf()
+        errors.add(throwable.message.toString())
+        _state.value?.let { currentState ->
+            _state.value = currentState.copy(error = errors, isLoading = false)
         }
     }
-
-
-    private fun onError(message: String) {
-        val errors = _homeUiState.value.error.toMutableList()
-        errors.add(message)
-        _homeUiState.update { it.copy(error = errors, isLoading = false) }
-    }
-
 
     override fun onClickMovie(movieId: Int) {
         TODO("Not yet implemented")
     }
 
-    override fun onClickSeeAllMovie(homeItemsType: HomeItemsType) {
+    override fun onClickSeeAllMovie(homeItemsType: HomeUiState.HomeItem) {
         TODO("Not yet implemented")
     }
 }
