@@ -7,19 +7,17 @@ import com.red_velvet.flix.ui.search.adapter.MediaSearchInteractionListener
 import com.red_velvet.flix.ui.search.mediaSearchUiState.MediaSearchUiState
 import com.red_velvet.flix.ui.search.mediaSearchUiState.MediaUiState
 import com.red_velvet.flix.ui.search.mediaSearchUiState.SearchTypes
+import com.red_velvet.flix.ui.search.mediaSearchUiState.toUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import toUiState
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchUsecase: SearchUsecase,
-
-
     ) : BaseViewModel(), MediaSearchInteractionListener {
 
     private val _uiState = MutableStateFlow(MediaSearchUiState())
@@ -41,14 +39,26 @@ class SearchViewModel @Inject constructor(
                 SearchTypes.MOVIE -> onSearchForMovie()
                 SearchTypes.PERSON -> onSearchForPreson()
                 SearchTypes.TV -> onSearchForTvShow()
-                SearchTypes.ALL -> TODO()
+                SearchTypes.ALL -> onSearchForAll()
             }
         }
     }
 
-    private fun onSearchForTvShow() {
-        TODO("Not yet implemented")
+    fun onSearchForAll() {
+        viewModelScope.launch {
+            _uiState.update {
+                it.copy(
+                    searchTypes = SearchTypes.ALL,
+                    isLoading = false,
+                    searchResult = searchUsecase(it.searchInput).map { all ->
+                        all.toUiState()
+                    }
+                )
+            }
+        }
+
     }
+
 
     fun onSearchForMovie() {
         viewModelScope.launch {
@@ -67,6 +77,18 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update {it.copy(
                 searchTypes = SearchTypes.PERSON,
+                isLoading = false,
+                searchResult = searchUsecase(it.searchInput).map { person ->
+                    person.toUiState()
+                }
+            ) }
+        }
+    }
+
+     fun onSearchForTvShow() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(
+                searchTypes = SearchTypes.TV,
                 isLoading = false,
                 searchResult = searchUsecase(it.searchInput).map { tv ->
                     tv.toUiState()
