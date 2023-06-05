@@ -21,43 +21,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeUiStat
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setAdapter()
-        collectHomeData()
+        binding.root.setOnClickListener {
+            collectHomeData()
+        }
     }
 
     private fun setAdapter() {
         homeAdapter = HomeAdapter(mutableListOf(), viewModel)
         binding.recyclerView.adapter = homeAdapter
     }
-
-//    private fun collectHomeData() {
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewModel.state.collect { homeUiState ->
-//                val homeItems = mutableListOf<HomeItem>()
-//                Log.i("HomeFragment", "homeUiState: $homeUiState")
-//
-//                homeUiState?.popularMovies?.let { popularMovies ->
-//                    Log.i("HomeFragment", "popularMovies: $popularMovies")
-//                    homeItems.add(HomeItem.Popular(popularMovies))
-//                }
-//                homeUiState?.nowPlayingMovies?.let { nowPlayingMovies ->
-//                    Log.i("HomeFragment", "nowPlayingMovies: $nowPlayingMovies")
-//
-//                    homeItems.add(HomeItem.NowPlaying(nowPlayingMovies))
-//                }
-//                homeUiState?.upcomingMovies?.let { upcomingMovies ->
-//                    Log.i("HomeFragment", "upcomingMovies: $upcomingMovies")
-//
-//                    homeItems.add(HomeItem.Upcoming(upcomingMovies))
-//                }
-//                homeUiState?.topRatedMovies?.let { topRatedMovies ->
-//                    Log.i("HomeFragment", "topRatedMovies: $topRatedMovies")
-//
-//                    homeItems.add(HomeItem.TopRated(topRatedMovies))
-//                }
-//                homeAdapter.setItems(homeItems)
-//            }
-//        }
-//    }
 
     private fun collectHomeData() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -79,19 +51,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeUiStat
             }
         }
     }
-
-//    private fun collectHomeData() {
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewModel.state.collect {
-//                homeAdapter.setItems(
-//                    mutableListOf(
-//                        it.popularMovies,
-//                        it.nowPlayingMovies,
-//                        it.upcomingMovies,
-//                        it.topRatedMovies,
-//                    )
-//                )
-//            }
-//        }
-//    }
 }

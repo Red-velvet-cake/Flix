@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 
 abstract class BaseViewModel<T : BaseUiState> : ViewModel() {
 
-    protected val _state = MutableStateFlow<T?>(null)
-    val state: StateFlow<T?> = _state.asStateFlow()
+    abstract val _state: MutableStateFlow<T?>
+    val state: StateFlow<T?> = _state
 
     protected fun handleMoviesSuccess(
         list: List<Movie>, stateModifier: (T, List<Movie>) -> T
