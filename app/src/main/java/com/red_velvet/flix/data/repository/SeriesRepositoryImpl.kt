@@ -20,92 +20,65 @@ import javax.inject.Inject
 class SeriesRepositoryImpl @Inject constructor(
     private val apiService: MoviesService,
     private val seriesDao: SeriesDao,
-    private val exceptionHandler: ExceptionHandler
-) : SeriesRepository {
+    exceptionHandler: ExceptionHandler
+) : SeriesRepository, BaseRepository(exceptionHandler) {
     override suspend fun getPopularSeries(): List<SeriesEntity> {
-        return seriesDao.getPopularSeries().toPopularSeriesEntity()
+        return seriesDao.getPopularSeries()
+            .toPopularSeriesEntity()
     }
 
     override suspend fun getTopRatedSeries(): List<SeriesEntity> {
-        return seriesDao.getTopRatedSeries().toTopRatedSeriesEntity()
+        return seriesDao.getTopRatedSeries()
+            .toTopRatedSeriesEntity()
     }
 
     override suspend fun getOnTheAirSeries(): List<SeriesEntity> {
-        return seriesDao.getOnTheAirSeries().toOnTheAirSeriesEntity()
+        return seriesDao.getOnTheAirSeries()
+            .toOnTheAirSeriesEntity()
     }
 
     override suspend fun getAiringTodaySeries(): List<SeriesEntity> {
-        return seriesDao.getAiringTodaySeries().toAiringTodaySeriesEntity()
+        return seriesDao.getAiringTodaySeries()
+            .toAiringTodaySeriesEntity()
     }
 
     override suspend fun getSeriesRecommendations(seriesId: Int, page: Int): List<SeriesEntity> {
-        val response = apiService.getSeriesRecommendations(seriesId, page)
-        if (response.isSuccessful) {
-            return response.body()?.items?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { apiService.getSeriesRecommendations(seriesId, page) }
+            .items?.toEntity() ?: emptyList()
     }
 
     override suspend fun getLatestSeries(): SeriesEntity {
-        val response = apiService.getLatestSeries()
-        if (response.isSuccessful) {
-            return response.body()?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { apiService.getLatestSeries() }
+            .toEntity()
     }
 
     override suspend fun getSeriesKeywords(seriesId: Int): List<String> {
-        val response = apiService.getSeriesKeywords(seriesId)
-        if (response.isSuccessful) {
-            return response.body()?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { apiService.getSeriesKeywords(seriesId) }
+            .toEntity()
     }
 
     override suspend fun getSeriesReviews(seriesId: Int, page: Int): List<ReviewEntity> {
-        val response = apiService.getSeriesReviews(seriesId, page)
-        if (response.isSuccessful) {
-            return response.body()?.items?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { apiService.getSeriesReviews(seriesId, page) }
+            .items?.toEntity() ?: emptyList()
     }
 
     override suspend fun rateSeries(seriesId: Int, rating: Double) {
-        val response = apiService.rateSeries(seriesId, rating)
-        if (!response.isSuccessful) {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        wrapApiCall { apiService.rateSeries(seriesId, rating) }
     }
 
     override suspend fun getSeasonDetails(seriesId: Int, seasonNumber: Int): SeasonEntity {
-        val response = apiService.getSeasonDetails(seriesId, seasonNumber)
-        if (response.isSuccessful) {
-            return response.body()?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { apiService.getSeasonDetails(seriesId, seasonNumber) }
+            .toEntity()
     }
 
     override suspend fun getSeasonImages(seriesId: Int, seasonNumber: Int): List<String> {
-        val response = apiService.getSeasonImages(seriesId, seasonNumber)
-        if (response.isSuccessful) {
-            return response.body()?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { apiService.getSeasonImages(seriesId, seasonNumber) }
+            .toEntity()
     }
 
     override suspend fun getSeriesVideos(seriesId: Int): List<TrailerEntity> {
-        val response = apiService.getSeriesVideos(seriesId)
-        if (response.isSuccessful) {
-            return response.body()?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { apiService.getSeriesVideos(seriesId) }
+            .toEntity()
     }
 
     override suspend fun getEpisodeDetails(
@@ -113,12 +86,8 @@ class SeriesRepositoryImpl @Inject constructor(
         seasonNumber: Int,
         episodeNumber: Int
     ): EpisodeEntity {
-        val response = apiService.getEpisodeDetails(seriesId, seasonNumber, episodeNumber)
-        if (response.isSuccessful) {
-            return response.body()?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { apiService.getEpisodeDetails(seriesId, seasonNumber, episodeNumber) }
+            .toEntity()
     }
 
     override suspend fun getEpisodeImages(
@@ -126,12 +95,8 @@ class SeriesRepositoryImpl @Inject constructor(
         seasonNumber: Int,
         episodeNumber: Int
     ): List<String> {
-        val response = apiService.getEpisodeImages(seriesId, seasonNumber, episodeNumber)
-        if (response.isSuccessful) {
-            return response.body()?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { apiService.getEpisodeImages(seriesId, seasonNumber, episodeNumber) }
+            .toEntity()
     }
 
     override suspend fun getEpisodeVideos(
@@ -139,12 +104,8 @@ class SeriesRepositoryImpl @Inject constructor(
         seasonNumber: Int,
         episodeNumber: Int
     ): List<TrailerEntity> {
-        val response = apiService.getEpisodeVideos(seriesId, seasonNumber, episodeNumber)
-        if (response.isSuccessful) {
-            return response.body()?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { apiService.getEpisodeVideos(seriesId, seasonNumber, episodeNumber) }
+            .toEntity()
     }
 
     override suspend fun rateEpisode(
@@ -153,10 +114,7 @@ class SeriesRepositoryImpl @Inject constructor(
         episodeNumber: Int,
         rating: Double
     ) {
-        val response = apiService.rateEpisode(seriesId, seasonNumber, episodeNumber, rating)
-        if (!response.isSuccessful) {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        wrapApiCall { apiService.rateEpisode(seriesId, seasonNumber, episodeNumber, rating) }
     }
 
 }

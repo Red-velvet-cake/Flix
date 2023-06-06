@@ -2,7 +2,6 @@ package com.red_velvet.flix.data.repository
 
 import com.red_velvet.flix.data.local.database.dao.MovieDao
 import com.red_velvet.flix.data.remote.MoviesService
-import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
 import com.red_velvet.flix.data.repository.mapper.movie.toEntity
 import com.red_velvet.flix.data.repository.mapper.movie.toNowPlayingMovieDto
 import com.red_velvet.flix.data.repository.mapper.movie.toNowPlayingMoviesEntity
@@ -24,12 +23,15 @@ class MovieRepositoryImpl @Inject constructor(
     private val moviesService: MoviesService,
     private val movieDao: MovieDao,
     private val exceptionHandler: ExceptionHandler
-) : MovieRepository {
+) : MovieRepository, BaseRepository(exceptionHandler) {
 
     override suspend fun getPopularMovies(
-        page: Int?, region: String?, language: String?
+        page: Int?,
+        region: String?,
+        language: String?
     ): List<MovieEntity> {
-        return movieDao.getPopularMovies().toPopularMoviesEntity()
+        return movieDao.getPopularMovies()
+            .toPopularMoviesEntity()
     }
 
     override suspend fun refreshPopularMovies() {
@@ -43,11 +45,13 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-
     override suspend fun getUpcomingMovies(
-        page: Int?, region: String?, language: String?
+        page: Int?,
+        region: String?,
+        language: String?
     ): List<MovieEntity> {
-        return movieDao.getUpcomingMovies().toUpcomingMoviesEntity()
+        return movieDao.getUpcomingMovies()
+            .toUpcomingMoviesEntity()
     }
 
     override suspend fun refreshUpcomingMovies() {
@@ -65,7 +69,8 @@ class MovieRepositoryImpl @Inject constructor(
     override suspend fun getNowPlayingMovies(
         page: Int?, region: String?, language: String?
     ): List<MovieEntity> {
-        return movieDao.getNowPlayingMovies().toNowPlayingMoviesEntity()
+        return movieDao.getNowPlayingMovies()
+            .toNowPlayingMoviesEntity()
     }
 
     override suspend fun refreshNowPlayingMovies() {
@@ -82,7 +87,8 @@ class MovieRepositoryImpl @Inject constructor(
     override suspend fun getTopRatedMovies(
         page: Int?, region: String?, language: String?
     ): List<MovieEntity> {
-        return movieDao.getTopRatedMovies().toTopRatedMoviesEntity()
+        return movieDao.getTopRatedMovies()
+            .toTopRatedMoviesEntity()
     }
 
     override suspend fun refreshTopRatedMovies() {
@@ -97,22 +103,14 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMovieDetails(movieId: Int): MovieEntity {
-        val response = moviesService.getMovieDetails(movieId)
-        if (response.isSuccessful) {
-            return response.body()?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { moviesService.getMovieDetails(movieId) }
+            .toEntity()
     }
 
 
     override suspend fun getMovieKeywords(movieId: Int): List<String> {
-        val response = moviesService.getMovieKeywords(movieId)
-        if (response.isSuccessful) {
-            return response.body()?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { moviesService.getMovieKeywords(movieId) }
+            .toEntity()
     }
 
     override suspend fun getSimilarMovies(
@@ -120,30 +118,18 @@ class MovieRepositoryImpl @Inject constructor(
         page: Int?,
         language: String?
     ): List<MovieEntity> {
-        val response = moviesService.getSimilarMovies(movieId, page, language)
-        if (response.isSuccessful) {
-            return response.body()?.items?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { moviesService.getSimilarMovies(movieId, page, language) }
+            .items?.toEntity() ?: emptyList()
     }
 
     override suspend fun getMovieTrailers(movieId: Int, language: String?): List<TrailerEntity> {
-        val response = moviesService.getMovieTrailers(movieId, language)
-        if (response.isSuccessful) {
-            return response.body()?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { moviesService.getMovieTrailers(movieId, language) }
+            .toEntity()
     }
 
-    override suspend fun getLatestMovie(): MovieResource {
-        val response = moviesService.getLatestMovie()
-        if (response.isSuccessful) {
-            return response.body()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+    override suspend fun getLatestMovie(): MovieEntity {
+        return wrapApiCall { moviesService.getLatestMovie() }
+            .toEntity()
     }
 
     override suspend fun getMovieRecommendations(
@@ -151,26 +137,16 @@ class MovieRepositoryImpl @Inject constructor(
         page: Int?,
         language: String?
     ): List<MovieEntity> {
-        val response = moviesService.getMovieRecommendations(movieId, page, language)
-        if (response.isSuccessful) {
-            return response.body()?.items?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { moviesService.getMovieRecommendations(movieId, page, language) }
+            .items?.toEntity() ?: emptyList()
     }
 
     override suspend fun rateMovie(movieId: Int, rating: Double) {
-        val response = moviesService.rateMovie(movieId, rating)
-        if (!response.isSuccessful) {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        wrapApiCall { moviesService.rateMovie(movieId, rating) }
     }
 
     override suspend fun deleteMovieRating(movieId: Int) {
-        val response = moviesService.deleteMovieRating(movieId)
-        if (!response.isSuccessful) {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        wrapApiCall { moviesService.deleteMovieRating(movieId) }
     }
 
     override suspend fun getMovieReviews(
@@ -178,12 +154,8 @@ class MovieRepositoryImpl @Inject constructor(
         page: Int?,
         language: String?
     ): List<ReviewEntity> {
-        val response = moviesService.getMovieReviews(movieId, page, language)
-        if (response.isSuccessful) {
-            return response.body()?.items?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { moviesService.getMovieReviews(movieId, page, language) }
+            .items?.toEntity() ?: emptyList()
     }
 
     override suspend fun getMoviesWatchlist(
@@ -192,12 +164,8 @@ class MovieRepositoryImpl @Inject constructor(
         page: Int?,
         sortBy: String?
     ): List<MovieEntity> {
-        val response = moviesService.getMoviesWatchlist(accountId, language, page, sortBy)
-        if (response.isSuccessful) {
-            return response.body()?.items?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { moviesService.getMoviesWatchlist(accountId, language, page, sortBy) }
+            .items?.toEntity() ?: emptyList()
     }
 
     override suspend fun getFavoriteMovies(
@@ -206,12 +174,8 @@ class MovieRepositoryImpl @Inject constructor(
         page: Int?,
         sortBy: String?
     ): List<MovieEntity> {
-        val response = moviesService.getFavoriteMovies(accountId, language, page, sortBy)
-        if (response.isSuccessful) {
-            return response.body()?.items?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { moviesService.getFavoriteMovies(accountId, language, page, sortBy) }
+            .items?.toEntity() ?: emptyList()
     }
 
     override suspend fun search(
@@ -220,12 +184,8 @@ class MovieRepositoryImpl @Inject constructor(
         language: String?,
         page: Int?
     ): List<MovieEntity> {
-        val response = moviesService.search(query, includeAdult, language, page)
-        if (response.isSuccessful) {
-            return response.body()?.items?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        return wrapApiCall { moviesService.search(query, includeAdult, language, page) }
+            .items?.toEntity() ?: emptyList()
     }
 
     override suspend fun getMoviesByKeyword(
@@ -235,18 +195,16 @@ class MovieRepositoryImpl @Inject constructor(
         page: Int?,
         region: String?
     ): List<MovieEntity> {
-        val response = moviesService.getMoviesByKeyword(
-            keywordId,
-            includeAdult,
-            language,
-            page,
-            region
-        )
-        if (response.isSuccessful) {
-            return response.body()?.items?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
+        return wrapApiCall {
+            moviesService.getMoviesByKeyword(
+                keywordId,
+                includeAdult,
+                language,
+                page,
+                region
+            )
         }
+            .items?.toEntity() ?: emptyList()
     }
 
     override suspend fun discoverMovies(
@@ -257,19 +215,17 @@ class MovieRepositoryImpl @Inject constructor(
         voteAverageGte: Double?,
         year: Int?
     ): List<MovieEntity> {
-        val response = moviesService.discoverMovies(
-            includeAdult,
-            language,
-            page,
-            sortBy,
-            voteAverageGte,
-            year
-        )
-        if (response.isSuccessful) {
-            return response.body()?.items?.toEntity()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
+        return wrapApiCall {
+            moviesService.discoverMovies(
+                includeAdult,
+                language,
+                page,
+                sortBy,
+                voteAverageGte,
+                year
+            )
         }
+            .items?.toEntity() ?: emptyList()
     }
 
 }

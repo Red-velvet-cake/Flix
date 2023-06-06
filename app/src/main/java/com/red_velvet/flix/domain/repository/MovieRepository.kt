@@ -1,7 +1,6 @@
 package com.red_velvet.flix.domain.repository
 
 
-import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
@@ -57,7 +56,7 @@ interface MovieRepository {
         language: String? = null
     ): List<TrailerEntity>
 
-    suspend fun getLatestMovie(): MovieResource
+    suspend fun getLatestMovie(): MovieEntity
 
     suspend fun getMovieRecommendations(
         movieId: Int,
