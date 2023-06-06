@@ -5,17 +5,16 @@ import com.red_velvet.flix.domain.model.Trailer
 import com.red_velvet.flix.domain.model.series.Episode
 import com.red_velvet.flix.domain.model.series.Season
 import com.red_velvet.flix.domain.model.series.TVShow
-import kotlinx.coroutines.flow.Flow
 
 interface TVShowsRepository {
 
-    suspend fun getPopularTvShow(): Flow<List<TVShow>>
+    suspend fun getPopularTvShow(): List<TVShow>
 
-    suspend fun getTopRatedTvShow(): Flow<List<TVShow>>
+    suspend fun getTopRatedTvShow(): List<TVShow>
 
-    suspend fun getOnTheAirTvShow(): Flow<List<TVShow>>
+    suspend fun getOnTheAirTvShow(): List<TVShow>
 
-    suspend fun getAiringTodayTvShow(): Flow<List<TVShow>>
+    suspend fun getAiringTodayTvShow(): List<TVShow>
 
     suspend fun getTVShowRecommendations(
         seriesId: Int,

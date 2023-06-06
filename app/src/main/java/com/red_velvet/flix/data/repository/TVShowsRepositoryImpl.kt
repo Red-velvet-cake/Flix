@@ -14,8 +14,6 @@ import com.red_velvet.flix.domain.model.series.Episode
 import com.red_velvet.flix.domain.model.series.Season
 import com.red_velvet.flix.domain.model.series.TVShow
 import com.red_velvet.flix.domain.utils.ExceptionHandler
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class TVShowsRepositoryImpl @Inject constructor(
@@ -23,20 +21,20 @@ class TVShowsRepositoryImpl @Inject constructor(
     private val tvShowDao: TvShowDao,
     private val exceptionHandler: ExceptionHandler
 ) : TVShowsRepository {
-    override suspend fun getPopularTvShow(): Flow<List<TVShow>> {
-        return tvShowDao.getPopularTvShow().map { it.toPopularTVShowsModels() }
+    override suspend fun getPopularTvShow(): List<TVShow> {
+        return tvShowDao.getPopularTvShow().toPopularTVShowsModels()
     }
 
-    override suspend fun getTopRatedTvShow(): Flow<List<TVShow>> {
-        return tvShowDao.getTopRatedTvShow().map { it.toTopRatedTVShowsModels() }
+    override suspend fun getTopRatedTvShow(): List<TVShow> {
+        return tvShowDao.getTopRatedTvShow().toTopRatedTVShowsModels()
     }
 
-    override suspend fun getOnTheAirTvShow(): Flow<List<TVShow>> {
-        return tvShowDao.getOnTheAirTvShow().map { it.toOnTheAirTvShowsModels() }
+    override suspend fun getOnTheAirTvShow(): List<TVShow> {
+        return tvShowDao.getOnTheAirTvShow().toOnTheAirTvShowsModels()
     }
 
-    override suspend fun getAiringTodayTvShow(): Flow<List<TVShow>> {
-        return tvShowDao.getAiringTodayTvShow().map { it.toAiringTodayTvShowsModels() }
+    override suspend fun getAiringTodayTvShow(): List<TVShow> {
+        return tvShowDao.getAiringTodayTvShow().toAiringTodayTvShowsModels()
     }
 
     override suspend fun getTVShowRecommendations(seriesId: Int, page: Int): List<TVShow> {
