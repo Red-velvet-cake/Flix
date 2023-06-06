@@ -11,7 +11,7 @@ import com.red_velvet.flix.data.local.database.entity.WatchedMovieDto
 import com.red_velvet.flix.data.local.database.entity.WatchedSeriesDto
 
 @Dao
-interface UserDataDao {
+interface UserDao {
     @Insert
     suspend fun insertUserData(userEntity: UserEntity)
 
