@@ -11,11 +11,11 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
-): BaseViewModel() {
+) : BaseViewModel<LoginUiState>() {
 
 
     private val _loginUIState = MutableStateFlow(LoginUiState())
-    val loginUIState = _loginUIState
+    override val state = _state
 
     fun onUserNameInputChange(text: CharSequence) {
         _loginUIState.value = _loginUIState.value.copy(userName = text.toString())
@@ -47,4 +47,7 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
+
+    override val _state: MutableStateFlow<LoginUiState>
+        get() = TODO("Not yet implemented")
 }

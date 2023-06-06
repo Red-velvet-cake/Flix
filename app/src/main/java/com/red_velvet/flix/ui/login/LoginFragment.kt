@@ -7,7 +7,7 @@ import com.red_velvet.flix.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment<FragmentLoginBinding,LoginViewModel>() {
+class LoginFragment : BaseFragment<FragmentLoginBinding,LoginViewModel, LoginUiState>() {
     override val layoutIdFragment: Int = R.layout.fragment_login
     override val viewModel: LoginViewModel by viewModels()
 
