@@ -21,7 +21,7 @@
             android:layout_height="0dp"
             android:overScrollMode="never"
             android:scrollbars="none"
-            app:hideIfTrue="@{viewModel.state.loading || viewModel.state.error.size() &gt;0}"
+            app:hideIfTrue="@{viewModel.state.error.size() == 0 &amp;&amp; !viewModel.state.loading}"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +31,7 @@
         <include
             android:id="@+id/loading"
             layout="@layout/loading"
-            app:isLoading="@{viewModel.state.loading}"
+            app:hideIfTrue="@{!viewModel.state.loading}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
         <include
             android:id="@+id/error"
             layout="@layout/error"
-            app:isError="@{viewModel.state.error.size() != 0 &amp;&amp; !viewModel.state.loading}"
+            app:hideIfTrue="@{viewModel.state.error.size() != 0 &amp;&amp; !viewModel.state.loading}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

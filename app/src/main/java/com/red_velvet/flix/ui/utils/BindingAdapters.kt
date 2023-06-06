@@ -2,6 +2,7 @@ package com.red_velvet.flix.ui.utils
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -23,3 +24,12 @@ fun bindMovieImage(image: ImageView, imageURL: String?) {
     }
 }
 
+@BindingAdapter("app:isVisible")
+fun isVisible(view: View, isVisible: Boolean) {
+    view.isVisible = isVisible
+}
+
+@BindingAdapter("app:errorText")
+fun showErrorAsString(view: TextView, error: List<String>) {
+    view.text = error.joinToString("\n")
+}
