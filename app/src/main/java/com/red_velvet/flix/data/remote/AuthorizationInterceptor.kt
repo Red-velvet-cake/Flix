@@ -2,7 +2,6 @@ package com.red_velvet.flix.data.remote
 
 import com.red_velvet.flix.BuildConfig
 import com.red_velvet.flix.data.local.shared_prefs.SharedPrefs
-import kotlinx.coroutines.runBlocking
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -27,8 +26,8 @@ class AuthorizationInterceptor @Inject constructor(
     private fun buildUrl(request: Request): HttpUrl {
         return request.url.newBuilder()
             .addQueryParameter(API_KEY, apiKey)
-            .addQueryParameter(REQUEST_TOKEN, runBlocking { sharedPrefs.getToken() })
-            .addQueryParameter(SESSION_ID, runBlocking { sharedPrefs.getSessionId() })
+            .addQueryParameter(REQUEST_TOKEN, sharedPrefs.getToken())
+            .addQueryParameter(SESSION_ID, sharedPrefs.getSessionId())
             .build()
     }
 

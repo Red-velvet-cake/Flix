@@ -2,6 +2,7 @@ package com.red_velvet.flix.data.local.shared_prefs
 
 import android.content.SharedPreferences
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -17,8 +18,8 @@ class SharedPrefsImpl @Inject constructor(
         }
     }
 
-    override suspend fun getToken(): String? {
-        return withContext(Dispatchers.IO) {
+    override fun getToken(): String? {
+        return runBlocking {
             sharedPreferences.getString(TOKEN, null)
         }
     }
@@ -31,8 +32,8 @@ class SharedPrefsImpl @Inject constructor(
         }
     }
 
-    override suspend fun getSessionId(): String? {
-        return withContext(Dispatchers.IO) {
+    override fun getSessionId(): String? {
+        return runBlocking {
             sharedPreferences.getString(SESSION_ID, null)
         }
     }
