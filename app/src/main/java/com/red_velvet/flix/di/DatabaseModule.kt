@@ -20,7 +20,7 @@ object DatabaseModule {
         return Room.databaseBuilder(
             context,
             MovieDatabase::class.java,
-            "movie_database"
+            "FLIX_DATABASE"
         ).build()
     }
 

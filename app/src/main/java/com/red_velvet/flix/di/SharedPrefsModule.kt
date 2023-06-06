@@ -17,7 +17,7 @@ object SharedPrefsModule {
     @Provides
     @Singleton
     fun getSharedPrefsUtil(@ApplicationContext context: Context): SharedPreferences {
-        return context.getSharedPreferences("sharedPrefsName", Context.MODE_PRIVATE)
+        return context.getSharedPreferences("FLIX_SHARED", Context.MODE_PRIVATE)
     }
 
     @Provides
