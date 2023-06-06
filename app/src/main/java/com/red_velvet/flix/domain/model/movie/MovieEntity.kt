@@ -1,7 +1,7 @@
 package com.red_velvet.flix.domain.model.movie
 
 
-data class Movie(
+data class MovieEntity(
     val id: Int,
     val title: String,
     val imageUrl: String,

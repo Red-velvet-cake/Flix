@@ -5,10 +5,10 @@ import com.red_velvet.flix.data.local.database.entity.AiringTodaySeriesDto
 import com.red_velvet.flix.data.local.database.entity.OnTheAirSeriesDto
 import com.red_velvet.flix.data.local.database.entity.PopularSeriesDto
 import com.red_velvet.flix.data.local.database.entity.TopRatedSeriesDto
-import com.red_velvet.flix.domain.model.series.TVShow
+import com.red_velvet.flix.domain.model.series.SeriesEntity
 
-fun PopularSeriesDto.toModel(): TVShow {
-    return TVShow(
+fun PopularSeriesDto.toModel(): SeriesEntity {
+    return SeriesEntity(
         id = id.toInt(),
         name = title,
         imageUrl = BuildConfig.IMAGE_BASE_PATH + imageUrl,
@@ -18,8 +18,8 @@ fun PopularSeriesDto.toModel(): TVShow {
     )
 }
 
-fun TopRatedSeriesDto.toModel(): TVShow {
-    return TVShow(
+fun TopRatedSeriesDto.toModel(): SeriesEntity {
+    return SeriesEntity(
         id = id.toInt(),
         name = title,
         imageUrl = BuildConfig.IMAGE_BASE_PATH + imageUrl,
@@ -30,8 +30,8 @@ fun TopRatedSeriesDto.toModel(): TVShow {
 }
 
 
-fun AiringTodaySeriesDto.toModel(): TVShow {
-    return TVShow(
+fun AiringTodaySeriesDto.toModel(): SeriesEntity {
+    return SeriesEntity(
         id = id.toInt(),
         name = title,
         imageUrl = BuildConfig.IMAGE_BASE_PATH + imageUrl,
@@ -41,8 +41,8 @@ fun AiringTodaySeriesDto.toModel(): TVShow {
     )
 }
 
-fun OnTheAirSeriesDto.toModel(): TVShow {
-    return TVShow(
+fun OnTheAirSeriesDto.toModel(): SeriesEntity {
+    return SeriesEntity(
         id = id.toInt(),
         name = title,
         imageUrl = BuildConfig.IMAGE_BASE_PATH + imageUrl,
@@ -52,18 +52,18 @@ fun OnTheAirSeriesDto.toModel(): TVShow {
     )
 }
 
-fun List<PopularSeriesDto>.toPopularTVShowsModels(): List<TVShow> {
+fun List<PopularSeriesDto>.toPopularTVShowsModels(): List<SeriesEntity> {
     return map { it.toModel() }
 }
 
-fun List<TopRatedSeriesDto>.toTopRatedTVShowsModels(): List<TVShow> {
+fun List<TopRatedSeriesDto>.toTopRatedTVShowsModels(): List<SeriesEntity> {
     return map { it.toModel() }
 }
 
-fun List<AiringTodaySeriesDto>.toAiringTodayTvShowsModels(): List<TVShow> {
+fun List<AiringTodaySeriesDto>.toAiringTodayTvShowsModels(): List<SeriesEntity> {
     return map { it.toModel() }
 }
 
-fun List<OnTheAirSeriesDto>.toOnTheAirTvShowsModels(): List<TVShow> {
+fun List<OnTheAirSeriesDto>.toOnTheAirTvShowsModels(): List<SeriesEntity> {
     return map { it.toModel() }
 }

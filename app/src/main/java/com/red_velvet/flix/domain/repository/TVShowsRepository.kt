@@ -1,34 +1,34 @@
 package com.red_velvet.flix.domain.repository
 
-import com.red_velvet.flix.domain.model.Review
-import com.red_velvet.flix.domain.model.Trailer
-import com.red_velvet.flix.domain.model.series.Episode
-import com.red_velvet.flix.domain.model.series.Season
-import com.red_velvet.flix.domain.model.series.TVShow
+import com.red_velvet.flix.domain.model.ReviewEntity
+import com.red_velvet.flix.domain.model.TrailerEntity
+import com.red_velvet.flix.domain.model.series.EpisodeEntity
+import com.red_velvet.flix.domain.model.series.SeasonEntity
+import com.red_velvet.flix.domain.model.series.SeriesEntity
 
 interface TVShowsRepository {
 
-    suspend fun getPopularTvShow(): List<TVShow>
+    suspend fun getPopularTvShow(): List<SeriesEntity>
 
-    suspend fun getTopRatedTvShow(): List<TVShow>
+    suspend fun getTopRatedTvShow(): List<SeriesEntity>
 
-    suspend fun getOnTheAirTvShow(): List<TVShow>
+    suspend fun getOnTheAirTvShow(): List<SeriesEntity>
 
-    suspend fun getAiringTodayTvShow(): List<TVShow>
+    suspend fun getAiringTodayTvShow(): List<SeriesEntity>
 
     suspend fun getTVShowRecommendations(
         seriesId: Int,
         page: Int = 1,
-    ): List<TVShow>
+    ): List<SeriesEntity>
 
-    suspend fun getLatestTVShow(): TVShow
+    suspend fun getLatestTVShow(): SeriesEntity
 
     suspend fun getTVShowKeywords(seriesId: Int): List<String>
 
     suspend fun getTVShowReviews(
         seriesId: Int,
         page: Int,
-    ): List<Review>
+    ): List<ReviewEntity>
 
     suspend fun rateTVShow(
         seriesId: Int,
@@ -38,7 +38,7 @@ interface TVShowsRepository {
     suspend fun getSeasonDetails(
         seriesId: Int,
         seasonNumber: Int,
-    ): Season
+    ): SeasonEntity
 
     suspend fun getSeasonImages(
         seriesId: Int,
@@ -47,13 +47,13 @@ interface TVShowsRepository {
 
     suspend fun getTVShowVideos(
         seriesId: Int,
-    ): List<Trailer>
+    ): List<TrailerEntity>
 
     suspend fun getEpisodeDetails(
         seriesId: Int,
         seasonNumber: Int,
         episodeNumber: Int,
-    ): Episode
+    ): EpisodeEntity
 
     suspend fun getEpisodeImages(
         seriesId: Int,
@@ -65,7 +65,7 @@ interface TVShowsRepository {
         seriesId: Int,
         seasonNumber: Int,
         episodeNumber: Int,
-    ): List<Trailer>
+    ): List<TrailerEntity>
 
     suspend fun rateEpisode(
         seriesId: Int,

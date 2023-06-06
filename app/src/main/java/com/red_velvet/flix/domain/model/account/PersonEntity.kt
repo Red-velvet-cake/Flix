@@ -1,7 +1,7 @@
 package com.red_velvet.flix.domain.model.account
 
 
-data class Person(
+data class PersonEntity(
     val id: Int,
     val name: String,
     val imageUrl: String,

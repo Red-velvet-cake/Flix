@@ -1,10 +1,10 @@
 package com.red_velvet.flix.domain.mapper.account
 
 import com.red_velvet.flix.data.local.database.entity.UserDto
-import com.red_velvet.flix.domain.model.account.User
+import com.red_velvet.flix.domain.model.account.UserEntity
 
-fun UserDto.toModel(): User {
-    return User(
+fun UserDto.toModel(): UserEntity {
+    return UserEntity(
         userName = userName,
         name = name,
         imageUrl = imageUrl,

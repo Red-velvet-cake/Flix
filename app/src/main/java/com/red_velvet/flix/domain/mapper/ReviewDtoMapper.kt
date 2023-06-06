@@ -2,13 +2,13 @@ package com.red_velvet.flix.domain.mapper
 
 import com.red_velvet.flix.data.remote.recoures.review.AuthorDetailsResource
 import com.red_velvet.flix.data.remote.recoures.review.ReviewResource
-import com.red_velvet.flix.domain.model.Review
-import com.red_velvet.flix.domain.model.movie.AuthorDetails
+import com.red_velvet.flix.domain.model.ReviewEntity
+import com.red_velvet.flix.domain.model.movie.AuthorDetailsEntity
 import com.red_velvet.flix.domain.utils.orZero
 
 
-fun ReviewResource.toModel(): Review {
-    return Review(
+fun ReviewResource.toModel(): ReviewEntity {
+    return ReviewEntity(
         id = id.orEmpty(),
         author = authorDetails?.toModel()!!,
         content = content.orEmpty(),
@@ -20,8 +20,8 @@ fun ReviewResource.toModel(): Review {
     )
 }
 
-fun AuthorDetailsResource.toModel(): AuthorDetails {
-    return AuthorDetails(
+fun AuthorDetailsResource.toModel(): AuthorDetailsEntity {
+    return AuthorDetailsEntity(
         avatarPath = avatarPath.orEmpty(),
         name = name.orEmpty(),
         rating = rating.orZero(),
@@ -29,6 +29,6 @@ fun AuthorDetailsResource.toModel(): AuthorDetails {
     )
 }
 
-fun List<ReviewResource>.toModel(): List<Review> {
+fun List<ReviewResource>.toModel(): List<ReviewEntity> {
     return map { it.toModel() }
 }

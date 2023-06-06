@@ -1,7 +1,7 @@
 package com.red_velvet.flix.domain.model.series
 
 
-data class TvShowDetails(
+data class SeriesDetailsEntity(
     val id: Int,
     val name: String,
     val adult: Boolean,
@@ -12,7 +12,7 @@ data class TvShowDetails(
     val numberOfSeasons: Int,
     val overview: String,
     val popularity: Double,
-    val seasons: List<Season> = emptyList(),
+    val seasons: List<SeasonEntity> = emptyList(),
     val type: String,
     val voteAverage: Int,
 )

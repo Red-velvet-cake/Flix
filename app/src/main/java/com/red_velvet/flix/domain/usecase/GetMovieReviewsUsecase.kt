@@ -1,6 +1,6 @@
 package com.red_velvet.flix.domain.usecase
 
-import com.red_velvet.flix.domain.model.Review
+import com.red_velvet.flix.domain.model.ReviewEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
 import javax.inject.Inject
 
@@ -11,7 +11,7 @@ class GetMovieReviewsUsecase @Inject constructor(
         movieId: Int,
         page: Int? = null,
         language: String? = null
-    ): List<Review> {
+    ): List<ReviewEntity> {
         return movieRepository.getMovieReviews(movieId, page, language)
     }
 }

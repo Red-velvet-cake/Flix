@@ -1,7 +1,7 @@
 package com.red_velvet.flix.domain.model
 
 
-data class Trailer(
+data class TrailerEntity(
     val id: String,
     val key: String,
     val name: String,

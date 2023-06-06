@@ -1,7 +1,7 @@
 package com.red_velvet.flix.domain.model.series
 
 
-data class TVShow(
+data class SeriesEntity(
     val id: Int,
     val name: String,
     val imageUrl: String,

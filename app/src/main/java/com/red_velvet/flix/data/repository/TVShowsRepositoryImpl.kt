@@ -8,11 +8,11 @@ import com.red_velvet.flix.domain.mapper.series.toOnTheAirTvShowsModels
 import com.red_velvet.flix.domain.mapper.series.toPopularTVShowsModels
 import com.red_velvet.flix.domain.mapper.series.toTopRatedTVShowsModels
 import com.red_velvet.flix.domain.mapper.toModel
-import com.red_velvet.flix.domain.model.Review
-import com.red_velvet.flix.domain.model.Trailer
-import com.red_velvet.flix.domain.model.series.Episode
-import com.red_velvet.flix.domain.model.series.Season
-import com.red_velvet.flix.domain.model.series.TVShow
+import com.red_velvet.flix.domain.model.ReviewEntity
+import com.red_velvet.flix.domain.model.TrailerEntity
+import com.red_velvet.flix.domain.model.series.EpisodeEntity
+import com.red_velvet.flix.domain.model.series.SeasonEntity
+import com.red_velvet.flix.domain.model.series.SeriesEntity
 import com.red_velvet.flix.domain.repository.TVShowsRepository
 import com.red_velvet.flix.domain.utils.ExceptionHandler
 import javax.inject.Inject
@@ -22,23 +22,23 @@ class TVShowsRepositoryImpl @Inject constructor(
     private val tvShowDao: TvShowDao,
     private val exceptionHandler: ExceptionHandler
 ) : TVShowsRepository {
-    override suspend fun getPopularTvShow(): List<TVShow> {
+    override suspend fun getPopularTvShow(): List<SeriesEntity> {
         return tvShowDao.getPopularTvShow().toPopularTVShowsModels()
     }
 
-    override suspend fun getTopRatedTvShow(): List<TVShow> {
+    override suspend fun getTopRatedTvShow(): List<SeriesEntity> {
         return tvShowDao.getTopRatedTvShow().toTopRatedTVShowsModels()
     }
 
-    override suspend fun getOnTheAirTvShow(): List<TVShow> {
+    override suspend fun getOnTheAirTvShow(): List<SeriesEntity> {
         return tvShowDao.getOnTheAirTvShow().toOnTheAirTvShowsModels()
     }
 
-    override suspend fun getAiringTodayTvShow(): List<TVShow> {
+    override suspend fun getAiringTodayTvShow(): List<SeriesEntity> {
         return tvShowDao.getAiringTodayTvShow().toAiringTodayTvShowsModels()
     }
 
-    override suspend fun getTVShowRecommendations(seriesId: Int, page: Int): List<TVShow> {
+    override suspend fun getTVShowRecommendations(seriesId: Int, page: Int): List<SeriesEntity> {
         val response = apiService.getTVShowRecommendations(seriesId, page)
         if (response.isSuccessful) {
             return response.body()?.items?.toModel()!!
@@ -47,7 +47,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getLatestTVShow(): TVShow {
+    override suspend fun getLatestTVShow(): SeriesEntity {
         val response = apiService.getLatestTVShow()
         if (response.isSuccessful) {
             return response.body()?.toModel()!!
@@ -65,7 +65,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getTVShowReviews(seriesId: Int, page: Int): List<Review> {
+    override suspend fun getTVShowReviews(seriesId: Int, page: Int): List<ReviewEntity> {
         val response = apiService.getTVShowReviews(seriesId, page)
         if (response.isSuccessful) {
             return response.body()?.items?.toModel()!!
@@ -81,7 +81,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getSeasonDetails(seriesId: Int, seasonNumber: Int): Season {
+    override suspend fun getSeasonDetails(seriesId: Int, seasonNumber: Int): SeasonEntity {
         val response = apiService.getSeasonDetails(seriesId, seasonNumber)
         if (response.isSuccessful) {
             return response.body()?.toModel()!!
@@ -99,7 +99,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getTVShowVideos(seriesId: Int): List<Trailer> {
+    override suspend fun getTVShowVideos(seriesId: Int): List<TrailerEntity> {
         val response = apiService.getTVShowVideos(seriesId)
         if (response.isSuccessful) {
             return response.body()?.toModel()!!
@@ -112,7 +112,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         seriesId: Int,
         seasonNumber: Int,
         episodeNumber: Int
-    ): Episode {
+    ): EpisodeEntity {
         val response = apiService.getEpisodeDetails(seriesId, seasonNumber, episodeNumber)
         if (response.isSuccessful) {
             return response.body()?.toModel()!!
@@ -138,7 +138,7 @@ class TVShowsRepositoryImpl @Inject constructor(
         seriesId: Int,
         seasonNumber: Int,
         episodeNumber: Int
-    ): List<Trailer> {
+    ): List<TrailerEntity> {
         val response = apiService.getEpisodeVideos(seriesId, seasonNumber, episodeNumber)
         if (response.isSuccessful) {
             return response.body()?.toModel()!!

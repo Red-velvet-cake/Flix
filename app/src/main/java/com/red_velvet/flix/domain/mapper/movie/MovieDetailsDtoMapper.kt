@@ -2,12 +2,12 @@ package com.red_velvet.flix.domain.mapper.movie
 
 import com.red_velvet.flix.BuildConfig
 import com.red_velvet.flix.data.remote.recoures.movie.MovieDetailsResource
-import com.red_velvet.flix.domain.model.movie.MovieDetails
+import com.red_velvet.flix.domain.model.movie.MovieDetailsEntity
 import com.red_velvet.flix.domain.utils.orFalse
 import com.red_velvet.flix.domain.utils.orZero
 
-fun MovieDetailsResource.toModel(): MovieDetails {
-    return MovieDetails(
+fun MovieDetailsResource.toModel(): MovieDetailsEntity {
+    return MovieDetailsEntity(
         id = id.orZero(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + backdropPath,
         adult = adult.orFalse(),

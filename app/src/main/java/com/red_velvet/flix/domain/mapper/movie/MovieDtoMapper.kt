@@ -6,11 +6,11 @@ import com.red_velvet.flix.data.local.database.entity.PopularMovieDto
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieDto
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieDto
 import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
-import com.red_velvet.flix.domain.model.movie.Movie
+import com.red_velvet.flix.domain.model.movie.MovieEntity
 import com.red_velvet.flix.domain.utils.orZero
 
-fun MovieResource.toModel(): Movie {
-    return Movie(
+fun MovieResource.toModel(): MovieEntity {
+    return MovieEntity(
         id = id.orZero(),
         title = title.orEmpty(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
@@ -20,7 +20,7 @@ fun MovieResource.toModel(): Movie {
     )
 }
 
-fun List<MovieResource>.toModel(): List<Movie> {
+fun List<MovieResource>.toModel(): List<MovieEntity> {
     return map { it.toModel() }
 }
 

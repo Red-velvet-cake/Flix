@@ -1,7 +1,7 @@
 package com.red_velvet.flix.domain.model.account
 
 
-data class CustomList(
+data class CustomListEntity(
     val id: String,
     val name: String,
     val description: String,

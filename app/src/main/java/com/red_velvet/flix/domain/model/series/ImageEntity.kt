@@ -1,6 +1,6 @@
 package com.red_velvet.flix.domain.model.series
 
-data class Image(
+data class ImageEntity(
     val aspectRatio: Double,
     val filePath: String,
     val height: Int,

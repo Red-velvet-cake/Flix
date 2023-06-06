@@ -6,11 +6,11 @@ import com.red_velvet.flix.data.local.database.entity.OnTheAirSeriesDto
 import com.red_velvet.flix.data.local.database.entity.PopularSeriesDto
 import com.red_velvet.flix.data.local.database.entity.TopRatedSeriesDto
 import com.red_velvet.flix.data.remote.recoures.tv_show.TVShowResource
-import com.red_velvet.flix.domain.model.series.TVShow
+import com.red_velvet.flix.domain.model.series.SeriesEntity
 import com.red_velvet.flix.domain.utils.orZero
 
-fun TVShowResource.toModel(): TVShow {
-    return TVShow(
+fun TVShowResource.toModel(): SeriesEntity {
+    return SeriesEntity(
         id = id.orZero(),
         name = name.orEmpty(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
@@ -20,7 +20,7 @@ fun TVShowResource.toModel(): TVShow {
     )
 }
 
-fun List<TVShowResource>.toModel(): List<TVShow> {
+fun List<TVShowResource>.toModel(): List<SeriesEntity> {
     return map { it.toModel() }
 }
 

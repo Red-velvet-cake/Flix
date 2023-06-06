@@ -1,12 +1,13 @@
 package com.red_velvet.flix.domain.model.series
 
 
-data class Season(
+data class EpisodeEntity(
     val id: Int,
-    val episodeCount: Int,
+    val imageUrl: String,
+    val episodeNumber: Int,
     val name: String,
     val overview: String,
-    val imageUrl: String,
+    val runtime: Int,
     val seasonNumber: Int,
-    val airDate: String,
+    val voteAverage: Double,
 )

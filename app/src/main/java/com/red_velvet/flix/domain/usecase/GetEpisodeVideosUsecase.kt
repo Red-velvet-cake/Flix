@@ -1,6 +1,6 @@
 package com.red_velvet.flix.domain.usecase
 
-import com.red_velvet.flix.domain.model.Trailer
+import com.red_velvet.flix.domain.model.TrailerEntity
 import com.red_velvet.flix.domain.repository.TVShowsRepository
 import javax.inject.Inject
 
@@ -9,7 +9,7 @@ class GetEpisodeVideosUsecase @Inject constructor(private val tvShowsRepository:
         seriesId: Int,
         seasonNumber: Int,
         episodeNumber: Int,
-    ): List<Trailer> {
+    ): List<TrailerEntity> {
         return tvShowsRepository.getEpisodeVideos(seriesId, seasonNumber, episodeNumber)
     }
 }

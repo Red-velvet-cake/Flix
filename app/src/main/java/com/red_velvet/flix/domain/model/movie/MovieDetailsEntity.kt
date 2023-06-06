@@ -1,7 +1,7 @@
 package com.red_velvet.flix.domain.model.movie
 
 
-data class MovieDetails(
+data class MovieDetailsEntity(
     val id: Int,
     val imageUrl: String,
     val adult: Boolean,

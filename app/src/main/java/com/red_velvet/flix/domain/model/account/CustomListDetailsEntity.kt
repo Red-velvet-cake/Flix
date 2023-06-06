@@ -1,12 +1,12 @@
 package com.red_velvet.flix.domain.model.account
 
-import com.red_velvet.flix.domain.model.movie.Movie
+import com.red_velvet.flix.domain.model.movie.MovieEntity
 
-data class CustomListDetails(
+data class CustomListDetailsEntity(
     val createdBy: String,
     val description: String,
     val id: String,
-    val items: List<Movie>,
+    val items: List<MovieEntity>,
     val name: String,
     val itemCount: Int,
 )

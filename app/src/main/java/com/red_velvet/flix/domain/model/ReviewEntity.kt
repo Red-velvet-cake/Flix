@@ -1,11 +1,11 @@
 package com.red_velvet.flix.domain.model
 
-import com.red_velvet.flix.domain.model.movie.AuthorDetails
+import com.red_velvet.flix.domain.model.movie.AuthorDetailsEntity
 
 
-data class Review(
+data class ReviewEntity(
     val id: String,
-    val author: AuthorDetails,
+    val author: AuthorDetailsEntity,
     val content: String,
     val createdAt: String,
     val updatedAt: String,

@@ -2,14 +2,14 @@ package com.red_velvet.flix.domain.mapper
 
 import com.red_velvet.flix.data.remote.recoures.trailer.TrailerDetailsResource
 import com.red_velvet.flix.data.remote.recoures.trailer.TrailersResource
-import com.red_velvet.flix.domain.model.Trailer
+import com.red_velvet.flix.domain.model.TrailerEntity
 
-fun TrailersResource.toModel(): List<Trailer> {
+fun TrailersResource.toModel(): List<TrailerEntity> {
     return results?.map { it?.toModel()!! } ?: emptyList()
 }
 
-fun TrailerDetailsResource.toModel(): Trailer {
-    return Trailer(
+fun TrailerDetailsResource.toModel(): TrailerEntity {
+    return TrailerEntity(
         id = id.orEmpty(),
         key = key.orEmpty(),
         name = name.orEmpty(),
