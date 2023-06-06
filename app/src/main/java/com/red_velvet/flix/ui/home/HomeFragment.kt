@@ -1,7 +1,6 @@
 package com.red_velvet.flix.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -21,9 +20,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeUiStat
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setAdapter()
-        binding.root.setOnClickListener {
-            collectHomeData()
-        }
+        collectHomeData()
     }
 
     private fun setAdapter() {
@@ -31,20 +28,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeUiStat
         binding.recyclerView.adapter = homeAdapter
     }
 
+
     private fun collectHomeData() {
+        val homeItems = mutableListOf<HomeUiState.HomeItem>()
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.state.collect { homeUiState ->
-                val homeItems = mutableListOf<HomeUiState.HomeItem>()
-                homeUiState?.popularMovies?.let { popularMovies ->
+                homeUiState.apply {
                     homeItems.add(HomeUiState.HomeItem("Popular", popularMovies))
-                }
-                homeUiState?.nowPlayingMovies?.let { nowPlayingMovies ->
                     homeItems.add(HomeUiState.HomeItem("Now Playing", nowPlayingMovies))
-                }
-                homeUiState?.upcomingMovies?.let { upcomingMovies ->
                     homeItems.add(HomeUiState.HomeItem("Upcoming", upcomingMovies))
-                }
-                homeUiState?.topRatedMovies?.let { topRatedMovies ->
                     homeItems.add(HomeUiState.HomeItem("Top Rated", topRatedMovies))
                 }
                 homeAdapter.setItems(homeItems)
