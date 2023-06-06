@@ -70,7 +70,7 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun refreshNowPlayingMovies() {
-        moviesService.getUpcomingMovies().let { nowPlayingMoviesResponse ->
+        moviesService.getNowPlayingMovies().let { nowPlayingMoviesResponse ->
             if (nowPlayingMoviesResponse.isSuccessful) {
                 nowPlayingMoviesResponse.body()?.items?.toNowPlayingMovieEntityList()
                     .let {
@@ -87,7 +87,7 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun refreshTopRatedMovies() {
-        moviesService.getUpcomingMovies().let { topRatedMoviesResponse ->
+        moviesService.getTopRatedMovies().let { topRatedMoviesResponse ->
             if (topRatedMoviesResponse.isSuccessful) {
                 topRatedMoviesResponse.body()?.items?.toTopRatedMovieEntityList()
                     .let {

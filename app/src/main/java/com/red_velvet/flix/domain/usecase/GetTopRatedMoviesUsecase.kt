@@ -1,5 +1,6 @@
 package com.red_velvet.flix.domain.usecase
 
+import android.util.Log
 import com.red_velvet.flix.data.repository.MovieRepository
 import com.red_velvet.flix.domain.model.movie.Movie
 import kotlinx.coroutines.flow.Flow
@@ -13,6 +14,10 @@ class GetTopRatedMoviesUsecase @Inject constructor(
         region: String? = null,
         language: String? = null
     ): Flow<List<Movie>> {
+        movieRepository.refreshTopRatedMovies()
+        movieRepository.getTopRatedMovies(1).collect {
+            Log.i("TAG", "getTopRatedMovies: ${it.size}")
+        }
         return movieRepository.getTopRatedMovies(page, region, language)
     }
 }

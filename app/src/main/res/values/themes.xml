@@ -5,7 +5,7 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Flix" parent="Base.Theme.Flix"/>
+    <style name="Theme.Flix" parent="Base.Theme.Flix" />
 
     <style name="CardCorners">
         <item name="cornerFamily">rounded</item>
@@ -32,7 +32,6 @@
         <item name="android:textSize">@dimen/text_large</item>
         <item name="android:textColor">@color/media_card_subtitle_color</item>
     </style>
-
 
 
     <style name="Medium">

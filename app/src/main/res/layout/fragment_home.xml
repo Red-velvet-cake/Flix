@@ -28,24 +28,24 @@
             app:spanCount="1" />
 
 
-        <include
-            android:id="@+id/loading"
-            layout="@layout/loading"
-            app:hideIfTrue="@{!viewModel.state.loading}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!--        <include-->
+        <!--            android:id="@+id/loading"-->
+        <!--            layout="@layout/loading"-->
+        <!--            app:hideIfTrue="@{!viewModel.state.loading}"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <include
-            android:id="@+id/error"
-            layout="@layout/error"
-            app:hideIfTrue="@{viewModel.state.error.size() != 0 &amp;&amp; !viewModel.state.loading}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:viewModel="@{viewModel}" />
+        <!--        <include-->
+        <!--            android:id="@+id/error"-->
+        <!--            layout="@layout/error"-->
+        <!--            app:hideIfTrue="@{viewModel.state.error.size() != 0 &amp;&amp; !viewModel.state.loading}"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:viewModel="@{viewModel}" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

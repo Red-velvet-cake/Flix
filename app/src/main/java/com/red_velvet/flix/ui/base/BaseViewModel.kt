@@ -1,5 +1,6 @@
 package com.red_velvet.flix.ui.base
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.red_velvet.flix.domain.model.movie.Movie
@@ -13,14 +14,14 @@ import kotlinx.coroutines.launch
 
 abstract class BaseViewModel<T : BaseUiState> : ViewModel() {
 
-    abstract val _state: MutableStateFlow<T?>
-    val state: StateFlow<T?> = _state
+    abstract val _state: MutableStateFlow<T>
+    abstract val state: StateFlow<T>
 
     protected fun handleMoviesSuccess(
         list: List<Movie>, stateModifier: (T, List<Movie>) -> T
     ) {
         if (list.isNotEmpty()) {
-            _state.value?.let { currentState ->
+            _state.value.let { currentState ->
                 _state.value = stateModifier(currentState, list)
             }
         }

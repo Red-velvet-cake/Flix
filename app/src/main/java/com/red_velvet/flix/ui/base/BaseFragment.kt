@@ -10,9 +10,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.red_velvet.flix.BR
 
-abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel<T>, T : BaseUiState> :
-    Fragment() {
-    abstract val layoutIdFragment: Int
+abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel<T>, T : BaseUiState> : Fragment() {
+       abstract val layoutIdFragment: Int
     abstract val viewModel: VM
 
     private lateinit var _binding: VDB
