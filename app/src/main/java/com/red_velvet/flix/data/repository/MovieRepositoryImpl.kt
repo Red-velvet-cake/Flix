@@ -187,34 +187,6 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getMoviesWatchlist(
-        accountId: Int,
-        language: String?,
-        page: Int?,
-        sortBy: String?
-    ): List<Movie> {
-        val response = moviesService.getMoviesWatchlist(accountId, language, page, sortBy)
-        if (response.isSuccessful) {
-            return response.body()?.items?.toModel()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
-    }
-
-    override suspend fun getFavoriteMovies(
-        accountId: Int,
-        language: String?,
-        page: Int?,
-        sortBy: String?
-    ): List<Movie> {
-        val response = moviesService.getFavoriteMovies(accountId, language, page, sortBy)
-        if (response.isSuccessful) {
-            return response.body()?.items?.toModel()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
-    }
-
     override suspend fun search(
         query: String,
         includeAdult: Boolean,

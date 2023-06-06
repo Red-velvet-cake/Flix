@@ -76,20 +76,6 @@ interface MovieRepository {
         language: String? = null
     ): List<Review>
 
-    suspend fun getMoviesWatchlist(
-        accountId: Int,
-        language: String? = null,
-        page: Int? = null,
-        sortBy: String? = null
-    ): List<Movie>
-
-    suspend fun getFavoriteMovies(
-        accountId: Int,
-        language: String? = null,
-        page: Int? = null,
-        sortBy: String? = null
-    ): List<Movie>
-
     suspend fun search(
         query: String,
         includeAdult: Boolean = false,
