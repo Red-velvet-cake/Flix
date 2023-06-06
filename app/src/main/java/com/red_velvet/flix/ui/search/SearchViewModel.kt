@@ -9,16 +9,19 @@ import com.red_velvet.flix.ui.search.mediaSearchUiState.MediaUiState
 import com.red_velvet.flix.ui.search.mediaSearchUiState.SearchTypes
 import com.red_velvet.flix.ui.search.mediaSearchUiState.toUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Suppress("UNUSED_EXPRESSION")
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchUsecase: SearchUsecase,
-    ) : BaseViewModel(), MediaSearchInteractionListener {
+) : BaseViewModel(), MediaSearchInteractionListener {
 
     private val _uiState = MutableStateFlow(MediaSearchUiState())
     val uiState = _uiState.asStateFlow()
@@ -31,17 +34,21 @@ class SearchViewModel @Inject constructor(
     }
 
 
-
-    fun OnChangeSearchTextFiled(searchInput: CharSequence) {
-        _uiState.update { it.copy(searchInput = searchInput.toString(), isLoading = true) }
+    @OptIn(FlowPreview::class)
+    fun onChangeSearchTextFiled(searchInput: CharSequence) {
+        _uiState.apply {
+            update { it.copy(searchInput = searchInput.toString(), isLoading = true) }
+            debounce(1000)
+        }
         viewModelScope.launch {
             when (_uiState.value.searchTypes) {
                 SearchTypes.MOVIE -> onSearchForMovie()
-                SearchTypes.PERSON -> onSearchForPreson()
+                SearchTypes.PERSON -> onSearchForPerson()
                 SearchTypes.TV -> onSearchForTvShow()
                 SearchTypes.ALL -> onSearchForAll()
             }
         }
+        ::onError
     }
 
     fun onSearchForAll() {
@@ -56,7 +63,7 @@ class SearchViewModel @Inject constructor(
                 )
             }
         }
-
+         ::onError
     }
 
 
@@ -72,29 +79,41 @@ class SearchViewModel @Inject constructor(
                 )
             }
         }
-    }
-    fun onSearchForPreson() {
-        viewModelScope.launch {
-            _uiState.update {it.copy(
-                searchTypes = SearchTypes.PERSON,
-                isLoading = false,
-                searchResult = searchUsecase(it.searchInput).map { person ->
-                    person.toUiState()
-                }
-            ) }
-        }
+        ::onError
     }
 
-     fun onSearchForTvShow() {
+    fun onSearchForPerson() {
         viewModelScope.launch {
-            _uiState.update { it.copy(
-                searchTypes = SearchTypes.TV,
-                isLoading = false,
-                searchResult = searchUsecase(it.searchInput).map { tv ->
-                    tv.toUiState()
-                }
-            ) }
+            _uiState.update {
+                it.copy(
+                    searchTypes = SearchTypes.PERSON,
+                    isLoading = false,
+                    searchResult = searchUsecase(it.searchInput).map { person ->
+                        person.toUiState()
+                    }
+                )
+            }
         }
+        ::onError
+    }
+
+    fun onSearchForTvShow() {
+        viewModelScope.launch {
+            _uiState.update {
+                it.copy(
+                    searchTypes = SearchTypes.TV,
+                    isLoading = false,
+                    searchResult = searchUsecase(it.searchInput).map { tv ->
+                        tv.toUiState()
+                    }
+                )
+            }
+        }
+        ::onError
+    }
+
+    private fun onError() {
+        _uiState.update { it.copy(error = emptyList(), isLoading = false) }
     }
 }
 
