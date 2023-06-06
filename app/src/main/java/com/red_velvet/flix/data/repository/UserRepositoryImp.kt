@@ -5,11 +5,15 @@ import com.red_velvet.flix.data.local.sharedPrefs.SharedPrefs
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.remote.dtos.account.AccountDto
 import com.red_velvet.flix.data.remote.dtos.auth.LoginRequest
+import com.red_velvet.flix.data.repository.mapper.movie.toFavoriteMovieDtoList
 import com.red_velvet.flix.data.repository.mapper.movie.toFavoriteMovieEntityList
 import com.red_velvet.flix.data.repository.mapper.movie.toMovieEntityList
+import com.red_velvet.flix.data.repository.mapper.movie.toWatchedMovieDtoList
 import com.red_velvet.flix.data.repository.mapper.movie.toWatchedMovieEntityList
+import com.red_velvet.flix.data.repository.mapper.series.toFavoriteSeriesDtoList
 import com.red_velvet.flix.data.repository.mapper.series.toFavoriteSeriesEntityList
 import com.red_velvet.flix.data.repository.mapper.series.toSeriesEntityList
+import com.red_velvet.flix.data.repository.mapper.series.toWatchedSeriesDtoList
 import com.red_velvet.flix.data.repository.mapper.series.toWatchedSeriesEntityList
 import com.red_velvet.flix.domain.model.movie.Movie
 import com.red_velvet.flix.domain.model.series.TVShow
@@ -104,6 +108,22 @@ class UserRepositoryImp @Inject constructor(
 
     override suspend fun getCachedMoviesWatchList(): List<Movie> {
         return userDao.getAllWatchedMovies().toWatchedMovieEntityList()
+    }
+
+    override suspend fun cacheFavoriteMovies(movies: List<Movie>) {
+        userDao.insertAllFavoriteMovies(movies.toFavoriteMovieDtoList())
+    }
+
+    override suspend fun cacheFavoriteSeries(series: List<TVShow>) {
+        userDao.insertAllFavoriteSeries(series.toFavoriteSeriesDtoList())
+    }
+
+    override suspend fun cacheMoviesWatchList(movies: List<Movie>) {
+        userDao.insertAllWatchedMovies(movies.toWatchedMovieDtoList())
+    }
+
+    override suspend fun cacheSeriesWatchList(series: List<TVShow>) {
+        userDao.insertAllWatchedSeries(series.toWatchedSeriesDtoList())
     }
 
     override suspend fun getSeriesWatchList(
