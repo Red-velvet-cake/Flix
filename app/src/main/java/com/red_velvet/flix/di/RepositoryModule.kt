@@ -2,7 +2,7 @@ package com.red_velvet.flix.di
 
 import com.red_velvet.flix.data.local.database.dao.MovieDao
 import com.red_velvet.flix.data.local.database.dao.TvShowDao
-import com.red_velvet.flix.data.local.sharedPrefs.SharedPrefs
+import com.red_velvet.flix.data.local.shared_prefs.SharedPrefs
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.repository.MovieRepository
 import com.red_velvet.flix.data.repository.MovieRepositoryImpl

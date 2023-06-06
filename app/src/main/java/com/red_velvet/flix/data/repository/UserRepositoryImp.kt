@@ -1,6 +1,6 @@
 package com.red_velvet.flix.data.repository
 
-import com.red_velvet.flix.data.local.sharedPrefs.SharedPrefs
+import com.red_velvet.flix.data.local.shared_prefs.SharedPrefs
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.remote.dtos.account.AccountDto
 import com.red_velvet.flix.data.remote.dtos.auth.LoginRequest
