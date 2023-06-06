@@ -41,5 +41,5 @@ import com.red_velvet.flix.data.local.database.entity.WatchedSeriesDto
 abstract class MovieDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
     abstract fun tvShowDao(): TvShowDao
-    abstract fun userDataDao(): UserDao
+    abstract fun userDao(): UserDao
 }
