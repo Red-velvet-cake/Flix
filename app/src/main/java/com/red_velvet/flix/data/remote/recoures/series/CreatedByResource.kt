@@ -1,4 +1,4 @@
-package com.red_velvet.flix.data.remote.recoures.tv_show
+package com.red_velvet.flix.data.remote.recoures.series
 
 
 import com.google.gson.annotations.SerializedName

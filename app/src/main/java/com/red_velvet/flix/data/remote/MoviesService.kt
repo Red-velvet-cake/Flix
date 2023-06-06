@@ -8,8 +8,8 @@ import com.red_velvet.flix.data.remote.recoures.list.*
 import com.red_velvet.flix.data.remote.recoures.movie.*
 import com.red_velvet.flix.data.remote.recoures.person.PersonResource
 import com.red_velvet.flix.data.remote.recoures.review.ReviewResource
+import com.red_velvet.flix.data.remote.recoures.series.*
 import com.red_velvet.flix.data.remote.recoures.trailer.TrailersResource
-import com.red_velvet.flix.data.remote.recoures.tv_show.*
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -124,69 +124,69 @@ interface MoviesService {
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US",
         @Query("timezone") timezone: String? = null
-    ): Response<PaginationResource<TVShowResource>>
+    ): Response<PaginationResource<SeriesResource>>
 
     @GET("tv/airing_today")
     suspend fun getAiringTodaySeries(
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US",
         @Query("timezone") timezone: String? = null
-    ): Response<PaginationResource<TVShowResource>>
+    ): Response<PaginationResource<SeriesResource>>
 
     @GET("tv/popular")
     suspend fun getPopularSeries(
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<TVShowResource>>
+    ): Response<PaginationResource<SeriesResource>>
 
     @GET("tv/top_rated")
     suspend fun getTopRatedSeries(
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<TVShowResource>>
+    ): Response<PaginationResource<SeriesResource>>
 
     @GET("tv/{tv_id}")
-    suspend fun getTVShowDetails(
-        @Path("tv_id") tvId: Int,
+    suspend fun getSeriesDetails(
+        @Path("tv_id") seriesId: Int,
         @Query("append_to_response") appendToResponse: String? = null,
         @Query("language") language: String? = "en-US"
-    ): Response<TVShowResource>
+    ): Response<SeriesResource>
 
     @GET("tv/{series_id}/images")
-    suspend fun getTVShowImages(
+    suspend fun getSeriesImages(
         @Path("series_id") seriesId: Int,
         @Query("language") language: String? = "en-US",
         @Query("include_image_language") includeImageLanguage: String? = null
     ): Response<ImagesResource>
 
     @GET("tv/{tv_id}/similar")
-    suspend fun getSimilarTVShows(
+    suspend fun getSimilarSeriess(
         @Path("tv_id") tvId: Int,
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<TVShowResource>>
+    ): Response<PaginationResource<SeriesResource>>
 
     @GET("tv/{series_id}/videos")
-    suspend fun getTVShowTrailers(
+    suspend fun getSeriesTrailers(
         @Path("series_id") seriesId: Int,
         @Query("include_video_language") includeVideoLanguage: String? = null,
     ): Response<TrailersResource>
 
     @GET("tv/{series_id}/recommendations")
-    suspend fun getTVShowRecommendations(
+    suspend fun getSeriesRecommendations(
         @Path("series_id") seriesId: Int,
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<TVShowResource>>
+    ): Response<PaginationResource<SeriesResource>>
 
     @GET("tv/latest")
-    suspend fun getLatestTVShow(): Response<TVShowResource>
+    suspend fun getLatestSeries(): Response<SeriesResource>
 
     @GET("tv/{series_id}/keywords")
-    suspend fun getTVShowKeywords(@Path("series_id") seriesId: Int): Response<KeywordsResource>
+    suspend fun getSeriesKeywords(@Path("series_id") seriesId: Int): Response<KeywordsResource>
 
     @GET("tv/{series_id}/reviews")
-    suspend fun getTVShowReviews(
+    suspend fun getSeriesReviews(
         @Path("series_id") seriesId: Int,
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US"
@@ -194,7 +194,7 @@ interface MoviesService {
 
     @FormUrlEncoded
     @POST("tv/{series_id}/rating")
-    suspend fun rateTVShow(
+    suspend fun rateSeries(
         @Path("series_id") seriesId: Int,
         @Field("value") rating: Double
     ): Response<ApiResponse>
@@ -216,7 +216,7 @@ interface MoviesService {
     ): Response<ImagesResource>
 
     @GET("tv/{series_id}/videos")
-    suspend fun getTVShowVideos(
+    suspend fun getSeriesVideos(
         @Path("series_id") seriesId: Int,
         @Query("include_video_language") includeVideoLanguage: String? = null,
         @Query("language") language: String? = "en-US"
@@ -375,7 +375,7 @@ interface MoviesService {
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
         @Query("year") year: Int? = null
-    ): Response<PaginationResource<TVShowResource>>
+    ): Response<PaginationResource<SeriesResource>>
 
 
     @GET("account")
@@ -393,7 +393,7 @@ interface MoviesService {
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
         @Query("sort_by") sortBy: String? = "created_at.asc"
-    ): Response<PaginationResource<TVShowResource>>
+    ): Response<PaginationResource<SeriesResource>>
 
     @GET("account/{account_id}/favorite/movies")
     suspend fun getFavoriteMovies(
@@ -415,7 +415,7 @@ interface MoviesService {
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
         @Query("sort_by") sortBy: String? = "created_at.asc"
-    ): Response<PaginationResource<TVShowResource>>
+    ): Response<PaginationResource<SeriesResource>>
 
     @GET("account/{account_id}/watchlist/movies")
     suspend fun getMoviesWatchlist(

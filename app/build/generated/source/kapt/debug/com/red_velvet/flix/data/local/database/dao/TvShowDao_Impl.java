@@ -28,7 +28,7 @@ import kotlin.coroutines.Continuation;
 
 @Generated("androidx.room.RoomProcessor")
 @SuppressWarnings({"unchecked", "deprecation"})
-public final class TvShowDao_Impl implements TvShowDao {
+public final class TvShowDao_Impl implements SeriesDao {
   private final RoomDatabase __db;
 
   private final EntityInsertionAdapter<PopularSeriesDto> __insertionAdapterOfPopularTvShowEntity;
@@ -269,7 +269,7 @@ public final class TvShowDao_Impl implements TvShowDao {
   }
 
   @Override
-  public List<PopularSeriesDto> getPopularTvShow() {
+  public List<PopularSeriesDto> getPopularSeries() {
     final String _sql = "SELECT * FROM POPULAR_SERIES";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     __db.assertNotSuspendingTransaction();
@@ -333,7 +333,7 @@ public final class TvShowDao_Impl implements TvShowDao {
   }
 
   @Override
-  public List<TopRatedSeriesDto> getTopRatedTvShow() {
+  public List<TopRatedSeriesDto> getTopRatedSeries() {
     final String _sql = "SELECT * FROM TOP_RATED_SERIES";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     __db.assertNotSuspendingTransaction();
@@ -397,7 +397,7 @@ public final class TvShowDao_Impl implements TvShowDao {
   }
 
   @Override
-  public List<OnTheAirSeriesDto> getOnTheAirTvShow() {
+  public List<OnTheAirSeriesDto> getOnTheAirSeries() {
     final String _sql = "SELECT * FROM ON_THE_AIR_SERIES";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     __db.assertNotSuspendingTransaction();
@@ -461,7 +461,7 @@ public final class TvShowDao_Impl implements TvShowDao {
   }
 
   @Override
-  public List<AiringTodaySeriesDto> getAiringTodayTvShow() {
+  public List<AiringTodaySeriesDto> getAiringTodaySeries() {
     final String _sql = "SELECT * FROM AIRING_TODAY_SERIES";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     __db.assertNotSuspendingTransaction();

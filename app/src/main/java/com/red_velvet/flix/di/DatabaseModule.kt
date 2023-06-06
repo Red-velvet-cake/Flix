@@ -30,7 +30,7 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideTvShowDao(movieDatabase: MovieDatabase) = movieDatabase.tvShowDao()
+    fun provideTvShowDao(movieDatabase: MovieDatabase) = movieDatabase.SeriesDao()
 
     @Provides
     @Singleton

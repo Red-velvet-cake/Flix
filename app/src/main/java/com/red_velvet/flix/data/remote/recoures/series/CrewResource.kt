@@ -1,25 +1,25 @@
-package com.red_velvet.flix.data.remote.recoures.tv_show
+package com.red_velvet.flix.data.remote.recoures.series
 
 
 import com.google.gson.annotations.SerializedName
 
-data class GuestStarResource(
+data class CrewResource(
     @SerializedName("adult")
     val adult: Boolean?,
-    @SerializedName("character")
-    val character: String?,
     @SerializedName("credit_id")
     val creditId: String?,
+    @SerializedName("department")
+    val department: String?,
     @SerializedName("gender")
     val gender: Int?,
     @SerializedName("id")
     val id: Int?,
+    @SerializedName("job")
+    val job: String?,
     @SerializedName("known_for_department")
     val knownForDepartment: String?,
     @SerializedName("name")
     val name: String?,
-    @SerializedName("order")
-    val order: Int?,
     @SerializedName("original_name")
     val originalName: String?,
     @SerializedName("popularity")

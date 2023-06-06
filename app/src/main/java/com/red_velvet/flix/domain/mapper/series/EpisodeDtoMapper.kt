@@ -1,7 +1,7 @@
 package com.red_velvet.flix.domain.mapper.series
 
 import com.red_velvet.flix.BuildConfig
-import com.red_velvet.flix.data.remote.recoures.tv_show.EpisodeResource
+import com.red_velvet.flix.data.remote.recoures.series.EpisodeResource
 import com.red_velvet.flix.domain.model.series.EpisodeEntity
 import com.red_velvet.flix.domain.utils.orZero
 

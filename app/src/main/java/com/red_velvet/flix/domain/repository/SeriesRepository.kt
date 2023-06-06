@@ -6,31 +6,31 @@ import com.red_velvet.flix.domain.model.series.EpisodeEntity
 import com.red_velvet.flix.domain.model.series.SeasonEntity
 import com.red_velvet.flix.domain.model.series.SeriesEntity
 
-interface TVShowsRepository {
+interface SeriesRepository {
 
-    suspend fun getPopularTvShow(): List<SeriesEntity>
+    suspend fun getPopularSeries(): List<SeriesEntity>
 
-    suspend fun getTopRatedTvShow(): List<SeriesEntity>
+    suspend fun getTopRatedSeries(): List<SeriesEntity>
 
-    suspend fun getOnTheAirTvShow(): List<SeriesEntity>
+    suspend fun getOnTheAirSeries(): List<SeriesEntity>
 
-    suspend fun getAiringTodayTvShow(): List<SeriesEntity>
+    suspend fun getAiringTodaySeries(): List<SeriesEntity>
 
-    suspend fun getTVShowRecommendations(
+    suspend fun getSeriesRecommendations(
         seriesId: Int,
         page: Int = 1,
     ): List<SeriesEntity>
 
-    suspend fun getLatestTVShow(): SeriesEntity
+    suspend fun getLatestSeries(): SeriesEntity
 
-    suspend fun getTVShowKeywords(seriesId: Int): List<String>
+    suspend fun getSeriesKeywords(seriesId: Int): List<String>
 
-    suspend fun getTVShowReviews(
+    suspend fun getSeriesReviews(
         seriesId: Int,
         page: Int,
     ): List<ReviewEntity>
 
-    suspend fun rateTVShow(
+    suspend fun rateSeries(
         seriesId: Int,
         rating: Double
     )
@@ -45,7 +45,7 @@ interface TVShowsRepository {
         seasonNumber: Int,
     ): List<String>
 
-    suspend fun getTVShowVideos(
+    suspend fun getSeriesVideos(
         seriesId: Int,
     ): List<TrailerEntity>
 

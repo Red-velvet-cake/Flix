@@ -1,10 +1,10 @@
 package com.red_velvet.flix.di
 
 import com.red_velvet.flix.data.repository.MovieRepositoryImpl
-import com.red_velvet.flix.data.repository.TVShowsRepositoryImpl
+import com.red_velvet.flix.data.repository.SeriesRepositoryImpl
 import com.red_velvet.flix.data.repository.UserRepositoryImp
 import com.red_velvet.flix.domain.repository.MovieRepository
-import com.red_velvet.flix.domain.repository.TVShowsRepository
+import com.red_velvet.flix.domain.repository.SeriesRepository
 import com.red_velvet.flix.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
@@ -22,7 +22,7 @@ abstract class RepositoryModule {
 
     @Singleton
     @Binds
-    abstract fun bindTVShowsRepository(tvShowsRepositoryImpl: TVShowsRepositoryImpl): TVShowsRepository
+    abstract fun bindSeriesRepository(seriesRepositoryImpl: SeriesRepositoryImpl): SeriesRepository
 
     @Singleton
     @Binds

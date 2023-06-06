@@ -3,7 +3,7 @@ package com.red_velvet.flix.data.local.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.red_velvet.flix.data.local.database.dao.MovieDao
-import com.red_velvet.flix.data.local.database.dao.TvShowDao
+import com.red_velvet.flix.data.local.database.dao.SeriesDao
 import com.red_velvet.flix.data.local.database.dao.UserDao
 import com.red_velvet.flix.data.local.database.entity.AiringTodaySeriesDto
 import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieDto
@@ -32,6 +32,6 @@ import com.red_velvet.flix.data.local.database.entity.UserDto
 )
 abstract class MovieDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
-    abstract fun tvShowDao(): TvShowDao
+    abstract fun SeriesDao(): SeriesDao
     abstract fun userDao(): UserDao
 }

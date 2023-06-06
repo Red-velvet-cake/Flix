@@ -1,17 +1,15 @@
-package com.red_velvet.flix.data.remote.recoures.tv_show
+package com.red_velvet.flix.data.remote.recoures.series
 
 
 import com.google.gson.annotations.SerializedName
 
-data class SessionDetailsResource(
+data class SeasonResource(
     @SerializedName("air_date")
     val airDate: String?,
-    @SerializedName("episodes")
-    val episodes: List<EpisodeResource?>?,
-    @SerializedName("_id")
-    val id: String?,
+    @SerializedName("episode_count")
+    val episodeCount: Int?,
     @SerializedName("id")
-    val seasonId: Int?,
+    val id: Int?,
     @SerializedName("name")
     val name: String?,
     @SerializedName("overview")

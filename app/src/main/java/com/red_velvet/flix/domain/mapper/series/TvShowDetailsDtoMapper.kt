@@ -1,12 +1,12 @@
 package com.red_velvet.flix.domain.mapper.series
 
 import com.red_velvet.flix.BuildConfig
-import com.red_velvet.flix.data.remote.recoures.tv_show.TvShowDetailsResource
+import com.red_velvet.flix.data.remote.recoures.series.SeriesDetailsResource
 import com.red_velvet.flix.domain.model.series.SeriesDetailsEntity
 import com.red_velvet.flix.domain.utils.orFalse
 import com.red_velvet.flix.domain.utils.orZero
 
-fun TvShowDetailsResource.toModel(): SeriesDetailsEntity {
+fun SeriesDetailsResource.toModel(): SeriesDetailsEntity {
     return SeriesDetailsEntity(
         id = id.orZero(),
         name = name.orEmpty(),

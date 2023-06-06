@@ -1,4 +1,4 @@
-package com.red_velvet.flix.data.remote.recoures.tv_show
+package com.red_velvet.flix.data.remote.recoures.series
 
 
 import com.google.gson.annotations.SerializedName
@@ -7,7 +7,7 @@ import com.red_velvet.flix.data.remote.recoures.ProductionCompanyResource
 import com.red_velvet.flix.data.remote.recoures.ProductionCountryResource
 import com.red_velvet.flix.data.remote.recoures.SpokenLanguageResource
 
-data class TvShowDetailsResource(
+data class SeriesDetailsResource(
     @SerializedName("adult")
     val adult: Boolean?,
     @SerializedName("backdrop_path")
@@ -37,7 +37,7 @@ data class TvShowDetailsResource(
     @SerializedName("networks")
     val networks: List<NetworkResource?>?,
     @SerializedName("next_episode_to_air")
-    val nextEpisodeToAir: TvEpisodeDetailsResource?,
+    val nextEpisodeToAir: SeriesEpisodeDetailsResource?,
     @SerializedName("number_of_episodes")
     val numberOfEpisodes: Int?,
     @SerializedName("number_of_seasons")
