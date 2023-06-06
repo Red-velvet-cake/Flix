@@ -28,11 +28,11 @@ import kotlin.coroutines.Continuation;
 public final class UserDao_Impl implements UserDao {
   private final RoomDatabase __db;
 
-  private final EntityInsertionAdapter<UserDto> __insertionAdapterOfUserEntity;
+  private final EntityInsertionAdapter<UserDto> __insertionAdapterOfUserDto;
 
   public UserDao_Impl(RoomDatabase __db) {
     this.__db = __db;
-    this.__insertionAdapterOfUserEntity = new EntityInsertionAdapter<UserDto>(__db) {
+    this.__insertionAdapterOfUserDto = new EntityInsertionAdapter<UserDto>(__db) {
       @Override
       public String createQuery() {
         return "INSERT OR REPLACE INTO `USERS` (`id`,`userName`,`name`,`imageUrl`) VALUES (nullif(?, 0),?,?,?)";
@@ -68,7 +68,7 @@ public final class UserDao_Impl implements UserDao {
       public Unit call() throws Exception {
         __db.beginTransaction();
         try {
-          __insertionAdapterOfUserEntity.insert(userDto);
+          __insertionAdapterOfUserDto.insert(userDto);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {

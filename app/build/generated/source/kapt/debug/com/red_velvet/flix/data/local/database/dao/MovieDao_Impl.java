@@ -1,6 +1,7 @@
 package com.red_velvet.flix.data.local.database.dao;
 
 import android.database.Cursor;
+import android.os.CancellationSignal;
 import androidx.room.CoroutinesRoom;
 import androidx.room.EntityInsertionAdapter;
 import androidx.room.RoomDatabase;
@@ -25,24 +26,23 @@ import java.util.concurrent.Callable;
 import javax.annotation.processing.Generated;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
-import kotlinx.coroutines.flow.Flow;
 
 @Generated("androidx.room.RoomProcessor")
 @SuppressWarnings({"unchecked", "deprecation"})
 public final class MovieDao_Impl implements MovieDao {
   private final RoomDatabase __db;
 
-  private final EntityInsertionAdapter<PopularMovieDto> __insertionAdapterOfPopularMovieEntity;
+  private final EntityInsertionAdapter<PopularMovieDto> __insertionAdapterOfPopularMovieDto;
 
-  private final EntityInsertionAdapter<TopRatedMovieDto> __insertionAdapterOfTopRatedMovieEntity;
+  private final EntityInsertionAdapter<TopRatedMovieDto> __insertionAdapterOfTopRatedMovieDto;
 
-  private final EntityInsertionAdapter<NowPlayingMovieDto> __insertionAdapterOfNowPlayingMovieEntity;
+  private final EntityInsertionAdapter<NowPlayingMovieDto> __insertionAdapterOfNowPlayingMovieDto;
 
-  private final EntityInsertionAdapter<UpcomingMovieDto> __insertionAdapterOfUpcomingMovieEntity;
+  private final EntityInsertionAdapter<UpcomingMovieDto> __insertionAdapterOfUpcomingMovieDto;
 
   public MovieDao_Impl(RoomDatabase __db) {
     this.__db = __db;
-    this.__insertionAdapterOfPopularMovieEntity = new EntityInsertionAdapter<PopularMovieDto>(__db) {
+    this.__insertionAdapterOfPopularMovieDto = new EntityInsertionAdapter<PopularMovieDto>(__db) {
       @Override
       public String createQuery() {
         return "INSERT OR REPLACE INTO `POPULAR_MOVIES` (`id`,`title`,`originalLanguage`,`overview`,`imageUrl`,`date`) VALUES (?,?,?,?,?,?)";
@@ -78,7 +78,7 @@ public final class MovieDao_Impl implements MovieDao {
         }
       }
     };
-    this.__insertionAdapterOfTopRatedMovieEntity = new EntityInsertionAdapter<TopRatedMovieDto>(__db) {
+    this.__insertionAdapterOfTopRatedMovieDto = new EntityInsertionAdapter<TopRatedMovieDto>(__db) {
       @Override
       public String createQuery() {
         return "INSERT OR REPLACE INTO `TOP_RATED_MOVIES` (`id`,`title`,`originalLanguage`,`overview`,`imageUrl`,`date`) VALUES (?,?,?,?,?,?)";
@@ -114,7 +114,7 @@ public final class MovieDao_Impl implements MovieDao {
         }
       }
     };
-    this.__insertionAdapterOfNowPlayingMovieEntity = new EntityInsertionAdapter<NowPlayingMovieDto>(__db) {
+    this.__insertionAdapterOfNowPlayingMovieDto = new EntityInsertionAdapter<NowPlayingMovieDto>(__db) {
       @Override
       public String createQuery() {
         return "INSERT OR REPLACE INTO `NOW_PLAYING_MOVIES` (`id`,`title`,`originalLanguage`,`overview`,`imageUrl`,`date`) VALUES (?,?,?,?,?,?)";
@@ -150,7 +150,7 @@ public final class MovieDao_Impl implements MovieDao {
         }
       }
     };
-    this.__insertionAdapterOfUpcomingMovieEntity = new EntityInsertionAdapter<UpcomingMovieDto>(__db) {
+    this.__insertionAdapterOfUpcomingMovieDto = new EntityInsertionAdapter<UpcomingMovieDto>(__db) {
       @Override
       public String createQuery() {
         return "INSERT OR REPLACE INTO `UPCOMING_MOVIES` (`id`,`title`,`originalLanguage`,`overview`,`imageUrl`,`date`) VALUES (?,?,?,?,?,?)";
@@ -196,7 +196,7 @@ public final class MovieDao_Impl implements MovieDao {
       public Unit call() throws Exception {
         __db.beginTransaction();
         try {
-          __insertionAdapterOfPopularMovieEntity.insert(popularMovieEntities);
+          __insertionAdapterOfPopularMovieDto.insert(popularMovieEntities);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {
@@ -214,7 +214,7 @@ public final class MovieDao_Impl implements MovieDao {
       public Unit call() throws Exception {
         __db.beginTransaction();
         try {
-          __insertionAdapterOfTopRatedMovieEntity.insert(topRatedMovieEntities);
+          __insertionAdapterOfTopRatedMovieDto.insert(topRatedMovieEntities);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {
@@ -232,7 +232,7 @@ public final class MovieDao_Impl implements MovieDao {
       public Unit call() throws Exception {
         __db.beginTransaction();
         try {
-          __insertionAdapterOfNowPlayingMovieEntity.insert(nowPlayingMovieEntities);
+          __insertionAdapterOfNowPlayingMovieDto.insert(nowPlayingMovieEntities);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {
@@ -250,7 +250,7 @@ public final class MovieDao_Impl implements MovieDao {
       public Unit call() throws Exception {
         __db.beginTransaction();
         try {
-          __insertionAdapterOfUpcomingMovieEntity.insert(upcomingMovieEntities);
+          __insertionAdapterOfUpcomingMovieDto.insert(upcomingMovieEntities);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {
@@ -261,10 +261,11 @@ public final class MovieDao_Impl implements MovieDao {
   }
 
   @Override
-  public Flow<List<PopularMovieDto>> getPopularMovies() {
+  public Object getPopularMovies(final Continuation<? super List<PopularMovieDto>> continuation) {
     final String _sql = "SELECT * FROM POPULAR_MOVIES";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
-    return CoroutinesRoom.createFlow(__db, false, new String[]{"POPULAR_MOVIES"}, new Callable<List<PopularMovieDto>>() {
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<PopularMovieDto>>() {
       @Override
       public List<PopularMovieDto> call() throws Exception {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
@@ -316,21 +317,18 @@ public final class MovieDao_Impl implements MovieDao {
           return _result;
         } finally {
           _cursor.close();
+          _statement.release();
         }
       }
-
-      @Override
-      protected void finalize() {
-        _statement.release();
-      }
-    });
+    }, continuation);
   }
 
   @Override
-  public Flow<List<TopRatedMovieDto>> getTopRatedMovies() {
+  public Object getTopRatedMovies(final Continuation<? super List<TopRatedMovieDto>> continuation) {
     final String _sql = "SELECT * FROM TOP_RATED_MOVIES";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
-    return CoroutinesRoom.createFlow(__db, false, new String[]{"TOP_RATED_MOVIES"}, new Callable<List<TopRatedMovieDto>>() {
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<TopRatedMovieDto>>() {
       @Override
       public List<TopRatedMovieDto> call() throws Exception {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
@@ -382,21 +380,19 @@ public final class MovieDao_Impl implements MovieDao {
           return _result;
         } finally {
           _cursor.close();
+          _statement.release();
         }
       }
-
-      @Override
-      protected void finalize() {
-        _statement.release();
-      }
-    });
+    }, continuation);
   }
 
   @Override
-  public Flow<List<NowPlayingMovieDto>> getNowPlayingMovies() {
+  public Object getNowPlayingMovies(
+      final Continuation<? super List<NowPlayingMovieDto>> continuation) {
     final String _sql = "SELECT * FROM NOW_PLAYING_MOVIES";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
-    return CoroutinesRoom.createFlow(__db, false, new String[]{"NOW_PLAYING_MOVIES"}, new Callable<List<NowPlayingMovieDto>>() {
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<NowPlayingMovieDto>>() {
       @Override
       public List<NowPlayingMovieDto> call() throws Exception {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
@@ -448,21 +444,18 @@ public final class MovieDao_Impl implements MovieDao {
           return _result;
         } finally {
           _cursor.close();
+          _statement.release();
         }
       }
-
-      @Override
-      protected void finalize() {
-        _statement.release();
-      }
-    });
+    }, continuation);
   }
 
   @Override
-  public Flow<List<UpcomingMovieDto>> getUpcomingMovies() {
+  public Object getUpcomingMovies(final Continuation<? super List<UpcomingMovieDto>> continuation) {
     final String _sql = "SELECT * FROM UPCOMING_MOVIES";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
-    return CoroutinesRoom.createFlow(__db, false, new String[]{"UPCOMING_MOVIES"}, new Callable<List<UpcomingMovieDto>>() {
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<UpcomingMovieDto>>() {
       @Override
       public List<UpcomingMovieDto> call() throws Exception {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
@@ -514,14 +507,10 @@ public final class MovieDao_Impl implements MovieDao {
           return _result;
         } finally {
           _cursor.close();
+          _statement.release();
         }
       }
-
-      @Override
-      protected void finalize() {
-        _statement.release();
-      }
-    });
+    }, continuation);
   }
 
   public static List<Class<?>> getRequiredConverters() {
