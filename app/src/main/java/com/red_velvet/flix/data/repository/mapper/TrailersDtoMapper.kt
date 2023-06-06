@@ -1,4 +1,4 @@
-package com.red_velvet.flix.domain.mapper
+package com.red_velvet.flix.data.repository.mapper
 
 import com.red_velvet.flix.data.remote.recoures.trailer.TrailerDetailsResource
 import com.red_velvet.flix.data.remote.recoures.trailer.TrailersResource

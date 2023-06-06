@@ -1,4 +1,4 @@
-package com.red_velvet.flix.domain.mapper.account
+package com.red_velvet.flix.data.repository.mapper.account
 
 import com.red_velvet.flix.data.local.database.entity.UserDto
 import com.red_velvet.flix.domain.entity.account.UserEntity
