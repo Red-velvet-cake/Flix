@@ -90,6 +90,9 @@ dependencies {
     // Glide
     implementation("com.github.bumptech.glide:glide:4.15.1")
 
+    // Lottie
+    implementation("com.airbnb.android:lottie:5.2.0")
+
     //navigation
     val nav_version = "2.5.1"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")

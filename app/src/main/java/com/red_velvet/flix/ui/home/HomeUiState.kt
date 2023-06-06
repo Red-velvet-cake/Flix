@@ -8,7 +8,7 @@ data class HomeUiState(
     val nowPlayingMovies: List<MediaUiState> = emptyList(),
     val upcomingMovies: List<MediaUiState> = emptyList(),
     val topRatedMovies: List<MediaUiState> = emptyList(),
-    val isLoading: Boolean = false,
+    val isLoading: Boolean = true,
     val error: List<String> = emptyList(),
 ) : BaseUiState {
 

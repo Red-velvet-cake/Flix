@@ -48,4 +48,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="todo">TODO</string>
+    <string name="oops">oops</string>
+    <string name="please_check_your_internet_connection_and_try_again">please check your internet connection and try again</string>
+    <string name="retry">retry</string>
 </resources>
