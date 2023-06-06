@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 data class FavoriteMovieDto(
     @PrimaryKey val id: Long,
     val title: String,
-    val originalLanguage: String,
-    val overview: String,
     val imageUrl: String,
-    val date: String,
+    val popularity: Double,
+    val releaseDate: String,
+    val rating: Double,
 )
