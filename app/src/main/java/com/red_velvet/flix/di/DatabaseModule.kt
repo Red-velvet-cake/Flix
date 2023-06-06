@@ -34,5 +34,5 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideUserDataDao(movieDatabase: MovieDatabase) = movieDatabase.userDataDao()
+    fun provideUserDataDao(movieDatabase: MovieDatabase) = movieDatabase.userDao()
 }

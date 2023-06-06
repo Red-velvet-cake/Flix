@@ -2,6 +2,7 @@ package com.red_velvet.flix.di
 
 import com.red_velvet.flix.data.local.database.dao.MovieDao
 import com.red_velvet.flix.data.local.database.dao.TvShowDao
+import com.red_velvet.flix.data.local.database.dao.UserDao
 import com.red_velvet.flix.data.local.sharedPrefs.SharedPrefs
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.repository.MovieRepository
@@ -45,9 +46,10 @@ object RepositoryModule {
     @Singleton
     fun provideUserRepository(
         moviesService: MoviesService,
+        userDao: UserDao,
         sharedPref: SharedPrefs,
         exceptionHandler: ExceptionHandler,
     ): UserRepository {
-        return UserRepositoryImp(moviesService, sharedPref, exceptionHandler)
+        return UserRepositoryImp(moviesService, userDao, sharedPref, exceptionHandler)
     }
 }
