@@ -381,15 +381,13 @@ interface MoviesService {
     @GET("account")
     suspend fun getAccountDetails(): Response<AccountDto>
 
-    @POST("account/{account_id}/favorite")
+    @POST("account/favorite")
     suspend fun markAsFavorite(
-        @Path("account_id") accountId: Int,
         @Body markAsFavoriteRequest: MarkAsFavoriteRequest
     ): Response<ApiResponse>
 
-    @GET("account/{account_id}/favorite/tv")
+    @GET("account/favorite/tv")
     suspend fun getFavoriteTvShows(
-        @Path("account_id") accountId: Int,
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
         @Query("sort_by") sortBy: String? = "created_at.asc"
@@ -402,23 +400,20 @@ interface MoviesService {
         @Query("sort_by") sortBy: String? = "created_at.asc"
     ): Response<PaginationDto<MovieDto>>
 
-    @POST("account/{account_id}/watchlist")
+    @POST("account/watchlist")
     suspend fun addToWatchlist(
-        @Path("account_id") accountId: Int,
         @Body addToWatchlistRequest: AddToWatchListRequest
     ): Response<ApiResponse>
 
-    @GET("account/{account_id}/watchlist/tv")
+    @GET("account/watchlist/tv")
     suspend fun getTvShowsWatchlist(
-        @Path("account_id") accountId: Int,
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
         @Query("sort_by") sortBy: String? = "created_at.asc"
     ): Response<PaginationDto<TVShowDto>>
 
-    @GET("account/{account_id}/watchlist/movies")
+    @GET("account/watchlist/movies")
     suspend fun getMoviesWatchlist(
-        @Path("account_id") accountId: Int,
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
         @Query("sort_by") sortBy: String? = "created_at.asc"
