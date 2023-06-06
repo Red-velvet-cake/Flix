@@ -2,7 +2,7 @@ package com.red_velvet.flix.data.repository
 
 import com.red_velvet.flix.data.local.database.dao.MovieDao
 import com.red_velvet.flix.data.remote.MoviesService
-import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
+import com.red_velvet.flix.data.remote.dtos.movie.MovieResource
 import com.red_velvet.flix.domain.mapper.movie.toModel
 import com.red_velvet.flix.domain.mapper.movie.toNowPlayingMovieEntityList
 import com.red_velvet.flix.domain.mapper.movie.toNowPlayingMoviesModels
@@ -139,7 +139,7 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getLatestMovie(): MovieDto {
+    override suspend fun getLatestMovie(): MovieResource {
         val response = moviesService.getLatestMovie()
         if (response.isSuccessful) {
             return response.body()!!

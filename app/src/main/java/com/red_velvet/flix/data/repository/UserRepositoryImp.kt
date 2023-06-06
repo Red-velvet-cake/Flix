@@ -2,7 +2,7 @@ package com.red_velvet.flix.data.repository
 
 import com.red_velvet.flix.data.local.shared_prefs.SharedPrefs
 import com.red_velvet.flix.data.remote.MoviesService
-import com.red_velvet.flix.data.remote.dtos.account.AccountDto
+import com.red_velvet.flix.data.remote.dtos.account.AccountResource
 import com.red_velvet.flix.data.remote.dtos.auth.LoginRequest
 import com.red_velvet.flix.domain.repository.UserRepository
 import com.red_velvet.flix.domain.utils.ExceptionHandler
@@ -33,7 +33,7 @@ class UserRepositoryImp @Inject constructor(
         sharedPrefs.clearSessionId()
     }
 
-    override suspend fun getAccountDetails(): AccountDto {
+    override suspend fun getAccountDetails(): AccountResource {
         val response = service.getAccountDetails()
         if (response.isSuccessful) {
             return response.body()!!

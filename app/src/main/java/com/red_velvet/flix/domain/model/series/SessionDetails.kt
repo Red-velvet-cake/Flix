@@ -1,7 +1,5 @@
 package com.red_velvet.flix.domain.model.series
 
-import com.red_velvet.flix.data.remote.dtos.tv_show.EpisodeDto
-
 data class SessionDetails(
     val airDate: String,
     val episodes: List<Episode>,

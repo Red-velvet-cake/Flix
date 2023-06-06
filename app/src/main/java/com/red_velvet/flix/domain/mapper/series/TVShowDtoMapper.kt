@@ -5,11 +5,11 @@ import com.red_velvet.flix.data.local.database.entity.AiringTodayTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.OnTheAirTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.PopularTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedTvShowEntity
-import com.red_velvet.flix.data.remote.dtos.tv_show.TVShowDto
+import com.red_velvet.flix.data.remote.dtos.tv_show.TVShowResource
 import com.red_velvet.flix.domain.model.series.TVShow
 import com.red_velvet.flix.domain.utils.orZero
 
-fun TVShowDto.toModel(): TVShow {
+fun TVShowResource.toModel(): TVShow {
     return TVShow(
         id = id.orZero(),
         name = name.orEmpty(),
@@ -20,12 +20,12 @@ fun TVShowDto.toModel(): TVShow {
     )
 }
 
-fun List<TVShowDto>.toModel(): List<TVShow> {
+fun List<TVShowResource>.toModel(): List<TVShow> {
     return map { it.toModel() }
 }
 
 
-fun TVShowDto.toPopularTvShowEntity(): PopularTvShowEntity {
+fun TVShowResource.toPopularTvShowEntity(): PopularTvShowEntity {
     return PopularTvShowEntity(
         id = id.orZero().toLong(),
         title = name.orEmpty(),
@@ -39,11 +39,11 @@ fun TVShowDto.toPopularTvShowEntity(): PopularTvShowEntity {
 }
 
 
-fun List<TVShowDto>.toPopularTvShowEntityList(): List<PopularTvShowEntity> {
+fun List<TVShowResource>.toPopularTvShowEntityList(): List<PopularTvShowEntity> {
     return map { it.toPopularTvShowEntity() }
 }
 
-fun TVShowDto.toTopRatedTvShowEntity(): TopRatedTvShowEntity {
+fun TVShowResource.toTopRatedTvShowEntity(): TopRatedTvShowEntity {
     return TopRatedTvShowEntity(
         id = id.orZero().toLong(),
         title = name.orEmpty(),
@@ -56,12 +56,12 @@ fun TVShowDto.toTopRatedTvShowEntity(): TopRatedTvShowEntity {
     )
 }
 
-fun List<TVShowDto>.toTopRatedTvShowEntityList(): List<TopRatedTvShowEntity> {
+fun List<TVShowResource>.toTopRatedTvShowEntityList(): List<TopRatedTvShowEntity> {
     return map { it.toTopRatedTvShowEntity() }
 }
 
 
-fun TVShowDto.toAirngTodayTvShowEntity(): AiringTodayTvShowEntity {
+fun TVShowResource.toAirngTodayTvShowEntity(): AiringTodayTvShowEntity {
     return AiringTodayTvShowEntity(
         id = id.orZero().toLong(),
         title = name.orEmpty(),
@@ -75,11 +75,11 @@ fun TVShowDto.toAirngTodayTvShowEntity(): AiringTodayTvShowEntity {
     )
 }
 
-fun List<TVShowDto>.toAiringTodayTvShowEntityList(): List<AiringTodayTvShowEntity> {
+fun List<TVShowResource>.toAiringTodayTvShowEntityList(): List<AiringTodayTvShowEntity> {
     return map { it.toAirngTodayTvShowEntity() }
 }
 
-fun TVShowDto.toOnTheAirTvShowEntity(): OnTheAirTvShowEntity {
+fun TVShowResource.toOnTheAirTvShowEntity(): OnTheAirTvShowEntity {
     return OnTheAirTvShowEntity(
         id = id.orZero().toLong(),
         title = name.orEmpty(),
@@ -92,6 +92,6 @@ fun TVShowDto.toOnTheAirTvShowEntity(): OnTheAirTvShowEntity {
     )
 }
 
-fun List<TVShowDto>.toOnTheAirTvShowEntityList(): List<OnTheAirTvShowEntity> {
+fun List<TVShowResource>.toOnTheAirTvShowEntityList(): List<OnTheAirTvShowEntity> {
     return map { it.toOnTheAirTvShowEntity() }
 }

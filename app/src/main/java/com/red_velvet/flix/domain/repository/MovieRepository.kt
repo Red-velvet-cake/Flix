@@ -1,7 +1,7 @@
 package com.red_velvet.flix.domain.repository
 
 
-import com.red_velvet.flix.data.remote.dtos.movie.MovieDto
+import com.red_velvet.flix.data.remote.dtos.movie.MovieResource
 import com.red_velvet.flix.domain.model.Review
 import com.red_velvet.flix.domain.model.Trailer
 import com.red_velvet.flix.domain.model.movie.Movie
@@ -58,7 +58,7 @@ interface MovieRepository {
         language: String? = null
     ): List<Trailer>
 
-    suspend fun getLatestMovie(): MovieDto
+    suspend fun getLatestMovie(): MovieResource
 
     suspend fun getMovieRecommendations(
         movieId: Int,

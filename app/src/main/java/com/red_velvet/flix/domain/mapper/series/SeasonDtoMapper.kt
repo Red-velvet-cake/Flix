@@ -1,11 +1,11 @@
 package com.red_velvet.flix.domain.mapper.series
 
 import com.red_velvet.flix.BuildConfig
-import com.red_velvet.flix.data.remote.dtos.tv_show.SeasonDto
+import com.red_velvet.flix.data.remote.dtos.tv_show.SeasonResource
 import com.red_velvet.flix.domain.model.series.Season
 import com.red_velvet.flix.domain.utils.orZero
 
-fun SeasonDto.toModel(): Season {
+fun SeasonResource.toModel(): Season {
     return Season(
         id = id.orZero(),
         episodeCount = episodeCount.orZero(),

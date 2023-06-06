@@ -1,6 +1,6 @@
 package com.red_velvet.flix.domain.repository
 
-import com.red_velvet.flix.data.remote.dtos.account.AccountDto
+import com.red_velvet.flix.data.remote.dtos.account.AccountResource
 
 interface UserRepository {
 
@@ -8,7 +8,7 @@ interface UserRepository {
 
     suspend fun logout()
 
-    suspend fun getAccountDetails(): AccountDto?
+    suspend fun getAccountDetails(): AccountResource?
 
     suspend fun getSessionId(): String?
 }
