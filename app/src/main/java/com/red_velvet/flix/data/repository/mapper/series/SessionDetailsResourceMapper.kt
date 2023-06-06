@@ -5,10 +5,10 @@ import com.red_velvet.flix.data.remote.recoures.series.SessionDetailsResource
 import com.red_velvet.flix.domain.entity.series.SessionDetailsEntity
 import com.red_velvet.flix.domain.utils.orZero
 
-fun SessionDetailsResource.toModel(): SessionDetailsEntity {
+fun SessionDetailsResource.toEntity(): SessionDetailsEntity {
     return SessionDetailsEntity(
         airDate = airDate.orEmpty(),
-        episodes = episodes?.map { it?.toModel()!! }.orEmpty(),
+        episodes = episodes?.map { it?.toEntity()!! }.orEmpty(),
         id = id.orEmpty(),
         seasonId = seasonId.orZero(),
         name = name.orEmpty(),
@@ -17,4 +17,3 @@ fun SessionDetailsResource.toModel(): SessionDetailsEntity {
         seasonNumber = seasonNumber.orZero()
     )
 }
-

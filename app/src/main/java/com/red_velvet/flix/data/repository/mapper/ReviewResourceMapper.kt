@@ -7,10 +7,10 @@ import com.red_velvet.flix.domain.entity.movie.AuthorDetailsEntity
 import com.red_velvet.flix.domain.utils.orZero
 
 
-fun ReviewResource.toModel(): ReviewEntity {
+fun ReviewResource.toEntity(): ReviewEntity {
     return ReviewEntity(
         id = id.orEmpty(),
-        author = authorDetails?.toModel()!!,
+        author = authorDetails?.toEntity()!!,
         content = content.orEmpty(),
         createdAt = createdAt.orEmpty(),
         updatedAt = updatedAt.orEmpty(),
@@ -20,7 +20,7 @@ fun ReviewResource.toModel(): ReviewEntity {
     )
 }
 
-fun AuthorDetailsResource.toModel(): AuthorDetailsEntity {
+fun AuthorDetailsResource.toEntity(): AuthorDetailsEntity {
     return AuthorDetailsEntity(
         avatarPath = avatarPath.orEmpty(),
         name = name.orEmpty(),
@@ -29,6 +29,6 @@ fun AuthorDetailsResource.toModel(): AuthorDetailsEntity {
     )
 }
 
-fun List<ReviewResource>.toModel(): List<ReviewEntity> {
-    return map { it.toModel() }
+fun List<ReviewResource>.toEntity(): List<ReviewEntity> {
+    return map { it.toEntity() }
 }

@@ -3,16 +3,16 @@ package com.red_velvet.flix.data.repository
 import com.red_velvet.flix.data.local.database.dao.MovieDao
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
-import com.red_velvet.flix.data.repository.mapper.movie.toModel
-import com.red_velvet.flix.data.repository.mapper.movie.toNowPlayingMovieEntityList
-import com.red_velvet.flix.data.repository.mapper.movie.toNowPlayingMoviesModels
-import com.red_velvet.flix.data.repository.mapper.movie.toPopularMovieEntityList
-import com.red_velvet.flix.data.repository.mapper.movie.toPopularMoviesModels
-import com.red_velvet.flix.data.repository.mapper.movie.toTopRatedMovieEntityList
-import com.red_velvet.flix.data.repository.mapper.movie.toTopRatedMoviesModels
-import com.red_velvet.flix.data.repository.mapper.movie.toUpcomingMovieEntityList
-import com.red_velvet.flix.data.repository.mapper.movie.toUpcomingMoviesModels
-import com.red_velvet.flix.data.repository.mapper.toModel
+import com.red_velvet.flix.data.repository.mapper.movie.toEntity
+import com.red_velvet.flix.data.repository.mapper.movie.toNowPlayingMovieDto
+import com.red_velvet.flix.data.repository.mapper.movie.toNowPlayingMoviesEntity
+import com.red_velvet.flix.data.repository.mapper.movie.toPopularMovieDto
+import com.red_velvet.flix.data.repository.mapper.movie.toPopularMoviesEntity
+import com.red_velvet.flix.data.repository.mapper.movie.toTopRatedMovieDto
+import com.red_velvet.flix.data.repository.mapper.movie.toTopRatedMoviesEntity
+import com.red_velvet.flix.data.repository.mapper.movie.toUpcomingMovieDto
+import com.red_velvet.flix.data.repository.mapper.movie.toUpcomingMoviesEntity
+import com.red_velvet.flix.data.repository.mapper.toEntity
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
@@ -31,13 +31,13 @@ class MovieRepositoryImpl @Inject constructor(
     override fun getPopularMovies(
         page: Int?, region: String?, language: String?
     ): Flow<List<MovieEntity>> {
-        return movieDao.getPopularMovies().map { it.toPopularMoviesModels() }
+        return movieDao.getPopularMovies().map { it.toPopularMoviesEntity() }
     }
 
     override suspend fun refreshPopularMovies() {
         moviesService.getPopularMovies().let { popularMoviesResponse ->
             if (popularMoviesResponse.isSuccessful) {
-                popularMoviesResponse.body()?.items?.toPopularMovieEntityList()
+                popularMoviesResponse.body()?.items?.toPopularMovieDto()
                     .let {
                         movieDao.insertPopularMovies(it!!)
                     }
@@ -49,13 +49,13 @@ class MovieRepositoryImpl @Inject constructor(
     override fun getUpcomingMovies(
         page: Int?, region: String?, language: String?
     ): Flow<List<MovieEntity>> {
-        return movieDao.getUpcomingMovies().map { it.toUpcomingMoviesModels() }
+        return movieDao.getUpcomingMovies().map { it.toUpcomingMoviesEntity() }
     }
 
     override suspend fun refreshUpcomingMovies() {
         moviesService.getUpcomingMovies().let { upcomingMoviesResponse ->
             if (upcomingMoviesResponse.isSuccessful) {
-                upcomingMoviesResponse.body()?.items?.toUpcomingMovieEntityList()
+                upcomingMoviesResponse.body()?.items?.toUpcomingMovieDto()
                     .let {
                         movieDao.insertUpcomingMovies(it!!)
                     }
@@ -67,13 +67,13 @@ class MovieRepositoryImpl @Inject constructor(
     override fun getNowPlayingMovies(
         page: Int?, region: String?, language: String?
     ): Flow<List<MovieEntity>> {
-        return movieDao.getNowPlayingMovies().map { it.toNowPlayingMoviesModels() }
+        return movieDao.getNowPlayingMovies().map { it.toNowPlayingMoviesEntity() }
     }
 
     override suspend fun refreshNowPlayingMovies() {
         moviesService.getUpcomingMovies().let { nowPlayingMoviesResponse ->
             if (nowPlayingMoviesResponse.isSuccessful) {
-                nowPlayingMoviesResponse.body()?.items?.toNowPlayingMovieEntityList()
+                nowPlayingMoviesResponse.body()?.items?.toNowPlayingMovieDto()
                     .let {
                         movieDao.insertNowPlayingMovies(it!!)
                     }
@@ -84,13 +84,13 @@ class MovieRepositoryImpl @Inject constructor(
     override fun getTopRatedMovies(
         page: Int?, region: String?, language: String?
     ): Flow<List<MovieEntity>> {
-        return movieDao.getTopRatedMovies().map { it.toTopRatedMoviesModels() }
+        return movieDao.getTopRatedMovies().map { it.toTopRatedMoviesEntity() }
     }
 
     override suspend fun refreshTopRatedMovies() {
         moviesService.getUpcomingMovies().let { topRatedMoviesResponse ->
             if (topRatedMoviesResponse.isSuccessful) {
-                topRatedMoviesResponse.body()?.items?.toTopRatedMovieEntityList()
+                topRatedMoviesResponse.body()?.items?.toTopRatedMovieDto()
                     .let {
                         movieDao.insertTopRatedMovies(it!!)
                     }
@@ -101,7 +101,7 @@ class MovieRepositoryImpl @Inject constructor(
     override suspend fun getMovieDetails(movieId: Int): MovieEntity {
         val response = moviesService.getMovieDetails(movieId)
         if (response.isSuccessful) {
-            return response.body()?.toModel()!!
+            return response.body()?.toEntity()!!
         } else {
             throw exceptionHandler.getException(response.code(), response.errorBody())
         }
@@ -111,7 +111,7 @@ class MovieRepositoryImpl @Inject constructor(
     override suspend fun getMovieKeywords(movieId: Int): List<String> {
         val response = moviesService.getMovieKeywords(movieId)
         if (response.isSuccessful) {
-            return response.body()?.toModel()!!
+            return response.body()?.toEntity()!!
         } else {
             throw exceptionHandler.getException(response.code(), response.errorBody())
         }
@@ -124,7 +124,7 @@ class MovieRepositoryImpl @Inject constructor(
     ): List<MovieEntity> {
         val response = moviesService.getSimilarMovies(movieId, page, language)
         if (response.isSuccessful) {
-            return response.body()?.items?.toModel()!!
+            return response.body()?.items?.toEntity()!!
         } else {
             throw exceptionHandler.getException(response.code(), response.errorBody())
         }
@@ -133,7 +133,7 @@ class MovieRepositoryImpl @Inject constructor(
     override suspend fun getMovieTrailers(movieId: Int, language: String?): List<TrailerEntity> {
         val response = moviesService.getMovieTrailers(movieId, language)
         if (response.isSuccessful) {
-            return response.body()?.toModel()!!
+            return response.body()?.toEntity()!!
         } else {
             throw exceptionHandler.getException(response.code(), response.errorBody())
         }
@@ -155,7 +155,7 @@ class MovieRepositoryImpl @Inject constructor(
     ): List<MovieEntity> {
         val response = moviesService.getMovieRecommendations(movieId, page, language)
         if (response.isSuccessful) {
-            return response.body()?.items?.toModel()!!
+            return response.body()?.items?.toEntity()!!
         } else {
             throw exceptionHandler.getException(response.code(), response.errorBody())
         }
@@ -182,7 +182,7 @@ class MovieRepositoryImpl @Inject constructor(
     ): List<ReviewEntity> {
         val response = moviesService.getMovieReviews(movieId, page, language)
         if (response.isSuccessful) {
-            return response.body()?.items?.toModel()!!
+            return response.body()?.items?.toEntity()!!
         } else {
             throw exceptionHandler.getException(response.code(), response.errorBody())
         }
@@ -196,7 +196,7 @@ class MovieRepositoryImpl @Inject constructor(
     ): List<MovieEntity> {
         val response = moviesService.getMoviesWatchlist(accountId, language, page, sortBy)
         if (response.isSuccessful) {
-            return response.body()?.items?.toModel()!!
+            return response.body()?.items?.toEntity()!!
         } else {
             throw exceptionHandler.getException(response.code(), response.errorBody())
         }
@@ -210,7 +210,7 @@ class MovieRepositoryImpl @Inject constructor(
     ): List<MovieEntity> {
         val response = moviesService.getFavoriteMovies(accountId, language, page, sortBy)
         if (response.isSuccessful) {
-            return response.body()?.items?.toModel()!!
+            return response.body()?.items?.toEntity()!!
         } else {
             throw exceptionHandler.getException(response.code(), response.errorBody())
         }
@@ -224,7 +224,7 @@ class MovieRepositoryImpl @Inject constructor(
     ): List<MovieEntity> {
         val response = moviesService.search(query, includeAdult, language, page)
         if (response.isSuccessful) {
-            return response.body()?.items?.toModel()!!
+            return response.body()?.items?.toEntity()!!
         } else {
             throw exceptionHandler.getException(response.code(), response.errorBody())
         }
@@ -245,7 +245,7 @@ class MovieRepositoryImpl @Inject constructor(
             region
         )
         if (response.isSuccessful) {
-            return response.body()?.items?.toModel()!!
+            return response.body()?.items?.toEntity()!!
         } else {
             throw exceptionHandler.getException(response.code(), response.errorBody())
         }
@@ -322,7 +322,7 @@ class MovieRepositoryImpl @Inject constructor(
             year
         )
         if (response.isSuccessful) {
-            return response.body()?.items?.toModel()!!
+            return response.body()?.items?.toEntity()!!
         } else {
             throw exceptionHandler.getException(response.code(), response.errorBody())
         }

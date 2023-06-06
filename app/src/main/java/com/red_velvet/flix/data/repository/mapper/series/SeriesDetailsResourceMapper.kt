@@ -6,7 +6,7 @@ import com.red_velvet.flix.domain.entity.series.SeriesDetailsEntity
 import com.red_velvet.flix.domain.utils.orFalse
 import com.red_velvet.flix.domain.utils.orZero
 
-fun SeriesDetailsResource.toModel(): SeriesDetailsEntity {
+fun SeriesDetailsResource.toEntity(): SeriesDetailsEntity {
     return SeriesDetailsEntity(
         id = id.orZero(),
         name = name.orEmpty(),
@@ -18,7 +18,7 @@ fun SeriesDetailsResource.toModel(): SeriesDetailsEntity {
         numberOfSeasons = numberOfSeasons.orZero(),
         overview = overview.orEmpty(),
         popularity = popularity.orZero(),
-        seasons = seasons?.map { it?.toModel()!! }.orEmpty(),
+        seasons = seasons?.map { it?.toEntity()!! }.orEmpty(),
         type = type.orEmpty(),
         voteAverage = voteAverage.orZero()
     )

@@ -7,7 +7,7 @@ import com.red_velvet.flix.data.local.database.entity.PopularSeriesDto
 import com.red_velvet.flix.data.local.database.entity.TopRatedSeriesDto
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
 
-fun PopularSeriesDto.toModel(): SeriesEntity {
+fun PopularSeriesDto.toEntity(): SeriesEntity {
     return SeriesEntity(
         id = id.toInt(),
         name = title,
@@ -18,7 +18,7 @@ fun PopularSeriesDto.toModel(): SeriesEntity {
     )
 }
 
-fun TopRatedSeriesDto.toModel(): SeriesEntity {
+fun TopRatedSeriesDto.toEntity(): SeriesEntity {
     return SeriesEntity(
         id = id.toInt(),
         name = title,
@@ -30,7 +30,7 @@ fun TopRatedSeriesDto.toModel(): SeriesEntity {
 }
 
 
-fun AiringTodaySeriesDto.toModel(): SeriesEntity {
+fun AiringTodaySeriesDto.toEntity(): SeriesEntity {
     return SeriesEntity(
         id = id.toInt(),
         name = title,
@@ -41,7 +41,7 @@ fun AiringTodaySeriesDto.toModel(): SeriesEntity {
     )
 }
 
-fun OnTheAirSeriesDto.toModel(): SeriesEntity {
+fun OnTheAirSeriesDto.toEntity(): SeriesEntity {
     return SeriesEntity(
         id = id.toInt(),
         name = title,
@@ -52,18 +52,18 @@ fun OnTheAirSeriesDto.toModel(): SeriesEntity {
     )
 }
 
-fun List<PopularSeriesDto>.toPopularTVShowsModels(): List<SeriesEntity> {
-    return map { it.toModel() }
+fun List<PopularSeriesDto>.toPopularSeriesEntity(): List<SeriesEntity> {
+    return map { it.toEntity() }
 }
 
-fun List<TopRatedSeriesDto>.toTopRatedTVShowsModels(): List<SeriesEntity> {
-    return map { it.toModel() }
+fun List<TopRatedSeriesDto>.toTopRatedSeriesEntity(): List<SeriesEntity> {
+    return map { it.toEntity() }
 }
 
-fun List<AiringTodaySeriesDto>.toAiringTodayTvShowsModels(): List<SeriesEntity> {
-    return map { it.toModel() }
+fun List<AiringTodaySeriesDto>.toAiringTodaySeriesEntity(): List<SeriesEntity> {
+    return map { it.toEntity() }
 }
 
-fun List<OnTheAirSeriesDto>.toOnTheAirTvShowsModels(): List<SeriesEntity> {
-    return map { it.toModel() }
+fun List<OnTheAirSeriesDto>.toOnTheAirSeriesEntity(): List<SeriesEntity> {
+    return map { it.toEntity() }
 }

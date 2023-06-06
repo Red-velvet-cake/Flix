@@ -5,7 +5,7 @@ import com.red_velvet.flix.data.remote.recoures.series.EpisodeResource
 import com.red_velvet.flix.domain.entity.series.EpisodeEntity
 import com.red_velvet.flix.domain.utils.orZero
 
-fun EpisodeResource.toModel(): EpisodeEntity {
+fun EpisodeResource.toEntity(): EpisodeEntity {
     return EpisodeEntity(
         id = id.orZero(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + stillPath,

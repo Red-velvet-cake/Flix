@@ -6,7 +6,7 @@ import com.red_velvet.flix.domain.entity.movie.MovieDetailsEntity
 import com.red_velvet.flix.domain.utils.orFalse
 import com.red_velvet.flix.domain.utils.orZero
 
-fun MovieDetailsResource.toModel(): MovieDetailsEntity {
+fun MovieDetailsResource.toEntity(): MovieDetailsEntity {
     return MovieDetailsEntity(
         id = id.orZero(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + backdropPath,
@@ -21,4 +21,3 @@ fun MovieDetailsResource.toModel(): MovieDetailsEntity {
         voteAverage = voteAverage.orZero(),
     )
 }
-

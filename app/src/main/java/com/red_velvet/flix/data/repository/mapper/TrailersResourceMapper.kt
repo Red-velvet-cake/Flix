@@ -4,11 +4,11 @@ import com.red_velvet.flix.data.remote.recoures.trailer.TrailerDetailsResource
 import com.red_velvet.flix.data.remote.recoures.trailer.TrailersResource
 import com.red_velvet.flix.domain.entity.TrailerEntity
 
-fun TrailersResource.toModel(): List<TrailerEntity> {
-    return results?.map { it?.toModel()!! } ?: emptyList()
+fun TrailersResource.toEntity(): List<TrailerEntity> {
+    return results?.map { it?.toEntity()!! } ?: emptyList()
 }
 
-fun TrailerDetailsResource.toModel(): TrailerEntity {
+fun TrailerDetailsResource.toEntity(): TrailerEntity {
     return TrailerEntity(
         id = id.orEmpty(),
         key = key.orEmpty(),

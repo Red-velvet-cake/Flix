@@ -5,7 +5,7 @@ import com.red_velvet.flix.data.remote.recoures.series.SeasonResource
 import com.red_velvet.flix.domain.entity.series.SeasonEntity
 import com.red_velvet.flix.domain.utils.orZero
 
-fun SeasonResource.toModel(): SeasonEntity {
+fun SeasonResource.toEntity(): SeasonEntity {
     return SeasonEntity(
         id = id.orZero(),
         episodeCount = episodeCount.orZero(),
