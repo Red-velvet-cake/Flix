@@ -13,6 +13,7 @@ import com.red_velvet.flix.domain.model.Trailer
 import com.red_velvet.flix.domain.model.series.Episode
 import com.red_velvet.flix.domain.model.series.Season
 import com.red_velvet.flix.domain.model.series.TVShow
+import com.red_velvet.flix.domain.repository.TVShowsRepository
 import com.red_velvet.flix.domain.utils.ExceptionHandler
 import javax.inject.Inject
 

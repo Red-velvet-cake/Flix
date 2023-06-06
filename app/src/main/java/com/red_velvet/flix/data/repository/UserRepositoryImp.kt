@@ -4,6 +4,7 @@ import com.red_velvet.flix.data.local.shared_prefs.SharedPrefs
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.remote.dtos.account.AccountDto
 import com.red_velvet.flix.data.remote.dtos.auth.LoginRequest
+import com.red_velvet.flix.domain.repository.UserRepository
 import com.red_velvet.flix.domain.utils.ExceptionHandler
 import javax.inject.Inject
 

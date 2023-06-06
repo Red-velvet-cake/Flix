@@ -1,11 +1,11 @@
 package com.red_velvet.flix.di
 
-import com.red_velvet.flix.data.repository.MovieRepository
 import com.red_velvet.flix.data.repository.MovieRepositoryImpl
-import com.red_velvet.flix.data.repository.TVShowsRepository
 import com.red_velvet.flix.data.repository.TVShowsRepositoryImpl
-import com.red_velvet.flix.data.repository.UserRepository
 import com.red_velvet.flix.data.repository.UserRepositoryImp
+import com.red_velvet.flix.domain.repository.MovieRepository
+import com.red_velvet.flix.domain.repository.TVShowsRepository
+import com.red_velvet.flix.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

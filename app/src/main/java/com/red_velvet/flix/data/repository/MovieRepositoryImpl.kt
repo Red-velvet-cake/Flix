@@ -16,6 +16,7 @@ import com.red_velvet.flix.domain.mapper.toModel
 import com.red_velvet.flix.domain.model.Review
 import com.red_velvet.flix.domain.model.Trailer
 import com.red_velvet.flix.domain.model.movie.Movie
+import com.red_velvet.flix.domain.repository.MovieRepository
 import com.red_velvet.flix.domain.utils.ExceptionHandler
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

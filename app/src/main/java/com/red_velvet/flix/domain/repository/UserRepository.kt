@@ -1,4 +1,4 @@
-package com.red_velvet.flix.data.repository
+package com.red_velvet.flix.domain.repository
 
 import com.red_velvet.flix.data.remote.dtos.account.AccountDto
 
