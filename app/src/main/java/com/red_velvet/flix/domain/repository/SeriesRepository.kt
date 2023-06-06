@@ -1,10 +1,10 @@
 package com.red_velvet.flix.domain.repository
 
-import com.red_velvet.flix.domain.model.ReviewEntity
-import com.red_velvet.flix.domain.model.TrailerEntity
-import com.red_velvet.flix.domain.model.series.EpisodeEntity
-import com.red_velvet.flix.domain.model.series.SeasonEntity
-import com.red_velvet.flix.domain.model.series.SeriesEntity
+import com.red_velvet.flix.domain.entity.ReviewEntity
+import com.red_velvet.flix.domain.entity.TrailerEntity
+import com.red_velvet.flix.domain.entity.series.EpisodeEntity
+import com.red_velvet.flix.domain.entity.series.SeasonEntity
+import com.red_velvet.flix.domain.entity.series.SeriesEntity
 
 interface SeriesRepository {
 

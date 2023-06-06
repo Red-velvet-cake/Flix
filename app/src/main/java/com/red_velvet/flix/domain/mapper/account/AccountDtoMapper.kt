@@ -2,7 +2,7 @@ package com.red_velvet.flix.domain.mapper.account
 
 import com.red_velvet.flix.BuildConfig
 import com.red_velvet.flix.data.remote.recoures.account.AccountResource
-import com.red_velvet.flix.domain.model.account.AccountEntity
+import com.red_velvet.flix.domain.entity.account.AccountEntity
 import com.red_velvet.flix.domain.utils.orZero
 
 fun AccountResource.toModel(): AccountEntity {

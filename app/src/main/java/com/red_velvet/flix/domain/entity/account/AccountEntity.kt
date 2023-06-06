@@ -1,4 +1,4 @@
-package com.red_velvet.flix.domain.model.account
+package com.red_velvet.flix.domain.entity.account
 
 
 data class AccountEntity(

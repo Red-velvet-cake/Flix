@@ -1,4 +1,4 @@
-package com.red_velvet.flix.domain.model.movie
+package com.red_velvet.flix.domain.entity.movie
 
 
 data class MovieEntity(

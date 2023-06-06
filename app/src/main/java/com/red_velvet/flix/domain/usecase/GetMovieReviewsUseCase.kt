@@ -1,6 +1,6 @@
 package com.red_velvet.flix.domain.usecase
 
-import com.red_velvet.flix.domain.model.ReviewEntity
+import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
 import javax.inject.Inject
 

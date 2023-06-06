@@ -2,9 +2,9 @@ package com.red_velvet.flix.domain.repository
 
 
 import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
-import com.red_velvet.flix.domain.model.ReviewEntity
-import com.red_velvet.flix.domain.model.TrailerEntity
-import com.red_velvet.flix.domain.model.movie.MovieEntity
+import com.red_velvet.flix.domain.entity.ReviewEntity
+import com.red_velvet.flix.domain.entity.TrailerEntity
+import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import kotlinx.coroutines.flow.Flow
 
 

@@ -1,4 +1,4 @@
-package com.red_velvet.flix.domain.model
+package com.red_velvet.flix.domain.entity
 
 
 data class TrailerEntity(

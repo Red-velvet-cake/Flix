@@ -1,4 +1,4 @@
-package com.red_velvet.flix.domain.model.series
+package com.red_velvet.flix.domain.entity.series
 
 data class ImageEntity(
     val aspectRatio: Double,

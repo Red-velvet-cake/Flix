@@ -6,7 +6,7 @@ import com.red_velvet.flix.data.local.database.entity.PopularMovieDto
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieDto
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieDto
 import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
-import com.red_velvet.flix.domain.model.movie.MovieEntity
+import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.utils.orZero
 
 fun MovieResource.toModel(): MovieEntity {

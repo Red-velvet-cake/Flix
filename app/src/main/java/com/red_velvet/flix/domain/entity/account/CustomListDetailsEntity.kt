@@ -1,6 +1,6 @@
-package com.red_velvet.flix.domain.model.account
+package com.red_velvet.flix.domain.entity.account
 
-import com.red_velvet.flix.domain.model.movie.MovieEntity
+import com.red_velvet.flix.domain.entity.movie.MovieEntity
 
 data class CustomListDetailsEntity(
     val createdBy: String,

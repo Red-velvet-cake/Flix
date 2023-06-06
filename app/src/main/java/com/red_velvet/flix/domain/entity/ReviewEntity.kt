@@ -1,6 +1,6 @@
-package com.red_velvet.flix.domain.model
+package com.red_velvet.flix.domain.entity
 
-import com.red_velvet.flix.domain.model.movie.AuthorDetailsEntity
+import com.red_velvet.flix.domain.entity.movie.AuthorDetailsEntity
 
 
 data class ReviewEntity(

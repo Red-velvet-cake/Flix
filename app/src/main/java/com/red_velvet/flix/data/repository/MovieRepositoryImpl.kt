@@ -3,6 +3,9 @@ package com.red_velvet.flix.data.repository
 import com.red_velvet.flix.data.local.database.dao.MovieDao
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
+import com.red_velvet.flix.domain.entity.ReviewEntity
+import com.red_velvet.flix.domain.entity.TrailerEntity
+import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.mapper.movie.toModel
 import com.red_velvet.flix.domain.mapper.movie.toNowPlayingMovieEntityList
 import com.red_velvet.flix.domain.mapper.movie.toNowPlayingMoviesModels
@@ -13,9 +16,6 @@ import com.red_velvet.flix.domain.mapper.movie.toTopRatedMoviesModels
 import com.red_velvet.flix.domain.mapper.movie.toUpcomingMovieEntityList
 import com.red_velvet.flix.domain.mapper.movie.toUpcomingMoviesModels
 import com.red_velvet.flix.domain.mapper.toModel
-import com.red_velvet.flix.domain.model.ReviewEntity
-import com.red_velvet.flix.domain.model.TrailerEntity
-import com.red_velvet.flix.domain.model.movie.MovieEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
 import com.red_velvet.flix.domain.utils.ExceptionHandler
 import kotlinx.coroutines.flow.Flow

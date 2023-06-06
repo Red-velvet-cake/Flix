@@ -6,7 +6,7 @@ import com.red_velvet.flix.data.local.database.entity.OnTheAirSeriesDto
 import com.red_velvet.flix.data.local.database.entity.PopularSeriesDto
 import com.red_velvet.flix.data.local.database.entity.TopRatedSeriesDto
 import com.red_velvet.flix.data.remote.recoures.series.SeriesResource
-import com.red_velvet.flix.domain.model.series.SeriesEntity
+import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.utils.orZero
 
 fun SeriesResource.toModel(): SeriesEntity {
