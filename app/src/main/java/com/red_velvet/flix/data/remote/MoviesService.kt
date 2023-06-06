@@ -395,9 +395,8 @@ interface MoviesService {
         @Query("sort_by") sortBy: String? = "created_at.asc"
     ): Response<PaginationDto<TVShowDto>>
 
-    @GET("account/{account_id}/favorite/movies")
+    @GET("account/favorite/movies")
     suspend fun getFavoriteMovies(
-        @Path("account_id") accountId: Int,
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
         @Query("sort_by") sortBy: String? = "created_at.asc"
