@@ -3,7 +3,7 @@ package com.red_velvet.flix.data.local.database.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "popular_tv_shows")
+@Entity(tableName = "POPULAR_SERIES")
 data class PopularTvShowEntity(
     @PrimaryKey val id: Long,
     val title: String,

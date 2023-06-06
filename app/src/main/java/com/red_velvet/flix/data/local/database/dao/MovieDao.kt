@@ -24,16 +24,16 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUpcomingMovies(upcomingMovieEntities: List<UpcomingMovieEntity>)
 
-    @Query("SELECT * FROM popular_movies")
+    @Query("SELECT * FROM POPULAR_MOVIES")
     fun getPopularMovies(): Flow<List<PopularMovieEntity>>
 
-    @Query("SELECT * FROM top_rated_movies")
+    @Query("SELECT * FROM TOP_RATED_MOVIES")
     fun getTopRatedMovies(): Flow<List<TopRatedMovieEntity>>
 
-    @Query("SELECT * FROM now_playing_movies")
+    @Query("SELECT * FROM NOW_PLAYING_MOVIES")
     fun getNowPlayingMovies(): Flow<List<NowPlayingMovieEntity>>
 
-    @Query("SELECT * FROM upcoming_movies")
+    @Query("SELECT * FROM UPCOMING_MOVIES")
     fun getUpcomingMovies(): Flow<List<UpcomingMovieEntity>>
 
 }

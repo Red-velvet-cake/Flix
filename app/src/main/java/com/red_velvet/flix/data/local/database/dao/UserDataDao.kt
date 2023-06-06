@@ -10,6 +10,6 @@ interface UserDataDao {
     @Insert(onConflict = androidx.room.OnConflictStrategy.REPLACE)
     suspend fun insertUserData(userEntity: UserEntity)
 
-    @Query("SELECT * FROM users")
+    @Query("SELECT * FROM USERS")
     suspend fun getUserData(): UserEntity
 }
