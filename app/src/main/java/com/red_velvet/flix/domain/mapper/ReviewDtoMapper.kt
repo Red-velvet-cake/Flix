@@ -1,7 +1,7 @@
 package com.red_velvet.flix.domain.mapper
 
-import com.red_velvet.flix.data.remote.dtos.review.AuthorDetailsResource
-import com.red_velvet.flix.data.remote.dtos.review.ReviewResource
+import com.red_velvet.flix.data.remote.recoures.review.AuthorDetailsResource
+import com.red_velvet.flix.data.remote.recoures.review.ReviewResource
 import com.red_velvet.flix.domain.model.Review
 import com.red_velvet.flix.domain.model.movie.AuthorDetails
 import com.red_velvet.flix.domain.utils.orZero

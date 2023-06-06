@@ -1,15 +1,15 @@
 package com.red_velvet.flix.data.remote
 
-import com.red_velvet.flix.data.remote.dtos.*
-import com.red_velvet.flix.data.remote.dtos.account.*
-import com.red_velvet.flix.data.remote.dtos.auth.*
-import com.red_velvet.flix.data.remote.dtos.image.ImagesResource
-import com.red_velvet.flix.data.remote.dtos.list.*
-import com.red_velvet.flix.data.remote.dtos.movie.*
-import com.red_velvet.flix.data.remote.dtos.person.PersonResource
-import com.red_velvet.flix.data.remote.dtos.review.ReviewResource
-import com.red_velvet.flix.data.remote.dtos.trailer.TrailersResource
-import com.red_velvet.flix.data.remote.dtos.tv_show.*
+import com.red_velvet.flix.data.remote.recoures.*
+import com.red_velvet.flix.data.remote.recoures.account.*
+import com.red_velvet.flix.data.remote.recoures.auth.*
+import com.red_velvet.flix.data.remote.recoures.image.ImagesResource
+import com.red_velvet.flix.data.remote.recoures.list.*
+import com.red_velvet.flix.data.remote.recoures.movie.*
+import com.red_velvet.flix.data.remote.recoures.person.PersonResource
+import com.red_velvet.flix.data.remote.recoures.review.ReviewResource
+import com.red_velvet.flix.data.remote.recoures.trailer.TrailersResource
+import com.red_velvet.flix.data.remote.recoures.tv_show.*
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE

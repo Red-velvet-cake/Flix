@@ -1,6 +1,6 @@
 package com.red_velvet.flix.domain.repository
 
-import com.red_velvet.flix.data.remote.dtos.account.AccountResource
+import com.red_velvet.flix.data.remote.recoures.account.AccountResource
 
 interface UserRepository {
 

@@ -5,7 +5,7 @@ import com.red_velvet.flix.data.local.database.entity.AiringTodayTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.OnTheAirTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.PopularTvShowEntity
 import com.red_velvet.flix.data.local.database.entity.TopRatedTvShowEntity
-import com.red_velvet.flix.data.remote.dtos.tv_show.TVShowResource
+import com.red_velvet.flix.data.remote.recoures.tv_show.TVShowResource
 import com.red_velvet.flix.domain.model.series.TVShow
 import com.red_velvet.flix.domain.utils.orZero
 

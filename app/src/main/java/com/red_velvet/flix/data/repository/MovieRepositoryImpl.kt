@@ -2,7 +2,7 @@ package com.red_velvet.flix.data.repository
 
 import com.red_velvet.flix.data.local.database.dao.MovieDao
 import com.red_velvet.flix.data.remote.MoviesService
-import com.red_velvet.flix.data.remote.dtos.movie.MovieResource
+import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
 import com.red_velvet.flix.domain.mapper.movie.toModel
 import com.red_velvet.flix.domain.mapper.movie.toNowPlayingMovieEntityList
 import com.red_velvet.flix.domain.mapper.movie.toNowPlayingMoviesModels

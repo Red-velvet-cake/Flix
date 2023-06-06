@@ -1,7 +1,7 @@
 package com.red_velvet.flix.domain.mapper
 
-import com.red_velvet.flix.data.remote.dtos.trailer.TrailerDetailsResource
-import com.red_velvet.flix.data.remote.dtos.trailer.TrailersResource
+import com.red_velvet.flix.data.remote.recoures.trailer.TrailerDetailsResource
+import com.red_velvet.flix.data.remote.recoures.trailer.TrailersResource
 import com.red_velvet.flix.domain.model.Trailer
 
 fun TrailersResource.toModel(): List<Trailer> {

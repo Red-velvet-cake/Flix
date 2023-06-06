@@ -1,7 +1,7 @@
 package com.red_velvet.flix.domain.repository
 
 
-import com.red_velvet.flix.data.remote.dtos.movie.MovieResource
+import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
 import com.red_velvet.flix.domain.model.Review
 import com.red_velvet.flix.domain.model.Trailer
 import com.red_velvet.flix.domain.model.movie.Movie
