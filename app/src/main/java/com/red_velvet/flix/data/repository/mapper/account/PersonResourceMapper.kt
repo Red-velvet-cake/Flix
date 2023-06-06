@@ -5,7 +5,7 @@ import com.red_velvet.flix.data.remote.recoures.person.PersonResource
 import com.red_velvet.flix.domain.entity.account.PersonEntity
 import com.red_velvet.flix.domain.utils.orZero
 
-fun PersonResource.toModel(): PersonEntity {
+fun PersonResource.toEntity(): PersonEntity {
     return PersonEntity(
         id = id.orZero(),
         name = name.orEmpty(),

@@ -5,7 +5,7 @@ import com.red_velvet.flix.data.repository.mapper.movie.toEntity
 import com.red_velvet.flix.domain.entity.account.CustomListDetailsEntity
 import com.red_velvet.flix.domain.utils.orZero
 
-fun CustomListDetailsResource.toModel(): CustomListDetailsEntity {
+fun CustomListDetailsResource.toEntity(): CustomListDetailsEntity {
     return CustomListDetailsEntity(
         createdBy = createdBy.orEmpty(),
         description = description.orEmpty(),
