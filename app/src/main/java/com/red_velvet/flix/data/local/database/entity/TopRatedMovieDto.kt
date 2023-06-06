@@ -3,8 +3,8 @@ package com.red_velvet.flix.data.local.database.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "POPULAR_MOVIES")
-data class PopularMovieEntity(
+@Entity(tableName = "TOP_RATED_MOVIES")
+data class TopRatedMovieDto(
     @PrimaryKey val id: Long,
     val title: String,
     val originalLanguage: String,

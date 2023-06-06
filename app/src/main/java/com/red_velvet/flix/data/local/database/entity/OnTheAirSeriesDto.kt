@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "ON_THE_AIR_SERIES")
-data class OnTheAirTvShowEntity(
+data class OnTheAirSeriesDto(
     @PrimaryKey val id: Long,
     val title: String,
     val originalLanguage: String,

@@ -3,13 +3,13 @@ package com.red_velvet.flix.data.local.database.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.red_velvet.flix.data.local.database.entity.UserEntity
+import com.red_velvet.flix.data.local.database.entity.UserDto
 
 @Dao
-interface UserDataDao {
+interface UserDao {
     @Insert(onConflict = androidx.room.OnConflictStrategy.REPLACE)
-    suspend fun insertUserData(userEntity: UserEntity)
+    suspend fun insertUserData(userDto: UserDto)
 
     @Query("SELECT * FROM USERS")
-    suspend fun getUserData(): UserEntity
+    suspend fun getUserData(): UserDto
 }

@@ -1,13 +1,13 @@
 package com.red_velvet.flix.domain.mapper.movie
 
 import com.red_velvet.flix.BuildConfig
-import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
-import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
-import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
-import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
+import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieDto
+import com.red_velvet.flix.data.local.database.entity.PopularMovieDto
+import com.red_velvet.flix.data.local.database.entity.TopRatedMovieDto
+import com.red_velvet.flix.data.local.database.entity.UpcomingMovieDto
 import com.red_velvet.flix.domain.model.movie.Movie
 
-fun PopularMovieEntity.toModel(): Movie {
+fun PopularMovieDto.toModel(): Movie {
     return Movie(
         id = id.toInt(),
         title = title,
@@ -18,7 +18,7 @@ fun PopularMovieEntity.toModel(): Movie {
     )
 }
 
-fun UpcomingMovieEntity.toModel(): Movie {
+fun UpcomingMovieDto.toModel(): Movie {
     return Movie(
         id = id.toInt(),
         title = title,
@@ -29,7 +29,7 @@ fun UpcomingMovieEntity.toModel(): Movie {
     )
 }
 
-fun TopRatedMovieEntity.toModel(): Movie {
+fun TopRatedMovieDto.toModel(): Movie {
     return Movie(
         id = id.toInt(),
         title = title,
@@ -40,7 +40,7 @@ fun TopRatedMovieEntity.toModel(): Movie {
     )
 }
 
-fun NowPlayingMovieEntity.toModel(): Movie {
+fun NowPlayingMovieDto.toModel(): Movie {
     return Movie(
         id = id.toInt(),
         title = title,
@@ -51,18 +51,18 @@ fun NowPlayingMovieEntity.toModel(): Movie {
     )
 }
 
-fun List<PopularMovieEntity>.toPopularMoviesModels(): List<Movie> {
+fun List<PopularMovieDto>.toPopularMoviesModels(): List<Movie> {
     return map { it.toModel() }
 }
 
-fun List<UpcomingMovieEntity>.toUpcomingMoviesModels(): List<Movie> {
+fun List<UpcomingMovieDto>.toUpcomingMoviesModels(): List<Movie> {
     return map { it.toModel() }
 }
 
-fun List<TopRatedMovieEntity>.toTopRatedMoviesModels(): List<Movie> {
+fun List<TopRatedMovieDto>.toTopRatedMoviesModels(): List<Movie> {
     return map { it.toModel() }
 }
 
-fun List<NowPlayingMovieEntity>.toNowPlayingMoviesModels(): List<Movie> {
+fun List<NowPlayingMovieDto>.toNowPlayingMoviesModels(): List<Movie> {
     return map { it.toModel() }
 }

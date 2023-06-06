@@ -1,10 +1,10 @@
 package com.red_velvet.flix.domain.mapper.movie
 
 import com.red_velvet.flix.BuildConfig
-import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
-import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
-import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
-import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
+import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieDto
+import com.red_velvet.flix.data.local.database.entity.PopularMovieDto
+import com.red_velvet.flix.data.local.database.entity.TopRatedMovieDto
+import com.red_velvet.flix.data.local.database.entity.UpcomingMovieDto
 import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
 import com.red_velvet.flix.domain.model.movie.Movie
 import com.red_velvet.flix.domain.utils.orZero
@@ -24,8 +24,8 @@ fun List<MovieResource>.toModel(): List<Movie> {
     return map { it.toModel() }
 }
 
-fun MovieResource.toPopularMovieEntity(): PopularMovieEntity {
-    return PopularMovieEntity(
+fun MovieResource.toPopularMovieEntity(): PopularMovieDto {
+    return PopularMovieDto(
         id = id.orZero().toLong(),
         title = title.orEmpty(),
         originalLanguage = originalLanguage.orEmpty(),
@@ -35,13 +35,13 @@ fun MovieResource.toPopularMovieEntity(): PopularMovieEntity {
     )
 }
 
-fun List<MovieResource>.toPopularMovieEntityList(): List<PopularMovieEntity> {
+fun List<MovieResource>.toPopularMovieEntityList(): List<PopularMovieDto> {
     return map { it.toPopularMovieEntity() }
 }
 
 
-fun MovieResource.toUpcomingMovieEntity(): UpcomingMovieEntity {
-    return UpcomingMovieEntity(
+fun MovieResource.toUpcomingMovieEntity(): UpcomingMovieDto {
+    return UpcomingMovieDto(
         id = id.orZero().toLong(),
         title = title.orEmpty(),
         originalLanguage = originalLanguage.orEmpty(),
@@ -51,12 +51,12 @@ fun MovieResource.toUpcomingMovieEntity(): UpcomingMovieEntity {
     )
 }
 
-fun List<MovieResource>.toUpcomingMovieEntityList(): List<UpcomingMovieEntity> {
+fun List<MovieResource>.toUpcomingMovieEntityList(): List<UpcomingMovieDto> {
     return map { it.toUpcomingMovieEntity() }
 }
 
-fun MovieResource.toTopRatedMovieEntity(): TopRatedMovieEntity {
-    return TopRatedMovieEntity(
+fun MovieResource.toTopRatedMovieEntity(): TopRatedMovieDto {
+    return TopRatedMovieDto(
         id = id.orZero().toLong(),
         title = title.orEmpty(),
         originalLanguage = originalLanguage.orEmpty(),
@@ -66,13 +66,13 @@ fun MovieResource.toTopRatedMovieEntity(): TopRatedMovieEntity {
     )
 }
 
-fun List<MovieResource>.toTopRatedMovieEntityList(): List<TopRatedMovieEntity> {
+fun List<MovieResource>.toTopRatedMovieEntityList(): List<TopRatedMovieDto> {
     return map { it.toTopRatedMovieEntity() }
 }
 
-fun MovieResource.toNowPlayingMovieEntity(): NowPlayingMovieEntity {
+fun MovieResource.toNowPlayingMovieEntity(): NowPlayingMovieDto {
 
-    return NowPlayingMovieEntity(
+    return NowPlayingMovieDto(
         id = id.orZero().toLong(),
         title = title.orEmpty(),
         originalLanguage = originalLanguage.orEmpty(),
@@ -82,6 +82,6 @@ fun MovieResource.toNowPlayingMovieEntity(): NowPlayingMovieEntity {
     )
 }
 
-fun List<MovieResource>.toNowPlayingMovieEntityList(): List<NowPlayingMovieEntity> {
+fun List<MovieResource>.toNowPlayingMovieEntityList(): List<NowPlayingMovieDto> {
     return map { it.toNowPlayingMovieEntity() }
 }
