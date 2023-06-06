@@ -4,6 +4,14 @@ import com.red_velvet.flix.data.local.database.entity.FavoriteSeriesDto
 import com.red_velvet.flix.data.local.database.entity.WatchedSeriesDto
 import com.red_velvet.flix.domain.model.movie.Movie
 
+/*
+* Later on, we will change data classes names to avoid confusion
+* MovieDto (API) -> MovieResource
+* MovieEntity (Database) -> MovieDto
+* Movie (Domain) -> MovieEntity
+* */
+
+
 fun FavoriteSeriesDto.toFavoriteSeriesEntity(): Movie {
     return Movie(
         id = id.toInt(),
