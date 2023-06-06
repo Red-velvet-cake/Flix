@@ -2,7 +2,7 @@ package com.red_velvet.flix.data.repository.mapper.series
 
 import com.red_velvet.flix.data.local.database.entity.FavoriteSeriesDto
 import com.red_velvet.flix.data.local.database.entity.WatchedSeriesDto
-import com.red_velvet.flix.domain.model.movie.Movie
+import com.red_velvet.flix.domain.model.series.TVShow
 
 /*
 * Later on, we will change data classes names to avoid confusion
@@ -12,32 +12,32 @@ import com.red_velvet.flix.domain.model.movie.Movie
 * */
 
 
-fun FavoriteSeriesDto.toFavoriteSeriesEntity(): Movie {
-    return Movie(
+fun FavoriteSeriesDto.toFavoriteSeriesEntity(): TVShow {
+    return TVShow(
         id = id.toInt(),
-        title = title,
+        name = title,
         imageUrl = imageUrl,
         popularity = popularity,
-        releaseDate = releaseDate,
+        firstAirDate = releaseDate,
         voteAverage = rating
     )
 }
 
-fun List<FavoriteSeriesDto>.toFavoriteSeriesEntityList(): List<Movie> {
+fun List<FavoriteSeriesDto>.toFavoriteSeriesEntityList(): List<TVShow> {
     return map { it.toFavoriteSeriesEntity() }
 }
 
-fun WatchedSeriesDto.toWatchedSeriesEntity(): Movie {
-    return Movie(
+fun WatchedSeriesDto.toWatchedSeriesEntity(): TVShow {
+    return TVShow(
         id = id.toInt(),
-        title = title,
+        name = title,
         imageUrl = imageUrl,
         popularity = popularity,
-        releaseDate = releaseDate,
+        firstAirDate = releaseDate,
         voteAverage = rating
     )
 }
 
-fun List<WatchedSeriesDto>.toWatchedSeriesEntityList(): List<Movie> {
+fun List<WatchedSeriesDto>.toWatchedSeriesEntityList(): List<TVShow> {
     return map { it.toWatchedSeriesEntity() }
 }
