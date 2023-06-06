@@ -5,40 +5,39 @@ import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
-import kotlinx.coroutines.flow.Flow
 
 
 interface MovieRepository {
 
-    fun getPopularMovies(
+    suspend fun getPopularMovies(
         page: Int? = null,
         region: String? = null,
         language: String? = null
-    ): Flow<List<MovieEntity>>
+    ): List<MovieEntity>
 
     suspend fun refreshPopularMovies()
 
-    fun getUpcomingMovies(
+    suspend fun getUpcomingMovies(
         page: Int? = null,
         region: String? = null,
         language: String? = null
-    ): Flow<List<MovieEntity>>
+    ): List<MovieEntity>
 
     suspend fun refreshUpcomingMovies()
 
-    fun getNowPlayingMovies(
+    suspend fun getNowPlayingMovies(
         page: Int? = null,
         region: String? = null,
         language: String? = null
-    ): Flow<List<MovieEntity>>
+    ): List<MovieEntity>
 
     suspend fun refreshNowPlayingMovies()
 
-    fun getTopRatedMovies(
+    suspend fun getTopRatedMovies(
         page: Int? = null,
         region: String? = null,
         language: String? = null
-    ): Flow<List<MovieEntity>>
+    ): List<MovieEntity>
 
     suspend fun refreshTopRatedMovies()
 

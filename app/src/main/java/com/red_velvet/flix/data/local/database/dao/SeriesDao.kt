@@ -24,14 +24,14 @@ interface SeriesDao {
     suspend fun insertAiringTodayTvShows(airingTodayTvShowEntities: List<AiringTodaySeriesDto>)
 
     @Query("SELECT * FROM POPULAR_SERIES")
-    fun getPopularSeries(): List<PopularSeriesDto>
+    suspend fun getPopularSeries(): List<PopularSeriesDto>
 
     @Query("SELECT * FROM TOP_RATED_SERIES")
-    fun getTopRatedSeries(): List<TopRatedSeriesDto>
+    suspend fun getTopRatedSeries(): List<TopRatedSeriesDto>
 
     @Query("SELECT * FROM ON_THE_AIR_SERIES")
-    fun getOnTheAirSeries(): List<OnTheAirSeriesDto>
+    suspend fun getOnTheAirSeries(): List<OnTheAirSeriesDto>
 
     @Query("SELECT * FROM AIRING_TODAY_SERIES")
-    fun getAiringTodaySeries(): List<AiringTodaySeriesDto>
+    suspend fun getAiringTodaySeries(): List<AiringTodaySeriesDto>
 }

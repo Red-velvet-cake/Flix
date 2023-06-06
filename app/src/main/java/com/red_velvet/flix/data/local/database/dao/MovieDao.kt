@@ -8,7 +8,6 @@ import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieDto
 import com.red_velvet.flix.data.local.database.entity.PopularMovieDto
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieDto
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieDto
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MovieDao {
@@ -25,15 +24,15 @@ interface MovieDao {
     suspend fun insertUpcomingMovies(upcomingMovieEntities: List<UpcomingMovieDto>)
 
     @Query("SELECT * FROM POPULAR_MOVIES")
-    fun getPopularMovies(): Flow<List<PopularMovieDto>>
+    suspend fun getPopularMovies(): List<PopularMovieDto>
 
     @Query("SELECT * FROM TOP_RATED_MOVIES")
-    fun getTopRatedMovies(): Flow<List<TopRatedMovieDto>>
+    suspend fun getTopRatedMovies(): List<TopRatedMovieDto>
 
     @Query("SELECT * FROM NOW_PLAYING_MOVIES")
-    fun getNowPlayingMovies(): Flow<List<NowPlayingMovieDto>>
+    suspend fun getNowPlayingMovies(): List<NowPlayingMovieDto>
 
     @Query("SELECT * FROM UPCOMING_MOVIES")
-    fun getUpcomingMovies(): Flow<List<UpcomingMovieDto>>
+    suspend fun getUpcomingMovies(): List<UpcomingMovieDto>
 
 }

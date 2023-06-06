@@ -18,8 +18,6 @@ import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
 import com.red_velvet.flix.domain.utils.ExceptionHandler
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
@@ -28,10 +26,10 @@ class MovieRepositoryImpl @Inject constructor(
     private val exceptionHandler: ExceptionHandler
 ) : MovieRepository {
 
-    override fun getPopularMovies(
+    override suspend fun getPopularMovies(
         page: Int?, region: String?, language: String?
-    ): Flow<List<MovieEntity>> {
-        return movieDao.getPopularMovies().map { it.toPopularMoviesEntity() }
+    ): List<MovieEntity> {
+        return movieDao.getPopularMovies().toPopularMoviesEntity()
     }
 
     override suspend fun refreshPopularMovies() {
@@ -46,10 +44,10 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
 
-    override fun getUpcomingMovies(
+    override suspend fun getUpcomingMovies(
         page: Int?, region: String?, language: String?
-    ): Flow<List<MovieEntity>> {
-        return movieDao.getUpcomingMovies().map { it.toUpcomingMoviesEntity() }
+    ): List<MovieEntity> {
+        return movieDao.getUpcomingMovies().toUpcomingMoviesEntity()
     }
 
     override suspend fun refreshUpcomingMovies() {
@@ -64,10 +62,10 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
 
-    override fun getNowPlayingMovies(
+    override suspend fun getNowPlayingMovies(
         page: Int?, region: String?, language: String?
-    ): Flow<List<MovieEntity>> {
-        return movieDao.getNowPlayingMovies().map { it.toNowPlayingMoviesEntity() }
+    ): List<MovieEntity> {
+        return movieDao.getNowPlayingMovies().toNowPlayingMoviesEntity()
     }
 
     override suspend fun refreshNowPlayingMovies() {
@@ -81,10 +79,10 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getTopRatedMovies(
+    override suspend fun getTopRatedMovies(
         page: Int?, region: String?, language: String?
-    ): Flow<List<MovieEntity>> {
-        return movieDao.getTopRatedMovies().map { it.toTopRatedMoviesEntity() }
+    ): List<MovieEntity> {
+        return movieDao.getTopRatedMovies().toTopRatedMoviesEntity()
     }
 
     override suspend fun refreshTopRatedMovies() {
