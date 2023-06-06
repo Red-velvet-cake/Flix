@@ -30,19 +30,19 @@ interface UserRepository {
 
     suspend fun getCachedFavoriteSeries(): List<TVShow>
 
-    suspend fun getWatchListMovies(
+    suspend fun getMoviesWatchList(
         language: String? = null,
         page: Int? = null,
         sortBy: String? = null,
     ): List<Movie>
 
-    suspend fun getCachedWatchListMovies(): List<Movie>
+    suspend fun getCachedMoviesWatchList(): List<Movie>
 
-    suspend fun getWatchListSeries(
+    suspend fun getSeriesWatchList(
         language: String? = null,
         page: Int? = null,
         sortBy: String? = null,
     ): List<TVShow>
 
-    suspend fun getCachedWatchListSeries(): List<TVShow>
+    suspend fun getCachedSeriesWatchList(): List<TVShow>
 }

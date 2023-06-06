@@ -89,7 +89,7 @@ class UserRepositoryImp @Inject constructor(
         return userDao.getAllFavoriteSeries().toFavoriteSeriesEntityList()
     }
 
-    override suspend fun getWatchListMovies(
+    override suspend fun getMoviesWatchList(
         language: String?,
         page: Int?,
         sortBy: String?
@@ -102,11 +102,11 @@ class UserRepositoryImp @Inject constructor(
         }
     }
 
-    override suspend fun getCachedWatchListMovies(): List<Movie> {
+    override suspend fun getCachedMoviesWatchList(): List<Movie> {
         return userDao.getAllWatchedMovies().toWatchedMovieEntityList()
     }
 
-    override suspend fun getWatchListSeries(
+    override suspend fun getSeriesWatchList(
         language: String?,
         page: Int?,
         sortBy: String?
@@ -119,7 +119,7 @@ class UserRepositoryImp @Inject constructor(
         }
     }
 
-    override suspend fun getCachedWatchListSeries(): List<TVShow> {
+    override suspend fun getCachedSeriesWatchList(): List<TVShow> {
         return userDao.getAllWatchedSeries().toWatchedSeriesEntityList()
     }
 
