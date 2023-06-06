@@ -3,9 +3,9 @@ package com.red_velvet.flix.data.local.database.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "top_rated_movies")
 data class TopRatedMovieEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long,
+    @PrimaryKey val id: Long,
     val title: String,
     val originalLanguage: String,
     val overview: String,

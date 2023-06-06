@@ -23,15 +23,15 @@ interface TvShowDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAiringTodayTvShows(airingTodayTvShowEntities: List<AiringTodayTvShowEntity>)
 
-    @Query("SELECT * FROM PopularTvShowEntity")
+    @Query("SELECT * FROM popular_tv_shows")
     fun getPopularTvShow(): List<PopularTvShowEntity>
 
-    @Query("SELECT * FROM TopRatedTvShowEntity")
+    @Query("SELECT * FROM top_rated_series")
     fun getTopRatedTvShow(): List<TopRatedTvShowEntity>
 
-    @Query("SELECT * FROM OnTheAirTvShowEntity")
+    @Query("SELECT * FROM on_the_air_series")
     fun getOnTheAirTvShow(): List<OnTheAirTvShowEntity>
 
-    @Query("SELECT * FROM AiringTodayTvShowEntity")
+    @Query("SELECT * FROM airing_today_series")
     fun getAiringTodayTvShow(): List<AiringTodayTvShowEntity>
 }

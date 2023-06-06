@@ -3,9 +3,9 @@ package com.red_velvet.flix.data.local.database.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "upcoming_movies")
 data class UpcomingMovieEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long,
+    @PrimaryKey val id: Long,
     val title: String,
     val originalLanguage: String,
     val overview: String,
