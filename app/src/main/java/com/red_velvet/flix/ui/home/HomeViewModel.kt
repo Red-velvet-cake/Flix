@@ -2,10 +2,10 @@ package com.red_velvet.flix.ui.home
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.red_velvet.flix.domain.usecase.GetNowPlayingMoviesUsecase
-import com.red_velvet.flix.domain.usecase.GetPopularMoviesUsecase
-import com.red_velvet.flix.domain.usecase.GetTopRatedMoviesUsecase
-import com.red_velvet.flix.domain.usecase.GetUpcomingMoviesUsecase
+import com.red_velvet.flix.domain.usecase.GetNowPlayingMoviesUseCase
+import com.red_velvet.flix.domain.usecase.GetPopularMoviesUseCase
+import com.red_velvet.flix.domain.usecase.GetTopRatedMoviesUseCase
+import com.red_velvet.flix.domain.usecase.GetUpcomingMoviesUseCase
 import com.red_velvet.flix.ui.base.BaseViewModel
 import com.red_velvet.flix.ui.home.adapter.MovieInteractionListener
 import com.red_velvet.flix.ui.home.adapter.toUiState
@@ -19,10 +19,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getPopularMoviesUsecase: GetPopularMoviesUsecase,
-    private val getNowPlayingMoviesUsecase: GetNowPlayingMoviesUsecase,
-    private val getUpcomingMoviesUsecase: GetUpcomingMoviesUsecase,
-    private val getTopRatedMoviesUsecase: GetTopRatedMoviesUsecase,
+    private val getPopularMoviesUsecase: GetPopularMoviesUseCase,
+    private val getNowPlayingMoviesUsecase: GetNowPlayingMoviesUseCase,
+    private val getUpcomingMoviesUsecase: GetUpcomingMoviesUseCase,
+    private val getTopRatedMoviesUsecase: GetTopRatedMoviesUseCase,
 ) : BaseViewModel(), MovieInteractionListener {
 
     private val _homeUiState = MutableStateFlow(HomeUiState())

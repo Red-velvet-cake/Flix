@@ -5,7 +5,7 @@ import com.red_velvet.flix.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetNowPlayingMoviesUsecase @Inject constructor(
+class GetUpcomingMoviesUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
     suspend operator fun invoke(
@@ -13,6 +13,6 @@ class GetNowPlayingMoviesUsecase @Inject constructor(
         region: String? = null,
         language: String? = null
     ): Flow<List<MovieEntity>> {
-        return movieRepository.getNowPlayingMovies(page, region, language)
+        return movieRepository.getUpcomingMovies(page, region, language)
     }
 }

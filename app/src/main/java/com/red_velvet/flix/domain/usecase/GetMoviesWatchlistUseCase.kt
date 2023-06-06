@@ -4,7 +4,7 @@ import com.red_velvet.flix.domain.model.movie.MovieEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
 import javax.inject.Inject
 
-class GetMoviesWatchlistUsecase @Inject constructor(
+class GetMoviesWatchlistUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
     suspend operator fun invoke(

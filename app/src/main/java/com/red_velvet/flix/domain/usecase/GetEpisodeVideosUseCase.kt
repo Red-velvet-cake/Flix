@@ -4,7 +4,7 @@ import com.red_velvet.flix.domain.model.TrailerEntity
 import com.red_velvet.flix.domain.repository.SeriesRepository
 import javax.inject.Inject
 
-class GetEpisodeVideosUsecase @Inject constructor(private val seriesRepository: SeriesRepository) {
+class GetEpisodeVideosUseCase @Inject constructor(private val seriesRepository: SeriesRepository) {
     suspend operator fun invoke(
         seriesId: Int,
         seasonNumber: Int,

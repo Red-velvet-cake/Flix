@@ -4,14 +4,16 @@ import com.red_velvet.flix.domain.model.movie.MovieEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
 import javax.inject.Inject
 
-class GetMoviesRecommendationsUsecase @Inject constructor(
+class GetMoviesByKeywordUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
     suspend operator fun invoke(
-        movieId: Int,
+        keywordId: Int,
+        includeAdult: Boolean = false,
+        language: String? = null,
         page: Int? = null,
-        language: String? = null
+        region: String? = null
     ): List<MovieEntity> {
-        return movieRepository.getMovieRecommendations(movieId, page, language)
+        return movieRepository.getMoviesByKeyword(keywordId, includeAdult, language, page, region)
     }
 }
