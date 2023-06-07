@@ -15,7 +15,6 @@ class HomeAdapter(
     private val listener: BaseInteractionListener,
 ) : BaseAdapter<HomeUiState.HomeItem>(homeItems, listener) {
     override val layoutId: Int = 0
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return ItemViewHolder(
             DataBindingUtil.inflate(
@@ -43,10 +42,21 @@ class HomeAdapter(
     ) {
         holder.binding.run {
             setVariable(BR.movieType, currentItem)
-            setVariable(
-                BR.adapterRecycler,
-                MovieAdapter(currentItem.movies, listener as MovieInteractionListener)
-            )
+            if (currentItem.title == "Popular") {
+                setVariable(
+                    BR.popularMoviesAdapterRecycler,
+                    PopularMovieAdapter(
+                        currentItem.movies,
+                        listener as PopularMovieInteractionListener
+                    )
+                )
+            } else {
+                setVariable(
+                    BR.adapterRecycler,
+                    MovieAdapter(currentItem.movies, listener as MovieInteractionListener)
+                )
+            }
+
         }
     }
 
@@ -70,15 +80,7 @@ class HomeAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (homeItems[position].title) {
-
-            "Popular" -> {
-                Log.d(
-                    "TAG",
-                    "homeItems[position].title: ${homeItems[position].movies.first()}"
-                )
-                R.layout.item_popular_movie
-            }
-
+            "Popular" -> R.layout.popular_movies_list
             else -> R.layout.list_movie
         }
     }

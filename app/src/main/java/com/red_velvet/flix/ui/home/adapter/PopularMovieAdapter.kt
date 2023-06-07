@@ -5,16 +5,16 @@ import com.red_velvet.flix.ui.base.BaseAdapter
 import com.red_velvet.flix.ui.base.BaseInteractionListener
 import com.red_velvet.flix.ui.home.HomeUiState
 
-class MovieAdapter(
+class PopularMovieAdapter(
     items: List<HomeUiState.MediaUiState>,
-    val listener: MovieInteractionListener
+    val listener: PopularMovieInteractionListener
 ) :
     BaseAdapter<HomeUiState.MediaUiState>(items, listener) {
-    override val layoutId: Int = R.layout.item_movie
+    override val layoutId: Int = R.layout.popular_movie_item
 }
 
-interface MovieInteractionListener : BaseInteractionListener {
-    fun onClickMovie(movieId: Int)
-    fun onClickSeeAllMovie(homeItemsType: HomeUiState.HomeItem)
+interface PopularMovieInteractionListener : BaseInteractionListener {
+    fun onClickPopularMovie(movieId: Int)
+    fun onClickSeeAllPopularMovies(homeItemsType: HomeUiState.HomeItem)
 }
 

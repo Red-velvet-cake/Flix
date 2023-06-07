@@ -7,6 +7,7 @@ import com.red_velvet.flix.domain.usecase.GetTopRatedMoviesUseCase
 import com.red_velvet.flix.domain.usecase.GetUpcomingMoviesUseCase
 import com.red_velvet.flix.ui.base.BaseViewModel
 import com.red_velvet.flix.ui.home.adapter.MovieInteractionListener
+import com.red_velvet.flix.ui.home.adapter.PopularMovieInteractionListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +20,7 @@ class HomeViewModel @Inject constructor(
     private val getNowPlayingMoviesUsecase: GetNowPlayingMoviesUseCase,
     private val getUpcomingMoviesUsecase: GetUpcomingMoviesUseCase,
     private val getTopRatedMoviesUsecase: GetTopRatedMoviesUseCase,
-) : BaseViewModel<HomeUiState>(), MovieInteractionListener {
+) : BaseViewModel<HomeUiState>(), MovieInteractionListener, PopularMovieInteractionListener {
     override val _state: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState())
     override val state = _state
     val list: Flow<List<MovieEntity>> = MutableStateFlow(
@@ -162,6 +163,14 @@ class HomeViewModel @Inject constructor(
     }
 
     override fun onClickSeeAllMovie(homeItemsType: HomeUiState.HomeItem) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClickPopularMovie(movieId: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClickSeeAllPopularMovies(homeItemsType: HomeUiState.HomeItem) {
         TODO("Not yet implemented")
     }
 

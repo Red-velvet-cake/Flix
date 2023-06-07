@@ -32,29 +32,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeUiStat
 
 
     private fun collectHomeData() {
-        var homeItems = mutableListOf<HomeUiState.HomeItem>()
+        var homeItems: MutableList<HomeUiState.HomeItem>
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.state.collect { homeUiState ->
                 homeUiState.apply {
-                    homeItems = mutableListOf<HomeUiState.HomeItem>(
+                    homeItems = mutableListOf(
                         HomeUiState.HomeItem("Popular", popularMovies),
                         HomeUiState.HomeItem("Now Playing", nowPlayingMovies),
                         HomeUiState.HomeItem("Upcoming", upcomingMovies),
                         HomeUiState.HomeItem("Top Rated", topRatedMovies),
                     )
                 }
-//                homeUiState.popularMovies.let { popularMovies ->
-//                    homeItems.add(HomeUiState.HomeItem("Popular", popularMovies))
-//                }
-//                homeUiState.nowPlayingMovies.let { nowPlayingMovies ->
-//                    homeItems.add(HomeUiState.HomeItem("Now Playing", nowPlayingMovies))
-//                }
-//                homeUiState.upcomingMovies.let { upcomingMovies ->
-//                    homeItems.add(HomeUiState.HomeItem("Upcoming", upcomingMovies))
-//                }
-//                homeUiState.topRatedMovies.let { topRatedMovies ->
-//                    homeItems.add(HomeUiState.HomeItem("Top Rated", topRatedMovies))
-//                }
                 homeAdapter.setItems(homeItems)
             }
         }
