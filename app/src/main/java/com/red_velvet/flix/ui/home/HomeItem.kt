@@ -1,6 +1,5 @@
 package com.red_velvet.flix.ui.home
 
-import com.red_velvet.flix.domain.model.movie.Movie
 import com.red_velvet.flix.ui.home.homeUiState.MediaUiState
 
 sealed class HomeItem(val priority: Int) {

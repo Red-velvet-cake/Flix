@@ -1,7 +1,7 @@
 package com.red_velvet.flix.domain.utils
 
 import com.google.gson.Gson
-import com.red_velvet.flix.data.remote.dtos.ApiResponse
+import com.red_velvet.flix.data.remote.recoures.ApiResponse
 import okhttp3.ResponseBody
 import javax.inject.Inject
 

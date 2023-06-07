@@ -20,7 +20,7 @@ object DatabaseModule {
         return Room.databaseBuilder(
             context,
             MovieDatabase::class.java,
-            "movie_database"
+            "FLIX_DATABASE"
         ).build()
     }
 
@@ -30,9 +30,9 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideTvShowDao(movieDatabase: MovieDatabase) = movieDatabase.tvShowDao()
+    fun provideTvShowDao(movieDatabase: MovieDatabase) = movieDatabase.SeriesDao()
 
     @Provides
     @Singleton
-    fun provideUserDataDao(movieDatabase: MovieDatabase) = movieDatabase.userDataDao()
+    fun provideUserDataDao(movieDatabase: MovieDatabase) = movieDatabase.userDao()
 }
