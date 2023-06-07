@@ -1,6 +1,6 @@
 package com.red_velvet.flix.data.repository
 
-import com.red_velvet.flix.domain.utils.ExceptionHandler
+import com.red_velvet.flix.data.util.ExceptionHandler
 import retrofit2.Response
 
 abstract class BaseRepository(private val exceptionHandler: ExceptionHandler) {

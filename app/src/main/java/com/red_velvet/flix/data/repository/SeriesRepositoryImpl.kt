@@ -12,13 +12,13 @@ import com.red_velvet.flix.data.repository.mapper.series.toPopularSeriesEntity
 import com.red_velvet.flix.data.repository.mapper.series.toTopRatedSeriesDto
 import com.red_velvet.flix.data.repository.mapper.series.toTopRatedSeriesEntity
 import com.red_velvet.flix.data.repository.mapper.toEntity
+import com.red_velvet.flix.data.util.ExceptionHandler
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.series.EpisodeEntity
 import com.red_velvet.flix.domain.entity.series.SeasonEntity
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.repository.SeriesRepository
-import com.red_velvet.flix.domain.utils.ExceptionHandler
 import javax.inject.Inject
 
 class SeriesRepositoryImpl @Inject constructor(

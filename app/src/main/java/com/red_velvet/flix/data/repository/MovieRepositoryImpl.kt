@@ -12,11 +12,11 @@ import com.red_velvet.flix.data.repository.mapper.movie.toTopRatedMoviesEntity
 import com.red_velvet.flix.data.repository.mapper.movie.toUpComingMovieDto
 import com.red_velvet.flix.data.repository.mapper.movie.toUpcomingMoviesEntity
 import com.red_velvet.flix.data.repository.mapper.toEntity
+import com.red_velvet.flix.data.util.ExceptionHandler
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
-import com.red_velvet.flix.domain.utils.ExceptionHandler
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
