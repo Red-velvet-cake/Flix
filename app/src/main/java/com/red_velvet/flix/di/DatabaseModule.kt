@@ -21,7 +21,9 @@ object DatabaseModule {
             context,
             MovieDatabase::class.java,
             "FLIX_DATABASE"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides

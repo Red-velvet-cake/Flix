@@ -27,7 +27,7 @@
 
         <View
             android:id="@+id/circleView"
-            android:layout_width="418dp"
+            android:layout_width="match_parent"
             android:layout_height="450dp"
             android:background="@drawable/background_down_card"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -74,6 +74,7 @@
             app:boxStrokeWidth="@dimen/_0dp"
             app:boxStrokeWidthFocused="@dimen/_0dp"
             app:hintEnabled="false"
+            app:setHelperText="@{viewModel.loginUIState.userNameHelperText}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loginTextView">
@@ -84,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_56dp"
                 android:drawableStart="@drawable/ic_person"
-                android:afterTextChanged="@{(text) -> viewModel.onUserNameInputChange(text)}"
+                android:afterTextChanged="@{(text) -> viewModel.onUserNameChanged(text)}"
                 android:hint="Username"
                 android:inputType="text"
                 android:textColor="@color/font_secondary"
@@ -103,6 +104,7 @@
             app:boxStrokeWidth="@dimen/_0dp"
             app:boxStrokeWidthFocused="@dimen/_0dp"
             app:hintEnabled="false"
+            setHelperText="@{viewModel.loginUIState.passwordHelperText}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_input_layout_username">
@@ -113,7 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_48dp"
                 android:drawableStart="@drawable/ic_password"
-                android:afterTextChanged="@{(text) -> viewModel.onPasswordInputChange(text)}"
+                android:afterTextChanged="@{(text) -> viewModel.onPasswordChanged(text)}"
                 android:hint="password"
                 android:inputType="textPassword"
                 android:textColor="@color/font_secondary"
@@ -130,9 +132,10 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/bg_button"
+            android:enabled="@{viewModel.loginUIState.validForm}"
             android:padding="@dimen/_0dp"
             android:paddingVertical="@dimen/_16dp"
-            android:onClick="@{()->viewModel.onClickLogin()}"
+            android:onClick="@{()->viewModel.onLoginClicked()}"
             android:text="Login"
             android:textColor="@color/font_secondary"
             android:textSize="@dimen/_16sp"
@@ -149,6 +152,7 @@
             app:indicatorColor="@color/off_white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:isVisible="@{viewModel.loginUIState.loading}"
             app:layout_constraintTop_toBottomOf="@+id/text_input_layout_password"
             app:trackColor="@color/Purple100" />
 
