@@ -12,6 +12,6 @@ class GetNowPlayingMoviesUseCase @Inject constructor(
         region: String? = null,
         language: String? = null
     ): List<MovieEntity> {
-        return movieRepository.getLocalNowPlayingMovies(page, region, language)
+        return movieRepository.getLocalNowPlayingMovies()
     }
 }

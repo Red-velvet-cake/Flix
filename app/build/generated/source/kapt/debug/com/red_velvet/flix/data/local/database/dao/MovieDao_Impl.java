@@ -189,14 +189,14 @@ public final class MovieDao_Impl implements MovieDao {
   }
 
   @Override
-  public Object insertPopularMovies(final List<PopularMovieDto> popularMovieEntities,
+  public Object insertPopularMovies(final List<PopularMovieDto> popularMovies,
       final Continuation<? super Unit> continuation) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       public Unit call() throws Exception {
         __db.beginTransaction();
         try {
-          __insertionAdapterOfPopularMovieDto.insert(popularMovieEntities);
+          __insertionAdapterOfPopularMovieDto.insert(popularMovies);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {
@@ -207,14 +207,14 @@ public final class MovieDao_Impl implements MovieDao {
   }
 
   @Override
-  public Object insertTopRatedMovies(final List<TopRatedMovieDto> topRatedMovieEntities,
+  public Object insertTopRatedMovies(final List<TopRatedMovieDto> topRatedMovies,
       final Continuation<? super Unit> continuation) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       public Unit call() throws Exception {
         __db.beginTransaction();
         try {
-          __insertionAdapterOfTopRatedMovieDto.insert(topRatedMovieEntities);
+          __insertionAdapterOfTopRatedMovieDto.insert(topRatedMovies);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {
@@ -225,14 +225,14 @@ public final class MovieDao_Impl implements MovieDao {
   }
 
   @Override
-  public Object insertNowPlayingMovies(final List<NowPlayingMovieDto> nowPlayingMovieEntities,
+  public Object insertNowPlayingMovies(final List<NowPlayingMovieDto> nowPlayingMovies,
       final Continuation<? super Unit> continuation) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       public Unit call() throws Exception {
         __db.beginTransaction();
         try {
-          __insertionAdapterOfNowPlayingMovieDto.insert(nowPlayingMovieEntities);
+          __insertionAdapterOfNowPlayingMovieDto.insert(nowPlayingMovies);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {
@@ -243,14 +243,14 @@ public final class MovieDao_Impl implements MovieDao {
   }
 
   @Override
-  public Object insertUpcomingMovies(final List<UpcomingMovieDto> upcomingMovieEntities,
+  public Object insertUpcomingMovies(final List<UpcomingMovieDto> upcomingMovies,
       final Continuation<? super Unit> continuation) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       public Unit call() throws Exception {
         __db.beginTransaction();
         try {
-          __insertionAdapterOfUpcomingMovieDto.insert(upcomingMovieEntities);
+          __insertionAdapterOfUpcomingMovieDto.insert(upcomingMovies);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {
