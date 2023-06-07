@@ -1,7 +1,6 @@
 package com.red_velvet.flix.ui.search.mediaSearchUiState
 
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
+
 
 
 data class MediaSearchUiState(
