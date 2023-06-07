@@ -8,13 +8,27 @@ import com.red_velvet.flix.domain.entity.series.SeriesEntity
 
 interface SeriesRepository {
 
-    suspend fun getPopularSeries(): List<SeriesEntity>
+    suspend fun getPopularSeries(
+        page: Int? = null,
+        language: String? = null,
+    ): List<SeriesEntity>
 
-    suspend fun getTopRatedSeries(): List<SeriesEntity>
+    suspend fun getTopRatedSeries(
+        page: Int? = null,
+        language: String? = null,
+    ): List<SeriesEntity>
 
-    suspend fun getOnTheAirSeries(): List<SeriesEntity>
+    suspend fun getOnTheAirSeries(
+        page: Int? = null,
+        language: String? = null,
+        timezone: String? = null,
+    ): List<SeriesEntity>
 
-    suspend fun getAiringTodaySeries(): List<SeriesEntity>
+    suspend fun getAiringTodaySeries(
+        page: Int? = null,
+        language: String? = null,
+        timezone: String? = null,
+    ): List<SeriesEntity>
 
     suspend fun getSeriesRecommendations(
         seriesId: Int,
@@ -73,5 +87,22 @@ interface SeriesRepository {
         episodeNumber: Int,
         rating: Double
     )
+
+
+    suspend fun getLocalPopularSeries(): List<SeriesEntity>
+
+    suspend fun getLocalTopRatedSeries(): List<SeriesEntity>
+
+    suspend fun getLocalOnTheAirSeries(): List<SeriesEntity>
+
+    suspend fun getLocalAiringTodaySeries(): List<SeriesEntity>
+
+    suspend fun cachePopularSeries(series: List<SeriesEntity>)
+
+    suspend fun cacheTopRatedSeries(series: List<SeriesEntity>)
+
+    suspend fun cacheOnTheAirSeries(series: List<SeriesEntity>)
+
+    suspend fun cacheAiringTodaySeries(series: List<SeriesEntity>)
 
 }

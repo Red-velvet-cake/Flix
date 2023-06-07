@@ -6,6 +6,6 @@ import javax.inject.Inject
 
 class GetOnTheAirSeriesUseCase @Inject constructor(private val seriesRepository: SeriesRepository) {
     suspend operator fun invoke(): List<SeriesEntity> {
-        return seriesRepository.getOnTheAirSeries()
+        return seriesRepository.getLocalOnTheAirSeries()
     }
 }
