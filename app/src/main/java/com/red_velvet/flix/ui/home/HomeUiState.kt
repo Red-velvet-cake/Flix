@@ -1,6 +1,6 @@
 package com.red_velvet.flix.ui.home
 
-import com.red_velvet.flix.domain.model.movie.Movie
+import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.ui.base.BaseUiState
 
 data class HomeUiState(
@@ -27,7 +27,7 @@ data class HomeUiState(
         )
 }
 
-internal fun List<Movie>.toUiState(): List<HomeUiState.MediaUiState> {
+internal fun List<MovieEntity>.toUiState(): List<HomeUiState.MediaUiState> {
     return map {
         HomeUiState.MediaUiState(
             id = it.id,
@@ -39,7 +39,7 @@ internal fun List<Movie>.toUiState(): List<HomeUiState.MediaUiState> {
     }
 }
 
-internal fun Movie.toUiState(): HomeUiState.MediaUiState {
+internal fun MovieEntity.toUiState(): HomeUiState.MediaUiState {
     return HomeUiState.MediaUiState(
         id = id,
         title = title,
