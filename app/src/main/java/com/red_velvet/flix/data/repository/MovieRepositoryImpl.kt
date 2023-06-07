@@ -30,7 +30,7 @@ class MovieRepositoryImpl @Inject constructor(
         language: String?
     ): List<MovieEntity> {
         return wrapApiCall { moviesService.getPopularMovies(page, region, language) }
-            .items?.toEntity() ?: emptyList()
+            .items.toEntity()
     }
 
     override suspend fun getUpcomingMovies(
@@ -39,7 +39,7 @@ class MovieRepositoryImpl @Inject constructor(
         language: String?
     ): List<MovieEntity> {
         return wrapApiCall { moviesService.getUpcomingMovies(page, region, language) }
-            .items?.toEntity() ?: emptyList()
+            .items.toEntity()
     }
 
     override suspend fun getNowPlayingMovies(
@@ -48,7 +48,7 @@ class MovieRepositoryImpl @Inject constructor(
         language: String?
     ): List<MovieEntity> {
         return wrapApiCall { moviesService.getNowPlayingMovies(page, region, language) }
-            .items?.toEntity() ?: emptyList()
+            .items.toEntity()
     }
 
     override suspend fun getTopRatedMovies(
@@ -57,7 +57,7 @@ class MovieRepositoryImpl @Inject constructor(
         language: String?
     ): List<MovieEntity> {
         return wrapApiCall { moviesService.getTopRatedMovies(page, region, language) }
-            .items?.toEntity() ?: emptyList()
+            .items.toEntity()
     }
 
 
@@ -77,7 +77,7 @@ class MovieRepositoryImpl @Inject constructor(
         language: String?
     ): List<MovieEntity> {
         return wrapApiCall { moviesService.getSimilarMovies(movieId, page, language) }
-            .items?.toEntity() ?: emptyList()
+            .items.toEntity()
     }
 
     override suspend fun getMovieTrailers(movieId: Int, language: String?): List<TrailerEntity> {
@@ -96,7 +96,7 @@ class MovieRepositoryImpl @Inject constructor(
         language: String?
     ): List<MovieEntity> {
         return wrapApiCall { moviesService.getMovieRecommendations(movieId, page, language) }
-            .items?.toEntity() ?: emptyList()
+            .items.toEntity()
     }
 
     override suspend fun rateMovie(movieId: Int, rating: Double) {
@@ -113,7 +113,7 @@ class MovieRepositoryImpl @Inject constructor(
         language: String?
     ): List<ReviewEntity> {
         return wrapApiCall { moviesService.getMovieReviews(movieId, page, language) }
-            .items?.toEntity() ?: emptyList()
+            .items.toEntity()
     }
 
     override suspend fun getMoviesWatchlist(
@@ -123,7 +123,7 @@ class MovieRepositoryImpl @Inject constructor(
         sortBy: String?
     ): List<MovieEntity> {
         return wrapApiCall { moviesService.getMoviesWatchlist(accountId, language, page, sortBy) }
-            .items?.toEntity() ?: emptyList()
+            .items.toEntity()
     }
 
     override suspend fun getFavoriteMovies(
@@ -133,7 +133,7 @@ class MovieRepositoryImpl @Inject constructor(
         sortBy: String?
     ): List<MovieEntity> {
         return wrapApiCall { moviesService.getFavoriteMovies(accountId, language, page, sortBy) }
-            .items?.toEntity() ?: emptyList()
+            .items.toEntity()
     }
 
     override suspend fun search(
@@ -143,7 +143,7 @@ class MovieRepositoryImpl @Inject constructor(
         page: Int?
     ): List<MovieEntity> {
         return wrapApiCall { moviesService.search(query, includeAdult, language, page) }
-            .items?.toEntity() ?: emptyList()
+            .items.toEntity()
     }
 
     override suspend fun getMoviesByKeyword(
@@ -162,7 +162,7 @@ class MovieRepositoryImpl @Inject constructor(
                 region
             )
         }
-            .items?.toEntity() ?: emptyList()
+            .items.toEntity()
     }
 
     override suspend fun discoverMovies(
@@ -183,7 +183,7 @@ class MovieRepositoryImpl @Inject constructor(
                 year
             )
         }
-            .items?.toEntity() ?: emptyList()
+            .items.toEntity()
     }
 
     override suspend fun getLocalPopularMovies(): List<MovieEntity> {

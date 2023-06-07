@@ -29,6 +29,6 @@ fun AuthorDetailsResource.toEntity(): AuthorDetailsEntity {
     )
 }
 
-fun List<ReviewResource>.toEntity(): List<ReviewEntity> {
-    return map { it.toEntity() }
+fun List<ReviewResource>?.toEntity(): List<ReviewEntity> {
+    return this?.map { it.toEntity() } ?: emptyList()
 }

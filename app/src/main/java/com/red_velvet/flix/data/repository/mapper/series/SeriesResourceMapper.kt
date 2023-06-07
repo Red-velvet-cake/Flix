@@ -20,8 +20,8 @@ fun SeriesResource.toEntity(): SeriesEntity {
     )
 }
 
-fun List<SeriesResource>.toEntity(): List<SeriesEntity> {
-    return map { it.toEntity() }
+fun List<SeriesResource>?.toEntity(): List<SeriesEntity> {
+    return this?.map { it.toEntity() } ?: emptyList()
 }
 
 fun SeriesResource.toPopularSeriesDto(): PopularSeriesDto {
@@ -37,8 +37,8 @@ fun SeriesResource.toPopularSeriesDto(): PopularSeriesDto {
     )
 }
 
-fun List<SeriesResource>.toPopularSeriesDto(): List<PopularSeriesDto> {
-    return map { it.toPopularSeriesDto() }
+fun List<SeriesResource>?.toPopularSeriesDto(): List<PopularSeriesDto> {
+    return this?.map { it.toPopularSeriesDto() } ?: emptyList()
 }
 
 fun SeriesResource.toTopRatedSeriesDto(): TopRatedSeriesDto {
@@ -54,8 +54,8 @@ fun SeriesResource.toTopRatedSeriesDto(): TopRatedSeriesDto {
     )
 }
 
-fun List<SeriesResource>.toTopRatedSeriesDto(): List<TopRatedSeriesDto> {
-    return map { it.toTopRatedSeriesDto() }
+fun List<SeriesResource>?.toTopRatedSeriesDto(): List<TopRatedSeriesDto> {
+    return this?.map { it.toTopRatedSeriesDto() } ?: emptyList()
 }
 
 fun SeriesResource.toAiringTodaySeriesDto(): AiringTodaySeriesDto {
@@ -72,8 +72,8 @@ fun SeriesResource.toAiringTodaySeriesDto(): AiringTodaySeriesDto {
     )
 }
 
-fun List<SeriesResource>.toAiringTodaySeriesDto(): List<AiringTodaySeriesDto> {
-    return map { it.toAiringTodaySeriesDto() }
+fun List<SeriesResource>?.toAiringTodaySeriesDto(): List<AiringTodaySeriesDto> {
+    return this?.map { it.toAiringTodaySeriesDto() } ?: emptyList()
 }
 
 fun SeriesResource.toOnTheAirSeriesDto(): OnTheAirSeriesDto {
@@ -89,6 +89,6 @@ fun SeriesResource.toOnTheAirSeriesDto(): OnTheAirSeriesDto {
     )
 }
 
-fun List<SeriesResource>.toOnTheAirSeriesDto(): List<OnTheAirSeriesDto> {
-    return map { it.toOnTheAirSeriesDto() }
+fun List<SeriesResource>?.toOnTheAirSeriesDto(): List<OnTheAirSeriesDto> {
+    return this?.map { it.toOnTheAirSeriesDto() } ?: emptyList()
 }

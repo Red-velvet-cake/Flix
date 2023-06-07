@@ -20,8 +20,8 @@ fun MovieResource.toEntity(): MovieEntity {
     )
 }
 
-fun List<MovieResource>.toEntity(): List<MovieEntity> {
-    return map { it.toEntity() }
+fun List<MovieResource>?.toEntity(): List<MovieEntity> {
+    return this?.map { it.toEntity() } ?: emptyList()
 }
 
 fun MovieResource.toPopularMovieDto(): PopularMovieDto {
@@ -35,8 +35,8 @@ fun MovieResource.toPopularMovieDto(): PopularMovieDto {
     )
 }
 
-fun List<MovieResource>.toPopularMovieDto(): List<PopularMovieDto> {
-    return map { it.toPopularMovieDto() }
+fun List<MovieResource>?.toPopularMovieDto(): List<PopularMovieDto> {
+    return this?.map { it.toPopularMovieDto() } ?: emptyList()
 }
 
 
@@ -51,8 +51,8 @@ fun MovieResource.toUpcomingMovieDto(): UpcomingMovieDto {
     )
 }
 
-fun List<MovieResource>.toUpcomingMovieDto(): List<UpcomingMovieDto> {
-    return map { it.toUpcomingMovieDto() }
+fun List<MovieResource>?.toUpcomingMovieDto(): List<UpcomingMovieDto> {
+    return this?.map { it.toUpcomingMovieDto() } ?: emptyList()
 }
 
 fun MovieResource.toTopRatedMovieDto(): TopRatedMovieDto {
@@ -66,8 +66,8 @@ fun MovieResource.toTopRatedMovieDto(): TopRatedMovieDto {
     )
 }
 
-fun List<MovieResource>.toTopRatedMovieDto(): List<TopRatedMovieDto> {
-    return map { it.toTopRatedMovieDto() }
+fun List<MovieResource>?.toTopRatedMovieDto(): List<TopRatedMovieDto> {
+    return this?.map { it.toTopRatedMovieDto() } ?: emptyList()
 }
 
 fun MovieResource.toNowPlayingMovieDto(): NowPlayingMovieDto {
@@ -81,6 +81,6 @@ fun MovieResource.toNowPlayingMovieDto(): NowPlayingMovieDto {
     )
 }
 
-fun List<MovieResource>.toNowPlayingMovieDto(): List<NowPlayingMovieDto> {
-    return map { it.toNowPlayingMovieDto() }
+fun List<MovieResource>?.toNowPlayingMovieDto(): List<NowPlayingMovieDto> {
+    return this?.map { it.toNowPlayingMovieDto() } ?: emptyList()
 }
