@@ -1,19 +1,16 @@
 package com.red_velvet.flix.data.repository
 
+import com.red_velvet.flix.domain.utils.ExceptionHandler
 import retrofit2.Response
 
-abstract class BaseRepository {
+abstract class BaseRepository(private val exceptionHandler: ExceptionHandler) {
 
-    protected suspend fun <I, O> wrap(
-        function: suspend () -> Response<I>,
-        mapper: (I) -> O,
-        extractResponse: (Response<I>) -> O
-    ): O {
-        val response = function()
-        return if (response.isSuccessful) {
-            extractResponse(response)?: throw Throwable()
+    suspend fun <T> wrapApiCall(call: suspend () -> Response<T>): T {
+        val response = call()
+        if (response.isSuccessful) {
+            return response.body()!!
         } else {
-            throw Throwable("response is not successful")
+            throw exceptionHandler.getException(response.code(), response.errorBody())
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.red_velvet.flix.domain.usecase
 
-import com.red_velvet.flix.data.repository.UserRepository
+import com.red_velvet.flix.domain.repository.UserRepository
 import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(
