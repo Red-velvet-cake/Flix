@@ -19,7 +19,7 @@
             android:id="@+id/loading"
             android:layout_width="@dimen/_180dp"
             android:layout_height="@dimen/_180dp"
-            android:isValid="@{isLoading}"
+            app:isVisible="@{isLoading}"
             android:src="@drawable/loading"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
