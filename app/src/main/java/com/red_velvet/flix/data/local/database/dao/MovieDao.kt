@@ -12,16 +12,16 @@ import com.red_velvet.flix.data.local.database.entity.UpcomingMovieDto
 @Dao
 interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPopularMovies(popularMovieEntities: List<PopularMovieDto>)
+    suspend fun insertPopularMovies(popularMovies: List<PopularMovieDto>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTopRatedMovies(topRatedMovieEntities: List<TopRatedMovieDto>)
+    suspend fun insertTopRatedMovies(topRatedMovies: List<TopRatedMovieDto>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNowPlayingMovies(nowPlayingMovieEntities: List<NowPlayingMovieDto>)
+    suspend fun insertNowPlayingMovies(nowPlayingMovies: List<NowPlayingMovieDto>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUpcomingMovies(upcomingMovieEntities: List<UpcomingMovieDto>)
+    suspend fun insertUpcomingMovies(upcomingMovies: List<UpcomingMovieDto>)
 
     @Query("SELECT * FROM POPULAR_MOVIES")
     suspend fun getPopularMovies(): List<PopularMovieDto>

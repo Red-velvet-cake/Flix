@@ -14,15 +14,11 @@ interface MovieRepository {
         language: String? = null
     ): List<MovieEntity>
 
-    suspend fun refreshPopularMovies()
-
     suspend fun getUpcomingMovies(
         page: Int? = null,
         region: String? = null,
         language: String? = null
     ): List<MovieEntity>
-
-    suspend fun refreshUpcomingMovies()
 
     suspend fun getNowPlayingMovies(
         page: Int? = null,
@@ -30,18 +26,13 @@ interface MovieRepository {
         language: String? = null
     ): List<MovieEntity>
 
-    suspend fun refreshNowPlayingMovies()
-
     suspend fun getTopRatedMovies(
         page: Int? = null,
         region: String? = null,
         language: String? = null
     ): List<MovieEntity>
 
-    suspend fun refreshTopRatedMovies()
-
     suspend fun getMovieDetails(movieId: Int): MovieEntity
-
 
     suspend fun getMovieKeywords(movieId: Int): List<String>
 
@@ -111,4 +102,21 @@ interface MovieRepository {
         voteAverageGte: Double? = null,
         year: Int? = null,
     ): List<MovieEntity>
+
+
+    suspend fun getLocalPopularMovies(): List<MovieEntity>
+
+    suspend fun getLocalUpcomingMovies(): List<MovieEntity>
+
+    suspend fun getLocalNowPlayingMovies(): List<MovieEntity>
+
+    suspend fun getLocalTopRatedMovies(): List<MovieEntity>
+
+    suspend fun cachePopularMovies(movies: List<MovieEntity>)
+
+    suspend fun cacheUpcomingMovies(movies: List<MovieEntity>)
+
+    suspend fun cacheNowPlayingMovies(movies: List<MovieEntity>)
+
+    suspend fun cacheTopRatedMovies(movies: List<MovieEntity>)
 }

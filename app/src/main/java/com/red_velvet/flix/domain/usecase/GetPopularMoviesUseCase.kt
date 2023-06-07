@@ -12,6 +12,6 @@ class GetPopularMoviesUseCase @Inject constructor(
         region: String? = null,
         language: String? = null
     ): List<MovieEntity> {
-        return movieRepository.getPopularMovies(page, region, language)
+        return movieRepository.getLocalPopularMovies(page, region, language)
     }
 }

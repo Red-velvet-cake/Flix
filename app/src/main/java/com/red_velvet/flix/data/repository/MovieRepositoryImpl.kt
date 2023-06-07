@@ -9,7 +9,7 @@ import com.red_velvet.flix.data.repository.mapper.movie.toPopularMovieDto
 import com.red_velvet.flix.data.repository.mapper.movie.toPopularMoviesEntity
 import com.red_velvet.flix.data.repository.mapper.movie.toTopRatedMovieDto
 import com.red_velvet.flix.data.repository.mapper.movie.toTopRatedMoviesEntity
-import com.red_velvet.flix.data.repository.mapper.movie.toUpcomingMovieDto
+import com.red_velvet.flix.data.repository.mapper.movie.toUpComingMovieDto
 import com.red_velvet.flix.data.repository.mapper.movie.toUpcomingMoviesEntity
 import com.red_velvet.flix.data.repository.mapper.toEntity
 import com.red_velvet.flix.domain.entity.ReviewEntity
@@ -22,27 +22,15 @@ import javax.inject.Inject
 class MovieRepositoryImpl @Inject constructor(
     private val moviesService: MoviesService,
     private val movieDao: MovieDao,
-    private val exceptionHandler: ExceptionHandler
+    exceptionHandler: ExceptionHandler
 ) : MovieRepository, BaseRepository(exceptionHandler) {
-
     override suspend fun getPopularMovies(
         page: Int?,
         region: String?,
         language: String?
     ): List<MovieEntity> {
-        return movieDao.getPopularMovies()
-            .toPopularMoviesEntity()
-    }
-
-    override suspend fun refreshPopularMovies() {
-        moviesService.getPopularMovies().let { popularMoviesResponse ->
-            if (popularMoviesResponse.isSuccessful) {
-                popularMoviesResponse.body()?.items?.toPopularMovieDto()
-                    .let {
-                        movieDao.insertPopularMovies(it!!)
-                    }
-            }
-        }
+        return wrapApiCall { moviesService.getPopularMovies(page, region, language) }
+            .items?.toEntity() ?: emptyList()
     }
 
     override suspend fun getUpcomingMovies(
@@ -50,63 +38,33 @@ class MovieRepositoryImpl @Inject constructor(
         region: String?,
         language: String?
     ): List<MovieEntity> {
-        return movieDao.getUpcomingMovies()
-            .toUpcomingMoviesEntity()
+        return wrapApiCall { moviesService.getUpcomingMovies(page, region, language) }
+            .items?.toEntity() ?: emptyList()
     }
-
-    override suspend fun refreshUpcomingMovies() {
-        moviesService.getUpcomingMovies().let { upcomingMoviesResponse ->
-            if (upcomingMoviesResponse.isSuccessful) {
-                upcomingMoviesResponse.body()?.items?.toUpcomingMovieDto()
-                    .let {
-                        movieDao.insertUpcomingMovies(it!!)
-                    }
-            }
-        }
-    }
-
 
     override suspend fun getNowPlayingMovies(
-        page: Int?, region: String?, language: String?
+        page: Int?,
+        region: String?,
+        language: String?
     ): List<MovieEntity> {
-        return movieDao.getNowPlayingMovies()
-            .toNowPlayingMoviesEntity()
-    }
-
-    override suspend fun refreshNowPlayingMovies() {
-        moviesService.getUpcomingMovies().let { nowPlayingMoviesResponse ->
-            if (nowPlayingMoviesResponse.isSuccessful) {
-                nowPlayingMoviesResponse.body()?.items?.toNowPlayingMovieDto()
-                    .let {
-                        movieDao.insertNowPlayingMovies(it!!)
-                    }
-            }
-        }
+        return wrapApiCall { moviesService.getNowPlayingMovies(page, region, language) }
+            .items?.toEntity() ?: emptyList()
     }
 
     override suspend fun getTopRatedMovies(
-        page: Int?, region: String?, language: String?
+        page: Int?,
+        region: String?,
+        language: String?
     ): List<MovieEntity> {
-        return movieDao.getTopRatedMovies()
-            .toTopRatedMoviesEntity()
+        return wrapApiCall { moviesService.getTopRatedMovies(page, region, language) }
+            .items?.toEntity() ?: emptyList()
     }
 
-    override suspend fun refreshTopRatedMovies() {
-        moviesService.getUpcomingMovies().let { topRatedMoviesResponse ->
-            if (topRatedMoviesResponse.isSuccessful) {
-                topRatedMoviesResponse.body()?.items?.toTopRatedMovieDto()
-                    .let {
-                        movieDao.insertTopRatedMovies(it!!)
-                    }
-            }
-        }
-    }
 
     override suspend fun getMovieDetails(movieId: Int): MovieEntity {
         return wrapApiCall { moviesService.getMovieDetails(movieId) }
             .toEntity()
     }
-
 
     override suspend fun getMovieKeywords(movieId: Int): List<String> {
         return wrapApiCall { moviesService.getMovieKeywords(movieId) }
@@ -228,4 +186,39 @@ class MovieRepositoryImpl @Inject constructor(
             .items?.toEntity() ?: emptyList()
     }
 
+    override suspend fun getLocalPopularMovies(): List<MovieEntity> {
+        return movieDao.getPopularMovies()
+            .toPopularMoviesEntity()
+    }
+
+    override suspend fun getLocalUpcomingMovies(): List<MovieEntity> {
+        return movieDao.getUpcomingMovies()
+            .toUpcomingMoviesEntity()
+    }
+
+    override suspend fun getLocalNowPlayingMovies(): List<MovieEntity> {
+        return movieDao.getNowPlayingMovies()
+            .toNowPlayingMoviesEntity()
+    }
+
+    override suspend fun getLocalTopRatedMovies(): List<MovieEntity> {
+        return movieDao.getTopRatedMovies()
+            .toTopRatedMoviesEntity()
+    }
+
+    override suspend fun cachePopularMovies(movies: List<MovieEntity>) {
+        movieDao.insertPopularMovies(movies.toPopularMovieDto())
+    }
+
+    override suspend fun cacheUpcomingMovies(movies: List<MovieEntity>) {
+        movieDao.insertUpcomingMovies(movies.toUpComingMovieDto())
+    }
+
+    override suspend fun cacheNowPlayingMovies(movies: List<MovieEntity>) {
+        movieDao.insertNowPlayingMovies(movies.toNowPlayingMovieDto())
+    }
+
+    override suspend fun cacheTopRatedMovies(movies: List<MovieEntity>) {
+        movieDao.insertTopRatedMovies(movies.toTopRatedMovieDto())
+    }
 }

@@ -12,6 +12,6 @@ class GetUpcomingMoviesUseCase @Inject constructor(
         region: String? = null,
         language: String? = null
     ): List<MovieEntity> {
-        return movieRepository.getUpcomingMovies(page, region, language)
+        return movieRepository.getLocalUpcomingMovies(page, region, language)
     }
 }
