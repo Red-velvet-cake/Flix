@@ -4,28 +4,21 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.red_velvet.flix.domain.model.movie.Movie
+import com.red_velvet.flix.ui.home.toUiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel<T : BaseUiState> : ViewModel() {
 
     abstract val _state: MutableStateFlow<T>
     abstract val state: StateFlow<T>
-
-    protected fun handleMoviesSuccess(
-        list: List<Movie>, stateModifier: (T, List<Movie>) -> T
-    ) {
-        if (list.isNotEmpty()) {
-            _state.value.let { currentState ->
-                _state.value = stateModifier(currentState, list)
-            }
-        }
-    }
 
     fun <T> tryToExecute(
         callee: suspend () -> Flow<T>,
@@ -36,6 +29,7 @@ abstract class BaseViewModel<T : BaseUiState> : ViewModel() {
         viewModelScope.launch(dispatcher) {
             try {
                 val flow = callee()
+                delay(1000)
                 flow.collect { data ->
                     collector(data)
                 }

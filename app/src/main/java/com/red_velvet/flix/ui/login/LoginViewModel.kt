@@ -5,6 +5,7 @@ import com.red_velvet.flix.domain.usecase.LoginUseCase
 import com.red_velvet.flix.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,7 +16,7 @@ class LoginViewModel @Inject constructor(
 
 
     private val _loginUIState = MutableStateFlow(LoginUiState())
-    override val state = _state
+    val loginUIState = _loginUIState
 
     fun onUserNameInputChange(text: CharSequence) {
         _loginUIState.value = _loginUIState.value.copy(userName = text.toString())
@@ -49,5 +50,7 @@ class LoginViewModel @Inject constructor(
     }
 
     override val _state: MutableStateFlow<LoginUiState>
+        get() = TODO("Not yet implemented")
+    override val state: StateFlow<LoginUiState>
         get() = TODO("Not yet implemented")
 }

@@ -32,15 +32,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel, HomeUiStat
 
 
     private fun collectHomeData() {
-        val homeItems = mutableListOf<HomeUiState.HomeItem>()
+        var homeItems = mutableListOf<HomeUiState.HomeItem>()
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.state.collect { homeUiState ->
                 homeUiState.apply {
-                    homeItems.add(HomeUiState.HomeItem("Popular", popularMovies))
-                    homeItems.add(HomeUiState.HomeItem("Now Playing", nowPlayingMovies))
-                    homeItems.add(HomeUiState.HomeItem("Upcoming", upcomingMovies))
-                    homeItems.add(HomeUiState.HomeItem("Top Rated", topRatedMovies))
+                    homeItems = mutableListOf<HomeUiState.HomeItem>(
+                        HomeUiState.HomeItem("Popular", popularMovies),
+                        HomeUiState.HomeItem("Now Playing", nowPlayingMovies),
+                        HomeUiState.HomeItem("Upcoming", upcomingMovies),
+                        HomeUiState.HomeItem("Top Rated", topRatedMovies),
+                    )
                 }
+//                homeUiState.popularMovies.let { popularMovies ->
+//                    homeItems.add(HomeUiState.HomeItem("Popular", popularMovies))
+//                }
+//                homeUiState.nowPlayingMovies.let { nowPlayingMovies ->
+//                    homeItems.add(HomeUiState.HomeItem("Now Playing", nowPlayingMovies))
+//                }
+//                homeUiState.upcomingMovies.let { upcomingMovies ->
+//                    homeItems.add(HomeUiState.HomeItem("Upcoming", upcomingMovies))
+//                }
+//                homeUiState.topRatedMovies.let { topRatedMovies ->
+//                    homeItems.add(HomeUiState.HomeItem("Top Rated", topRatedMovies))
+//                }
                 homeAdapter.setItems(homeItems)
             }
         }

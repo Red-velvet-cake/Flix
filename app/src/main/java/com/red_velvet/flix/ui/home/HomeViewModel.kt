@@ -1,5 +1,6 @@
 package com.red_velvet.flix.ui.home
 
+import androidx.lifecycle.viewModelScope
 import com.red_velvet.flix.domain.model.movie.Movie
 import com.red_velvet.flix.domain.usecase.GetNowPlayingMoviesUsecase
 import com.red_velvet.flix.domain.usecase.GetPopularMoviesUsecase
@@ -8,8 +9,11 @@ import com.red_velvet.flix.domain.usecase.GetUpcomingMoviesUsecase
 import com.red_velvet.flix.ui.base.BaseViewModel
 import com.red_velvet.flix.ui.home.adapter.MovieInteractionListener
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -78,20 +82,20 @@ class HomeViewModel @Inject constructor(
         getTopRatedMovies()
     }
 
-
     private fun getPopularMovies() {
         tryToExecute(
             {
                 list
 //                getPopularMoviesUsecase(1, "US", "en-US")
-            },
-            { list -> handleMoviesSuccess(list, ::modifyPopularMoviesState) },
-            ::onError,
+            }, ::modifyPopularMoviesState, ::onError
         )
+
     }
 
-    private fun modifyPopularMoviesState(state: HomeUiState, movies: List<Movie>): HomeUiState {
-        return state.copy(popularMovies = movies.toUiState(), isLoading = false)
+    private fun modifyPopularMoviesState(movies: List<Movie>) {
+        _state.update { oldState ->
+            oldState.copy(popularMovies = movies.toUiState(), isLoading = false)
+        }
     }
 
     private fun getNowPlayingMovies() {
@@ -99,14 +103,15 @@ class HomeViewModel @Inject constructor(
             {
                 list
 //                getNowPlayingMoviesUsecase(1, "US", "en-US")
-            },
-            { list -> handleMoviesSuccess(list, ::modifyNowPlayingMoviesState) },
-            ::onError,
+            }, ::modifyNowPlayingMoviesState, ::onError
         )
+
     }
 
-    private fun modifyNowPlayingMoviesState(state: HomeUiState, movies: List<Movie>): HomeUiState {
-        return state.copy(nowPlayingMovies = movies.toUiState(), isLoading = false)
+    private fun modifyNowPlayingMoviesState(movies: List<Movie>) {
+        _state.update { oldState ->
+            oldState.copy(nowPlayingMovies = movies.toUiState(), isLoading = false)
+        }
     }
 
     private fun getUpcomingMovies() {
@@ -114,14 +119,15 @@ class HomeViewModel @Inject constructor(
             {
                 list
 //                getUpcomingMoviesUsecase(1, "US", "en-US")
-            },
-            { list -> handleMoviesSuccess(list, ::modifyUpcomingMoviesState) },
-            ::onError,
+            }, ::modifyUpcomingMoviesState, ::onError
         )
+
     }
 
-    private fun modifyUpcomingMoviesState(state: HomeUiState, movies: List<Movie>): HomeUiState {
-        return state.copy(upcomingMovies = movies.toUiState(), isLoading = false)
+    private fun modifyUpcomingMoviesState(movies: List<Movie>) {
+        _state.update { oldState ->
+            oldState.copy(upcomingMovies = movies.toUiState(), isLoading = false)
+        }
     }
 
     private fun getTopRatedMovies() {
@@ -129,22 +135,21 @@ class HomeViewModel @Inject constructor(
             {
                 list
 //                getTopRatedMoviesUsecase(1, "US", "en-US")
-            },
-            { list -> handleMoviesSuccess(list, ::modifyTopRatedMoviesState) },
-            ::onError,
+            }, ::modifyTopRatedMoviesState, ::onError
         )
+
     }
 
-    private fun modifyTopRatedMoviesState(state: HomeUiState, movies: List<Movie>): HomeUiState {
-        return state.copy(topRatedMovies = movies.toUiState(), isLoading = false)
+    private fun modifyTopRatedMoviesState(movies: List<Movie>) {
+        _state.update { oldState ->
+            oldState.copy(topRatedMovies = movies.toUiState(), isLoading = false)
+        }
     }
 
     private fun onError(throwable: Throwable) {
-        val errors = state.value.error.toMutableList() ?: mutableListOf()
+        val errors = mutableListOf<String>()
         errors.add(throwable.message.toString())
-        state.value.let { currentState ->
-            state.value = currentState.copy(error = errors, isLoading = false)
-        }
+        _state.update { it.copy(error = errors, isLoading = false) }
     }
 
     override fun onClickMovie(movieId: Int) {
