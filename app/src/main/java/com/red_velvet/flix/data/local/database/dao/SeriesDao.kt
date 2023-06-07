@@ -12,16 +12,16 @@ import com.red_velvet.flix.data.local.database.entity.TopRatedSeriesDto
 @Dao
 interface SeriesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPopularTvShows(popularTvShowEntities: List<PopularSeriesDto>)
+    suspend fun insertPopularSeries(popularSeries: List<PopularSeriesDto>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTopRatedTvShows(topRatedTvShowEntities: List<TopRatedSeriesDto>)
+    suspend fun insertTopRatedSeries(topRatedSeries: List<TopRatedSeriesDto>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOnTheAirTvShows(onTheAirTvShowEntities: List<OnTheAirSeriesDto>)
+    suspend fun insertOnTheAirSeries(onTheAirSeries: List<OnTheAirSeriesDto>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAiringTodayTvShows(airingTodayTvShowEntities: List<AiringTodaySeriesDto>)
+    suspend fun insertAiringTodaySeries(airingTodaySeries: List<AiringTodaySeriesDto>)
 
     @Query("SELECT * FROM POPULAR_SERIES")
     suspend fun getPopularSeries(): List<PopularSeriesDto>
