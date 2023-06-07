@@ -14,7 +14,8 @@ fun PopularMovieEntity.toModel(): Movie {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + imageUrl,
         popularity = 0.0,
         releaseDate = date,
-        voteAverage = 0.0
+        voteAverage = 0.0,
+        originalLanguage = originalLanguage
     )
 }
 
@@ -25,7 +26,8 @@ fun UpcomingMovieEntity.toModel(): Movie {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + imageUrl,
         popularity = 0.0,
         releaseDate = date,
-        voteAverage = 0.0
+        voteAverage = 0.0,
+        originalLanguage = originalLanguage
     )
 }
 
@@ -36,7 +38,8 @@ fun TopRatedMovieEntity.toModel(): Movie {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + imageUrl,
         popularity = 0.0,
         releaseDate = date,
-        voteAverage = 0.0
+        voteAverage = 0.0,
+        originalLanguage = originalLanguage
     )
 }
 
@@ -47,7 +50,8 @@ fun NowPlayingMovieEntity.toModel(): Movie {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + imageUrl,
         popularity = 0.0,
         releaseDate = date,
-        voteAverage = 0.0
+        voteAverage = 0.0,
+        originalLanguage = originalLanguage
     )
 }
 

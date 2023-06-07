@@ -1,5 +1,6 @@
 package com.red_velvet.flix.ui.home.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -68,9 +69,17 @@ class HomeAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (homeItems.isNotEmpty()) {
-            return R.layout.list_movie
+        return when (homeItems[position].title) {
+
+            "Popular" -> {
+                Log.d(
+                    "TAG",
+                    "homeItems[position].title: ${homeItems[position].movies.first()}"
+                )
+                R.layout.item_popular_movie
+            }
+
+            else -> R.layout.list_movie
         }
-        return -1
     }
 }

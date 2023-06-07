@@ -7,16 +7,33 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.red_velvet.flix.R
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Locale
+
+@BindingAdapter("app:formattedDate", "app:language", requireAll = true)
+fun bindFormattedDateWithCountryCode(view: TextView, rawDate: String?, languageCode: String?) {
+    if (rawDate.isNullOrEmpty() || languageCode.isNullOrEmpty()) {
+        view.text = ""
+        return
+    }
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+    val date = inputFormat.parse(rawDate)
+
+    val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+    val formattedDate = outputFormat.format(date!!)
+
+    val countryCode = convertLanguageToCountryCode(languageCode)
+
+    view.text = "$formattedDate ($countryCode)"
+}
 
 
 @BindingAdapter("app:posterImage")
 fun bindMovieImage(image: ImageView, imageURL: String?) {
     imageURL?.let {
-        Glide.with(image.context)
-            .load(imageURL)
-            .placeholder(R.drawable.ic_loading)
-            .error(R.drawable.ic_media_background)
-            .into(image)
+        Glide.with(image.context).load(imageURL).placeholder(R.drawable.ic_loading)
+            .error(R.drawable.ic_media_background).into(image)
     }
 }
 
@@ -30,8 +47,6 @@ fun isVisible(view: View, isVisible: Boolean) {
 fun hideIfTrue(view: View, value: Boolean) {
     view.isVisible = !value
 }
-
-
 
 
 @BindingAdapter("app:errorText")

@@ -16,7 +16,8 @@ fun MovieDto.toModel(): Movie {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
         popularity = popularity.orZero(),
         releaseDate = releaseDate.orEmpty(),
-        voteAverage = voteAverage.orZero()
+        voteAverage = voteAverage.orZero(),
+        originalLanguage = originalLanguage.orEmpty(),
     )
 }
 

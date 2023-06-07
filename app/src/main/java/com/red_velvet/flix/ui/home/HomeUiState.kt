@@ -22,7 +22,9 @@ data class HomeUiState(
         val imageUrl: String = "",
         val title: String = "",
         val date: String = "",
-    )
+        val originalLanguage: String = "",
+
+        )
 }
 
 internal fun List<Movie>.toUiState(): List<HomeUiState.MediaUiState> {
@@ -31,7 +33,19 @@ internal fun List<Movie>.toUiState(): List<HomeUiState.MediaUiState> {
             id = it.id,
             imageUrl = it.imageUrl,
             title = it.title,
-            date = it.releaseDate
+            date = it.releaseDate,
+            originalLanguage = it.originalLanguage,
         )
     }
+}
+
+internal fun Movie.toUiState(): HomeUiState.MediaUiState {
+    return HomeUiState.MediaUiState(
+        id = id,
+        title = title,
+        imageUrl = imageUrl,
+        date = releaseDate,
+        originalLanguage = originalLanguage
+    )
+
 }

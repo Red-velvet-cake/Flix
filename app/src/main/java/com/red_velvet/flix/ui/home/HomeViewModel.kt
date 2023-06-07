@@ -32,40 +32,45 @@ class HomeViewModel @Inject constructor(
                 "Title 1",
                 "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
                 0.0,
-                "go go go",
+                "2022-1-3",
                 0.0,
+                "en",
             ),
             Movie(
                 2,
                 "Title 2",
                 "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
                 0.0,
-                "go go go",
+                "2022-3-11",
                 0.0,
+                "ar",
             ),
             Movie(
                 2,
                 "Title 3",
                 "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
                 0.0,
-                "go go go",
+                "2022-7-12",
                 0.0,
+                "ja",
             ),
             Movie(
                 2,
                 "Title 4",
                 "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
                 0.0,
-                "go go go",
+                "2022-5-22",
                 0.0,
+                "ch"
             ),
             Movie(
                 2,
                 "Title 5",
                 "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
                 0.0,
-                "go go go",
+                "2022-4-22",
                 0.0,
+                "ko"
             ),
 
             )
@@ -94,7 +99,10 @@ class HomeViewModel @Inject constructor(
 
     private fun modifyPopularMoviesState(movies: List<Movie>) {
         _state.update { oldState ->
-            oldState.copy(popularMovies = movies.toUiState(), isLoading = false)
+            oldState.copy(
+                popularMovies = mutableListOf(movies.first()).toUiState(),
+                isLoading = false
+            )
         }
     }
 
