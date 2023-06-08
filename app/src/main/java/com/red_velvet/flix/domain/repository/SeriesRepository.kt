@@ -1,8 +1,5 @@
 package com.red_velvet.flix.domain.repository
 
-import com.red_velvet.flix.data.remote.recoures.Pagination
-import com.red_velvet.flix.data.remote.recoures.image.ImagesResource
-import com.red_velvet.flix.data.remote.recoures.series.SeriesResource
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.series.EpisodeEntity
@@ -27,9 +24,9 @@ interface SeriesRepository {
     suspend fun getEpisodeImages(seriesId: Int, season: Int, episode: Int): List<String>
     suspend fun getEpisodeTrailers(seriesId: Int, season: Int, episode: Int): List<TrailerEntity>
     suspend fun rateEpisode(seriesId: Int, season: Int, episode: Int, rate: Float)
-    suspend fun getSeriesDetails(seriesId: Int): SeriesResource
-    suspend fun getSeriesImages(seriesId: Int): ImagesResource
-    suspend fun getSimilarSeries(seriesId: Int, page: Int?): Pagination<SeriesResource>
+    suspend fun getSeriesDetails(seriesId: Int): SeriesEntity
+    suspend fun getSeriesImages(seriesId: Int): List<String>
+    suspend fun getSimilarSeries(seriesId: Int, page: Int?): List<SeriesEntity>
 
     suspend fun getLocalPopularSeries(): List<SeriesEntity>
     suspend fun getLocalTopRatedSeries(): List<SeriesEntity>

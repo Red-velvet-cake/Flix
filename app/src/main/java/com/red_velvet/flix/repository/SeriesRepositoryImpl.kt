@@ -1,9 +1,6 @@
 package com.red_velvet.flix.repository
 
 import com.red_velvet.flix.data.local.database.dao.SeriesDao
-import com.red_velvet.flix.data.remote.recoures.Pagination
-import com.red_velvet.flix.data.remote.recoures.image.ImagesResource
-import com.red_velvet.flix.data.remote.recoures.series.SeriesResource
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.series.EpisodeEntity
@@ -98,16 +95,16 @@ class SeriesRepositoryImpl @Inject constructor(
         remoteDataSource.rateEpisode(seriesId, season, episode, rate)
     }
 
-    override suspend fun getSeriesDetails(seriesId: Int): SeriesResource {
-        return remoteDataSource.getSeriesDetails(seriesId)
+    override suspend fun getSeriesDetails(seriesId: Int): SeriesEntity {
+        return remoteDataSource.getSeriesDetails(seriesId).toEntity()
     }
 
-    override suspend fun getSeriesImages(seriesId: Int): ImagesResource {
-        return remoteDataSource.getSeriesImages(seriesId)
+    override suspend fun getSeriesImages(seriesId: Int): List<String> {
+        return remoteDataSource.getSeriesImages(seriesId).toEntity()
     }
 
-    override suspend fun getSimilarSeries(seriesId: Int, page: Int?): Pagination<SeriesResource> {
-        return remoteDataSource.getSimilarSeries(seriesId, page)
+    override suspend fun getSimilarSeries(seriesId: Int, page: Int?): List<SeriesEntity> {
+        return remoteDataSource.getSimilarSeries(seriesId, page).toEntity()
     }
 
 
