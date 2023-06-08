@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -21,7 +20,7 @@
             android:layout_height="0dp"
             android:overScrollMode="never"
             android:scrollbars="none"
-            app:hideIfTrue="@{viewModel.homeUiState.loading || viewModel.homeUiState.error.size() &gt;5}"
+            app:hideIfTrue="@{viewModel.state.loading || viewModel.state.error.size() &gt;5}"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"

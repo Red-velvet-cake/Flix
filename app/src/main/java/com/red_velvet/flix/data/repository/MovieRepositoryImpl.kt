@@ -1,6 +1,7 @@
 package com.red_velvet.flix.data.repository
 
 import com.red_velvet.flix.data.local.database.dao.MovieDao
+import com.red_velvet.flix.data.remote.APIErrorHandler
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.repository.mapper.movie.toEntity
 import com.red_velvet.flix.data.repository.mapper.movie.toNowPlayingMovieDto
@@ -16,14 +17,13 @@ import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
-import com.red_velvet.flix.domain.utils.ExceptionHandler
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     private val moviesService: MoviesService,
     private val movieDao: MovieDao,
-    exceptionHandler: ExceptionHandler
-) : MovieRepository, BaseRepository(exceptionHandler) {
+    apiErrorHandler: APIErrorHandler
+) : MovieRepository, BaseRepository(apiErrorHandler) {
     override suspend fun getPopularMovies(
         page: Int?,
         region: String?,
