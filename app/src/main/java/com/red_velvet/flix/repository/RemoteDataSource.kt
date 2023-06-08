@@ -53,14 +53,12 @@ interface RemoteDataSource {
     suspend fun getSimilarSeries(seriesId: Int, page: Int?): Pagination<SeriesResource>
     suspend fun getSeriesTrailers(seriesId: Int): TrailersResource
     suspend fun getSeriesRecommendations(seriesId: Int, page: Int?): Pagination<SeriesResource>
-
     suspend fun getLatestSeries(): SeriesResource
     suspend fun getSeriesKeywords(seriesId: Int): KeywordsResource
     suspend fun getSeriesReviews(seriesId: Int, page: Int?): Pagination<ReviewResource>
     suspend fun rateSeries(seriesId: Int, rate: Float): ApiResponse
     suspend fun getSeasonDetails(seriesId: Int, seasonNumber: Int): SeasonResource
     suspend fun getSeasonImages(seriesId: Int, seasonNumber: Int): ImagesResource
-
     suspend fun getEpisodeDetails(seriesId: Int, season: Int, episode: Int): EpisodeResource
     suspend fun getEpisodeImages(seriesId: Int, season: Int, episode: Int): ImagesResource
     suspend fun getEpisodeTrailers(seriesId: Int, season: Int, episode: Int): TrailersResource
