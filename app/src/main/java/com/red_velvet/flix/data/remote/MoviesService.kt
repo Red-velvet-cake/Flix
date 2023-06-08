@@ -45,28 +45,28 @@ interface MoviesService {
         @Query("page") page: Int? = 1,
         @Query("region") region: String? = null,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<MovieResource>>
+    ): Response<Pagination<MovieResource>>
 
     @GET("movie/upcoming")
     suspend fun getUpcomingMovies(
         @Query("page") page: Int? = 1,
         @Query("region") region: String? = null,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<MovieResource>>
+    ): Response<Pagination<MovieResource>>
 
     @GET("movie/top_rated")
     suspend fun getTopRatedMovies(
         @Query("page") page: Int? = 1,
         @Query("region") region: String? = null,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<MovieResource>>
+    ): Response<Pagination<MovieResource>>
 
     @GET("movie/now_playing")
     suspend fun getNowPlayingMovies(
         @Query("page") page: Int? = 1,
         @Query("region") region: String? = null,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<MovieResource>>
+    ): Response<Pagination<MovieResource>>
 
     @GET("movie/{movie_id}")
     suspend fun getMovieDetails(
@@ -83,7 +83,7 @@ interface MoviesService {
         @Path("movie_id") movieId: Int,
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<MovieResource>>
+    ): Response<Pagination<MovieResource>>
 
     @GET("movie/{movie_id}/keywords")
     suspend fun getMovieKeywords(@Path("movie_id") movieId: Int): Response<KeywordsResource>
@@ -99,7 +99,7 @@ interface MoviesService {
         @Path("movie_id") movieId: Int,
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<MovieResource>>
+    ): Response<Pagination<MovieResource>>
 
     @FormUrlEncoded
     @POST("movie/{movie_id}/rating")
@@ -116,7 +116,7 @@ interface MoviesService {
         @Path("movie_id") movieId: Int,
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<ReviewResource>>
+    ): Response<Pagination<ReviewResource>>
 
 
     @GET("tv/on_the_air")
@@ -124,26 +124,26 @@ interface MoviesService {
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US",
         @Query("timezone") timezone: String? = null
-    ): Response<PaginationResource<SeriesResource>>
+    ): Response<Pagination<SeriesResource>>
 
     @GET("tv/airing_today")
     suspend fun getAiringTodaySeries(
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US",
         @Query("timezone") timezone: String? = null
-    ): Response<PaginationResource<SeriesResource>>
+    ): Response<Pagination<SeriesResource>>
 
     @GET("tv/popular")
     suspend fun getPopularSeries(
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<SeriesResource>>
+    ): Response<Pagination<SeriesResource>>
 
     @GET("tv/top_rated")
     suspend fun getTopRatedSeries(
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<SeriesResource>>
+    ): Response<Pagination<SeriesResource>>
 
     @GET("tv/{tv_id}")
     suspend fun getSeriesDetails(
@@ -164,7 +164,7 @@ interface MoviesService {
         @Path("tv_id") tvId: Int,
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<SeriesResource>>
+    ): Response<Pagination<SeriesResource>>
 
     @GET("tv/{series_id}/videos")
     suspend fun getSeriesTrailers(
@@ -177,7 +177,7 @@ interface MoviesService {
         @Path("series_id") seriesId: Int,
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<SeriesResource>>
+    ): Response<Pagination<SeriesResource>>
 
     @GET("tv/latest")
     suspend fun getLatestSeries(): Response<SeriesResource>
@@ -190,7 +190,7 @@ interface MoviesService {
         @Path("series_id") seriesId: Int,
         @Query("page") page: Int? = 1,
         @Query("language") language: String? = "en-US"
-    ): Response<PaginationResource<ReviewResource>>
+    ): Response<Pagination<ReviewResource>>
 
     @FormUrlEncoded
     @POST("tv/{series_id}/rating")
@@ -267,7 +267,7 @@ interface MoviesService {
         @Query("sort_by") sortBy: String? = "popularity.desc",
         @Query("vote_average.gte") voteAverageGte: Double? = null,
         @Query("year") year: Int? = null
-    ): Response<PaginationResource<MovieResource>>
+    ): Response<Pagination<MovieResource>>
 
 
     @GET("keyword/{keyword_id}")
@@ -280,7 +280,7 @@ interface MoviesService {
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
         @Query("region") region: String? = null
-    ): Response<PaginationResource<MovieResource>>
+    ): Response<Pagination<MovieResource>>
 
 
     @POST("list")
@@ -319,7 +319,7 @@ interface MoviesService {
         @Query("include_adult") includeAdult: Boolean = false,
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
-    ): Response<PaginationResource<MovieResource>>
+    ): Response<Pagination<MovieResource>>
 
     @GET("search/movie")
     suspend fun searchMovies(
@@ -330,7 +330,7 @@ interface MoviesService {
         @Query("page") page: Int? = 1,
         @Query("region") region: String? = null,
         @Query("year") year: Int? = null
-    ): Response<PaginationResource<MovieResource>>
+    ): Response<Pagination<MovieResource>>
 
     @GET("search/person")
     suspend fun searchPeople(
@@ -338,7 +338,7 @@ interface MoviesService {
         @Query("include_adult") includeAdult: Boolean = false,
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
-    ): Response<PaginationResource<PersonResource>>
+    ): Response<Pagination<PersonResource>>
 
     @GET("search/tv")
     suspend fun searchTvShows(
@@ -348,53 +348,47 @@ interface MoviesService {
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
         @Query("year") year: Int? = null
-    ): Response<PaginationResource<SeriesResource>>
+    ): Response<Pagination<SeriesResource>>
 
 
     @GET("account")
     suspend fun getAccountDetails(): Response<AccountResource>
 
-    @POST("account/{account_id}/favorite")
+    @POST("account/favorite")
     suspend fun markAsFavorite(
-        @Path("account_id") accountId: Int,
         @Body markAsFavoriteRequest: MarkAsFavoriteRequest
     ): Response<ApiResponse>
 
-    @GET("account/{account_id}/favorite/tv")
+    @GET("account/favorite/tv")
     suspend fun getFavoriteTvShows(
-        @Path("account_id") accountId: Int,
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
         @Query("sort_by") sortBy: String? = "created_at.asc"
-    ): Response<PaginationResource<SeriesResource>>
+    ): Response<Pagination<SeriesResource>>
 
-    @GET("account/{account_id}/favorite/movies")
+    @GET("account/favorite/movies")
     suspend fun getFavoriteMovies(
-        @Path("account_id") accountId: Int,
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
         @Query("sort_by") sortBy: String? = "created_at.asc"
-    ): Response<PaginationResource<MovieResource>>
+    ): Response<Pagination<MovieResource>>
 
-    @POST("account/{account_id}/watchlist")
+    @POST("account/watchlist")
     suspend fun addToWatchlist(
-        @Path("account_id") accountId: Int,
         @Body addToWatchlistRequest: AddToWatchListRequest
     ): Response<ApiResponse>
 
-    @GET("account/{account_id}/watchlist/tv")
+    @GET("account/watchlist/tv")
     suspend fun getTvShowsWatchlist(
-        @Path("account_id") accountId: Int,
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
         @Query("sort_by") sortBy: String? = "created_at.asc"
-    ): Response<PaginationResource<SeriesResource>>
+    ): Response<Pagination<SeriesResource>>
 
-    @GET("account/{account_id}/watchlist/movies")
+    @GET("account/watchlist/movies")
     suspend fun getMoviesWatchlist(
-        @Path("account_id") accountId: Int,
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
         @Query("sort_by") sortBy: String? = "created_at.asc"
-    ): Response<PaginationResource<MovieResource>>
+    ): Response<Pagination<MovieResource>>
 }
