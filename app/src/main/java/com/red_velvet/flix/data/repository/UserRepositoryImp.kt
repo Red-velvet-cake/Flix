@@ -1,10 +1,10 @@
 package com.red_velvet.flix.data.repository
 
 import com.red_velvet.flix.data.local.shared_prefs.SharedPrefs
+import com.red_velvet.flix.data.remote.APIErrorHandler
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.remote.recoures.auth.LoginRequest
 import com.red_velvet.flix.data.repository.mapper.account.toEntity
-import com.red_velvet.flix.data.util.ExceptionHandler
 import com.red_velvet.flix.domain.entity.account.AccountEntity
 import com.red_velvet.flix.domain.repository.UserRepository
 import javax.inject.Inject
@@ -12,8 +12,8 @@ import javax.inject.Inject
 class UserRepositoryImp @Inject constructor(
     private val service: MoviesService,
     private val sharedPrefs: SharedPrefs,
-    exceptionHandler: ExceptionHandler
-) : UserRepository, BaseRepository(exceptionHandler) {
+    apiErrorHandler: APIErrorHandler
+) : UserRepository, BaseRepository(apiErrorHandler) {
     override suspend fun login(userName: String, password: String) {
         wrapApiCall {
             service.validateRequestTokenWithLogin(

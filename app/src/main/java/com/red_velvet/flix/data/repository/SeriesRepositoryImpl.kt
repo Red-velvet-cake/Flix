@@ -1,6 +1,7 @@
 package com.red_velvet.flix.data.repository
 
 import com.red_velvet.flix.data.local.database.dao.SeriesDao
+import com.red_velvet.flix.data.remote.APIErrorHandler
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.repository.mapper.series.toAiringTodaySeriesDto
 import com.red_velvet.flix.data.repository.mapper.series.toAiringTodaySeriesEntity
@@ -12,7 +13,6 @@ import com.red_velvet.flix.data.repository.mapper.series.toPopularSeriesEntity
 import com.red_velvet.flix.data.repository.mapper.series.toTopRatedSeriesDto
 import com.red_velvet.flix.data.repository.mapper.series.toTopRatedSeriesEntity
 import com.red_velvet.flix.data.repository.mapper.toEntity
-import com.red_velvet.flix.data.util.ExceptionHandler
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.series.EpisodeEntity
@@ -24,8 +24,8 @@ import javax.inject.Inject
 class SeriesRepositoryImpl @Inject constructor(
     private val apiService: MoviesService,
     private val seriesDao: SeriesDao,
-    exceptionHandler: ExceptionHandler
-) : SeriesRepository, BaseRepository(exceptionHandler) {
+    apiErrorHandler: APIErrorHandler
+) : SeriesRepository, BaseRepository(apiErrorHandler) {
     override suspend fun getPopularSeries(
         page: Int?,
         language: String?,
