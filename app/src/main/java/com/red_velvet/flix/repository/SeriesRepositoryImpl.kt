@@ -1,139 +1,115 @@
 package com.red_velvet.flix.repository
 
 import com.red_velvet.flix.data.local.database.dao.SeriesDao
-import com.red_velvet.flix.data.remote.APIErrorHandler
-import com.red_velvet.flix.data.remote.APIService
-import com.red_velvet.flix.data.repository.mapper.series.toAiringTodaySeriesDto
-import com.red_velvet.flix.data.repository.mapper.series.toAiringTodaySeriesEntity
-import com.red_velvet.flix.data.repository.mapper.series.toEntity
-import com.red_velvet.flix.data.repository.mapper.series.toOnTheAirSeriesDto
-import com.red_velvet.flix.data.repository.mapper.series.toOnTheAirSeriesEntity
-import com.red_velvet.flix.data.repository.mapper.series.toPopularSeriesDto
-import com.red_velvet.flix.data.repository.mapper.series.toPopularSeriesEntity
-import com.red_velvet.flix.data.repository.mapper.series.toTopRatedSeriesDto
-import com.red_velvet.flix.data.repository.mapper.series.toTopRatedSeriesEntity
-import com.red_velvet.flix.data.repository.mapper.toEntity
+import com.red_velvet.flix.data.remote.recoures.Pagination
+import com.red_velvet.flix.data.remote.recoures.image.ImagesResource
+import com.red_velvet.flix.data.remote.recoures.series.SeriesResource
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.series.EpisodeEntity
 import com.red_velvet.flix.domain.entity.series.SeasonEntity
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.repository.SeriesRepository
+import com.red_velvet.flix.repository.mapper.series.toAiringTodaySeriesDto
+import com.red_velvet.flix.repository.mapper.series.toAiringTodaySeriesEntity
+import com.red_velvet.flix.repository.mapper.series.toEntity
+import com.red_velvet.flix.repository.mapper.series.toOnTheAirSeriesDto
+import com.red_velvet.flix.repository.mapper.series.toOnTheAirSeriesEntity
+import com.red_velvet.flix.repository.mapper.series.toPopularSeriesDto
+import com.red_velvet.flix.repository.mapper.series.toPopularSeriesEntity
+import com.red_velvet.flix.repository.mapper.series.toTopRatedSeriesDto
+import com.red_velvet.flix.repository.mapper.series.toTopRatedSeriesEntity
+import com.red_velvet.flix.repository.mapper.toEntity
 import javax.inject.Inject
 
 class SeriesRepositoryImpl @Inject constructor(
-    private val apiService: APIService,
+    private val remoteDataSource: RemoteDataSource,
     private val seriesDao: SeriesDao,
-    apiErrorHandler: APIErrorHandler
 ) : SeriesRepository {
-    override suspend fun getPopularSeries(
-        page: Int?,
-        language: String?,
-    ): List<SeriesEntity> {
-        return wrapApiCall { apiService.getPopularSeries(page, language) }
-            .items?.toEntity() ?: emptyList()
+    override suspend fun getPopularSeries(page: Int?): List<SeriesEntity> {
+        return remoteDataSource.getPopularSeries(page).toEntity()
     }
 
-    override suspend fun getTopRatedSeries(
-        page: Int?,
-        language: String?,
-    ): List<SeriesEntity> {
-        return wrapApiCall { apiService.getTopRatedSeries(page, language) }
-            .items?.toEntity() ?: emptyList()
+    override suspend fun getTopRatedSeries(page: Int?): List<SeriesEntity> {
+        return remoteDataSource.getTopRatedSeries(page).toEntity()
     }
 
-    override suspend fun getOnTheAirSeries(
-        page: Int?,
-        language: String?,
-        timezone: String?,
-    ): List<SeriesEntity> {
-        return wrapApiCall { apiService.getOnTheAirSeries(page, language, timezone) }
-            .items?.toEntity() ?: emptyList()
+    override suspend fun getOnTheAirSeries(page: Int?): List<SeriesEntity> {
+        return remoteDataSource.getOnTheAirSeries(page).toEntity()
     }
 
-    override suspend fun getAiringTodaySeries(
-        page: Int?,
-        language: String?,
-        timezone: String?,
-    ): List<SeriesEntity> {
-        return wrapApiCall { apiService.getAiringTodaySeries(page, language, timezone) }
-            .items?.toEntity() ?: emptyList()
+    override suspend fun getAiringTodaySeries(page: Int?): List<SeriesEntity> {
+        return remoteDataSource.getAiringTodaySeries(page).toEntity()
     }
 
-    override suspend fun getSeriesRecommendations(seriesId: Int, page: Int): List<SeriesEntity> {
-        return wrapApiCall { apiService.getSeriesRecommendations(seriesId, page) }
-            .items?.toEntity() ?: emptyList()
+    override suspend fun getSeriesRecommendations(seriesId: Int, page: Int?): List<SeriesEntity> {
+        return remoteDataSource.getSeriesRecommendations(seriesId, page).toEntity()
     }
 
     override suspend fun getLatestSeries(): SeriesEntity {
-        return wrapApiCall { apiService.getLatestSeries() }
-            .toEntity()
+        return remoteDataSource.getLatestSeries().toEntity()
     }
 
     override suspend fun getSeriesKeywords(seriesId: Int): List<String> {
-        return wrapApiCall { apiService.getSeriesKeywords(seriesId) }
-            .toEntity()
+        return remoteDataSource.getSeriesKeywords(seriesId).toEntity()
     }
 
-    override suspend fun getSeriesReviews(seriesId: Int, page: Int): List<ReviewEntity> {
-        return wrapApiCall { apiService.getSeriesReviews(seriesId, page) }
-            .items?.toEntity() ?: emptyList()
+    override suspend fun getSeriesReviews(seriesId: Int, page: Int?): List<ReviewEntity> {
+        return remoteDataSource.getSeriesReviews(seriesId, page).toEntity()
     }
 
-    override suspend fun rateSeries(seriesId: Int, rating: Double) {
-        wrapApiCall { apiService.rateSeries(seriesId, rating) }
+    override suspend fun rateSeries(seriesId: Int, rate: Float) {
+        remoteDataSource.rateSeries(seriesId, rate)
     }
 
     override suspend fun getSeasonDetails(seriesId: Int, seasonNumber: Int): SeasonEntity {
-        return wrapApiCall { apiService.getSeasonDetails(seriesId, seasonNumber) }
-            .toEntity()
+        return remoteDataSource.getSeasonDetails(seriesId, seasonNumber).toEntity()
     }
 
     override suspend fun getSeasonImages(seriesId: Int, seasonNumber: Int): List<String> {
-        return wrapApiCall { apiService.getSeasonImages(seriesId, seasonNumber) }
-            .toEntity()
+        return remoteDataSource.getSeasonImages(seriesId, seasonNumber).toEntity()
     }
 
-    override suspend fun getSeriesVideos(seriesId: Int): List<TrailerEntity> {
-        return wrapApiCall { apiService.getSeriesVideos(seriesId) }
-            .toEntity()
+    override suspend fun getSeriesTrailers(seriesId: Int): List<TrailerEntity> {
+        return remoteDataSource.getSeriesTrailers(seriesId).toEntity()
     }
 
     override suspend fun getEpisodeDetails(
         seriesId: Int,
-        seasonNumber: Int,
-        episodeNumber: Int
+        season: Int,
+        episode: Int
     ): EpisodeEntity {
-        return wrapApiCall { apiService.getEpisodeDetails(seriesId, seasonNumber, episodeNumber) }
-            .toEntity()
+        return remoteDataSource.getEpisodeDetails(seriesId, season, episode).toEntity()
     }
 
-    override suspend fun getEpisodeImages(
-        seriesId: Int,
-        seasonNumber: Int,
-        episodeNumber: Int
-    ): List<String> {
-        return wrapApiCall { apiService.getEpisodeImages(seriesId, seasonNumber, episodeNumber) }
-            .toEntity()
+    override suspend fun getEpisodeImages(seriesId: Int, season: Int, episode: Int): List<String> {
+        return remoteDataSource.getEpisodeImages(seriesId, season, episode).toEntity()
     }
 
-    override suspend fun getEpisodeVideos(
+    override suspend fun getEpisodeTrailers(
         seriesId: Int,
-        seasonNumber: Int,
-        episodeNumber: Int
+        season: Int,
+        episode: Int
     ): List<TrailerEntity> {
-        return wrapApiCall { apiService.getEpisodeTrailers(seriesId, seasonNumber, episodeNumber) }
-            .toEntity()
+        return remoteDataSource.getEpisodeTrailers(seriesId, season, episode).toEntity()
     }
 
-    override suspend fun rateEpisode(
-        seriesId: Int,
-        seasonNumber: Int,
-        episodeNumber: Int,
-        rating: Double
-    ) {
-        wrapApiCall { apiService.rateEpisode(seriesId, seasonNumber, episodeNumber, rating) }
+    override suspend fun rateEpisode(seriesId: Int, season: Int, episode: Int, rate: Float) {
+        remoteDataSource.rateEpisode(seriesId, season, episode, rate)
     }
+
+    override suspend fun getSeriesDetails(seriesId: Int): SeriesResource {
+        return remoteDataSource.getSeriesDetails(seriesId)
+    }
+
+    override suspend fun getSeriesImages(seriesId: Int): ImagesResource {
+        return remoteDataSource.getSeriesImages(seriesId)
+    }
+
+    override suspend fun getSimilarSeries(seriesId: Int, page: Int?): Pagination<SeriesResource> {
+        return remoteDataSource.getSimilarSeries(seriesId, page)
+    }
+
 
     override suspend fun getLocalPopularSeries(): List<SeriesEntity> {
         return seriesDao.getPopularSeries()

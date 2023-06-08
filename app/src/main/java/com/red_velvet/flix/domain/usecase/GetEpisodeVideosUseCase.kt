@@ -10,6 +10,6 @@ class GetEpisodeVideosUseCase @Inject constructor(private val seriesRepository: 
         seasonNumber: Int,
         episodeNumber: Int,
     ): List<TrailerEntity> {
-        return seriesRepository.getEpisodeVideos(seriesId, seasonNumber, episodeNumber)
+        return seriesRepository.getEpisodeTrailers(seriesId, seasonNumber, episodeNumber)
     }
 }
