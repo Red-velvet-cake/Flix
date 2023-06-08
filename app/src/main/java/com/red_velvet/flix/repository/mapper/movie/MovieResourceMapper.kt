@@ -5,6 +5,7 @@ import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieDto
 import com.red_velvet.flix.data.local.database.entity.PopularMovieDto
 import com.red_velvet.flix.data.local.database.entity.TopRatedMovieDto
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieDto
+import com.red_velvet.flix.data.remote.recoures.Pagination
 import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.utils.orZero
@@ -20,8 +21,8 @@ fun MovieResource.toEntity(): MovieEntity {
     )
 }
 
-fun List<MovieResource>?.toEntity(): List<MovieEntity> {
-    return this?.map { it.toEntity() } ?: emptyList()
+fun Pagination<MovieResource>.toEntity(): List<MovieEntity> {
+    return items?.map { it.toEntity() } ?: emptyList()
 }
 
 fun MovieResource.toPopularMovieDto(): PopularMovieDto {
@@ -51,8 +52,8 @@ fun MovieResource.toUpcomingMovieDto(): UpcomingMovieDto {
     )
 }
 
-fun List<MovieResource>?.toUpcomingMovieDto(): List<UpcomingMovieDto> {
-    return this?.map { it.toUpcomingMovieDto() } ?: emptyList()
+fun Pagination<MovieResource>.toUpcomingMovieDto(): List<UpcomingMovieDto> {
+    return items?.map { it.toUpcomingMovieDto() } ?: emptyList()
 }
 
 fun MovieResource.toTopRatedMovieDto(): TopRatedMovieDto {
@@ -81,6 +82,6 @@ fun MovieResource.toNowPlayingMovieDto(): NowPlayingMovieDto {
     )
 }
 
-fun List<MovieResource>?.toNowPlayingMovieDto(): List<NowPlayingMovieDto> {
-    return this?.map { it.toNowPlayingMovieDto() } ?: emptyList()
+fun Pagination<MovieResource>.toNowPlayingMovieDto(): List<NowPlayingMovieDto> {
+    return items?.map { it.toNowPlayingMovieDto() } ?: emptyList()
 }

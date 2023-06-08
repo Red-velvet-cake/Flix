@@ -1,5 +1,6 @@
 package com.red_velvet.flix.repository.mapper
 
+import com.red_velvet.flix.data.remote.recoures.Pagination
 import com.red_velvet.flix.data.remote.recoures.review.AuthorDetailsResource
 import com.red_velvet.flix.data.remote.recoures.review.ReviewResource
 import com.red_velvet.flix.domain.entity.ReviewEntity
@@ -29,6 +30,6 @@ fun AuthorDetailsResource.toEntity(): AuthorDetailsEntity {
     )
 }
 
-fun List<ReviewResource>?.toEntity(): List<ReviewEntity> {
-    return this?.map { it.toEntity() } ?: emptyList()
+fun Pagination<ReviewResource>.toEntity(): List<ReviewEntity> {
+    return items?.map { it.toEntity() } ?: emptyList()
 }

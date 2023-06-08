@@ -22,23 +22,19 @@ class MovieRepositoryImpl @Inject constructor(
     private val movieDao: MovieDao,
 ) : MovieRepository {
     override suspend fun getPopularMovies(page: Int?): List<MovieEntity> {
-        return remoteDataSource.getPopularMovies(page).items
-            .toEntity()
+        return remoteDataSource.getPopularMovies(page).toEntity()
     }
 
     override suspend fun getUpcomingMovies(page: Int?): List<MovieEntity> {
-        return remoteDataSource.getUpcomingMovies(page).items
-            .toEntity()
+        return remoteDataSource.getUpcomingMovies(page).toEntity()
     }
 
     override suspend fun getNowPlayingMovies(page: Int?): List<MovieEntity> {
-        return remoteDataSource.getNowPlayingMovies(page).items
-            .toEntity()
+        return remoteDataSource.getNowPlayingMovies(page).toEntity()
     }
 
     override suspend fun getTopRatedMovies(page: Int?): List<MovieEntity> {
-        return remoteDataSource.getTopRatedMovies(page).items
-            .toEntity()
+        return remoteDataSource.getTopRatedMovies(page).toEntity()
     }
 
     override suspend fun getMovieDetails(movieId: Int): MovieEntity {
@@ -50,8 +46,7 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getSimilarMovies(movieId: Int, page: Int?): List<MovieEntity> {
-        return remoteDataSource.getSimilarMovies(movieId, page).items
-            .toEntity()
+        return remoteDataSource.getSimilarMovies(movieId, page).toEntity()
     }
 
     override suspend fun getMovieTrailers(movieId: Int): List<TrailerEntity> {
@@ -63,8 +58,7 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMovieRecommendations(movieId: Int, page: Int?): List<MovieEntity> {
-        return remoteDataSource.getMovieRecommendations(movieId, page).items
-            .toEntity()
+        return remoteDataSource.getMovieRecommendations(movieId, page).toEntity()
     }
 
     override suspend fun rateMovie(movieId: Int, rate: Float) {
@@ -76,33 +70,27 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMovieReviews(movieId: Int, page: Int?): List<ReviewEntity> {
-        return remoteDataSource.getMovieReviews(movieId, page).items
-            .toEntity()
+        return remoteDataSource.getMovieReviews(movieId, page).toEntity()
     }
 
     override suspend fun getMoviesWatchlist(page: Int?): List<MovieEntity> {
-        return remoteDataSource.getMoviesWatchlist(page).items
-            .toEntity()
+        return remoteDataSource.getMoviesWatchlist(page).toEntity()
     }
 
     override suspend fun getFavoriteMovies(page: Int?): List<MovieEntity> {
-        return remoteDataSource.getFavoriteMovies(page).items
-            .toEntity()
+        return remoteDataSource.getFavoriteMovies(page).toEntity()
     }
 
     override suspend fun search(query: String, page: Int?): List<MovieEntity> {
-        return remoteDataSource.search(query, page).items
-            .toEntity()
+        return remoteDataSource.search(query, page).toEntity()
     }
 
     override suspend fun searchMovies(query: String, page: Int?): List<MovieEntity> {
-        return remoteDataSource.searchMovies(query, page).items
-            .toEntity()
+        return remoteDataSource.searchMovies(query, page).toEntity()
     }
 
     override suspend fun getMoviesByKeyword(keywordId: Int, page: Int?): List<MovieEntity> {
-        return remoteDataSource.getMoviesByKeyword(keywordId, page).items
-            .toEntity()
+        return remoteDataSource.getMoviesByKeyword(keywordId, page).toEntity()
     }
 
     override suspend fun discoverMovies(
@@ -111,8 +99,7 @@ class MovieRepositoryImpl @Inject constructor(
         rate: Float?,
         year: Int?
     ): List<MovieEntity> {
-        return remoteDataSource.discoverMovies(page, sortBy, rate, year).items
-            .toEntity()
+        return remoteDataSource.discoverMovies(page, sortBy, rate, year).toEntity()
     }
 
     override suspend fun getLocalPopularMovies(): List<MovieEntity> {

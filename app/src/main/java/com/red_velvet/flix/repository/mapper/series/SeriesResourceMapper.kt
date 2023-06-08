@@ -5,6 +5,7 @@ import com.red_velvet.flix.data.local.database.entity.AiringTodaySeriesDto
 import com.red_velvet.flix.data.local.database.entity.OnTheAirSeriesDto
 import com.red_velvet.flix.data.local.database.entity.PopularSeriesDto
 import com.red_velvet.flix.data.local.database.entity.TopRatedSeriesDto
+import com.red_velvet.flix.data.remote.recoures.Pagination
 import com.red_velvet.flix.data.remote.recoures.series.SeriesResource
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.utils.orZero
@@ -20,8 +21,8 @@ fun SeriesResource.toEntity(): SeriesEntity {
     )
 }
 
-fun List<SeriesResource>?.toEntity(): List<SeriesEntity> {
-    return this?.map { it.toEntity() } ?: emptyList()
+fun Pagination<SeriesResource>.toEntity(): List<SeriesEntity> {
+    return items?.map { it.toEntity() } ?: emptyList()
 }
 
 fun SeriesResource.toPopularSeriesDto(): PopularSeriesDto {
@@ -37,8 +38,8 @@ fun SeriesResource.toPopularSeriesDto(): PopularSeriesDto {
     )
 }
 
-fun List<SeriesResource>?.toPopularSeriesDto(): List<PopularSeriesDto> {
-    return this?.map { it.toPopularSeriesDto() } ?: emptyList()
+fun Pagination<SeriesResource>.toPopularSeriesDto(): List<PopularSeriesDto> {
+    return items?.map { it.toPopularSeriesDto() } ?: emptyList()
 }
 
 fun SeriesResource.toTopRatedSeriesDto(): TopRatedSeriesDto {
@@ -54,8 +55,8 @@ fun SeriesResource.toTopRatedSeriesDto(): TopRatedSeriesDto {
     )
 }
 
-fun List<SeriesResource>?.toTopRatedSeriesDto(): List<TopRatedSeriesDto> {
-    return this?.map { it.toTopRatedSeriesDto() } ?: emptyList()
+fun Pagination<SeriesResource>.toTopRatedSeriesDto(): List<TopRatedSeriesDto> {
+    return items?.map { it.toTopRatedSeriesDto() } ?: emptyList()
 }
 
 fun SeriesResource.toAiringTodaySeriesDto(): AiringTodaySeriesDto {
@@ -72,8 +73,8 @@ fun SeriesResource.toAiringTodaySeriesDto(): AiringTodaySeriesDto {
     )
 }
 
-fun List<SeriesResource>?.toAiringTodaySeriesDto(): List<AiringTodaySeriesDto> {
-    return this?.map { it.toAiringTodaySeriesDto() } ?: emptyList()
+fun Pagination<SeriesResource>.toAiringTodaySeriesDto(): List<AiringTodaySeriesDto> {
+    return items?.map { it.toAiringTodaySeriesDto() } ?: emptyList()
 }
 
 fun SeriesResource.toOnTheAirSeriesDto(): OnTheAirSeriesDto {
@@ -89,6 +90,6 @@ fun SeriesResource.toOnTheAirSeriesDto(): OnTheAirSeriesDto {
     )
 }
 
-fun List<SeriesResource>?.toOnTheAirSeriesDto(): List<OnTheAirSeriesDto> {
-    return this?.map { it.toOnTheAirSeriesDto() } ?: emptyList()
+fun Pagination<SeriesResource>.toOnTheAirSeriesDto(): List<OnTheAirSeriesDto> {
+    return items?.map { it.toOnTheAirSeriesDto() } ?: emptyList()
 }
