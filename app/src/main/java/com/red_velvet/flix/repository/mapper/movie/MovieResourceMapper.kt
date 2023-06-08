@@ -1,4 +1,4 @@
-package com.red_velvet.flix.data.repository.mapper.movie
+package com.red_velvet.flix.repository.mapper.movie
 
 import com.red_velvet.flix.BuildConfig
 import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieDto

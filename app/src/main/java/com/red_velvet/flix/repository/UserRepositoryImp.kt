@@ -1,4 +1,4 @@
-package com.red_velvet.flix.data.repository
+package com.red_velvet.flix.repository
 
 import com.red_velvet.flix.data.local.shared_prefs.SharedPrefs
 import com.red_velvet.flix.data.remote.APIErrorHandler
@@ -13,7 +13,7 @@ class UserRepositoryImp @Inject constructor(
     private val service: MoviesService,
     private val sharedPrefs: SharedPrefs,
     apiErrorHandler: APIErrorHandler
-) : UserRepository, BaseRepository(apiErrorHandler) {
+) : UserRepository, com.red_velvet.flix.repository.BaseRepository(apiErrorHandler) {
     override suspend fun login(userName: String, password: String) {
         wrapApiCall {
             service.validateRequestTokenWithLogin(

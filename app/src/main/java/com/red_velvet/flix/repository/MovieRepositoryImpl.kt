@@ -1,4 +1,4 @@
-package com.red_velvet.flix.data.repository
+package com.red_velvet.flix.repository
 
 import com.red_velvet.flix.data.local.database.dao.MovieDao
 import com.red_velvet.flix.data.remote.APIErrorHandler
@@ -23,7 +23,7 @@ class MovieRepositoryImpl @Inject constructor(
     private val moviesService: MoviesService,
     private val movieDao: MovieDao,
     apiErrorHandler: APIErrorHandler
-) : MovieRepository, BaseRepository(apiErrorHandler) {
+) : MovieRepository, com.red_velvet.flix.repository.BaseRepository(apiErrorHandler) {
     override suspend fun getPopularMovies(
         page: Int?,
         region: String?,

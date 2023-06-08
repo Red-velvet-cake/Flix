@@ -1,4 +1,4 @@
-package com.red_velvet.flix.data.repository
+package com.red_velvet.flix.repository
 
 import com.red_velvet.flix.data.remote.APIErrorHandler
 import com.red_velvet.flix.domain.utils.FlixException
