@@ -4,15 +4,11 @@ sealed class FlixException : Exception() {
 
     object Unauthorized : FlixException()
 
-    object InvalidAPIKey : FlixException()
-
     object ServerError : FlixException()
 
     object InvalidUsernameOrPassword : FlixException()
 
     object EmailNotVerified : FlixException()
-
-    object InvalidRequestToken : FlixException()
 
     object NoInternet : FlixException()
 

@@ -26,16 +26,12 @@ abstract class BaseViewModel<T : BaseUiState> : ViewModel() {
                 onSuccess(result)
             } catch (e: FlixException.Unauthorized) {
                 onError(ErrorUiState.UnAuthorized)
-            } catch (e: FlixException.InvalidAPIKey) {
-                onError(ErrorUiState.InvalidApiKey)
             } catch (e: FlixException.ServerError) {
                 onError(ErrorUiState.ServerError)
             } catch (e: FlixException.InvalidUsernameOrPassword) {
                 onError(ErrorUiState.InvalidUsernameOrPassword)
             } catch (e: FlixException.EmailNotVerified) {
                 onError(ErrorUiState.EmailNotVerified)
-            } catch (e: FlixException.InvalidRequestToken) {
-                onError(ErrorUiState.InvalidRequestToken)
             } catch (e: FlixException.NoInternet) {
                 onError(ErrorUiState.NoInternet)
             } catch (e: FlixException.TimeOut) {
@@ -45,6 +41,5 @@ abstract class BaseViewModel<T : BaseUiState> : ViewModel() {
             }
         }
     }
-
 }
 

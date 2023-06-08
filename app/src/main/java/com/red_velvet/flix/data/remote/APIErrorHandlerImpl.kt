@@ -33,11 +33,9 @@ class APIErrorHandlerImpl @Inject constructor() : APIErrorHandler {
     override fun getFlixException(errorBody: ResponseBody?): FlixException {
         return when (parseErrorBody(errorBody).statusCode) {
             in UNAUTHORIZED_STATUS_CODES -> FlixException.Unauthorized
-            in INVALID_API_KEY_STATUS_CODES -> FlixException.InvalidAPIKey
             in SERVER_ERROR_STATUS_CODES -> FlixException.ServerError
             in INVALID_USERNAME_PASSWORD_STATUS_CODES -> FlixException.InvalidUsernameOrPassword
             EMAIL_NOT_VERIFIED.code -> FlixException.EmailNotVerified
-            INVALID_REQUEST_TOKEN.code -> FlixException.InvalidRequestToken
             else -> FlixException.Unknown
         }
     }
@@ -59,12 +57,10 @@ class APIErrorHandlerImpl @Inject constructor() : APIErrorHandler {
             ACCOUNT_DISABLED.code,
             INVALID_TOKEN.code,
             INSUFFICIENT_PERMISSIONS.code,
-            RESOURCE_PRIVATE.code
-        )
-
-        private val INVALID_API_KEY_STATUS_CODES = listOf(
+            RESOURCE_PRIVATE.code,
             INVALID_API_KEY.code,
-            SUSPENDED_API_KEY.code
+            SUSPENDED_API_KEY.code,
+            INVALID_REQUEST_TOKEN.code
         )
 
         private val SERVER_ERROR_STATUS_CODES = listOf(
