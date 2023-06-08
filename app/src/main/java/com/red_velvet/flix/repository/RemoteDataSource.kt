@@ -1,21 +1,22 @@
-package com.red_velvet.flix.data.remote
+package com.red_velvet.flix.repository
 
 import com.red_velvet.flix.data.remote.recoures.ApiResponse
+import com.red_velvet.flix.data.remote.recoures.KeywordResource
 import com.red_velvet.flix.data.remote.recoures.Pagination
 import com.red_velvet.flix.data.remote.recoures.account.AccountResource
 import com.red_velvet.flix.data.remote.recoures.account.AddToWatchListRequest
 import com.red_velvet.flix.data.remote.recoures.account.MarkAsFavoriteRequest
-import com.red_velvet.flix.data.remote.recoures.auth.GestSessionResource
+import com.red_velvet.flix.data.remote.recoures.auth.GuestSessionResource
 import com.red_velvet.flix.data.remote.recoures.auth.LoginRequest
 import com.red_velvet.flix.data.remote.recoures.auth.SessionResource
 import com.red_velvet.flix.data.remote.recoures.auth.TokenResource
 import com.red_velvet.flix.data.remote.recoures.image.ImagesResource
 import com.red_velvet.flix.data.remote.recoures.list.CreateListRequest
 import com.red_velvet.flix.data.remote.recoures.list.CustomListDetailsResource
-import com.red_velvet.flix.data.remote.recoures.movie.KeywordResource
 import com.red_velvet.flix.data.remote.recoures.movie.KeywordsResource
 import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
 import com.red_velvet.flix.data.remote.recoures.person.PersonResource
+import com.red_velvet.flix.data.remote.recoures.review.ReviewResource
 import com.red_velvet.flix.data.remote.recoures.series.EpisodeResource
 import com.red_velvet.flix.data.remote.recoures.series.SeasonResource
 import com.red_velvet.flix.data.remote.recoures.series.SeriesResource
@@ -26,7 +27,7 @@ interface RemoteDataSource {
     suspend fun getRequestToken(): TokenResource
     suspend fun validateRequestTokenWithLogin(loginRequest: LoginRequest): TokenResource
     suspend fun createSession(requestToken: String): SessionResource
-    suspend fun createGuestSession(): GestSessionResource
+    suspend fun createGuestSession(): GuestSessionResource
     suspend fun deleteSession(sessionId: String): ApiResponse
 
     suspend fun getPopularMovies(page: Int?): Pagination<MovieResource>
@@ -41,7 +42,7 @@ interface RemoteDataSource {
     suspend fun getMovieRecommendations(movieId: Int, page: Int?): Pagination<MovieResource>
     suspend fun rateMovie(movieId: Int, rate: Float): ApiResponse
     suspend fun deleteMovieRating(movieId: Int): ApiResponse
-    suspend fun getMovieReviews(movieId: Int, page: Int?): Pagination<MovieResource>
+    suspend fun getMovieReviews(movieId: Int, page: Int?): Pagination<ReviewResource>
 
     suspend fun getOnTheAirSeries(page: Int?): Pagination<SeriesResource>
     suspend fun getAiringTodaySeries(page: Int?): Pagination<SeriesResource>
@@ -55,16 +56,15 @@ interface RemoteDataSource {
 
     suspend fun getLatestSeries(): SeriesResource
     suspend fun getSeriesKeywords(seriesId: Int): KeywordsResource
-    suspend fun getSeriesReviews(seriesId: Int, page: Int?): Pagination<SeriesResource>
-    suspend fun rateSeries(seriesId: Int, rate: Double): ApiResponse
+    suspend fun getSeriesReviews(seriesId: Int, page: Int?): Pagination<ReviewResource>
+    suspend fun rateSeries(seriesId: Int, rate: Float): ApiResponse
     suspend fun getSeasonDetails(seriesId: Int, seasonNumber: Int): SeasonResource
     suspend fun getSeasonImages(seriesId: Int, seasonNumber: Int): ImagesResource
-    suspend fun getSeasonTrailers(seriesId: Int, seasonNumber: Int): TrailersResource
 
     suspend fun getEpisodeDetails(seriesId: Int, season: Int, episode: Int): EpisodeResource
     suspend fun getEpisodeImages(seriesId: Int, season: Int, episode: Int): ImagesResource
     suspend fun getEpisodeTrailers(seriesId: Int, season: Int, episode: Int): TrailersResource
-    suspend fun rateEpisode(seriesId: Int, season: Int, episode: Int, rate: Double): ApiResponse
+    suspend fun rateEpisode(seriesId: Int, season: Int, episode: Int, rate: Float): ApiResponse
 
     suspend fun getKeywordById(keywordId: Int): KeywordResource
     suspend fun getMoviesByKeyword(keywordId: Int, page: Int?): Pagination<MovieResource>
@@ -92,7 +92,7 @@ interface RemoteDataSource {
     suspend fun discoverMovies(
         page: Int?,
         sortBy: String?,
-        rate: Double?,
+        rate: Float?,
         year: Int?
     ): Pagination<MovieResource>
 

@@ -2,7 +2,7 @@ package com.red_velvet.flix.repository
 
 import com.red_velvet.flix.data.local.database.dao.SeriesDao
 import com.red_velvet.flix.data.remote.APIErrorHandler
-import com.red_velvet.flix.data.remote.MoviesService
+import com.red_velvet.flix.data.remote.APIService
 import com.red_velvet.flix.data.repository.mapper.series.toAiringTodaySeriesDto
 import com.red_velvet.flix.data.repository.mapper.series.toAiringTodaySeriesEntity
 import com.red_velvet.flix.data.repository.mapper.series.toEntity
@@ -22,7 +22,7 @@ import com.red_velvet.flix.domain.repository.SeriesRepository
 import javax.inject.Inject
 
 class SeriesRepositoryImpl @Inject constructor(
-    private val apiService: MoviesService,
+    private val apiService: APIService,
     private val seriesDao: SeriesDao,
     apiErrorHandler: APIErrorHandler
 ) : SeriesRepository, com.red_velvet.flix.repository.BaseRepository(apiErrorHandler) {
@@ -122,7 +122,7 @@ class SeriesRepositoryImpl @Inject constructor(
         seasonNumber: Int,
         episodeNumber: Int
     ): List<TrailerEntity> {
-        return wrapApiCall { apiService.getEpisodeVideos(seriesId, seasonNumber, episodeNumber) }
+        return wrapApiCall { apiService.getEpisodeTrailers(seriesId, seasonNumber, episodeNumber) }
             .toEntity()
     }
 
