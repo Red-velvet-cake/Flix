@@ -1,8 +1,5 @@
 package com.red_velvet.flix.data.remote
 
-import com.red_velvet.flix.data.local.database.dao.MovieDao
-import com.red_velvet.flix.data.local.database.dao.SeriesDao
-import com.red_velvet.flix.data.local.database.dao.UserDao
 import com.red_velvet.flix.data.remote.recoures.ApiResponse
 import com.red_velvet.flix.data.remote.recoures.KeywordResource
 import com.red_velvet.flix.data.remote.recoures.Pagination
@@ -35,9 +32,6 @@ import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(
     private val apiService: APIService,
-    private val userDao: UserDao,
-    private val movieDao: MovieDao,
-    private val seriesDao: SeriesDao,
     private val apiErrorHandler: APIErrorHandler
 ) : RemoteDataSource {
     override suspend fun getRequestToken(): TokenResource {

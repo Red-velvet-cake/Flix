@@ -1,6 +1,5 @@
 package com.red_velvet.flix.repository
 
-import com.red_velvet.flix.data.local.shared_prefs.SharedPrefs
 import com.red_velvet.flix.data.remote.recoures.account.AddToWatchListRequest
 import com.red_velvet.flix.data.remote.recoures.account.MarkAsFavoriteRequest
 import com.red_velvet.flix.data.remote.recoures.list.CreateListRequest
@@ -19,7 +18,7 @@ import javax.inject.Inject
 
 class UserRepositoryImp @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
-    private val sharedPrefs: SharedPrefs,
+    private val preferenceDataSource: PreferenceDataSource,
 ) : UserRepository {
 
     override suspend fun getRequestToken(): TokenEntity {
@@ -95,19 +94,27 @@ class UserRepositoryImp @Inject constructor(
     }
 
     override suspend fun storeSessionId(sessionId: String) {
-        sharedPrefs.setSessionId(sessionId)
+        preferenceDataSource.saveSessionId(sessionId)
     }
 
     override suspend fun storeRequestToken(requestToken: String) {
-        sharedPrefs.setToken(requestToken)
+        preferenceDataSource.saveRequestToken(requestToken)
     }
 
     override suspend fun getStoredSessionId(): String? {
-        return sharedPrefs.getSessionId()
+        return preferenceDataSource.getSessionId()
     }
 
     override suspend fun getStoredRequestToken(): String? {
-        return sharedPrefs.getToken()
+        return preferenceDataSource.getRequestToken()
+    }
+
+    override suspend fun clearSession() {
+        preferenceDataSource.clearSession()
+    }
+
+    override suspend fun isUserLoggedIn(): Boolean {
+        return preferenceDataSource.isUserLoggedIn()
     }
 
 }

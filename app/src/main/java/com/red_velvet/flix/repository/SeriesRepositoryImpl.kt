@@ -1,6 +1,5 @@
 package com.red_velvet.flix.repository
 
-import com.red_velvet.flix.data.local.database.dao.SeriesDao
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.series.EpisodeEntity
@@ -21,7 +20,7 @@ import javax.inject.Inject
 
 class SeriesRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
-    private val seriesDao: SeriesDao,
+    private val localDataSource: LocalDataSource,
 ) : SeriesRepository {
     override suspend fun getPopularSeries(page: Int?): List<SeriesEntity> {
         return remoteDataSource.getPopularSeries(page).toEntity()
@@ -109,39 +108,39 @@ class SeriesRepositoryImpl @Inject constructor(
 
 
     override suspend fun getLocalPopularSeries(): List<SeriesEntity> {
-        return seriesDao.getPopularSeries()
+        return localDataSource.getPopularSeries()
             .toPopularSeriesEntity()
     }
 
     override suspend fun getLocalTopRatedSeries(): List<SeriesEntity> {
-        return seriesDao.getTopRatedSeries()
+        return localDataSource.getTopRatedSeries()
             .toTopRatedSeriesEntity()
     }
 
     override suspend fun getLocalOnTheAirSeries(): List<SeriesEntity> {
-        return seriesDao.getOnTheAirSeries()
+        return localDataSource.getOnTheAirSeries()
             .toOnTheAirSeriesEntity()
     }
 
     override suspend fun getLocalAiringTodaySeries(): List<SeriesEntity> {
-        return seriesDao.getAiringTodaySeries()
+        return localDataSource.getAiringTodaySeries()
             .toAiringTodaySeriesEntity()
     }
 
     override suspend fun cachePopularSeries(series: List<SeriesEntity>) {
-        seriesDao.insertPopularSeries(series.toPopularSeriesDto())
+        localDataSource.insertPopularSeries(series.toPopularSeriesDto())
     }
 
     override suspend fun cacheTopRatedSeries(series: List<SeriesEntity>) {
-        seriesDao.insertTopRatedSeries(series.toTopRatedSeriesDto())
+        localDataSource.insertTopRatedSeries(series.toTopRatedSeriesDto())
     }
 
     override suspend fun cacheOnTheAirSeries(series: List<SeriesEntity>) {
-        seriesDao.insertOnTheAirSeries(series.toOnTheAirSeriesDto())
+        localDataSource.insertOnTheAirSeries(series.toOnTheAirSeriesDto())
     }
 
     override suspend fun cacheAiringTodaySeries(series: List<SeriesEntity>) {
-        seriesDao.insertAiringTodaySeries(series.toAiringTodaySeriesDto())
+        localDataSource.insertAiringTodaySeries(series.toAiringTodaySeriesDto())
     }
 
 }

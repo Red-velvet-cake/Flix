@@ -1,6 +1,5 @@
 package com.red_velvet.flix.repository
 
-import com.red_velvet.flix.data.local.database.dao.MovieDao
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
@@ -19,7 +18,7 @@ import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
-    private val movieDao: MovieDao,
+    private val localDataSource: LocalDataSource,
 ) : MovieRepository {
     override suspend fun getPopularMovies(page: Int?): List<MovieEntity> {
         return remoteDataSource.getPopularMovies(page).toEntity()
@@ -103,38 +102,38 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getLocalPopularMovies(): List<MovieEntity> {
-        return movieDao.getPopularMovies()
+        return localDataSource.getPopularMovies()
             .toPopularMoviesEntity()
     }
 
     override suspend fun getLocalUpcomingMovies(): List<MovieEntity> {
-        return movieDao.getUpcomingMovies()
+        return localDataSource.getUpcomingMovies()
             .toUpcomingMoviesEntity()
     }
 
     override suspend fun getLocalNowPlayingMovies(): List<MovieEntity> {
-        return movieDao.getNowPlayingMovies()
+        return localDataSource.getNowPlayingMovies()
             .toNowPlayingMoviesEntity()
     }
 
     override suspend fun getLocalTopRatedMovies(): List<MovieEntity> {
-        return movieDao.getTopRatedMovies()
+        return localDataSource.getTopRatedMovies()
             .toTopRatedMoviesEntity()
     }
 
     override suspend fun cachePopularMovies(movies: List<MovieEntity>) {
-        movieDao.insertPopularMovies(movies.toPopularMovieDto())
+        localDataSource.insertPopularMovies(movies.toPopularMovieDto())
     }
 
     override suspend fun cacheUpcomingMovies(movies: List<MovieEntity>) {
-        movieDao.insertUpcomingMovies(movies.toUpComingMovieDto())
+        localDataSource.insertUpcomingMovies(movies.toUpComingMovieDto())
     }
 
     override suspend fun cacheNowPlayingMovies(movies: List<MovieEntity>) {
-        movieDao.insertNowPlayingMovies(movies.toNowPlayingMovieDto())
+        localDataSource.insertNowPlayingMovies(movies.toNowPlayingMovieDto())
     }
 
     override suspend fun cacheTopRatedMovies(movies: List<MovieEntity>) {
-        movieDao.insertTopRatedMovies(movies.toTopRatedMovieDto())
+        localDataSource.insertTopRatedMovies(movies.toTopRatedMovieDto())
     }
 }

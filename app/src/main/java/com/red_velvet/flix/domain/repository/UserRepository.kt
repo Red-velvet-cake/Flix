@@ -35,4 +35,6 @@ interface UserRepository {
     suspend fun storeRequestToken(requestToken: String)
     suspend fun getStoredSessionId(): String?
     suspend fun getStoredRequestToken(): String?
+    suspend fun clearSession()
+    suspend fun isUserLoggedIn(): Boolean
 }
