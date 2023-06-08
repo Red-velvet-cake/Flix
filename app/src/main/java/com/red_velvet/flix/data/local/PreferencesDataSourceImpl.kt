@@ -1,12 +1,12 @@
 package com.red_velvet.flix.data.local
 
 import com.red_velvet.flix.data.local.shared_prefs.SharedPrefs
-import com.red_velvet.flix.repository.PreferenceDataSource
+import com.red_velvet.flix.repository.PreferencesDataSource
 import javax.inject.Inject
 
-class PreferenceDataSourceImpl @Inject constructor(
+class PreferencesDataSourceImpl @Inject constructor(
     private val sharedPreferences: SharedPrefs
-) : PreferenceDataSource {
+) : PreferencesDataSource {
     override suspend fun saveRequestToken(requestToken: String) {
         sharedPreferences.setToken(requestToken)
     }

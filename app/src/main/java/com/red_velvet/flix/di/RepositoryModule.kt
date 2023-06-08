@@ -1,13 +1,9 @@
 package com.red_velvet.flix.di
 
-import com.red_velvet.flix.data.remote.APIErrorHandler
-import com.red_velvet.flix.data.remote.APIErrorHandlerImpl
-import com.red_velvet.flix.data.remote.RemoteDataSourceImpl
 import com.red_velvet.flix.domain.repository.MovieRepository
 import com.red_velvet.flix.domain.repository.SeriesRepository
 import com.red_velvet.flix.domain.repository.UserRepository
 import com.red_velvet.flix.repository.MovieRepositoryImpl
-import com.red_velvet.flix.repository.RemoteDataSource
 import com.red_velvet.flix.repository.SeriesRepositoryImpl
 import com.red_velvet.flix.repository.UserRepositoryImp
 import dagger.Binds
@@ -32,11 +28,4 @@ abstract class RepositoryModule {
     @Binds
     abstract fun bindUserRepository(userRepositoryImp: UserRepositoryImp): UserRepository
 
-    @Singleton
-    @Binds
-    abstract fun bindRemoteDataSource(remoteDataSource: RemoteDataSourceImpl): RemoteDataSource
-
-    @Singleton
-    @Binds
-    abstract fun bindAPIErrorHandler(apiErrorHandlerImpl: APIErrorHandlerImpl): APIErrorHandler
 }

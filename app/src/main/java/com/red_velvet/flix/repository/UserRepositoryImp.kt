@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 class UserRepositoryImp @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
-    private val preferenceDataSource: PreferenceDataSource,
+    private val preferencesDataSource: PreferencesDataSource,
 ) : UserRepository {
 
     override suspend fun getRequestToken(): TokenEntity {
@@ -94,27 +94,27 @@ class UserRepositoryImp @Inject constructor(
     }
 
     override suspend fun storeSessionId(sessionId: String) {
-        preferenceDataSource.saveSessionId(sessionId)
+        preferencesDataSource.saveSessionId(sessionId)
     }
 
     override suspend fun storeRequestToken(requestToken: String) {
-        preferenceDataSource.saveRequestToken(requestToken)
+        preferencesDataSource.saveRequestToken(requestToken)
     }
 
     override suspend fun getStoredSessionId(): String? {
-        return preferenceDataSource.getSessionId()
+        return preferencesDataSource.getSessionId()
     }
 
     override suspend fun getStoredRequestToken(): String? {
-        return preferenceDataSource.getRequestToken()
+        return preferencesDataSource.getRequestToken()
     }
 
     override suspend fun clearSession() {
-        preferenceDataSource.clearSession()
+        preferencesDataSource.clearSession()
     }
 
     override suspend fun isUserLoggedIn(): Boolean {
-        return preferenceDataSource.isUserLoggedIn()
+        return preferencesDataSource.isUserLoggedIn()
     }
 
 }

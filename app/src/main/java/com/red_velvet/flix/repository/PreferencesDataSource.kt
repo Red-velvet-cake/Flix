@@ -1,6 +1,6 @@
 package com.red_velvet.flix.repository
 
-interface PreferenceDataSource {
+interface PreferencesDataSource {
     suspend fun saveRequestToken(requestToken: String)
     suspend fun saveSessionId(sessionId: String)
     fun getRequestToken(): String?
