@@ -1,5 +1,7 @@
 package com.red_velvet.flix.di
 
+import com.red_velvet.flix.data.remote.APIErrorHandler
+import com.red_velvet.flix.data.remote.APIErrorHandlerImpl
 import com.red_velvet.flix.data.repository.MovieRepositoryImpl
 import com.red_velvet.flix.data.repository.SeriesRepositoryImpl
 import com.red_velvet.flix.data.repository.UserRepositoryImp
@@ -27,4 +29,8 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun bindUserRepository(userRepositoryImp: UserRepositoryImp): UserRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindAPIErrorHandler(apiErrorHandler: APIErrorHandlerImpl): APIErrorHandler
 }

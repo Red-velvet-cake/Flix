@@ -10,7 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment<FragmentLoginBinding,LoginViewModel>() {
+class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     override val layoutIdFragment: Int = R.layout.fragment_login
     override val viewModel: LoginViewModel by viewModels()
 
