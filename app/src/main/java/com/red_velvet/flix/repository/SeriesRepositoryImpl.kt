@@ -25,7 +25,7 @@ class SeriesRepositoryImpl @Inject constructor(
     private val apiService: APIService,
     private val seriesDao: SeriesDao,
     apiErrorHandler: APIErrorHandler
-) : SeriesRepository, com.red_velvet.flix.repository.BaseRepository(apiErrorHandler) {
+) : SeriesRepository {
     override suspend fun getPopularSeries(
         page: Int?,
         language: String?,
