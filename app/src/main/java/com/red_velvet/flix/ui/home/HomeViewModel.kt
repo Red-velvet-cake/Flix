@@ -9,20 +9,21 @@ import com.red_velvet.flix.ui.home.adapter.MovieInteractionListener
 import com.red_velvet.flix.ui.home.homeUiState.HomeUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+
     private val getPopularMoviesUsecase: GetPopularMoviesUseCase,
     private val getNowPlayingMoviesUsecase: GetNowPlayingMoviesUseCase,
     private val getUpcomingMoviesUsecase: GetUpcomingMoviesUseCase,
     private val getTopRatedMoviesUsecase: GetTopRatedMoviesUseCase,
-) : BaseViewModel(), MovieInteractionListener {
-
-    private val _homeUiState = MutableStateFlow(HomeUiState())
-    val homeUiState = _homeUiState.asStateFlow()
+) : BaseViewModel<HomeUiState>(), MovieInteractionListener {
+    override val _state: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState())
+    override val state: StateFlow<HomeUiState> = _state.asStateFlow()
 
     init {
         getHomeData()
@@ -137,9 +138,9 @@ class HomeViewModel @Inject constructor(
 
 
     private fun onError(message: String) {
-        val errors = _homeUiState.value.error.toMutableList()
+        val errors = _state.value.error.toMutableList()
         errors.add(message)
-        _homeUiState.update { it.copy(error = errors, isLoading = false) }
+        _state.update { it.copy(error = errors, isLoading = false) }
     }
 
 
