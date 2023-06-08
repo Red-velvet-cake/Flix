@@ -2,10 +2,10 @@ package com.red_velvet.flix.domain.repository
 
 import com.red_velvet.flix.data.remote.recoures.account.AddToWatchListRequest
 import com.red_velvet.flix.data.remote.recoures.account.MarkAsFavoriteRequest
-import com.red_velvet.flix.data.remote.recoures.auth.LoginRequest
 import com.red_velvet.flix.data.remote.recoures.list.CreateListRequest
 import com.red_velvet.flix.domain.entity.account.AccountEntity
 import com.red_velvet.flix.domain.entity.account.CustomListDetailsEntity
+import com.red_velvet.flix.domain.entity.account.LoginBodyEntity
 import com.red_velvet.flix.domain.entity.account.TokenEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
@@ -13,7 +13,7 @@ import com.red_velvet.flix.domain.entity.series.SeriesEntity
 interface UserRepository {
 
     suspend fun getRequestToken(): TokenEntity
-    suspend fun login(loginRequest: LoginRequest): TokenEntity
+    suspend fun login(loginRequest: LoginBodyEntity): TokenEntity
     suspend fun createSession(requestToken: String): String
     suspend fun createGuestSession(): String
     suspend fun deleteSession(sessionId: String)

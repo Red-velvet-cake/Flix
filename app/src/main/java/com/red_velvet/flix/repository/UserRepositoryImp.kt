@@ -3,15 +3,16 @@ package com.red_velvet.flix.repository
 import com.red_velvet.flix.data.local.shared_prefs.SharedPrefs
 import com.red_velvet.flix.data.remote.recoures.account.AddToWatchListRequest
 import com.red_velvet.flix.data.remote.recoures.account.MarkAsFavoriteRequest
-import com.red_velvet.flix.data.remote.recoures.auth.LoginRequest
 import com.red_velvet.flix.data.remote.recoures.list.CreateListRequest
 import com.red_velvet.flix.domain.entity.account.AccountEntity
 import com.red_velvet.flix.domain.entity.account.CustomListDetailsEntity
+import com.red_velvet.flix.domain.entity.account.LoginBodyEntity
 import com.red_velvet.flix.domain.entity.account.TokenEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.repository.UserRepository
 import com.red_velvet.flix.repository.mapper.account.toEntity
+import com.red_velvet.flix.repository.mapper.account.toResource
 import com.red_velvet.flix.repository.mapper.movie.toEntity
 import com.red_velvet.flix.repository.mapper.series.toEntity
 import javax.inject.Inject
@@ -25,8 +26,8 @@ class UserRepositoryImp @Inject constructor(
         return remoteDataSource.getRequestToken().toEntity()
     }
 
-    override suspend fun login(loginRequest: LoginRequest): TokenEntity {
-        return remoteDataSource.validateRequestTokenWithLogin(loginRequest).toEntity()
+    override suspend fun login(loginRequest: LoginBodyEntity): TokenEntity {
+        return remoteDataSource.validateRequestTokenWithLogin(loginRequest.toResource()).toEntity()
     }
 
     override suspend fun createSession(requestToken: String): String {
