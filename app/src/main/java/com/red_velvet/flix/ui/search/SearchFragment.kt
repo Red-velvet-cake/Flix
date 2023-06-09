@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 @AndroidEntryPoint
-class SearchFragment() : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
+class SearchFragment() : BaseFragment<FragmentSearchBinding>() {
 
     override val layoutIdFragment: Int = R.layout.fragment_search
 
@@ -37,13 +37,13 @@ class SearchFragment() : BaseFragment<FragmentSearchBinding, SearchViewModel>() 
     @OptIn(FlowPreview::class)
     private fun getSearchResultsBySearchTerm() {
         lifecycleScope.launch {
-            viewModel.uiState.debounce(500).collectLatest { searchTerm ->
+            viewModel.state.debounce(500).collectLatest { searchTerm ->
                 if (searchTerm.searchInput.isNotBlank()
-                    && oldValue.value.searchInput != viewModel.uiState.value.searchInput
-                    || oldValue.value.searchTypes != viewModel.uiState.value.searchTypes
+                    && oldValue.value.searchInput != viewModel.state.value.searchInput
+                    || oldValue.value.searchTypes != viewModel.state.value.searchTypes
                 ) {
                     bindMedia()
-                    oldValue.emit(viewModel.uiState.value)
+                    oldValue.emit(viewModel.state.value)
                 }
             }
         }

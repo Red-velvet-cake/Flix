@@ -1,7 +1,5 @@
 package com.red_velvet.flix.ui.search.mediaSearchUiState
 
-import com.red_velvet.flix.BuildConfig
-import com.red_velvet.flix.domain.model.movie.Movie
 
 data class MediaUiState(
     val mediaID: Int,

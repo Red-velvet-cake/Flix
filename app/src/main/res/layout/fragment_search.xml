@@ -24,7 +24,7 @@
             android:id="@+id/text_input_search"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_search_bar"
-            android:text="@{viewModel.uiState.searchInput}"
+            android:text="@{viewModel.state.searchInput}"
             android:afterTextChanged="@{(text) -> viewModel.onChangeSearchTextFiled(text)}"
             android:layout_marginHorizontal="@dimen/_16dp"
             android:paddingHorizontal="@dimen/_8dp"
@@ -65,7 +65,7 @@
             app:layout_constraintStart_toStartOf="@id/text_view_categories"
             app:layout_constraintTop_toBottomOf="@id/text_view_categories"
             app:selectionRequired="true"
-            app:showWhenSearch="@{viewModel.uiState.searchInput}"
+            app:showWhenSearch="@{viewModel.state.searchInput}"
             app:singleSelection="true">
 
 
@@ -128,7 +128,7 @@
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_8dp"
             android:paddingVertical="@dimen/_8dp"
-            app:items="@{viewModel.uiState.searchResult}"
+            app:items="@{viewModel.state.searchResult}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

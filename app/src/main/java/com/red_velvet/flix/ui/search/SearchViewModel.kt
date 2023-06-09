@@ -2,7 +2,7 @@ package com.red_velvet.flix.ui.search
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.red_velvet.flix.domain.usecase.SearchUsecase
+import com.red_velvet.flix.domain.usecase.SearchUseCase
 import com.red_velvet.flix.ui.base.BaseViewModel
 import com.red_velvet.flix.ui.search.adapter.MediaSearchInteractionListener
 import com.red_velvet.flix.ui.search.mediaSearchUiState.MediaSearchUiState
@@ -12,6 +12,7 @@ import com.red_velvet.flix.ui.search.mediaSearchUiState.toUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.update
@@ -21,11 +22,14 @@ import javax.inject.Inject
 @Suppress("UNUSED_EXPRESSION")
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val searchUsecase: SearchUsecase,
-) : BaseViewModel(), MediaSearchInteractionListener {
+    private val searchUsecase: SearchUseCase,
+) : BaseViewModel<MediaSearchUiState>(), MediaSearchInteractionListener {
 
-    private val _uiState = MutableStateFlow(MediaSearchUiState())
-    val uiState = _uiState.asStateFlow()
+    
+
+    override val _state = MutableStateFlow(MediaSearchUiState())
+    override val state: StateFlow<MediaSearchUiState> = _state.asStateFlow()
+
 
 //    private val _searchUIEvent = MutableStateFlow<Event<SearchUIEvent?>>(EventLog.Event(null))
 //    val searchUIEvent = _searchUIEvent.asStateFlow()
@@ -37,12 +41,12 @@ class SearchViewModel @Inject constructor(
 
     @OptIn(FlowPreview::class)
     fun onChangeSearchTextFiled(searchInput: CharSequence) {
-        _uiState.apply {
+        _state.apply {
             update { it.copy(searchInput = searchInput.toString(), isLoading = true) }
             debounce(1000)
         }
         viewModelScope.launch {
-            when (_uiState.value.searchTypes) {
+            when (_state.value.searchTypes) {
                 SearchTypes.MOVIE -> onSearchForMovie()
                 SearchTypes.PERSON -> onSearchForPerson()
                 SearchTypes.TV -> onSearchForTvShow()
@@ -54,7 +58,7 @@ class SearchViewModel @Inject constructor(
 
     fun onSearchForAll() {
         viewModelScope.launch {
-            _uiState.update {
+            _state.update {
                 it.copy(
                     searchTypes = SearchTypes.ALL,
                     isLoading = false,
@@ -70,7 +74,7 @@ class SearchViewModel @Inject constructor(
 
     fun onSearchForMovie() {
         viewModelScope.launch {
-            _uiState.update {
+            _state.update {
                 it.copy(
                     searchTypes = SearchTypes.MOVIE,
                     isLoading = false,
@@ -80,14 +84,14 @@ class SearchViewModel @Inject constructor(
                     }
                 )
             }
-            Log.i("mustafa", _uiState.value.searchResult.toString() )
+            Log.i("mustafa", _state.value.searchResult.toString() )
         }
         ::onError
     }
 
     fun onSearchForPerson() {
         viewModelScope.launch {
-            _uiState.update {
+            _state.update {
                 it.copy(
                     searchTypes = SearchTypes.PERSON,
                     isLoading = false,
@@ -102,7 +106,7 @@ class SearchViewModel @Inject constructor(
 
     fun onSearchForTvShow() {
         viewModelScope.launch {
-            _uiState.update {
+            _state.update {
                 it.copy(
                     searchTypes = SearchTypes.TV,
                     isLoading = false,
@@ -116,8 +120,10 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun onError() {
-        _uiState.update { it.copy(error = emptyList(), isLoading = false) }
+        _state.update { it.copy(error = emptyList(), isLoading = false) }
     }
+
+   
 
 }
 
