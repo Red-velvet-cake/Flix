@@ -20,14 +20,14 @@
         android:layout_height="match_parent"
         android:background="@color/background">
 
-
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/text_input_search"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_search_bar"
             android:text="@{viewModel.uiState.searchInput}"
             android:afterTextChanged="@{(text) -> viewModel.onChangeSearchTextFiled(text)}"
             android:layout_marginHorizontal="@dimen/_16dp"
+            android:paddingHorizontal="@dimen/_8dp"
             android:layout_marginVertical="@dimen/_16dp"
             android:background="@color/Secondary"
             android:focusable="true"
@@ -40,7 +40,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:importantForAutofill="no"
-            tools:ignore="LabelFor" />
+            tools:ignore="LabelFor" >
+            <requestFocus />
+
+        </com.google.android.material.textfield.TextInputEditText>
 
 
         <TextView
@@ -65,21 +68,7 @@
             app:showWhenSearch="@{viewModel.uiState.searchInput}"
             app:singleSelection="true">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_selection_all"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{() -> viewModel.onSearchForAll()}"
-                android:paddingHorizontal="@dimen/_8dp"
-                android:paddingVertical="@dimen/_8dp"
-                android:text="All"
-                android:textAlignment="center"
-                android:textColor="@color/font_primary"
-                app:checkedIconEnabled="true"
-                app:chipBackgroundColor="@color/Purple100"
-                app:chipCornerRadius="@dimen/_8dp"
-                app:chipStrokeColor="@color/on_secondary"
-                app:chipStrokeWidth="1dp" />
+
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_selection_movie"
@@ -132,52 +121,21 @@
         </com.google.android.material.chip.ChipGroup>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_search_result"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_8dp"
             android:paddingVertical="@dimen/_8dp"
-            app:errorSearch="@{viewModel.uiState.searchResult}"
+            app:items="@{viewModel.uiState.searchResult}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chip_group_search_type"
-            app:loadingSearch="@{viewModel.uiState.loading}"
-            app:searchInput="@{viewModel.uiState.searchInput}"
+            android:visibility="visible"
             app:spanCount="3"
             tools:listitem="@layout/item_search" />
-
-        <include
-            android:id="@+id/loading"
-            layout="@layout/loading_search"
-            app:isLoading="@{viewModel.uiState.loading}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <include
-            android:id="@+id/error"
-            layout="@layout/error_search"
-            app:isError="@{viewModel.uiState.error.isEmpty()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:viewModel="@{viewModel}" />
-
-        <include
-            android:id="@+id/no_result"
-            layout="@layout/no_internet_connection_search"
-            app:hideWhenBlankSearch="@{viewModel.uiState.searchInput}"
-            app:isListEmpty="@{viewModel.uiState.empty}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

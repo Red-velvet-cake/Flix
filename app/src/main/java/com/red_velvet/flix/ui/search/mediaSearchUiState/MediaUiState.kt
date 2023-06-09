@@ -11,14 +11,3 @@ data class MediaUiState(
     val mediaReleaseDate: String,
     val mediaVoteAverage: Double,
 )
-internal fun Movie.toUiState(): MediaUiState {
-    return MediaUiState(
-        mediaID = id,
-        mediaName = title,
-        mediaImage = BuildConfig.IMAGE_BASE_PATH,
-        mediaPopularity = popularity,
-        mediaReleaseDate = releaseDate,
-        mediaVoteAverage = voteAverage
-    )
-
-}

@@ -1,5 +1,6 @@
 package com.red_velvet.flix.ui.search
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.red_velvet.flix.domain.usecase.SearchUsecase
 import com.red_velvet.flix.ui.base.BaseViewModel
@@ -75,9 +76,11 @@ class SearchViewModel @Inject constructor(
                     isLoading = false,
                     searchResult = searchUsecase(it.searchInput).map { movie ->
                         movie.toUiState()
+
                     }
                 )
             }
+            Log.i("mustafa", _uiState.value.searchResult.toString() )
         }
         ::onError
     }
@@ -115,6 +118,7 @@ class SearchViewModel @Inject constructor(
     private fun onError() {
         _uiState.update { it.copy(error = emptyList(), isLoading = false) }
     }
+
 }
 
 

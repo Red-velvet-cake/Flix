@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.red_velvet.flix.R
 import com.red_velvet.flix.databinding.FragmentSearchBinding
 import com.red_velvet.flix.ui.base.BaseFragment
+import com.red_velvet.flix.ui.search.adapter.MediaSearchAdapter
 import com.red_velvet.flix.ui.search.mediaSearchUiState.MediaSearchUiState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
@@ -28,6 +29,8 @@ class SearchFragment() : BaseFragment<FragmentSearchBinding, SearchViewModel>() 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedElementEnterTransition = ChangeTransform()
+        val adapter = MediaSearchAdapter(emptyList(), listener = viewModel)
+        binding.recyclerSearchResult.adapter = adapter
         getSearchResultsBySearchTerm()
     }
 
