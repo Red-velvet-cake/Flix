@@ -29,17 +29,21 @@
             android:layout_marginHorizontal="@dimen/_16dp"
             android:paddingHorizontal="@dimen/_8dp"
             android:layout_marginVertical="@dimen/_16dp"
-            android:background="@color/Secondary"
+            android:background="@drawable/search_bar_background"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:inputType="text"
             android:maxLines="1"
+            android:hint="What do you want to Watch?"
+            android:autofillHints="creditCardExpirationDate"
             android:textColor="@color/font_accent"
             android:textColorHint="@color/font_accent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:importantForAutofill="no"
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="@dimen/_8dp"
             tools:ignore="LabelFor" >
             <requestFocus />
 
@@ -52,6 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16dp"
             android:text="categories"
+            android:textSize="@dimen/_16sp"
             android:textColor="@color/font_primary"
             app:layout_constraintStart_toStartOf="@id/text_input_search"
             app:layout_constraintTop_toBottomOf="@id/text_input_search" />
@@ -68,6 +73,24 @@
             app:showWhenSearch="@{viewModel.state.searchInput}"
             app:singleSelection="true">
 
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_selection_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.onSearchForAll()}"
+                android:paddingHorizontal="@dimen/_8dp"
+                android:paddingVertical="@dimen/_8dp"
+                android:text="All"
+                android:checked="true"
+                android:textAlignment="center"
+                app:checkedIconVisible="false"
+                android:textColor="@color/font_primary"
+                app:checkedIconEnabled="true"
+                android:checkable="true"
+                app:chipBackgroundColor="@color/chip_backgournd"
+                app:chipCornerRadius="@dimen/_8dp"
+                app:chipStrokeColor="@color/on_secondary"
+                app:chipStrokeWidth="1dp" />
 
 
             <com.google.android.material.chip.Chip
@@ -81,8 +104,9 @@
                 android:textAlignment="center"
                 android:textColor="@color/font_primary"
                 app:checkedIconEnabled="false"
-                app:chipBackgroundColor="@color/Secondary"
+                app:chipBackgroundColor="@color/chip_backgournd"
                 app:chipCornerRadius="@dimen/_8dp"
+                android:checkable="true"
                 app:chipStrokeColor="@color/on_secondary"
                 app:chipStrokeWidth="1dp" />
 
@@ -95,9 +119,10 @@
                 android:paddingVertical="@dimen/_8dp"
                 android:text="Person"
                 android:textAlignment="center"
+                android:checkable="true"
                 android:textColor="@color/font_primary"
                 app:checkedIconEnabled="false"
-                app:chipBackgroundColor="@color/Secondary"
+                app:chipBackgroundColor="@color/chip_backgournd"
                 app:chipCornerRadius="@dimen/_8dp"
                 app:chipStrokeColor="@color/on_secondary"
                 app:chipStrokeWidth="1dp" />
@@ -110,10 +135,11 @@
                 android:paddingHorizontal="@dimen/_8dp"
                 android:paddingVertical="@dimen/_8dp"
                 android:text="TV"
+                android:checkable="true"
                 android:textAlignment="center"
                 android:textColor="@color/font_primary"
                 app:checkedIconEnabled="false"
-                app:chipBackgroundColor="@color/Secondary"
+                app:chipBackgroundColor="@color/chip_backgournd"
                 app:chipCornerRadius="@dimen/_8dp"
                 app:chipStrokeColor="@color/on_secondary"
                 app:chipStrokeWidth="1dp" />
@@ -124,8 +150,8 @@
             android:id="@+id/recycler_search_result"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:clipToPadding="false"
             android:orientation="vertical"
+            app:spanCount="2"
             android:paddingHorizontal="@dimen/_8dp"
             android:paddingVertical="@dimen/_8dp"
             app:items="@{viewModel.state.searchResult}"
@@ -135,7 +161,45 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chip_group_search_type"
             android:visibility="visible"
-            app:spanCount="3"
             tools:listitem="@layout/item_search" />
+
+        <ImageView
+            android:id="@+id/image_view_lost_connection"
+            android:layout_width="@dimen/_128dp"
+            android:layout_height="@dimen/_128dp"
+            android:layout_marginBottom="@dimen/_8dp"
+            android:src="@drawable/no_internet"
+            app:showWhenNoInternetError="@{viewModel.state.error}"
+            app:layout_constraintBottom_toTopOf="@id/title_lost_connection"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/title_lost_connection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20dp"
+            android:text="Internet is not available"
+            android:textColor="@color/font_secondary"
+            android:textSize="@dimen/_20sp"
+            app:showWhenNoInternetError="@{viewModel.state.error}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/loading"
+            android:layout_width="@dimen/_180dp"
+            android:layout_height="@dimen/_180dp"
+            app:error="@{viewModel.state.error}"
+            app:emptyResult="@{viewModel.state.searchResult.empty}"
+            app:loading="@{viewModel.state.loading}"
+            android:src="@drawable/loading"
+            app:layout_constraintTop_toBottomOf="@id/chip_group_search_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
