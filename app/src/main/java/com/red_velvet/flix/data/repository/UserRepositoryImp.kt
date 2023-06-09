@@ -1,19 +1,21 @@
 package com.red_velvet.flix.data.repository
 
-import com.red_velvet.flix.data.local.sharedPrefs.SharedPrefs
+import com.red_velvet.flix.data.local.shared_prefs.SharedPrefs
+import com.red_velvet.flix.data.remote.APIErrorHandler
 import com.red_velvet.flix.data.remote.MoviesService
-import com.red_velvet.flix.data.remote.dtos.account.AccountDto
-import com.red_velvet.flix.data.remote.dtos.auth.LoginRequest
-import com.red_velvet.flix.domain.utils.ExceptionHandler
+import com.red_velvet.flix.data.remote.recoures.auth.LoginRequest
+import com.red_velvet.flix.data.repository.mapper.account.toEntity
+import com.red_velvet.flix.domain.entity.account.AccountEntity
+import com.red_velvet.flix.domain.repository.UserRepository
 import javax.inject.Inject
 
 class UserRepositoryImp @Inject constructor(
     private val service: MoviesService,
     private val sharedPrefs: SharedPrefs,
-    private val exceptionHandler: ExceptionHandler
-) : UserRepository {
+    apiErrorHandler: APIErrorHandler
+) : UserRepository, BaseRepository(apiErrorHandler) {
     override suspend fun login(userName: String, password: String) {
-        val response =
+        wrapApiCall {
             service.validateRequestTokenWithLogin(
                 LoginRequest(
                     userName,
@@ -21,10 +23,8 @@ class UserRepositoryImp @Inject constructor(
                     sharedPrefs.getToken()
                 )
             )
-        if (response.isSuccessful) {
-            sharedPrefs.getToken()?.let { createSession(it) }
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
+        }.requestToken?.let {
+            createSession(it)
         }
     }
 
@@ -32,13 +32,9 @@ class UserRepositoryImp @Inject constructor(
         sharedPrefs.clearSessionId()
     }
 
-    override suspend fun getAccountDetails(): AccountDto {
-        val response = service.getAccountDetails()
-        if (response.isSuccessful) {
-            return response.body()!!
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+    override suspend fun getAccountDetails(): AccountEntity {
+        return wrapApiCall { service.getAccountDetails() }
+            .toEntity()
     }
 
     override suspend fun getSessionId(): String? {
@@ -50,21 +46,13 @@ class UserRepositoryImp @Inject constructor(
     }
 
     private suspend fun createSession(requestToken: String) {
-        val response = service.createSession(requestToken)
-        if (response.isSuccessful) {
-            sharedPrefs.setSessionId(response.body()?.sessionId!!)
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+        wrapApiCall { service.createSession(requestToken) }
+            .sessionId?.let { saveSessionId(it) }
     }
 
-    private suspend fun refreshRequestToken() {
-        val response = service.getRequestToken()
-        if (response.isSuccessful) {
-            sharedPrefs.setToken(response.body()?.requestToken!!)
-        } else {
-            throw exceptionHandler.getException(response.code(), response.errorBody())
-        }
+    private suspend fun generateRequestToken() {
+        wrapApiCall { service.getRequestToken() }
+            .requestToken?.let { sharedPrefs.setToken(it) }
     }
 
 }

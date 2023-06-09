@@ -1,5 +1,6 @@
 package com.red_velvet.flix.ui.home.homeUiState
 
+import com.red_velvet.flix.ui.base.BaseUiState
 import com.red_velvet.flix.ui.home.HomeItem
 
 data class HomeUiState(
@@ -9,4 +10,4 @@ data class HomeUiState(
     val topRatedMovies: HomeItem = HomeItem.TopRated(emptyList()),
     val isLoading: Boolean = false,
     val error: List<String> = emptyList(),
-)
+) : BaseUiState

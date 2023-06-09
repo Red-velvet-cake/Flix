@@ -2,36 +2,37 @@ package com.red_velvet.flix.data.local.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieEntity
-import com.red_velvet.flix.data.local.database.entity.PopularMovieEntity
-import com.red_velvet.flix.data.local.database.entity.TopRatedMovieEntity
-import com.red_velvet.flix.data.local.database.entity.UpcomingMovieEntity
-import kotlinx.coroutines.flow.Flow
+import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieDto
+import com.red_velvet.flix.data.local.database.entity.PopularMovieDto
+import com.red_velvet.flix.data.local.database.entity.TopRatedMovieDto
+import com.red_velvet.flix.data.local.database.entity.UpcomingMovieDto
+
 @Dao
 interface MovieDao {
-    @Insert
-    suspend fun insertPopularMovies(popularMovieEntities: List<PopularMovieEntity>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPopularMovies(popularMovies: List<PopularMovieDto>)
 
-    @Insert
-    suspend fun insertTopRatedMovies(topRatedMovieEntities: List<TopRatedMovieEntity>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTopRatedMovies(topRatedMovies: List<TopRatedMovieDto>)
 
-    @Insert
-    suspend fun insertNowPlayingMovies(nowPlayingMovieEntities: List<NowPlayingMovieEntity>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNowPlayingMovies(nowPlayingMovies: List<NowPlayingMovieDto>)
 
-    @Insert
-    suspend fun insertUpcomingMovies(upcomingMovieEntities: List<UpcomingMovieEntity>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertUpcomingMovies(upcomingMovies: List<UpcomingMovieDto>)
 
-    @Query("SELECT * FROM PopularMovieEntity")
-    fun getPopularMovies(): Flow<List<PopularMovieEntity>>
+    @Query("SELECT * FROM POPULAR_MOVIES")
+    suspend fun getPopularMovies(): List<PopularMovieDto>
 
-    @Query("SELECT * FROM TopRatedMovieEntity")
-    fun getTopRatedMovies(): Flow<List<TopRatedMovieEntity>>
+    @Query("SELECT * FROM TOP_RATED_MOVIES")
+    suspend fun getTopRatedMovies(): List<TopRatedMovieDto>
 
-    @Query("SELECT * FROM NowPlayingMovieEntity")
-    fun getNowPlayingMovies(): Flow<List<NowPlayingMovieEntity>>
+    @Query("SELECT * FROM NOW_PLAYING_MOVIES")
+    suspend fun getNowPlayingMovies(): List<NowPlayingMovieDto>
 
-    @Query("SELECT * FROM UpcomingMovieEntity")
-    fun getUpcomingMovies(): Flow<List<UpcomingMovieEntity>>
+    @Query("SELECT * FROM UPCOMING_MOVIES")
+    suspend fun getUpcomingMovies(): List<UpcomingMovieDto>
 
 }

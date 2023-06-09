@@ -1,53 +1,36 @@
 package com.red_velvet.flix.di
 
-import com.red_velvet.flix.data.local.database.dao.MovieDao
-import com.red_velvet.flix.data.local.database.dao.TvShowDao
-import com.red_velvet.flix.data.local.sharedPrefs.SharedPrefs
-import com.red_velvet.flix.data.remote.MoviesService
-import com.red_velvet.flix.data.repository.MovieRepository
+import com.red_velvet.flix.data.remote.APIErrorHandler
+import com.red_velvet.flix.data.remote.APIErrorHandlerImpl
 import com.red_velvet.flix.data.repository.MovieRepositoryImpl
-import com.red_velvet.flix.data.repository.TVShowsRepository
-import com.red_velvet.flix.data.repository.TVShowsRepositoryImpl
-import com.red_velvet.flix.data.repository.UserRepository
+import com.red_velvet.flix.data.repository.SeriesRepositoryImpl
 import com.red_velvet.flix.data.repository.UserRepositoryImp
-import com.red_velvet.flix.domain.utils.ExceptionHandler
+import com.red_velvet.flix.domain.repository.MovieRepository
+import com.red_velvet.flix.domain.repository.SeriesRepository
+import com.red_velvet.flix.domain.repository.UserRepository
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
+abstract class RepositoryModule {
 
-    @Provides
     @Singleton
-    fun provideMovieRepository(
-        moviesService: MoviesService,
-        movieDao: MovieDao,
-        exceptionHandler: ExceptionHandler
-    ): MovieRepository {
-        return MovieRepositoryImpl(moviesService, movieDao, exceptionHandler)
-    }
+    @Binds
+    abstract fun bindMoviesRepository(moviesRepositoryImpl: MovieRepositoryImpl): MovieRepository
 
-    @Provides
     @Singleton
-    fun provideTVShowRepository(
-        moviesService: MoviesService,
-        tvShowDao: TvShowDao,
-        exceptionHandler: ExceptionHandler
-    ): TVShowsRepository {
-        return TVShowsRepositoryImpl(moviesService, tvShowDao, exceptionHandler)
-    }
+    @Binds
+    abstract fun bindSeriesRepository(seriesRepositoryImpl: SeriesRepositoryImpl): SeriesRepository
 
-    @Provides
     @Singleton
-    fun provideUserRepository(
-        moviesService: MoviesService,
-        sharedPref: SharedPrefs,
-        exceptionHandler: ExceptionHandler,
-    ): UserRepository {
-        return UserRepositoryImp(moviesService, sharedPref, exceptionHandler)
-    }
+    @Binds
+    abstract fun bindUserRepository(userRepositoryImp: UserRepositoryImp): UserRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindAPIErrorHandler(apiErrorHandler: APIErrorHandlerImpl): APIErrorHandler
 }
