@@ -7,12 +7,7 @@ import javax.inject.Inject
 class GetFavoriteMoviesUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
-    suspend operator fun invoke(
-        accountId: Int,
-        language: String? = null,
-        page: Int? = null,
-        sortBy: String? = null
-    ): List<MovieEntity> {
-        return movieRepository.getFavoriteMovies(accountId, language, page, sortBy)
+    suspend operator fun invoke(page: Int? = null): List<MovieEntity> {
+        return movieRepository.getFavoriteMovies(page)
     }
 }

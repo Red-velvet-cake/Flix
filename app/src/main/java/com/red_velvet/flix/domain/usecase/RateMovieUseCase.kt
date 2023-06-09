@@ -8,8 +8,8 @@ class RateMovieUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(
         movieId: Int,
-        rating: Double
+        rate: Float
     ) {
-        return movieRepository.rateMovie(movieId, rating)
+        return movieRepository.rateMovie(movieId, rate)
     }
 }

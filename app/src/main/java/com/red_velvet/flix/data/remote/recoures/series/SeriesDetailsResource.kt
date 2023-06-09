@@ -2,7 +2,7 @@ package com.red_velvet.flix.data.remote.recoures.series
 
 
 import com.google.gson.annotations.SerializedName
-import com.red_velvet.flix.data.remote.recoures.GenreResource
+import com.red_velvet.flix.data.remote.recoures.KeywordResource
 import com.red_velvet.flix.data.remote.recoures.ProductionCompanyResource
 import com.red_velvet.flix.data.remote.recoures.ProductionCountryResource
 import com.red_velvet.flix.data.remote.recoures.SpokenLanguageResource
@@ -19,7 +19,7 @@ data class SeriesDetailsResource(
     @SerializedName("first_air_date")
     val firstAirDate: String?,
     @SerializedName("genres")
-    val genres: List<GenreResource?>?,
+    val genres: List<KeywordResource?>?,
     @SerializedName("homepage")
     val homepage: String?,
     @SerializedName("id")
