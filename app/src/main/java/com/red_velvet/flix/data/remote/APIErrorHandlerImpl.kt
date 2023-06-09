@@ -28,7 +28,9 @@ import com.red_velvet.flix.domain.utils.FlixException
 import okhttp3.ResponseBody
 import javax.inject.Inject
 
-class APIErrorHandlerImpl @Inject constructor() : APIErrorHandler {
+class APIErrorHandlerImpl @Inject constructor(
+    private val gson: Gson
+) : APIErrorHandler {
 
     override fun getFlixException(errorBody: ResponseBody?): FlixException {
         return when (parseErrorBody(errorBody).statusCode) {
@@ -42,7 +44,7 @@ class APIErrorHandlerImpl @Inject constructor() : APIErrorHandler {
 
     private fun parseErrorBody(errorBody: ResponseBody?): ApiResponse {
         return try {
-            Gson().fromJson(errorBody!!.string(), ApiResponse::class.java)
+            gson.fromJson(errorBody!!.string(), ApiResponse::class.java)
         } catch (e: Exception) {
             throw e
         }

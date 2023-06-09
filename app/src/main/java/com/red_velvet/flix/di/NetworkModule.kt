@@ -1,5 +1,6 @@
 package com.red_velvet.flix.di
 
+import com.google.gson.Gson
 import com.red_velvet.flix.BuildConfig
 import com.red_velvet.flix.data.remote.APIService
 import com.red_velvet.flix.data.remote.AuthorizationInterceptor
@@ -60,6 +61,12 @@ object NetworkModule {
         return HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BASIC
         }
+    }
+
+    @Singleton
+    @Provides
+    fun provideGson(): Gson {
+        return Gson()
     }
 
 }
