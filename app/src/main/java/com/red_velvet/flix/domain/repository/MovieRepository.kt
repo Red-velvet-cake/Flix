@@ -1,9 +1,16 @@
 package com.red_velvet.flix.domain.repository
 
 
+import com.red_velvet.flix.data.remote.recoures.PaginationResource
+import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
+import com.red_velvet.flix.data.remote.recoures.person.PersonResource
+import com.red_velvet.flix.data.remote.recoures.series.SeriesResource
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
+import retrofit2.Response
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 
 interface MovieRepository {
@@ -84,6 +91,34 @@ interface MovieRepository {
         includeAdult: Boolean = false,
         language: String? = null,
         page: Int? = null,
+    ): List<MovieEntity>
+
+    suspend fun searchMovies(
+        query: String,
+        includeAdult: Boolean = false,
+        language: String? = null,
+        primaryReleaseYear: Int? = null,
+        page: Int? = null,
+        region: String? = null,
+        year: Int? = null
+    ): List<MovieEntity>
+
+
+    suspend fun searchPeople(
+        query: String,
+        includeAdult: Boolean = false,
+        language: String? = null,
+        page: Int? = null,
+    ): List<MovieEntity>
+
+
+    suspend fun searchTvShows(
+        query: String,
+        firstAirDateYear: Int? = null,
+        includeAdult: Boolean = false,
+        language: String? = null,
+        page: Int? = null,
+        year: Int? = null
     ): List<MovieEntity>
 
     suspend fun getMoviesByKeyword(

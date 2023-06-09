@@ -146,6 +146,38 @@ class MovieRepositoryImpl @Inject constructor(
             .items.toEntity()
     }
 
+    override suspend fun searchMovies(
+        query: String,
+        includeAdult: Boolean,
+        language: String?,
+        primaryReleaseYear: Int?,
+        page: Int?,
+        region: String?,
+        year: Int?
+    ): List<MovieEntity> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun searchPeople(
+        query: String,
+        includeAdult: Boolean,
+        language: String?,
+        page: Int?
+    ): List<MovieEntity> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun searchTvShows(
+        query: String,
+        firstAirDateYear: Int?,
+        includeAdult: Boolean,
+        language: String?,
+        page: Int?,
+        year: Int?
+    ): List<MovieEntity> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getMoviesByKeyword(
         keywordId: Int,
         includeAdult: Boolean,
