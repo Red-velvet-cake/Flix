@@ -9,10 +9,8 @@ class SearchUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(
         query: String,
-        includeAdult: Boolean = false,
-        language: String? = null,
         page: Int? = null
     ): List<MovieEntity> {
-        return movieRepository.search(query, includeAdult, language, page)
+        return movieRepository.search(query, page)
     }
 }

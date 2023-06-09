@@ -7,10 +7,7 @@ import javax.inject.Inject
 class GetMoviesTrailersUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
-    suspend operator fun invoke(
-        movieId: Int,
-        language: String? = null
-    ): List<TrailerEntity> {
-        return movieRepository.getMovieTrailers(movieId, language)
+    suspend operator fun invoke(movieId: Int): List<TrailerEntity> {
+        return movieRepository.getMovieTrailers(movieId)
     }
 }

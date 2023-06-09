@@ -9,11 +9,8 @@ class GetMoviesByKeywordUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(
         keywordId: Int,
-        includeAdult: Boolean = false,
-        language: String? = null,
         page: Int? = null,
-        region: String? = null
     ): List<MovieEntity> {
-        return movieRepository.getMoviesByKeyword(keywordId, includeAdult, language, page, region)
+        return movieRepository.getMoviesByKeyword(keywordId, page)
     }
 }
