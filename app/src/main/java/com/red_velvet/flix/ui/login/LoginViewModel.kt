@@ -1,9 +1,11 @@
 package com.red_velvet.flix.ui.login
 
 import android.util.Log
-import androidx.lifecycle.viewModelScope
+import com.red_velvet.flix.domain.usecase.RequestTokenUseCase
+import com.red_velvet.flix.domain.usecase.SessionCreationUseCase
+import com.red_velvet.flix.domain.usecase.SessionStorageUseCase
+import com.red_velvet.flix.domain.usecase.StoreRequestTokenUseCase
 import com.red_velvet.flix.domain.usecase.login.LoginUseCase
-import com.red_velvet.flix.domain.usecase.login.PasswordMatchingUseCase
 import com.red_velvet.flix.domain.usecase.login.PasswordValidateUseCase
 import com.red_velvet.flix.domain.usecase.login.UserNameValidateUseCase
 import com.red_velvet.flix.ui.base.BaseViewModel
@@ -14,16 +16,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
-    private val passwordMatchingUseCase: PasswordMatchingUseCase,
     private val passwordValidateUseCase: PasswordValidateUseCase,
-    private val userNameValidateUseCase: UserNameValidateUseCase
-): BaseViewModel<LoginUiState>() {
+    private val userNameValidateUseCase: UserNameValidateUseCase,
+    private val requestTokenUseCase: RequestTokenUseCase,
+    private val sessionCreationUseCase: SessionCreationUseCase,
+    private val storeRequestTokenUseCase: StoreRequestTokenUseCase,
+    private val sessionStorageUseCase: SessionStorageUseCase
+) : BaseViewModel<LoginUiState>() {
 
     override val _state: MutableStateFlow<LoginUiState> = MutableStateFlow(LoginUiState())
     override val state: StateFlow<LoginUiState> = _state.asStateFlow()
@@ -50,34 +54,50 @@ class LoginViewModel @Inject constructor(
     }
 
     fun onLoginClicked() {
-        viewModelScope.launch {
-            Log.d("onLoginClicked ", ": ${_state.value.isValidForm}")
-            if (_state.value.isValidForm) {
-                _state.value = _state.value.copy(isLoading = true)
-                tryToExecute(
-                    call = { loginUseCase(_state.value.userName, _state.value.password) },
-                    onSuccess = { onLoginSuccessfully() },
-                    onError = { error -> onLoginError(error) }
-                )
-            } else {
-                _state.value = _state.value.copy(
-                    isLoading = false,
-                    error = "Please enter a valid username and password."
-                )
-            }
+        val userName = _state.value.userName
+        val password = _state.value.password
+        if (validateForm(userName, password)) {
+            _state.value = _state.value.copy(isLoading = true)
+            tryToExecute(
+                call = { performLogin(userName, password) },
+                onSuccess = { onLoginSuccessfully() },
+                onError = { error -> onLoginError(error) }
+            )
         }
     }
+
+    private suspend fun performLogin(userName: String, password: String) {
+        val requestTokenUseCase = requestTokenUseCase()
+        storeRequestTokenUseCase(requestTokenUseCase.requestToken)
+        val loginResult = loginUseCase(userName, password, requestTokenUseCase.requestToken)
+        val sessionId = sessionCreationUseCase(loginResult.requestToken)
+        sessionStorageUseCase(sessionId)
+    }
+
+    private fun validateForm(userName: String, password: String): Boolean {
+        val isValidUserName = userNameValidateUseCase(userName)
+        val isValidPassword = passwordValidateUseCase(password)
+
+        _state.value = _state.value.copy(
+            userNameHelperText = if (isValidUserName) "" else "Invalid username.",
+            passwordHelperText = if (isValidPassword) "" else "Password should have at least 6 characters.",
+            isValidForm = isValidUserName && isValidPassword
+        )
+
+        return _state.value.isValidForm
+    }
+
     private fun onLoginError(errorUiState: ErrorUiState) {
         _state.update {
             it.copy(
                 isLoading = false,
-                error = errorUiState.message,
-                passwordHelperText = errorUiState.message
+                error = errorUiState
             )
         }
     }
 
     private fun onLoginSuccessfully() {
+        Log.d("onLoginSuccessfully ", ":")
         _state.update { it.copy(isLoading = false) }
         _loginEvent.value = Event(LoginUIEvent.LoginEvent)
         resetForm()

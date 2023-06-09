@@ -74,7 +74,7 @@
             app:boxStrokeWidth="@dimen/_0dp"
             app:boxStrokeWidthFocused="@dimen/_0dp"
             app:hintEnabled="false"
-            app:setHelperText="@{viewModel.loginUIState.userNameHelperText}"
+            app:setHelperText="@{viewModel.state.userNameHelperText}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loginTextView">
@@ -104,7 +104,7 @@
             app:boxStrokeWidth="@dimen/_0dp"
             app:boxStrokeWidthFocused="@dimen/_0dp"
             app:hintEnabled="false"
-            setHelperText="@{viewModel.loginUIState.passwordHelperText}"
+            setHelperText="@{viewModel.state.passwordHelperText}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_input_layout_username">
@@ -132,7 +132,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/bg_button"
-            android:enabled="@{viewModel.loginUIState.validForm}"
+            android:enabled="@{viewModel.state.validForm}"
             android:padding="@dimen/_0dp"
             android:paddingVertical="@dimen/_16dp"
             android:onClick="@{()->viewModel.onLoginClicked()}"
@@ -152,7 +152,7 @@
             app:indicatorColor="@color/off_white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:isVisible="@{viewModel.loginUIState.loading}"
+            app:isVisible="@{viewModel.state.loading}"
             app:layout_constraintTop_toBottomOf="@+id/text_input_layout_password"
             app:trackColor="@color/Purple100" />
 
