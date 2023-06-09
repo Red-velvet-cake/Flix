@@ -3,6 +3,7 @@ package com.red_velvet.flix.domain.repository
 
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
+import com.red_velvet.flix.domain.entity.movie.MovieDetailsEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 
 
@@ -32,7 +33,7 @@ interface MovieRepository {
         language: String? = null
     ): List<MovieEntity>
 
-    suspend fun getMovieDetails(movieId: Int): MovieEntity
+    suspend fun getMovieDetails(movieId: Int): MovieDetailsEntity
 
     suspend fun getMovieKeywords(movieId: Int): List<String>
 
