@@ -1,5 +1,8 @@
 package com.red_velvet.flix.ui.movieDetails
 
+import com.red_velvet.flix.domain.entity.movie.MovieDetailsEntity
+import com.red_velvet.flix.ui.base.BaseUiState
+
 data class MovieUiState(
     val isLoading : Boolean = true,
     val errors : List<String> = emptyList(),
@@ -30,7 +33,7 @@ data class MovieUiState(
     val review: List<MovieReview> = emptyList(),
     val seeAllRecommendations: Boolean = false,
     val movieRecommendations: List<MovieRecommendations> = emptyList(),
-)
+): BaseUiState
 
 data class TopCast(
     val actorImageUrl: String,
@@ -52,3 +55,8 @@ data class MovieRecommendations(
     val recommendedMovieName: String,
     val recommendedMovieImageUrl: String,
 )
+fun MovieDetailsEntity.toUiState(): MovieUiState{
+return MovieUiState(
+        movieName = title
+    )
+}
