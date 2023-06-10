@@ -1,20 +1,19 @@
 package com.red_velvet.flix.ui.search
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.usecase.SearchUseCase
 import com.red_velvet.flix.ui.base.BaseViewModel
+import com.red_velvet.flix.ui.base.ErrorUiState
 import com.red_velvet.flix.ui.search.adapter.MediaSearchInteractionListener
 import com.red_velvet.flix.ui.search.mediaSearchUiState.MediaSearchUiState
 import com.red_velvet.flix.ui.search.mediaSearchUiState.MediaUiState
 import com.red_velvet.flix.ui.search.mediaSearchUiState.SearchTypes
 import com.red_velvet.flix.ui.search.mediaSearchUiState.toUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,10 +21,9 @@ import javax.inject.Inject
 @Suppress("UNUSED_EXPRESSION")
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val searchUsecase: SearchUseCase,
+    private val searchUseCase: SearchUseCase,
 ) : BaseViewModel<MediaSearchUiState>(), MediaSearchInteractionListener {
 
-    
 
     override val _state = MutableStateFlow(MediaSearchUiState())
     override val state: StateFlow<MediaSearchUiState> = _state.asStateFlow()
@@ -39,91 +37,114 @@ class SearchViewModel @Inject constructor(
     }
 
 
-    @OptIn(FlowPreview::class)
     fun onChangeSearchTextFiled(searchInput: CharSequence) {
-        _state.apply {
-            update { it.copy(searchInput = searchInput.toString(), isLoading = true) }
-            debounce(1000)
-        }
+        _state.update { it.copy(searchInput.toString(), isLoading = true) }
         viewModelScope.launch {
             when (_state.value.searchTypes) {
                 SearchTypes.MOVIE -> onSearchForMovie()
                 SearchTypes.PERSON -> onSearchForPerson()
-                SearchTypes.TV -> onSearchForTvShow()
+                SearchTypes.SERIES -> onSearchForTvShow()
                 SearchTypes.ALL -> onSearchForAll()
             }
         }
         ::onError
     }
 
+
     fun onSearchForAll() {
-        viewModelScope.launch {
-            _state.update {
-                it.copy(
-                    searchTypes = SearchTypes.ALL,
-                    isLoading = false,
-                    searchResult = searchUsecase(it.searchInput).map { all ->
-                        all.toUiState()
-                    }
-                )
-            }
+        _state.update { it.copy(isLoading = true) }
+        tryToExecute(
+            { searchUseCase(state.value.searchInput) },
+            ::onSearchForAllSuccess,
+            ::onError
+        )
+
+
+    }
+
+    private fun onSearchForAllSuccess(media: List<MovieEntity>) {
+        val mediaUiState = media.map(MovieEntity::toUiState)
+        _state.update {
+            it.copy(
+                searchTypes = SearchTypes.ALL,
+                isLoading = false,
+                searchResult = mediaUiState,
+                error = null
+            )
+
         }
-         ::onError
     }
 
 
     fun onSearchForMovie() {
-        viewModelScope.launch {
-            _state.update {
-                it.copy(
-                    searchTypes = SearchTypes.MOVIE,
-                    isLoading = false,
-                    searchResult = searchUsecase(it.searchInput).map { movie ->
-                        movie.toUiState()
+        _state.update { it.copy(isLoading = true) }
+        tryToExecute(
+            { searchUseCase(state.value.searchInput) },
+            ::onSearchForMovieSuccess,
+            ::onError
+        )
+    }
 
-                    }
-                )
-            }
-            Log.i("mustafa", _state.value.searchResult.toString() )
+    private fun onSearchForMovieSuccess(movies: List<MovieEntity>) {
+        val moviesUiState = movies.map(MovieEntity::toUiState)
+        _state.update {
+            it.copy(
+                searchTypes = SearchTypes.MOVIE,
+                isLoading = false,
+                searchResult = moviesUiState,
+                error = null
+            )
         }
-        ::onError
     }
 
     fun onSearchForPerson() {
-        viewModelScope.launch {
-            _state.update {
-                it.copy(
-                    searchTypes = SearchTypes.PERSON,
-                    isLoading = false,
-                    searchResult = searchUsecase(it.searchInput).map { person ->
-                        person.toUiState()
-                    }
-                )
-            }
+        _state.update { it.copy(isLoading = true) }
+        tryToExecute(
+            { searchUseCase(state.value.searchInput) },
+            ::onSearchForPersonSuccess,
+            ::onError
+        )
+
+    }
+
+    private fun onSearchForPersonSuccess(person: List<MovieEntity>) {
+        val personUiState = person.map(MovieEntity::toUiState)
+        _state.update {
+            it.copy(
+                searchTypes = SearchTypes.PERSON,
+                isLoading = false,
+                searchResult = personUiState,
+                error = null
+            )
         }
-        ::onError
     }
 
     fun onSearchForTvShow() {
-        viewModelScope.launch {
-            _state.update {
-                it.copy(
-                    searchTypes = SearchTypes.TV,
-                    isLoading = false,
-                    searchResult = searchUsecase(it.searchInput).map { tv ->
-                        tv.toUiState()
-                    }
-                )
-            }
+        _state.update { it.copy(isLoading = true) }
+        tryToExecute(
+            { searchUseCase(state.value.searchInput) },
+            ::onSearchForSeriesSuccess,
+            ::onError
+        )
+
+    }
+
+    private fun onSearchForSeriesSuccess(series: List<MovieEntity>) {
+        val seriesUiState = series.map(MovieEntity::toUiState)
+        _state.update {
+            it.copy(
+                searchTypes = SearchTypes.SERIES,
+                isLoading = false,
+                searchResult = seriesUiState,
+                error = null
+            )
         }
-        ::onError
     }
 
-    private fun onError() {
-        _state.update { it.copy(error = emptyList(), isLoading = false) }
+    private fun onError(error: ErrorUiState) {
+        _state.update { it.copy(error = error, isLoading = false) }
     }
 
-   
 
 }
 
