@@ -73,6 +73,8 @@
     <dimen name="text_small">12sp</dimen>
     <dimen name="_300dp">300dp</dimen>
     <dimen name="_44dp">44dp</dimen>
+    <dimen name="_130dp">130dp</dimen>
+    <dimen name="_150dp">150dp</dimen>
 
 
 </resources>
