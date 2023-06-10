@@ -3,6 +3,8 @@ package com.red_velvet.flix.ui.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -18,12 +20,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override val viewModel: HomeViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        makePager()
+        assignPagesToTabs()
     }
 
-    private fun makePager() {
+    private fun assignPagesToTabs() {
         val viewPager = view?.findViewById<ViewPager2>(R.id.view_pager)
         viewPager?.adapter = ViewPagerAdapter(this, viewModel)
+        viewPager?.isUserInputEnabled = false
 
         val tabLayout = view?.findViewById<TabLayout>(R.id.tab_layout)
         TabLayoutMediator(tabLayout!!, viewPager!!) { tab, position ->
