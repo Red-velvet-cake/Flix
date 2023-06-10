@@ -4,5 +4,5 @@ enum class SearchTypes {
     ALL,
     MOVIE,
     PERSON,
-    TV
+    SERIES
 }
