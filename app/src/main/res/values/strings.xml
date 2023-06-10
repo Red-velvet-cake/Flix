@@ -52,4 +52,6 @@
     <string name="oops">oops</string>
     <string name="please_check_your_internet_connection_and_try_again">please check your internet connection and try again</string>
     <string name="retry">retry</string>
+    <string name="movies">Movies</string>
+    <string name="tvshows">TVShows</string>
 </resources>
