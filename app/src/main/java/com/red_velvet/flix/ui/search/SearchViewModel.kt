@@ -1,7 +1,13 @@
 package com.red_velvet.flix.ui.search
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.red_velvet.flix.domain.entity.PersonEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
+import com.red_velvet.flix.domain.entity.series.SeriesEntity
+import com.red_velvet.flix.domain.usecase.SearchMovieUseCase
+import com.red_velvet.flix.domain.usecase.SearchPersonUseCase
+import com.red_velvet.flix.domain.usecase.SearchSeriesUseCase
 import com.red_velvet.flix.domain.usecase.SearchUseCase
 import com.red_velvet.flix.ui.base.BaseViewModel
 import com.red_velvet.flix.ui.base.ErrorUiState
@@ -21,7 +27,10 @@ import javax.inject.Inject
 @Suppress("UNUSED_EXPRESSION")
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val searchUseCase: SearchUseCase,
+    private val multiSearchUseCase: SearchUseCase,
+    private val searchMovieUseCase: SearchMovieUseCase,
+    private val searchSeriesUseCase: SearchSeriesUseCase,
+    private val searchPersonUseCase: SearchPersonUseCase
 ) : BaseViewModel<MediaSearchUiState>(), MediaSearchInteractionListener {
 
 
@@ -38,7 +47,7 @@ class SearchViewModel @Inject constructor(
 
 
     fun onChangeSearchTextFiled(searchInput: CharSequence) {
-        _state.update { it.copy(searchInput.toString(), isLoading = true) }
+        _state.update { it.copy(searchInput = searchInput.toString(), isLoading = true) }
         viewModelScope.launch {
             when (_state.value.searchTypes) {
                 SearchTypes.MOVIE -> onSearchForMovie()
@@ -54,7 +63,7 @@ class SearchViewModel @Inject constructor(
     fun onSearchForAll() {
         _state.update { it.copy(isLoading = true) }
         tryToExecute(
-            { searchUseCase(state.value.searchInput) },
+            { multiSearchUseCase(state.value.searchInput) },
             ::onSearchForAllSuccess,
             ::onError
         )
@@ -79,7 +88,7 @@ class SearchViewModel @Inject constructor(
     fun onSearchForMovie() {
         _state.update { it.copy(isLoading = true) }
         tryToExecute(
-            { searchUseCase(state.value.searchInput) },
+            { searchMovieUseCase(state.value.searchInput) },
             ::onSearchForMovieSuccess,
             ::onError
         )
@@ -100,15 +109,15 @@ class SearchViewModel @Inject constructor(
     fun onSearchForPerson() {
         _state.update { it.copy(isLoading = true) }
         tryToExecute(
-            { searchUseCase(state.value.searchInput) },
+            { searchPersonUseCase(state.value.searchInput) },
             ::onSearchForPersonSuccess,
             ::onError
         )
 
     }
 
-    private fun onSearchForPersonSuccess(person: List<MovieEntity>) {
-        val personUiState = person.map(MovieEntity::toUiState)
+    private fun onSearchForPersonSuccess(person: List<PersonEntity>) {
+        val personUiState = person.map(PersonEntity::toUiState)
         _state.update {
             it.copy(
                 searchTypes = SearchTypes.PERSON,
@@ -122,15 +131,15 @@ class SearchViewModel @Inject constructor(
     fun onSearchForTvShow() {
         _state.update { it.copy(isLoading = true) }
         tryToExecute(
-            { searchUseCase(state.value.searchInput) },
+            { searchSeriesUseCase(state.value.searchInput) },
             ::onSearchForSeriesSuccess,
             ::onError
         )
 
     }
 
-    private fun onSearchForSeriesSuccess(series: List<MovieEntity>) {
-        val seriesUiState = series.map(MovieEntity::toUiState)
+    private fun onSearchForSeriesSuccess(series: List<SeriesEntity>) {
+        val seriesUiState = series.map(SeriesEntity::toUiState)
         _state.update {
             it.copy(
                 searchTypes = SearchTypes.SERIES,
@@ -139,6 +148,7 @@ class SearchViewModel @Inject constructor(
                 error = null
             )
         }
+        Log.i("mustafa",_state.value.searchResult.toString())
     }
 
     private fun onError(error: ErrorUiState) {
