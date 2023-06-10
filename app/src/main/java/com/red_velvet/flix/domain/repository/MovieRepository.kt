@@ -5,9 +5,11 @@ import com.red_velvet.flix.data.remote.recoures.PaginationResource
 import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
 import com.red_velvet.flix.data.remote.recoures.person.PersonResource
 import com.red_velvet.flix.data.remote.recoures.series.SeriesResource
+import com.red_velvet.flix.domain.entity.PersonEntity
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
+import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -109,7 +111,7 @@ interface MovieRepository {
         includeAdult: Boolean = false,
         language: String? = null,
         page: Int? = null,
-    ): List<MovieEntity>
+    ): List<PersonEntity>
 
 
     suspend fun searchTvShows(
@@ -119,7 +121,7 @@ interface MovieRepository {
         language: String? = null,
         page: Int? = null,
         year: Int? = null
-    ): List<MovieEntity>
+    ): List<SeriesEntity>
 
     suspend fun getMoviesByKeyword(
         keywordId: Int,

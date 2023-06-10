@@ -12,10 +12,13 @@ import com.red_velvet.flix.data.repository.mapper.movie.toTopRatedMovieDto
 import com.red_velvet.flix.data.repository.mapper.movie.toTopRatedMoviesEntity
 import com.red_velvet.flix.data.repository.mapper.movie.toUpComingMovieDto
 import com.red_velvet.flix.data.repository.mapper.movie.toUpcomingMoviesEntity
+import com.red_velvet.flix.data.repository.mapper.series.toEntity
 import com.red_velvet.flix.data.repository.mapper.toEntity
+import com.red_velvet.flix.domain.entity.PersonEntity
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
+import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
 import javax.inject.Inject
 
@@ -25,78 +28,80 @@ class MovieRepositoryImpl @Inject constructor(
     apiErrorHandler: APIErrorHandler
 ) : MovieRepository, BaseRepository(apiErrorHandler) {
     override suspend fun getPopularMovies(
-        page: Int?,
-        region: String?,
-        language: String?
+        page: Int?, region: String?, language: String?
     ): List<MovieEntity> {
-        return wrapApiCall { moviesService.getPopularMovies(page, region, language) }
-            .items.toEntity()
+        return wrapApiCall {
+            moviesService.getPopularMovies(
+                page, region, language
+            )
+        }.items.toEntity()
     }
 
     override suspend fun getUpcomingMovies(
-        page: Int?,
-        region: String?,
-        language: String?
+        page: Int?, region: String?, language: String?
     ): List<MovieEntity> {
-        return wrapApiCall { moviesService.getUpcomingMovies(page, region, language) }
-            .items.toEntity()
+        return wrapApiCall {
+            moviesService.getUpcomingMovies(
+                page, region, language
+            )
+        }.items.toEntity()
     }
 
     override suspend fun getNowPlayingMovies(
-        page: Int?,
-        region: String?,
-        language: String?
+        page: Int?, region: String?, language: String?
     ): List<MovieEntity> {
-        return wrapApiCall { moviesService.getNowPlayingMovies(page, region, language) }
-            .items.toEntity()
+        return wrapApiCall {
+            moviesService.getNowPlayingMovies(
+                page, region, language
+            )
+        }.items.toEntity()
     }
 
     override suspend fun getTopRatedMovies(
-        page: Int?,
-        region: String?,
-        language: String?
+        page: Int?, region: String?, language: String?
     ): List<MovieEntity> {
-        return wrapApiCall { moviesService.getTopRatedMovies(page, region, language) }
-            .items.toEntity()
+        return wrapApiCall {
+            moviesService.getTopRatedMovies(
+                page, region, language
+            )
+        }.items.toEntity()
     }
 
 
     override suspend fun getMovieDetails(movieId: Int): MovieEntity {
-        return wrapApiCall { moviesService.getMovieDetails(movieId) }
-            .toEntity()
+        return wrapApiCall { moviesService.getMovieDetails(movieId) }.toEntity()
     }
 
     override suspend fun getMovieKeywords(movieId: Int): List<String> {
-        return wrapApiCall { moviesService.getMovieKeywords(movieId) }
-            .toEntity()
+        return wrapApiCall { moviesService.getMovieKeywords(movieId) }.toEntity()
     }
 
     override suspend fun getSimilarMovies(
-        movieId: Int,
-        page: Int?,
-        language: String?
+        movieId: Int, page: Int?, language: String?
     ): List<MovieEntity> {
-        return wrapApiCall { moviesService.getSimilarMovies(movieId, page, language) }
-            .items.toEntity()
+        return wrapApiCall {
+            moviesService.getSimilarMovies(
+                movieId, page, language
+            )
+        }.items.toEntity()
     }
 
     override suspend fun getMovieTrailers(movieId: Int, language: String?): List<TrailerEntity> {
-        return wrapApiCall { moviesService.getMovieTrailers(movieId, language) }
-            .toEntity()
+        return wrapApiCall { moviesService.getMovieTrailers(movieId, language) }.toEntity()
     }
 
     override suspend fun getLatestMovie(): MovieEntity {
-        return wrapApiCall { moviesService.getLatestMovie() }
-            .toEntity()
+        return wrapApiCall { moviesService.getLatestMovie() }.toEntity()
     }
 
     override suspend fun getMovieRecommendations(
-        movieId: Int,
-        page: Int?,
-        language: String?
+        movieId: Int, page: Int?, language: String?
     ): List<MovieEntity> {
-        return wrapApiCall { moviesService.getMovieRecommendations(movieId, page, language) }
-            .items.toEntity()
+        return wrapApiCall {
+            moviesService.getMovieRecommendations(
+                movieId, page, language
+            )
+        }.items.toEntity()
     }
 
     override suspend fun rateMovie(movieId: Int, rating: Double) {
@@ -108,42 +113,43 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMovieReviews(
-        movieId: Int,
-        page: Int?,
-        language: String?
+        movieId: Int, page: Int?, language: String?
     ): List<ReviewEntity> {
-        return wrapApiCall { moviesService.getMovieReviews(movieId, page, language) }
-            .items.toEntity()
+        return wrapApiCall {
+            moviesService.getMovieReviews(
+                movieId, page, language
+            )
+        }.items.toEntity()
     }
 
     override suspend fun getMoviesWatchlist(
-        accountId: Int,
-        language: String?,
-        page: Int?,
-        sortBy: String?
+        accountId: Int, language: String?, page: Int?, sortBy: String?
     ): List<MovieEntity> {
-        return wrapApiCall { moviesService.getMoviesWatchlist(accountId, language, page, sortBy) }
-            .items.toEntity()
+        return wrapApiCall {
+            moviesService.getMoviesWatchlist(
+                accountId, language, page, sortBy
+            )
+        }.items.toEntity()
     }
 
     override suspend fun getFavoriteMovies(
-        accountId: Int,
-        language: String?,
-        page: Int?,
-        sortBy: String?
+        accountId: Int, language: String?, page: Int?, sortBy: String?
     ): List<MovieEntity> {
-        return wrapApiCall { moviesService.getFavoriteMovies(accountId, language, page, sortBy) }
-            .items.toEntity()
+        return wrapApiCall {
+            moviesService.getFavoriteMovies(
+                accountId, language, page, sortBy
+            )
+        }.items.toEntity()
     }
 
     override suspend fun search(
-        query: String,
-        includeAdult: Boolean,
-        language: String?,
-        page: Int?
+        query: String, includeAdult: Boolean, language: String?, page: Int?
     ): List<MovieEntity> {
-        return wrapApiCall { moviesService.search(query, includeAdult, language, page) }
-            .items.toEntity()
+        return wrapApiCall {
+            moviesService.search(
+                query, includeAdult, language, page
+            )
+        }.items.toEntity()
     }
 
     override suspend fun searchMovies(
@@ -155,16 +161,21 @@ class MovieRepositoryImpl @Inject constructor(
         region: String?,
         year: Int?
     ): List<MovieEntity> {
-        TODO("Not yet implemented")
+        return wrapApiCall {
+            moviesService.searchMovies(
+                query, includeAdult, language, primaryReleaseYear, page, region
+            )
+        }.items.toEntity()
     }
 
     override suspend fun searchPeople(
-        query: String,
-        includeAdult: Boolean,
-        language: String?,
-        page: Int?
-    ): List<MovieEntity> {
-        TODO("Not yet implemented")
+        query: String, includeAdult: Boolean, language: String?, page: Int?
+    ): List<PersonEntity> {
+        return wrapApiCall {
+            moviesService.searchPeople(
+                query, includeAdult, language, page
+            )
+        }.items.toEntity()
     }
 
     override suspend fun searchTvShows(
@@ -174,27 +185,23 @@ class MovieRepositoryImpl @Inject constructor(
         language: String?,
         page: Int?,
         year: Int?
-    ): List<MovieEntity> {
-        TODO("Not yet implemented")
+    ): List<SeriesEntity> {
+        return wrapApiCall {
+            moviesService.searchTvShows(
+                query, firstAirDateYear, includeAdult, language, page, year
+            )
+        }.items.toEntity()
     }
 
+
     override suspend fun getMoviesByKeyword(
-        keywordId: Int,
-        includeAdult: Boolean,
-        language: String?,
-        page: Int?,
-        region: String?
+        keywordId: Int, includeAdult: Boolean, language: String?, page: Int?, region: String?
     ): List<MovieEntity> {
         return wrapApiCall {
             moviesService.getMoviesByKeyword(
-                keywordId,
-                includeAdult,
-                language,
-                page,
-                region
+                keywordId, includeAdult, language, page, region
             )
-        }
-            .items.toEntity()
+        }.items.toEntity()
     }
 
     override suspend fun discoverMovies(
@@ -207,35 +214,25 @@ class MovieRepositoryImpl @Inject constructor(
     ): List<MovieEntity> {
         return wrapApiCall {
             moviesService.discoverMovies(
-                includeAdult,
-                language,
-                page,
-                sortBy,
-                voteAverageGte,
-                year
+                includeAdult, language, page, sortBy, voteAverageGte, year
             )
-        }
-            .items.toEntity()
+        }.items.toEntity()
     }
 
     override suspend fun getLocalPopularMovies(): List<MovieEntity> {
-        return movieDao.getPopularMovies()
-            .toPopularMoviesEntity()
+        return movieDao.getPopularMovies().toPopularMoviesEntity()
     }
 
     override suspend fun getLocalUpcomingMovies(): List<MovieEntity> {
-        return movieDao.getUpcomingMovies()
-            .toUpcomingMoviesEntity()
+        return movieDao.getUpcomingMovies().toUpcomingMoviesEntity()
     }
 
     override suspend fun getLocalNowPlayingMovies(): List<MovieEntity> {
-        return movieDao.getNowPlayingMovies()
-            .toNowPlayingMoviesEntity()
+        return movieDao.getNowPlayingMovies().toNowPlayingMoviesEntity()
     }
 
     override suspend fun getLocalTopRatedMovies(): List<MovieEntity> {
-        return movieDao.getTopRatedMovies()
-            .toTopRatedMoviesEntity()
+        return movieDao.getTopRatedMovies().toTopRatedMoviesEntity()
     }
 
     override suspend fun cachePopularMovies(movies: List<MovieEntity>) {
