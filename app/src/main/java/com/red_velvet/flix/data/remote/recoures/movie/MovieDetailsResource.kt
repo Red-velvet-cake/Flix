@@ -2,7 +2,7 @@ package com.red_velvet.flix.data.remote.recoures.movie
 
 
 import com.google.gson.annotations.SerializedName
-import com.red_velvet.flix.data.remote.recoures.GenreResource
+import com.red_velvet.flix.data.remote.recoures.KeywordResource
 import com.red_velvet.flix.data.remote.recoures.ProductionCompanyResource
 import com.red_velvet.flix.data.remote.recoures.ProductionCountryResource
 import com.red_velvet.flix.data.remote.recoures.SpokenLanguageResource
@@ -17,7 +17,7 @@ data class MovieDetailsResource(
     @SerializedName("budget")
     val budget: Int?,
     @SerializedName("genres")
-    val genres: List<GenreResource?>?,
+    val genres: List<KeywordResource?>?,
     @SerializedName("homepage")
     val homepage: String?,
     @SerializedName("id")

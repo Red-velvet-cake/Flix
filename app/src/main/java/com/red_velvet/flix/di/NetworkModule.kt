@@ -1,8 +1,9 @@
 package com.red_velvet.flix.di
 
+import com.google.gson.Gson
 import com.red_velvet.flix.BuildConfig
+import com.red_velvet.flix.data.remote.APIService
 import com.red_velvet.flix.data.remote.AuthorizationInterceptor
-import com.red_velvet.flix.data.remote.MoviesService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,8 +20,8 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideMovieService(retrofit: Retrofit): MoviesService {
-        return retrofit.create(MoviesService::class.java)
+    fun provideMovieService(retrofit: Retrofit): APIService {
+        return retrofit.create(APIService::class.java)
     }
 
     @Singleton
@@ -60,6 +61,12 @@ object NetworkModule {
         return HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BASIC
         }
+    }
+
+    @Singleton
+    @Provides
+    fun provideGson(): Gson {
+        return Gson()
     }
 
 }
