@@ -8,21 +8,9 @@ class SearchMovieUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
     suspend operator fun invoke(
-        query: String,
-        includeAdult: Boolean = false,
-        language: String? = null,
-        primaryReleaseYear: Int? = null,
-        page: Int? = null,
-        region: String? = null
-    ): List<MovieEntity>{
-      return  movieRepository.searchMovies(
-            query,
-            includeAdult,
-            language,
-            primaryReleaseYear,
-            page,
-            region
+        query: String, page: Int? = null): List<MovieEntity> {
 
-        )
+        return movieRepository.searchMovies(query, page)
+
     }
 }

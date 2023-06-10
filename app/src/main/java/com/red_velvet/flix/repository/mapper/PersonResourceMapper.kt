@@ -1,4 +1,4 @@
-package com.red_velvet.flix.data.repository.mapper
+package com.red_velvet.flix.repository.mapper
 
 import com.red_velvet.flix.BuildConfig
 import com.red_velvet.flix.data.remote.recoures.person.PersonResource

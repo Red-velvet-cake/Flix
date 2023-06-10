@@ -8,16 +8,7 @@ import javax.inject.Inject
 class SearchSeriesUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
-    suspend operator fun invoke(
-        query: String,
-        firstAirDateYear: Int? = null,
-        includeAdult: Boolean = false,
-        language: String? = null,
-        page: Int? = null,
-        year: Int? = null
-    ): List<SeriesEntity> {
-        return movieRepository.searchTvShows(
-            query, firstAirDateYear, includeAdult, language, page, year
-        )
+    suspend operator fun invoke(query: String, page: Int? = null): List<SeriesEntity> {
+        return movieRepository.searchSeries(query, page)
     }
 }

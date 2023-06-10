@@ -7,12 +7,7 @@ import javax.inject.Inject
 class SearchPersonUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
-    suspend operator fun invoke(
-        query: String,
-        includeAdult: Boolean = false,
-        language: String? = null,
-        page: Int? = null,
-    ): List<PersonEntity>{
-       return movieRepository.searchPeople(query, includeAdult, language, page)
+    suspend operator fun invoke(query: String, page: Int? = null): List<PersonEntity> {
+        return movieRepository.searchPeople(query, page)
     }
 }

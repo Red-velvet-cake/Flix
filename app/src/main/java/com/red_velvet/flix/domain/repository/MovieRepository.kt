@@ -1,9 +1,11 @@
 package com.red_velvet.flix.domain.repository
 
 
+import com.red_velvet.flix.domain.entity.PersonEntity
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
+import com.red_velvet.flix.domain.entity.series.SeriesEntity
 
 
 interface MovieRepository {
@@ -40,41 +42,10 @@ interface MovieRepository {
 
     suspend fun search(query: String, page: Int? = null): List<MovieEntity>
 
-    suspend fun searchMovies(
-        query: String,
-        includeAdult: Boolean = false,
-        language: String? = null,
-        primaryReleaseYear: Int? = null,
-        page: Int? = null,
-        region: String? = null,
-        year: Int? = null
-    ): List<MovieEntity>
 
+    suspend fun searchSeries(query: String, page: Int?): List<SeriesEntity>
+    suspend fun searchPeople(query: String, page: Int?): List<PersonEntity>
 
-    suspend fun searchPeople(
-        query: String,
-        includeAdult: Boolean = false,
-        language: String? = null,
-        page: Int? = null,
-    ): List<PersonEntity>
-
-
-    suspend fun searchTvShows(
-        query: String,
-        firstAirDateYear: Int? = null,
-        includeAdult: Boolean = false,
-        language: String? = null,
-        page: Int? = null,
-        year: Int? = null
-    ): List<SeriesEntity>
-
-    suspend fun getMoviesByKeyword(
-        keywordId: Int,
-        includeAdult: Boolean = false,
-        language: String? = null,
-        page: Int? = null,
-        region: String? = null
-    ): List<MovieEntity>
     suspend fun searchMovies(query: String, page: Int?): List<MovieEntity>
 
     suspend fun getMoviesByKeyword(keywordId: Int, page: Int? = null): List<MovieEntity>
