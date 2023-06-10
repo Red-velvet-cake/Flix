@@ -1,4 +1,4 @@
-package com.red_velvet.flix.domain.usecase
+package com.red_velvet.flix.domain.usecase.login
 
 import com.red_velvet.flix.domain.entity.account.TokenEntity
 import com.red_velvet.flix.domain.repository.UserRepository

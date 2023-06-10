@@ -1,10 +1,6 @@
 package com.red_velvet.flix.ui.login
 
 import android.util.Log
-import com.red_velvet.flix.domain.usecase.RequestTokenUseCase
-import com.red_velvet.flix.domain.usecase.SessionCreationUseCase
-import com.red_velvet.flix.domain.usecase.SessionStorageUseCase
-import com.red_velvet.flix.domain.usecase.StoreRequestTokenUseCase
 import com.red_velvet.flix.domain.usecase.login.LoginUseCase
 import com.red_velvet.flix.domain.usecase.login.PasswordValidateUseCase
 import com.red_velvet.flix.domain.usecase.login.UserNameValidateUseCase
@@ -23,10 +19,6 @@ class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val passwordValidateUseCase: PasswordValidateUseCase,
     private val userNameValidateUseCase: UserNameValidateUseCase,
-    private val requestTokenUseCase: RequestTokenUseCase,
-    private val sessionCreationUseCase: SessionCreationUseCase,
-    private val storeRequestTokenUseCase: StoreRequestTokenUseCase,
-    private val sessionStorageUseCase: SessionStorageUseCase
 ) : BaseViewModel<LoginUiState>() {
 
     override val _state: MutableStateFlow<LoginUiState> = MutableStateFlow(LoginUiState())
@@ -59,19 +51,11 @@ class LoginViewModel @Inject constructor(
         if (validateForm(userName, password)) {
             _state.value = _state.value.copy(isLoading = true)
             tryToExecute(
-                call = { performLogin(userName, password) },
+                call = { loginUseCase(userName, password) },
                 onSuccess = { onLoginSuccessfully() },
                 onError = { error -> onLoginError(error) }
             )
         }
-    }
-
-    private suspend fun performLogin(userName: String, password: String) {
-        val requestTokenUseCase = requestTokenUseCase()
-        storeRequestTokenUseCase(requestTokenUseCase.requestToken)
-        val loginResult = loginUseCase(userName, password, requestTokenUseCase.requestToken)
-        val sessionId = sessionCreationUseCase(loginResult.requestToken)
-        sessionStorageUseCase(sessionId)
     }
 
     private fun validateForm(userName: String, password: String): Boolean {
