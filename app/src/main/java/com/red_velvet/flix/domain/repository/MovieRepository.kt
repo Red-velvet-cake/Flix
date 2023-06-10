@@ -1,99 +1,44 @@
 package com.red_velvet.flix.domain.repository
 
 
-import com.red_velvet.flix.data.remote.recoures.PaginationResource
-import com.red_velvet.flix.data.remote.recoures.movie.MovieResource
-import com.red_velvet.flix.data.remote.recoures.person.PersonResource
-import com.red_velvet.flix.data.remote.recoures.series.SeriesResource
-import com.red_velvet.flix.domain.entity.PersonEntity
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
-import com.red_velvet.flix.domain.entity.series.SeriesEntity
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Query
 
 
 interface MovieRepository {
 
-    suspend fun getPopularMovies(
-        page: Int? = null,
-        region: String? = null,
-        language: String? = null
-    ): List<MovieEntity>
+    suspend fun getPopularMovies(page: Int? = null): List<MovieEntity>
 
-    suspend fun getUpcomingMovies(
-        page: Int? = null,
-        region: String? = null,
-        language: String? = null
-    ): List<MovieEntity>
+    suspend fun getUpcomingMovies(page: Int? = null): List<MovieEntity>
 
-    suspend fun getNowPlayingMovies(
-        page: Int? = null,
-        region: String? = null,
-        language: String? = null
-    ): List<MovieEntity>
+    suspend fun getNowPlayingMovies(page: Int? = null): List<MovieEntity>
 
-    suspend fun getTopRatedMovies(
-        page: Int? = null,
-        region: String? = null,
-        language: String? = null
-    ): List<MovieEntity>
+    suspend fun getTopRatedMovies(page: Int? = null): List<MovieEntity>
 
     suspend fun getMovieDetails(movieId: Int): MovieEntity
 
     suspend fun getMovieKeywords(movieId: Int): List<String>
 
-    suspend fun getSimilarMovies(
-        movieId: Int,
-        page: Int? = null,
-        language: String? = null
-    ): List<MovieEntity>
+    suspend fun getSimilarMovies(movieId: Int, page: Int? = null): List<MovieEntity>
 
-    suspend fun getMovieTrailers(
-        movieId: Int,
-        language: String? = null
-    ): List<TrailerEntity>
+    suspend fun getMovieTrailers(movieId: Int): List<TrailerEntity>
 
     suspend fun getLatestMovie(): MovieEntity
 
-    suspend fun getMovieRecommendations(
-        movieId: Int,
-        page: Int? = null,
-        language: String? = null
-    ): List<MovieEntity>
+    suspend fun getMovieRecommendations(movieId: Int, page: Int? = null): List<MovieEntity>
 
-    suspend fun rateMovie(movieId: Int, rating: Double)
+    suspend fun rateMovie(movieId: Int, rate: Float)
 
     suspend fun deleteMovieRating(movieId: Int)
 
-    suspend fun getMovieReviews(
-        movieId: Int,
-        page: Int? = null,
-        language: String? = null
-    ): List<ReviewEntity>
+    suspend fun getMovieReviews(movieId: Int, page: Int? = null): List<ReviewEntity>
 
-    suspend fun getMoviesWatchlist(
-        accountId: Int,
-        language: String? = null,
-        page: Int? = null,
-        sortBy: String? = null
-    ): List<MovieEntity>
+    suspend fun getMoviesWatchlist(page: Int? = null): List<MovieEntity>
 
-    suspend fun getFavoriteMovies(
-        accountId: Int,
-        language: String? = null,
-        page: Int? = null,
-        sortBy: String? = null
-    ): List<MovieEntity>
+    suspend fun getFavoriteMovies(page: Int? = null): List<MovieEntity>
 
-    suspend fun search(
-        query: String,
-        includeAdult: Boolean = false,
-        language: String? = null,
-        page: Int? = null,
-    ): List<MovieEntity>
+    suspend fun search(query: String, page: Int? = null): List<MovieEntity>
 
     suspend fun searchMovies(
         query: String,
@@ -130,14 +75,15 @@ interface MovieRepository {
         page: Int? = null,
         region: String? = null
     ): List<MovieEntity>
+    suspend fun searchMovies(query: String, page: Int?): List<MovieEntity>
+
+    suspend fun getMoviesByKeyword(keywordId: Int, page: Int? = null): List<MovieEntity>
 
     suspend fun discoverMovies(
-        includeAdult: Boolean = false,
-        language: String? = null,
-        page: Int? = null,
-        sortBy: String? = null,
-        voteAverageGte: Double? = null,
-        year: Int? = null,
+        page: Int?,
+        sortBy: String?,
+        rate: Float?,
+        year: Int?
     ): List<MovieEntity>
 
 
