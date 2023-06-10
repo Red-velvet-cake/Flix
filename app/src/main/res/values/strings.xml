@@ -55,6 +55,8 @@
     <string name="text_not_found">Not Found</string>
     <string name="text_chip_all">All</string>
     <string name="text_chip_person">Person</string>
-    <string name="text_show_tv">TV</string>
+    <string name="text_show_tv">Series</string>
     <string name="text_chip_movie">Movie</string>
+    <string name="text_start_note">Search for your favorite movies and TV shows that you love.</string>
+    <string name="hint_search_bar">What do you want to Watch?</string>
 </resources>
