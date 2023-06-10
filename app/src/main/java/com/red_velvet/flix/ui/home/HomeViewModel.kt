@@ -6,10 +6,10 @@ import com.red_velvet.flix.domain.usecase.GetPopularMoviesUseCase
 import com.red_velvet.flix.domain.usecase.GetTopRatedMoviesUseCase
 import com.red_velvet.flix.domain.usecase.GetUpcomingMoviesUseCase
 import com.red_velvet.flix.ui.base.BaseViewModel
+import com.red_velvet.flix.ui.base.ErrorUiState
 import com.red_velvet.flix.ui.home.adapter.MovieInteractionListener
 import com.red_velvet.flix.ui.home.adapter.PopularMovieInteractionListener
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
@@ -23,62 +23,74 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel<HomeUiState>(), MovieInteractionListener, PopularMovieInteractionListener {
     override val _state: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState())
     override val state = _state
-    val list: Flow<List<MovieEntity>> = MutableStateFlow(
-        listOf(
-            MovieEntity(
-                1,
-                "Title 1",
-                "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
-                0.0,
-                "2022-1-3",
-                0.0,
-                "en",
-            ),
-            MovieEntity(
-                2,
-                "Title 2",
-                "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
-                0.0,
-                "2022-3-11",
-                0.0,
-                "ar",
-            ),
-            MovieEntity(
-                2,
-                "Title 3",
-                "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
-                0.0,
-                "2022-7-12",
-                0.0,
-                "ja",
-            ),
-            MovieEntity(
-                2,
-                "Title 4",
-                "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
-                0.0,
-                "2022-5-22",
-                0.0,
-                "ch"
-            ),
-            MovieEntity(
-                2,
-                "Title 5",
-                "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
-                0.0,
-                "2022-4-22",
-                0.0,
-                "ko"
-            ),
+    val list: List<MovieEntity> = listOf(
+        MovieEntity(
+            1,
+            "Title 1",
+            "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
+            0.0,
+            "2022-1-3",
+            0.0,
+            "en",
+        ),
+        MovieEntity(
+            2,
+            "Title 2",
+            "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
+            0.0,
+            "2022-3-11",
+            0.0,
+            "ar",
+        ),
+        MovieEntity(
+            2,
+            "Title 3",
+            "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
+            0.0,
+            "2022-7-12",
+            0.0,
+            "ja",
+        ),
+        MovieEntity(
+            2,
+            "Title 4",
+            "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
+            0.0,
+            "2022-5-22",
+            0.0,
+            "ch"
+        ),
+        MovieEntity(
+            2,
+            "Title 5",
+            "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
+            0.0,
+            "2022-4-22",
+            0.0,
+            "ko"
+        ),
 
-            )
-    )
+        )
 
     init {
         getHomeData()
     }
 
-    fun getHomeData() {
+
+    private fun getHomeData() {
+        getMoviesPageData()
+        getTvShowsPageData()
+    }
+
+    fun getTvShowsPageData() {
+        getPopularMovies()
+        getNowPlayingMovies()
+        getUpcomingMovies()
+        getTopRatedMovies()
+    }
+
+
+    fun getMoviesPageData() {
         getPopularMovies()
         getNowPlayingMovies()
         getUpcomingMovies()
@@ -87,10 +99,10 @@ class HomeViewModel @Inject constructor(
 
     private fun getPopularMovies() {
         tryToExecute(
-            {
-                list
-//                getPopularMoviesUsecase(1, "US", "en-US")
-            }, ::modifyPopularMoviesState, ::onError
+            { list },
+//            getPopularMoviesUsecase::invoke,
+            ::modifyPopularMoviesState,
+            ::onError
         )
 
     }
@@ -98,18 +110,17 @@ class HomeViewModel @Inject constructor(
     private fun modifyPopularMoviesState(movies: List<MovieEntity>) {
         _state.update { oldState ->
             oldState.copy(
-                popularMovies = mutableListOf(movies.first()).toUiState(),
-                isLoading = false
+                popularMovies = mutableListOf(movies.first()).toUiState(), isLoading = false
             )
         }
     }
 
     private fun getNowPlayingMovies() {
         tryToExecute(
-            {
-                list
-//                getNowPlayingMoviesUsecase(1, "US", "en-US")
-            }, ::modifyNowPlayingMoviesState, ::onError
+            { list },
+//            getNowPlayingMoviesUsecase::invoke,
+            ::modifyNowPlayingMoviesState,
+            ::onError
         )
 
     }
@@ -122,10 +133,10 @@ class HomeViewModel @Inject constructor(
 
     private fun getUpcomingMovies() {
         tryToExecute(
-            {
-                list
-//                getUpcomingMoviesUsecase(1, "US", "en-US")
-            }, ::modifyUpcomingMoviesState, ::onError
+             { list },
+//            getUpcomingMoviesUsecase::invoke,
+            ::modifyUpcomingMoviesState,
+            ::onError
         )
 
     }
@@ -138,10 +149,9 @@ class HomeViewModel @Inject constructor(
 
     private fun getTopRatedMovies() {
         tryToExecute(
-            {
-                list
-//                getTopRatedMoviesUsecase(1, "US", "en-US")
-            }, ::modifyTopRatedMoviesState, ::onError
+             { list },
+//            getTopRatedMoviesUsecase::invoke,
+            ::modifyTopRatedMoviesState, ::onError
         )
 
     }
@@ -152,9 +162,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun onError(throwable: Throwable) {
+    private fun onError(errorUiState: ErrorUiState) {
         val errors = mutableListOf<String>()
-        errors.add(throwable.message.toString())
+        errors.add(errorUiState.toString())
         _state.update { it.copy(error = errors, isLoading = false) }
     }
 
