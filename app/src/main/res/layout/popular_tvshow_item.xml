@@ -7,11 +7,11 @@
 
         <variable
             name="listener"
-            type="com.red_velvet.flix.ui.home.adapter.PopularMovieInteractionListener" />
+            type="com.red_velvet.flix.ui.home.adapter.PopularTvShowInteractionListener" />
 
         <variable
             name="item"
-            type="com.red_velvet.flix.ui.home.MovieUiState.MediaUiState" />
+            type="com.red_velvet.flix.ui.home.TvShowUiState.MediaUiState" />
 
     </data>
 
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_small"
         android:background="@color/background_color"
-        android:onClick="@{()->listener.onClickPopularMovie(item.id)}"
+        android:onClick="@{()->listener.onClickPopularTvShow(item.id)}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent">
@@ -41,11 +41,10 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            app:layout_constraintEnd_toEndOf="@+id/image_movie"
-            app:layout_constraintStart_toStartOf="@+id/image_movie"
             android:background="@drawable/rounded_corner"
             app:layout_constraintBottom_toBottomOf="@+id/image_movie"
-            />
+            app:layout_constraintEnd_toEndOf="@+id/image_movie"
+            app:layout_constraintStart_toStartOf="@+id/image_movie" />
 
 
         <TextView
@@ -73,7 +72,7 @@
             android:gravity="start"
             android:maxWidth="240dp"
             app:formattedDate="@{item.date}"
-            app:language="@{item.originalLanguage}"
+            app:language="@{item.date}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/movie_title"
             tools:text="The Flash" />

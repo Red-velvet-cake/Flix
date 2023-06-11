@@ -7,15 +7,15 @@
 
         <variable
             name="listener"
-            type="com.red_velvet.flix.ui.home.adapter.MovieInteractionListener" />
+            type="com.red_velvet.flix.ui.home.adapter.TvShowInteractionListener" />
 
         <variable
             name="item"
-            type="com.red_velvet.flix.ui.home.MovieUiState.MediaUiState" />
+            type="com.red_velvet.flix.ui.home.TvShowUiState.MediaUiState" />
 
         <variable
             name="type"
-            type="com.red_velvet.flix.ui.home.MovieUiState.MovieTabItem" />
+            type="com.red_velvet.flix.ui.home.TvShowUiState.TvShowItem" />
 
     </data>
 
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/background_color"
-        android:onClick="@{()->listener.onClickMovie(item.id)}">
+        android:onClick="@{()->listener.onClickTvShow(item.id)}">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/media_movie_image"
@@ -61,7 +61,7 @@
             android:ellipsize="end"
             android:lines="1"
             app:formattedDate="@{item.date}"
-            app:language="@{item.originalLanguage}"
+            app:language="@{item.date}"
             app:layout_constraintStart_toStartOf="@+id/media_movie_image"
             app:layout_constraintTop_toBottomOf="@+id/media_movie_title"
             tools:text="Now Streaming" />

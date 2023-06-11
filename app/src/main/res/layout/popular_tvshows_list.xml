@@ -6,12 +6,12 @@
     <data>
 
         <variable
-            name="popularMoviesAdapterRecycler"
+            name="popularTvShowsAdapterRecycler"
             type="com.red_velvet.flix.ui.home.adapter.PopularMediaAdapter" />
 
         <variable
-            name="movieType"
-            type="com.red_velvet.flix.ui.home.MovieUiState.MovieTabItem" />
+            name="tvshowType"
+            type="com.red_velvet.flix.ui.home.TvShowUiState.TvShowItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_medium"
-            android:text="@{movieType.title}"
+            android:text="@{tvshowType.title}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Popular Movies" />
@@ -40,16 +40,16 @@
             android:textColor="@color/media_card_subtitle_color"
             app:layout_constraintBaseline_toBaselineOf="@+id/text_title"
             app:layout_constraintEnd_toEndOf="parent" />
-<!--            android:onClick="@{() -> popularMoviesAdapterRecycler.listener.onClickSeeAllPopularMovies(movieType)}"-->
+<!--        android:onClick="@{() -> popularTvShowsAdapterRecycler.listener.onClickSeeAllPopularTvShows(tvshowType)}"-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_movie"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_medium"
-            android:layout_marginEnd="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_small"
-            android:adapter="@{popularMoviesAdapterRecycler}"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:adapter="@{popularTvShowsAdapterRecycler}"
             android:clipToPadding="false"
             android:orientation="horizontal"
             android:overScrollMode="never"
