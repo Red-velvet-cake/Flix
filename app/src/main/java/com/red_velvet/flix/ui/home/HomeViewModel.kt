@@ -134,7 +134,6 @@ class HomeViewModel @Inject constructor(
 
     init {
         getMoviesPageData()
-        getTvShowsPageData()
     }
 
     fun getMoviesPageData() {
