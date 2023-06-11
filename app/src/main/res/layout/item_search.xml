@@ -25,7 +25,8 @@
         android:paddingHorizontal="@dimen/_8dp"
         android:paddingVertical="@dimen/_8dp"
         app:cardCornerRadius="@dimen/_8dp"
-        app:cardElevation="4dp">
+        app:cardElevation="4dp"
+        app:strokeColor="@color/background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -38,6 +39,7 @@
                 android:layout_height="@dimen/_148dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/rectangle"
+                android:background="@drawable/search_bar_background"
                 app:imageURL="@{item.mediaImage}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

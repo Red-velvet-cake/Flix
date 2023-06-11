@@ -56,7 +56,7 @@ class SearchFragment() : BaseFragment<FragmentSearchBinding>() {
 
     private fun bindMedia() {
         binding.recyclerSearchResult.layoutManager =
-            StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
+            StaggeredGridLayoutManager(3, RecyclerView.VERTICAL)
     }
 
 }
