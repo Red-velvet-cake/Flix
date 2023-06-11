@@ -1,4 +1,4 @@
-package com.red_velvet.flix.domain.usecase.login
+package com.red_velvet.flix.domain.usecase.login.user
 
 import javax.inject.Inject
 

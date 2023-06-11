@@ -18,19 +18,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         super.onStart()
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.loginEvent.collect { event ->
-                event.getContentIfNotHandled()?.let { onEvent(it) }
-            }
-        }
-    }
+                when (event) {
+                    LoginUIEvent.LoginEvent -> {
+                        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                    }
 
-    private fun onEvent(event: LoginUIEvent) {
-        when (event) {
-            LoginUIEvent.LoginEvent -> {
-                // Navigate to the next screen
-                findNavController().navigate(0)
-            }
-            LoginUIEvent.GuestEvent -> {
-                // Handle guest event navigation
+                    LoginUIEvent.GuestEvent -> {
+                        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                    }
+                }
             }
         }
     }

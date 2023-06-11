@@ -1,10 +1,10 @@
-package com.red_velvet.flix.domain.usecase.login
+package com.red_velvet.flix.domain.usecase.login.user
 
 import com.red_velvet.flix.domain.entity.account.LoginBodyEntity
 import com.red_velvet.flix.domain.repository.UserRepository
 import javax.inject.Inject
 
-class LoginUseCase @Inject constructor(
+class UserLoginUseCase @Inject constructor(
     private val userRepository: UserRepository,
     private val requestTokenUseCase: RequestTokenUseCase,
     private val sessionCreationUseCase: SessionCreationUseCase,

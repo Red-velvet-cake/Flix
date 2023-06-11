@@ -66,15 +66,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_layout_username"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_48dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="@dimen/_32dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/background_edit_text"
-            app:boxStrokeWidth="@dimen/_0dp"
-            app:boxStrokeWidthFocused="@dimen/_0dp"
-            app:hintEnabled="false"
+            android:maxLines="1"
             app:setHelperText="@{viewModel.state.userNameHelperText}"
+            app:helperTextTextColor="#FF0000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loginTextView">
@@ -96,16 +95,16 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_layout_password"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_48dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/_12dp"
+            android:layout_marginTop="@dimen/_16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/background_edit_text"
-            app:boxStrokeWidth="@dimen/_0dp"
-            app:boxStrokeWidthFocused="@dimen/_0dp"
-            app:hintEnabled="false"
+            android:maxLines="1"
             setHelperText="@{viewModel.state.passwordHelperText}"
+            app:helperTextTextColor="#FF0000"
             app:layout_constraintEnd_toEndOf="parent"
+            app:passwordToggleEnabled="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_input_layout_username">
 
@@ -113,14 +112,13 @@
                 android:id="@+id/edit_text_password"
                 style="@style/EditTextDefaultStyle"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_48dp"
+                android:layout_height="@dimen/_56dp"
                 android:drawableStart="@drawable/ic_password"
                 android:afterTextChanged="@{(text) -> viewModel.onPasswordChanged(text)}"
                 android:hint="password"
                 android:inputType="textPassword"
                 android:textColor="@color/font_secondary"
                 android:textColorHint="@color/font_secondary" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -209,6 +207,7 @@
             android:padding="@dimen/_0dp"
             android:paddingVertical="@dimen/_16dp"
             android:text="continue as guest"
+            android:onClick="@{()->viewModel.onGuestClicked()}"
             android:textColor="@color/font_secondary"
             android:textSize="@dimen/_16sp"
             app:layout_constraintEnd_toEndOf="parent"
