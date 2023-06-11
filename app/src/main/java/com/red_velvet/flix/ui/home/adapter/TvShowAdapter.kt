@@ -7,13 +7,13 @@ import com.red_velvet.flix.ui.base.BaseAdapter
 import com.red_velvet.flix.BR
 import com.red_velvet.flix.R
 import com.red_velvet.flix.ui.base.BaseInteractionListener
-import com.red_velvet.flix.ui.home.MovieUiState
+import com.red_velvet.flix.ui.home.TvShowUiState
 
-class MovieAdapter(
-    private var movieTabItems: MutableList<MovieUiState.MovieTabItem>,
+class TvShowAdapter(
+    private var tvshowTabItems: MutableList<TvShowUiState.TvShowItem>,
     private val listener: BaseInteractionListener,
-) : BaseAdapter<MovieUiState.MovieTabItem>(movieTabItems, listener) {
-    override val layoutId: Int = 0
+) : BaseAdapter<TvShowUiState.TvShowItem>(tvshowTabItems, listener) {
+    override val layoutId: Int = 1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return ItemViewHolder(
             DataBindingUtil.inflate(
@@ -24,12 +24,12 @@ class MovieAdapter(
 
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        if (movieTabItems.isNotEmpty()) bind(holder as ItemViewHolder, position)
+        if (tvshowTabItems.isNotEmpty()) bind(holder as ItemViewHolder, position)
     }
 
     private fun bind(holder: ItemViewHolder, position: Int) {
         if (position != -1) {
-            val currentItem = movieTabItems[position]
+            val currentItem = tvshowTabItems[position]
             bindMovie(holder, currentItem)
         }
     }
@@ -37,26 +37,26 @@ class MovieAdapter(
 
     private fun bindMovie(
         holder: ItemViewHolder,
-        currentItem: MovieUiState.MovieTabItem,
+        currentItem: TvShowUiState.TvShowItem,
     ) {
         holder.binding.run {
-            setVariable(BR.movieType, currentItem)
-            if (currentItem.title == "Popular Movies") {
+            setVariable(BR.tvshowType, currentItem)
+            if (currentItem.title == "Popular Series") {
                 setVariable(
-                    BR.popularMoviesAdapterRecycler,
+                    BR.popularTvShowsAdapterRecycler,
                     PopularMediaAdapter(
-                        currentItem.movies,
-                        listener as PopularMovieInteractionListener,
-                        R.layout.popular_movie_item
+                        currentItem.tvshows,
+                        listener as PopularTvShowInteractionListener,
+                        R.layout.popular_tvshow_item
                     )
                 )
             } else {
                 setVariable(
                     BR.adapterRecycler,
                     MediaAdapter(
-                        currentItem.movies,
-                        listener as MovieInteractionListener,
-                        R.layout.item_movie
+                        currentItem.tvshows,
+                        listener as TvShowInteractionListener,
+                        R.layout.item_tvshow
                     )
                 )
             }
@@ -64,28 +64,28 @@ class MovieAdapter(
         }
     }
 
-    override fun setItems(newItems: List<MovieUiState.MovieTabItem>) {
-        movieTabItems = newItems.toMutableList()
-        super.setItems(movieTabItems)
+    override fun setItems(newItems: List<TvShowUiState.TvShowItem>) {
+        tvshowTabItems = newItems.toMutableList()
+        super.setItems(tvshowTabItems)
     }
 
     override fun areItemsTheSame(
-        oldItem: MovieUiState.MovieTabItem, newItem: MovieUiState.MovieTabItem
+        oldItem: TvShowUiState.TvShowItem, newItem: TvShowUiState.TvShowItem
     ): Boolean {
         return oldItem.title == newItem.title
     }
 
     override fun areContentsTheSame(
-        oldItem: MovieUiState.MovieTabItem,
-        newItem: MovieUiState.MovieTabItem,
+        oldItem: TvShowUiState.TvShowItem,
+        newItem: TvShowUiState.TvShowItem,
     ): Boolean {
         return oldItem == newItem
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (movieTabItems[position].title) {
-            "Popular Movies" -> R.layout.popular_movies_list
-            else -> R.layout.list_movie
+        return when (tvshowTabItems[position].title) {
+            "Popular Series" -> R.layout.popular_tvshows_list
+            else -> R.layout.list_tvshow
         }
     }
 }
