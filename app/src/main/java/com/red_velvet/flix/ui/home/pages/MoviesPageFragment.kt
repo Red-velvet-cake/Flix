@@ -6,15 +6,16 @@ import androidx.lifecycle.lifecycleScope
 import com.red_velvet.flix.R
 import com.red_velvet.flix.databinding.MoviesPageBinding
 import com.red_velvet.flix.ui.base.BaseFragment
-import com.red_velvet.flix.ui.home.HomeUiState
+import com.red_velvet.flix.ui.home.MovieUiState
 import com.red_velvet.flix.ui.home.HomeViewModel
-import com.red_velvet.flix.ui.home.adapter.HomeAdapter
+import com.red_velvet.flix.ui.home.adapter.MovieAdapter
 import kotlinx.coroutines.launch
 
 
-class MoviesPageFragment(override val viewModel: HomeViewModel) : BaseFragment<MoviesPageBinding>() {
+class MoviesPageFragment(override val viewModel: HomeViewModel) :
+    BaseFragment<MoviesPageBinding>() {
     override val layoutIdFragment = R.layout.movies_page
-    private lateinit var homeAdapter: HomeAdapter
+    private lateinit var moviesAdapter: MovieAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setAdapter()
@@ -22,19 +23,19 @@ class MoviesPageFragment(override val viewModel: HomeViewModel) : BaseFragment<M
     }
 
     private fun setAdapter() {
-        homeAdapter = HomeAdapter(mutableListOf(), viewModel)
-        binding.moviesRecyclerView.adapter = homeAdapter
+        moviesAdapter = MovieAdapter(mutableListOf(), viewModel)
+        binding.moviesRecyclerView.adapter = moviesAdapter
     }
 
     private fun collectMovieData() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.state.collect { homeUiState ->
-                homeAdapter.setItems(
+            viewModel.state.collect { moviesUiState ->
+                moviesAdapter.setItems(
                     mutableListOf(
-                        HomeUiState.HomeItem("Popular", homeUiState.popularMovies),
-                        HomeUiState.HomeItem("Now Playing", homeUiState.nowPlayingMovies),
-                        HomeUiState.HomeItem("Upcoming", homeUiState.upcomingMovies),
-                        HomeUiState.HomeItem("Top Rated", homeUiState.topRatedMovies),
+                        MovieUiState.MovieTabItem("Popular Movies", moviesUiState.popularMovies),
+                        MovieUiState.MovieTabItem("Now Playing", moviesUiState.nowPlayingMovies),
+                        MovieUiState.MovieTabItem("Upcoming", moviesUiState.upcomingMovies),
+                        MovieUiState.MovieTabItem("Top Rated", moviesUiState.topRatedMovies),
                     )
                 )
             }
