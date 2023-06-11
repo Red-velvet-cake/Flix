@@ -3,16 +3,16 @@ package com.red_velvet.flix.ui.home
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.ui.base.BaseUiState
 
-data class HomeUiState(
+data class MovieUiState(
     val popularMovies: List<MediaUiState> = emptyList(),
     val nowPlayingMovies: List<MediaUiState> = emptyList(),
     val upcomingMovies: List<MediaUiState> = emptyList(),
     val topRatedMovies: List<MediaUiState> = emptyList(),
-    val isLoading: Boolean = true,
+    val isLoading: Boolean = false,
     val error: List<String> = emptyList(),
 ) : BaseUiState {
 
-    data class HomeItem(
+    data class MovieTabItem(
         val title: String = "",
         val movies: List<MediaUiState> = emptyList(),
     )
@@ -27,9 +27,9 @@ data class HomeUiState(
         )
 }
 
-internal fun List<MovieEntity>.toUiState(): List<HomeUiState.MediaUiState> {
+internal fun List<MovieEntity>.toUiState(): List<MovieUiState.MediaUiState> {
     return map {
-        HomeUiState.MediaUiState(
+        MovieUiState.MediaUiState(
             id = it.id,
             imageUrl = it.imageUrl,
             title = it.title,
@@ -39,8 +39,8 @@ internal fun List<MovieEntity>.toUiState(): List<HomeUiState.MediaUiState> {
     }
 }
 
-internal fun MovieEntity.toUiState(): HomeUiState.MediaUiState {
-    return HomeUiState.MediaUiState(
+internal fun MovieEntity.toUiState(): MovieUiState.MediaUiState {
+    return MovieUiState.MediaUiState(
         id = id,
         title = title,
         imageUrl = imageUrl,
