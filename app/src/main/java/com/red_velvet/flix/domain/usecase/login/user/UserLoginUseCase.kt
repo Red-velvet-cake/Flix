@@ -12,15 +12,12 @@ class UserLoginUseCase @Inject constructor(
     private val storeRequestTokenUseCase: StoreRequestTokenUseCase
 ) {
     suspend operator fun invoke(userName: String, password: String): Boolean {
-        return try {
-            val requestToken = requestTokenUseCase()
-            val validatedRequestToken = userRepository.login(LoginBodyEntity(userName, password, requestToken.requestToken))
-            val sessionId = sessionCreationUseCase(validatedRequestToken.requestToken)
-            storeRequestTokenUseCase(requestToken.requestToken)
-            sessionStorageUseCase(sessionId)
-            true
-        } catch (e: Exception) {
-            false
-        }
+        val requestToken = requestTokenUseCase()
+        val validatedRequestToken = userRepository.login(LoginBodyEntity(userName, password, requestToken.requestToken))
+        if (validatedRequestToken.requestToken == null) throw Exception("Login failed")
+        val sessionId = sessionCreationUseCase(validatedRequestToken.requestToken)
+        storeRequestTokenUseCase(requestToken.requestToken)
+        sessionStorageUseCase(sessionId)
+        return true
     }
 }
