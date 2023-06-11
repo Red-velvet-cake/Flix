@@ -192,8 +192,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/loading"
-            android:layout_width="@dimen/_180dp"
-            android:layout_height="@dimen/_180dp"
+            android:layout_width="@dimen/_158dp"
+            android:layout_height="@dimen/_158dp"
             android:src="@drawable/loading"
             android:visibility="invisible"
             app:emptyResult="@{viewModel.state.searchResult.empty}"
