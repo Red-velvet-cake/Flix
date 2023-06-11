@@ -5,8 +5,8 @@ import android.transition.ChangeTransform
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.red_velvet.flix.R
 import com.red_velvet.flix.databinding.FragmentSearchBinding
 import com.red_velvet.flix.ui.base.BaseFragment
@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
+
 @AndroidEntryPoint
 class SearchFragment() : BaseFragment<FragmentSearchBinding>() {
 
@@ -48,9 +49,10 @@ class SearchFragment() : BaseFragment<FragmentSearchBinding>() {
             }
         }
     }
+
     private fun bindMedia() {
         binding.recyclerSearchResult.layoutManager =
-            LinearLayoutManager(this@SearchFragment.context, RecyclerView.VERTICAL, false)
+            StaggeredGridLayoutManager(3, RecyclerView.VERTICAL)
     }
 
 }
