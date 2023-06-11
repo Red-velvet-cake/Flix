@@ -30,9 +30,13 @@ class SearchFragment() : BaseFragment<FragmentSearchBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedElementEnterTransition = ChangeTransform()
+        getSearchResultsBySearchTerm()
+        setAdapter()
+    }
+
+    private fun setAdapter() {
         val adapter = MediaSearchAdapter(emptyList(), listener = viewModel)
         binding.recyclerSearchResult.adapter = adapter
-        getSearchResultsBySearchTerm()
     }
 
     @OptIn(FlowPreview::class)
@@ -52,7 +56,7 @@ class SearchFragment() : BaseFragment<FragmentSearchBinding>() {
 
     private fun bindMedia() {
         binding.recyclerSearchResult.layoutManager =
-            StaggeredGridLayoutManager(3, RecyclerView.VERTICAL)
+            StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
     }
 
 }
