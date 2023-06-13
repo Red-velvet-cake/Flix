@@ -44,19 +44,17 @@ class MovieAdapter(
             if (currentItem.title == "Popular Movies") {
                 setVariable(
                     BR.popularMoviesAdapterRecycler,
-                    PopularMediaAdapter(
+                    PopularMovieMediaAdapter(
                         currentItem.movies,
-                        listener as PopularMovieInteractionListener,
-                        R.layout.popular_movie_item
+                        listener as PopularMovieInteractionListener
                     )
                 )
             } else {
                 setVariable(
                     BR.adapterRecycler,
-                    MediaAdapter(
+                    MovieMediaAdapter(
                         currentItem.movies,
-                        listener as MovieInteractionListener,
-                        R.layout.item_movie
+                        listener as MovieInteractionListener
                     )
                 )
             }

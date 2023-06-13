@@ -7,7 +7,7 @@
 
         <variable
             name="popularTvShowsAdapterRecycler"
-            type="com.red_velvet.flix.ui.home.adapter.PopularMediaAdapter" />
+            type="com.red_velvet.flix.ui.home.adapter.PopularTVShowMediaAdapter" />
 
         <variable
             name="tvshowType"
@@ -39,8 +39,8 @@
             android:text="@string/see_all"
             android:textColor="@color/media_card_subtitle_color"
             app:layout_constraintBaseline_toBaselineOf="@+id/text_title"
+        android:onClick="@{() -> popularTvShowsAdapterRecycler.listener.onClickSeeAllPopularTvShows(tvshowType)}"
             app:layout_constraintEnd_toEndOf="parent" />
-<!--        android:onClick="@{() -> popularTvShowsAdapterRecycler.listener.onClickSeeAllPopularTvShows(tvshowType)}"-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_movie"

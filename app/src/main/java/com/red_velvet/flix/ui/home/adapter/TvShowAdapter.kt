@@ -44,19 +44,17 @@ class TvShowAdapter(
             if (currentItem.title == "Popular Series") {
                 setVariable(
                     BR.popularTvShowsAdapterRecycler,
-                    PopularMediaAdapter(
+                    PopularTVShowMediaAdapter(
                         currentItem.tvshows,
-                        listener as PopularTvShowInteractionListener,
-                        R.layout.popular_tvshow_item
+                        listener as PopularTvShowInteractionListener
                     )
                 )
             } else {
                 setVariable(
                     BR.adapterRecycler,
-                    MediaAdapter(
+                    TVShowMediaAdapter(
                         currentItem.tvshows,
-                        listener as TvShowInteractionListener,
-                        R.layout.item_tvshow
+                        listener as TvShowInteractionListener
                     )
                 )
             }
