@@ -23,7 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/background_color"
-        android:onClick="@{()->listener.onClickTvShow(item.id)}">
+        >
+<!--        android:onClick="@{()->listener.onClickTvShow(item.id)}"-->
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/media_movie_image"
