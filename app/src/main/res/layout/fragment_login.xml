@@ -82,7 +82,7 @@
                 android:id="@+id/edit_text_username"
                 style="@style/EditTextDefaultStyle"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_56dp"
+                android:layout_height="@dimen/height_search_bar"
                 android:drawableStart="@drawable/ic_person"
                 android:afterTextChanged="@{(text) -> viewModel.onUserNameChanged(text)}"
                 android:hint="Username"
