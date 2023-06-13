@@ -75,6 +75,8 @@
     <dimen name="_44dp">44dp</dimen>
     <dimen name="_130dp">130dp</dimen>
     <dimen name="_150dp">150dp</dimen>
+    <dimen name="_270dp">270dp</dimen>
+    <dimen name="_112dp">112dp</dimen>
 
 
 </resources>
