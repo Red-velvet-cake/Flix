@@ -36,7 +36,7 @@ data class HomeUiState(
     )
 }
 
-internal fun List<MovieEntity>.toUiState(): List<HomeUiState.MediaUiState> {
+internal fun List<MovieEntity>.toMovieUiState(): List<HomeUiState.MediaUiState> {
     return map {
         HomeUiState.MediaUiState(
             id = it.id,
@@ -49,7 +49,7 @@ internal fun List<MovieEntity>.toUiState(): List<HomeUiState.MediaUiState> {
 }
 
 
-internal fun List<SeriesEntity>.toUiState(): List<HomeUiState.MediaUiState> {
+internal fun List<SeriesEntity>.toSeriesUiState(): List<HomeUiState.MediaUiState> {
     return map {
         HomeUiState.MediaUiState(
             id = it.id,

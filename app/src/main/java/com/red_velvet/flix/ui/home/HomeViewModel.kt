@@ -163,7 +163,8 @@ class HomeViewModel @Inject constructor(
     private fun modifyPopularMoviesState(movies: List<MovieEntity>) {
         _state.update {
             it.copy(
-                popularMovies = mutableListOf(movies.first()).toUiState(), isMovieLoading = false
+                popularMovies = mutableListOf(movies.first()).toMovieUiState(),
+                isMovieLoading = false
             )
         }
     }
@@ -179,7 +180,7 @@ class HomeViewModel @Inject constructor(
 
     private fun modifyNowPlayingMoviesState(movies: List<MovieEntity>) {
         _state.update {
-            it.copy(nowPlayingMovies = movies.toUiState(), isMovieLoading = false)
+            it.copy(nowPlayingMovies = movies.toMovieUiState(), isMovieLoading = false)
         }
     }
 
@@ -194,7 +195,7 @@ class HomeViewModel @Inject constructor(
 
     private fun modifyUpcomingMoviesState(movies: List<MovieEntity>) {
         _state.update {
-            it.copy(upcomingMovies = movies.toUiState(), isMovieLoading = false)
+            it.copy(upcomingMovies = movies.toMovieUiState(), isMovieLoading = false)
         }
     }
 
@@ -209,7 +210,7 @@ class HomeViewModel @Inject constructor(
 
     private fun modifyTopRatedMoviesState(movies: List<MovieEntity>) {
         _state.update {
-            it.copy(topRatedMovies = movies.toUiState(), isMovieLoading = false)
+            it.copy(topRatedMovies = movies.toMovieUiState(), isMovieLoading = false)
         }
     }
 
@@ -230,7 +231,8 @@ class HomeViewModel @Inject constructor(
     private fun modifyPopularSeriesState(series: List<SeriesEntity>) {
         _state.update {
             it.copy(
-                popularSeries = mutableListOf(series.first()).toUiState(), isSeriesLoading = false
+                popularSeries = mutableListOf(series.first()).toSeriesUiState(),
+                isSeriesLoading = false
             )
         }
     }
@@ -247,7 +249,7 @@ class HomeViewModel @Inject constructor(
     private fun modifyAiringTodaySeriesState(series: List<SeriesEntity>) {
         _state.update {
             it.copy(
-                airingTodaySeries = series.toUiState(), isSeriesLoading = false
+                airingTodaySeries = series.toSeriesUiState(), isSeriesLoading = false
             )
         }
     }
@@ -264,7 +266,7 @@ class HomeViewModel @Inject constructor(
     private fun modifyOnAirSeriesState(series: List<SeriesEntity>) {
         _state.update {
             it.copy(
-                onTVSeries = series.toUiState(), isSeriesLoading = false
+                onTVSeries = series.toSeriesUiState(), isSeriesLoading = false
             )
         }
     }
@@ -281,7 +283,7 @@ class HomeViewModel @Inject constructor(
     private fun modifyTopRatedSeriesState(series: List<SeriesEntity>) {
         _state.update {
             it.copy(
-                topRatedSeries = series.toUiState(), isSeriesLoading = false
+                topRatedSeries = series.toSeriesUiState(), isSeriesLoading = false
             )
         }
     }
@@ -298,7 +300,7 @@ class HomeViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun onClickSeeAllMovie(movieTabItemsType: HomeUiState.HomeItem) {
+    override fun onClickSeeAllMovie(homeItem: HomeUiState.HomeItem) {
         TODO("Not yet implemented")
     }
 
@@ -314,7 +316,7 @@ class HomeViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun onClickSeeAllTvShows(tvShowTabItemsType: HomeUiState.HomeItem) {
+    override fun onClickSeeAllTvShows(homeItem: HomeUiState.HomeItem) {
         TODO("Not yet implemented")
     }
 
