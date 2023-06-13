@@ -7,12 +7,13 @@ import com.red_velvet.flix.ui.base.BaseAdapter
 import com.red_velvet.flix.BR
 import com.red_velvet.flix.R
 import com.red_velvet.flix.ui.base.BaseInteractionListener
-import com.red_velvet.flix.ui.home.MovieUiState
+import com.red_velvet.flix.ui.home.HomeUiState
+
 
 class MovieAdapter(
-    private var movieTabItems: MutableList<MovieUiState.MovieTabItem>,
+    private var movieTabItems: MutableList<HomeUiState.HomeItem>,
     private val listener: BaseInteractionListener,
-) : BaseAdapter<MovieUiState.MovieTabItem>(movieTabItems, listener) {
+) : BaseAdapter<HomeUiState.HomeItem>(movieTabItems, listener) {
     override val layoutId: Int = 0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return ItemViewHolder(
@@ -37,7 +38,7 @@ class MovieAdapter(
 
     private fun bindMovie(
         holder: ItemViewHolder,
-        currentItem: MovieUiState.MovieTabItem,
+        currentItem: HomeUiState.HomeItem,
     ) {
         holder.binding.run {
             setVariable(BR.movieType, currentItem)
@@ -45,7 +46,7 @@ class MovieAdapter(
                 setVariable(
                     BR.popularMoviesAdapterRecycler,
                     PopularMovieMediaAdapter(
-                        currentItem.movies,
+                        currentItem.items,
                         listener as PopularMovieInteractionListener
                     )
                 )
@@ -53,7 +54,7 @@ class MovieAdapter(
                 setVariable(
                     BR.adapterRecycler,
                     MovieMediaAdapter(
-                        currentItem.movies,
+                        currentItem.items,
                         listener as MovieInteractionListener
                     )
                 )
@@ -62,20 +63,20 @@ class MovieAdapter(
         }
     }
 
-    override fun setItems(newItems: List<MovieUiState.MovieTabItem>) {
+    override fun setItems(newItems: List<HomeUiState.HomeItem>) {
         movieTabItems = newItems.toMutableList()
         super.setItems(movieTabItems)
     }
 
     override fun areItemsTheSame(
-        oldItem: MovieUiState.MovieTabItem, newItem: MovieUiState.MovieTabItem
+        oldItem: HomeUiState.HomeItem, newItem: HomeUiState.HomeItem
     ): Boolean {
         return oldItem.title == newItem.title
     }
 
     override fun areContentsTheSame(
-        oldItem: MovieUiState.MovieTabItem,
-        newItem: MovieUiState.MovieTabItem,
+        oldItem: HomeUiState.HomeItem,
+        newItem: HomeUiState.HomeItem,
     ): Boolean {
         return oldItem == newItem
     }

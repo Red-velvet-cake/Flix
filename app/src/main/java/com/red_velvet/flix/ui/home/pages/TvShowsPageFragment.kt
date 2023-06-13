@@ -6,10 +6,8 @@ import androidx.lifecycle.lifecycleScope
 import com.red_velvet.flix.R
 import com.red_velvet.flix.databinding.TvshowsPageBinding
 import com.red_velvet.flix.ui.base.BaseFragment
-import com.red_velvet.flix.ui.home.MovieUiState
+import com.red_velvet.flix.ui.home.HomeUiState
 import com.red_velvet.flix.ui.home.HomeViewModel
-import com.red_velvet.flix.ui.home.TvShowUiState
-import com.red_velvet.flix.ui.home.adapter.MovieAdapter
 import com.red_velvet.flix.ui.home.adapter.TvShowAdapter
 import kotlinx.coroutines.launch
 
@@ -31,13 +29,13 @@ class TvShowsPageFragment(override val viewModel: HomeViewModel) :
 
     private fun collectTvShowData() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.tvShowState.collect { tvshowUiState ->
+            viewModel.state.collect { tvshowUiState ->
                 tvShowAdapter.setItems(
                     mutableListOf(
-                        TvShowUiState.TvShowItem("Popular Series", tvshowUiState.popularSeries),
-                        TvShowUiState.TvShowItem("Airing Today", tvshowUiState.airingTodaySeries),
-                        TvShowUiState.TvShowItem("On TV", tvshowUiState.onTVSeries),
-                        TvShowUiState.TvShowItem("Top Rated", tvshowUiState.topRatedSeries),
+                        HomeUiState.HomeItem("Popular Series", tvshowUiState.popularSeries),
+                        HomeUiState.HomeItem("Airing Today", tvshowUiState.airingTodaySeries),
+                        HomeUiState.HomeItem("On TV", tvshowUiState.onTVSeries),
+                        HomeUiState.HomeItem("Top Rated", tvshowUiState.topRatedSeries),
                     )
                 )
             }

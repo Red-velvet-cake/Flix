@@ -7,12 +7,13 @@ import com.red_velvet.flix.ui.base.BaseAdapter
 import com.red_velvet.flix.BR
 import com.red_velvet.flix.R
 import com.red_velvet.flix.ui.base.BaseInteractionListener
-import com.red_velvet.flix.ui.home.TvShowUiState
+import com.red_velvet.flix.ui.home.HomeUiState
+
 
 class TvShowAdapter(
-    private var tvshowTabItems: MutableList<TvShowUiState.TvShowItem>,
+    private var tvshowTabItems: MutableList<HomeUiState.HomeItem>,
     private val listener: BaseInteractionListener,
-) : BaseAdapter<TvShowUiState.TvShowItem>(tvshowTabItems, listener) {
+) : BaseAdapter<HomeUiState.HomeItem>(tvshowTabItems, listener) {
     override val layoutId: Int = 1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return ItemViewHolder(
@@ -37,7 +38,7 @@ class TvShowAdapter(
 
     private fun bindMovie(
         holder: ItemViewHolder,
-        currentItem: TvShowUiState.TvShowItem,
+        currentItem: HomeUiState.HomeItem,
     ) {
         holder.binding.run {
             setVariable(BR.tvshowType, currentItem)
@@ -45,7 +46,7 @@ class TvShowAdapter(
                 setVariable(
                     BR.popularTvShowsAdapterRecycler,
                     PopularTVShowMediaAdapter(
-                        currentItem.tvshows,
+                        currentItem.items,
                         listener as PopularTvShowInteractionListener
                     )
                 )
@@ -53,7 +54,7 @@ class TvShowAdapter(
                 setVariable(
                     BR.adapterRecycler,
                     TVShowMediaAdapter(
-                        currentItem.tvshows,
+                        currentItem.items,
                         listener as TvShowInteractionListener
                     )
                 )
@@ -62,20 +63,20 @@ class TvShowAdapter(
         }
     }
 
-    override fun setItems(newItems: List<TvShowUiState.TvShowItem>) {
+    override fun setItems(newItems: List<HomeUiState.HomeItem>) {
         tvshowTabItems = newItems.toMutableList()
         super.setItems(tvshowTabItems)
     }
 
     override fun areItemsTheSame(
-        oldItem: TvShowUiState.TvShowItem, newItem: TvShowUiState.TvShowItem
+        oldItem: HomeUiState.HomeItem, newItem: HomeUiState.HomeItem
     ): Boolean {
         return oldItem.title == newItem.title
     }
 
     override fun areContentsTheSame(
-        oldItem: TvShowUiState.TvShowItem,
-        newItem: TvShowUiState.TvShowItem,
+        oldItem: HomeUiState.HomeItem,
+        newItem: HomeUiState.HomeItem,
     ): Boolean {
         return oldItem == newItem
     }

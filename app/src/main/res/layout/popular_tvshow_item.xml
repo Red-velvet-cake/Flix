@@ -11,7 +11,7 @@
 
         <variable
             name="item"
-            type="com.red_velvet.flix.ui.home.TvShowUiState.MediaUiState" />
+            type="com.red_velvet.flix.ui.home.HomeUiState.MediaUiState" />
 
     </data>
 

@@ -11,11 +11,11 @@
 
         <variable
             name="item"
-            type="com.red_velvet.flix.ui.home.MovieUiState.MediaUiState" />
+            type="com.red_velvet.flix.ui.home.HomeUiState.MediaUiState" />
 
         <variable
             name="type"
-            type="com.red_velvet.flix.ui.home.MovieUiState.MovieTabItem" />
+            type="com.red_velvet.flix.ui.home.HomeUiState.HomeItem" />
 
     </data>
 

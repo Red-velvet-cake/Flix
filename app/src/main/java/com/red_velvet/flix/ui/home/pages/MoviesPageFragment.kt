@@ -6,7 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import com.red_velvet.flix.R
 import com.red_velvet.flix.databinding.MoviesPageBinding
 import com.red_velvet.flix.ui.base.BaseFragment
-import com.red_velvet.flix.ui.home.MovieUiState
+import com.red_velvet.flix.ui.home.HomeUiState
 import com.red_velvet.flix.ui.home.HomeViewModel
 import com.red_velvet.flix.ui.home.adapter.MovieAdapter
 import kotlinx.coroutines.launch
@@ -32,10 +32,10 @@ class MoviesPageFragment(override val viewModel: HomeViewModel) :
             viewModel.state.collect { moviesUiState ->
                 moviesAdapter.setItems(
                     mutableListOf(
-                        MovieUiState.MovieTabItem("Popular Movies", moviesUiState.popularMovies),
-                        MovieUiState.MovieTabItem("Now Playing", moviesUiState.nowPlayingMovies),
-                        MovieUiState.MovieTabItem("Upcoming", moviesUiState.upcomingMovies),
-                        MovieUiState.MovieTabItem("Top Rated", moviesUiState.topRatedMovies),
+                        HomeUiState.HomeItem("Popular Movies", moviesUiState.popularMovies),
+                        HomeUiState.HomeItem("Now Playing", moviesUiState.nowPlayingMovies),
+                        HomeUiState.HomeItem("Upcoming", moviesUiState.upcomingMovies),
+                        HomeUiState.HomeItem("Top Rated", moviesUiState.topRatedMovies),
                     )
                 )
             }

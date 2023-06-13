@@ -11,7 +11,7 @@
 
         <variable
             name="tvshowType"
-            type="com.red_velvet.flix.ui.home.TvShowUiState.TvShowItem" />
+            type="com.red_velvet.flix.ui.home.HomeUiState.HomeItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

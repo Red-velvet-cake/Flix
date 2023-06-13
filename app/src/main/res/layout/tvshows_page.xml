@@ -21,7 +21,7 @@
             android:layout_height="0dp"
             android:overScrollMode="never"
             android:scrollbars="none"
-            app:hideIfTrue="@{viewModel.tvShowState.loading || viewModel.tvShowState.error.size() &gt;5}"
+            app:hideIfTrue="@{viewModel.state.seriesLoading || viewModel.state.seriesError.size() &gt;5}"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,7 @@
         <include
             android:id="@+id/loading"
             layout="@layout/loading"
-            app:isLoading="@{viewModel.tvShowState.loading}"
+            app:isLoading="@{viewModel.state.seriesLoading}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
         <include
             android:id="@+id/error"
             layout="@layout/tvshows_error"
-            app:isError="@{viewModel.tvShowState.error.size() &gt;5 &amp;&amp; !viewModel.tvShowState.loading}"
+            app:isError="@{viewModel.state.seriesError.size() &gt;5 &amp;&amp; !viewModel.state.seriesLoading}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
