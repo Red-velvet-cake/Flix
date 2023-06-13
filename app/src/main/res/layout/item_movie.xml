@@ -43,7 +43,7 @@
         <TextView
             android:id="@+id/media_movie_title"
             style="@style/Medium.Small"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/media_card_width"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_too_small"
             android:ellipsize="end"
@@ -56,7 +56,7 @@
         <TextView
             android:id="@+id/media_movie_subtitle"
             style="@style/Regular.Small"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/media_card_width"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_extra_small"
             android:ellipsize="end"

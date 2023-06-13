@@ -1,5 +1,6 @@
 package com.red_velvet.flix.ui.home.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -14,7 +15,7 @@ class TvShowsAdapter(
     private var tvshowTabItems: MutableList<HomeUiState.HomeItem>,
     private val listener: BaseInteractionListener,
 ) : BaseAdapter<HomeUiState.HomeItem>(tvshowTabItems, listener) {
-    override val layoutId: Int = 1
+    override val layoutId: Int = 0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return ItemViewHolder(
             DataBindingUtil.inflate(

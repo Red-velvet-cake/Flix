@@ -1,5 +1,6 @@
 package com.red_velvet.flix.ui.home
 
+import android.util.Log
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.usecase.GetAiringTodaySeriesUseCase
@@ -39,99 +40,6 @@ class HomeViewModel @Inject constructor(
     override val _state: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState())
     override val state = _state
 
-    private val list: List<MovieEntity> = listOf(
-        MovieEntity(
-            1,
-            "Title 1",
-            "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
-            0.0,
-            "2022-1-3",
-            0.0,
-            "en",
-        ),
-        MovieEntity(
-            2,
-            "Title 2",
-            "https://image.tmdb.org/t/p/w500/8kOWDBK6XlPUzckuHDo3wwVRFwt.jpg",
-            0.0,
-            "2022-3-11",
-            0.0,
-            "ar",
-        ),
-        MovieEntity(
-            2,
-            "Title 3",
-            "https://image.tmdb.org/t/p/w500/9ijMGlJKqcslswWUzTEwScm82Gs.jpg",
-            0.0,
-            "2022-7-12",
-            0.0,
-            "ja",
-        ),
-        MovieEntity(
-            2,
-            "Title 4",
-            "https://image.tmdb.org/t/p/w500/1f3qspv64L5FXrRy0MF8X92ieuw.jpg",
-            0.0,
-            "2022-5-22",
-            0.0,
-            "ch"
-        ),
-        MovieEntity(
-            2,
-            "Title 5",
-            "https://image.tmdb.org/t/p/w500/2IWouZK4gkgHhJa3oyYuSWfSqbG.jpg",
-            0.0,
-            "2022-4-22",
-            0.0,
-            "ko"
-        ),
-
-        )
-    private val list2: List<SeriesEntity> = listOf(
-        SeriesEntity(
-            1,
-            "Title 1",
-            "https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
-            "2022-1-3",
-            0.0,
-            0.0,
-        ),
-        SeriesEntity(
-            2,
-            "Title 2",
-            "https://image.tmdb.org/t/p/w500/8kOWDBK6XlPUzckuHDo3wwVRFwt.jpg",
-            "2022-3-11",
-            0.0,
-            0.0,
-        ),
-        SeriesEntity(
-            2,
-            "Title 3",
-            "https://image.tmdb.org/t/p/w500/9ijMGlJKqcslswWUzTEwScm82Gs.jpg",
-            "2022-7-12",
-            0.0,
-            0.0,
-        ),
-        SeriesEntity(
-            2,
-            "Title 4",
-            "https://image.tmdb.org/t/p/w500/1f3qspv64L5FXrRy0MF8X92ieuw.jpg",
-            "2022-5-22",
-            0.0,
-            0.0,
-        ),
-        SeriesEntity(
-            2,
-            "Title 5",
-            "https://image.tmdb.org/t/p/w500/2IWouZK4gkgHhJa3oyYuSWfSqbG.jpg",
-            "2022-4-22",
-            0.0,
-            0.0,
-
-            ),
-
-        )
-
     init {
         getMoviesPageData()
     }
@@ -155,14 +63,15 @@ class HomeViewModel @Inject constructor(
 
     private fun getPopularMovies() {
         tryToExecute(
-            { list },
-//            getPopularMoviesUsecase::invoke,
-            ::modifyPopularMoviesState, ::onMovieError
+            getPopularMoviesUsecase::invoke,
+            ::modifyPopularMoviesState,
+            ::onMovieError
         )
 
     }
 
     private fun modifyPopularMoviesState(movies: List<MovieEntity>) {
+        Log.d("RESPONSE", "modifyPopularMoviesState: ${movies.size}")
         _state.update {
             it.copy(
                 popularMovies = mutableListOf(movies.first()).toMovieUiState(),
@@ -173,8 +82,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getNowPlayingMovies() {
         tryToExecute(
-            { list },
-//            getNowPlayingMoviesUsecase::invoke,
+            getNowPlayingMoviesUsecase::invoke,
             ::modifyNowPlayingMoviesState, ::onMovieError
         )
 
@@ -188,8 +96,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getUpcomingMovies() {
         tryToExecute(
-            { list },
-//            getUpcomingMoviesUsecase::invoke,
+            getUpcomingMoviesUsecase::invoke,
             ::modifyUpcomingMoviesState, ::onMovieError
         )
 
@@ -203,8 +110,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getTopRatedMovies() {
         tryToExecute(
-            { list },
-//            getTopRatedMoviesUsecase::invoke,
+            getTopRatedMoviesUsecase::invoke,
             ::modifyTopRatedMoviesState, ::onMovieError
         )
 
@@ -217,6 +123,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun onMovieError(errorUiState: ErrorUiState) {
+        Log.e("RESPONSE", "onMovieError: $errorUiState")
         val errors = mutableListOf<String>()
         errors.add(errorUiState.toString())
         _state.update { it.copy(movieError = errors, isMovieLoading = false) }
@@ -224,8 +131,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getPopularSeries() {
         tryToExecute(
-            { list2 },
-//            getPopularSeriesUseCase::invoke,
+            getPopularSeriesUseCase::invoke,
             ::modifyPopularSeriesState, ::onSeriesError
         )
     }
@@ -242,8 +148,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getAiringTodaySeries() {
         tryToExecute(
-            { list2 },
-//            getAiringTodaySeriesUseCase::invoke,
+            getAiringTodaySeriesUseCase::invoke,
             ::modifyAiringTodaySeriesState, ::onSeriesError
         )
     }
@@ -259,8 +164,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getOnAirSeries() {
         tryToExecute(
-            { list2 },
-//            getOnTheAirSeriesUseCase::invoke,
+            getOnTheAirSeriesUseCase::invoke,
             ::modifyOnAirSeriesState, ::onSeriesError
         )
     }
@@ -276,8 +180,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getTopRatedSeries() {
         tryToExecute(
-            { list2 },
-//            getTopRatedSeriesUseCase::invoke,
+            getTopRatedSeriesUseCase::invoke,
             ::modifyTopRatedSeriesState, ::onSeriesError
         )
     }

@@ -19,13 +19,10 @@ fun bindFormattedDateWithCountryCode(view: TextView, rawDate: String?, languageC
     }
     val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
     val date = inputFormat.parse(rawDate)
-
     val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
     val formattedDate = outputFormat.format(date!!)
 
-    val countryCode = convertLanguageToCountryCode(languageCode)
-
-    view.text = "$formattedDate ($countryCode)"
+    view.text = "$formattedDate (${languageCode.uppercase()})"
 }
 
 

@@ -11,6 +11,7 @@ class PopularMovieMediaAdapter(
 ) :
     BaseAdapter<HomeUiState.MediaUiState>(items, listener) {
     override val layoutId: Int = R.layout.popular_movie_item
+
 }
 
 interface PopularMovieInteractionListener : BaseInteractionListener {
