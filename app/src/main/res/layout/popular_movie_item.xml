@@ -7,7 +7,7 @@
 
         <variable
             name="listener"
-            type="com.red_velvet.flix.ui.home.adapter.PopularMovieInteractionListener" />
+            type="com.red_velvet.flix.ui.home.adapters.PopularMovieInteractionListener" />
 
         <variable
             name="item"

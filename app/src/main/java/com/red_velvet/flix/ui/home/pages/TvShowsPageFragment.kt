@@ -8,13 +8,13 @@ import com.red_velvet.flix.databinding.TvshowsPageBinding
 import com.red_velvet.flix.ui.base.BaseFragment
 import com.red_velvet.flix.ui.home.HomeUiState
 import com.red_velvet.flix.ui.home.HomeViewModel
-import com.red_velvet.flix.ui.home.adapter.TvShowAdapter
+import com.red_velvet.flix.ui.home.adapters.TvShowsAdapter
 import kotlinx.coroutines.launch
 
 class TvShowsPageFragment(override val viewModel: HomeViewModel) :
     BaseFragment<TvshowsPageBinding>() {
     override val layoutIdFragment = R.layout.tvshows_page
-    private lateinit var tvShowAdapter: TvShowAdapter
+    private lateinit var tvShowAdapter: TvShowsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -23,7 +23,7 @@ class TvShowsPageFragment(override val viewModel: HomeViewModel) :
     }
 
     private fun setAdapter() {
-        tvShowAdapter = TvShowAdapter(mutableListOf(), viewModel)
+        tvShowAdapter = TvShowsAdapter(mutableListOf(), viewModel)
         binding.tvshowsRecyclerView.adapter = tvShowAdapter
     }
 

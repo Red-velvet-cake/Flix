@@ -7,7 +7,7 @@
 
         <variable
             name="popularTvShowsAdapterRecycler"
-            type="com.red_velvet.flix.ui.home.adapter.PopularTVShowMediaAdapter" />
+            type="com.red_velvet.flix.ui.home.adapters.PopularTVShowMediaAdapter" />
 
         <variable
             name="tvshowType"

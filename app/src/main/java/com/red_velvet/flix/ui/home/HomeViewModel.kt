@@ -12,10 +12,12 @@ import com.red_velvet.flix.domain.usecase.GetTopRatedSeriesUseCase
 import com.red_velvet.flix.domain.usecase.GetUpcomingMoviesUseCase
 import com.red_velvet.flix.ui.base.BaseViewModel
 import com.red_velvet.flix.ui.base.ErrorUiState
-import com.red_velvet.flix.ui.home.adapter.MovieInteractionListener
-import com.red_velvet.flix.ui.home.adapter.PopularMovieInteractionListener
-import com.red_velvet.flix.ui.home.adapter.PopularTvShowInteractionListener
-import com.red_velvet.flix.ui.home.adapter.TvShowInteractionListener
+import com.red_velvet.flix.ui.home.adapters.MovieInteractionListener
+import com.red_velvet.flix.ui.home.adapters.PopularMovieInteractionListener
+import com.red_velvet.flix.ui.home.adapters.PopularTvShowInteractionListener
+import com.red_velvet.flix.ui.home.adapters.TvShowInteractionListener
+import com.red_velvet.flix.ui.utils.toMovieUiState
+import com.red_velvet.flix.ui.utils.toSeriesUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update

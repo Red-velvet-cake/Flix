@@ -1,4 +1,4 @@
-package com.red_velvet.flix.ui.home.adapter
+package com.red_velvet.flix.ui.home.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,11 +10,11 @@ import com.red_velvet.flix.ui.base.BaseInteractionListener
 import com.red_velvet.flix.ui.home.HomeUiState
 
 
-class MovieAdapter(
-    private var movieTabItems: MutableList<HomeUiState.HomeItem>,
+class TvShowsAdapter(
+    private var tvshowTabItems: MutableList<HomeUiState.HomeItem>,
     private val listener: BaseInteractionListener,
-) : BaseAdapter<HomeUiState.HomeItem>(movieTabItems, listener) {
-    override val layoutId: Int = 0
+) : BaseAdapter<HomeUiState.HomeItem>(tvshowTabItems, listener) {
+    override val layoutId: Int = 1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return ItemViewHolder(
             DataBindingUtil.inflate(
@@ -25,12 +25,12 @@ class MovieAdapter(
 
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        if (movieTabItems.isNotEmpty()) bind(holder as ItemViewHolder, position)
+        if (tvshowTabItems.isNotEmpty()) bind(holder as ItemViewHolder, position)
     }
 
     private fun bind(holder: ItemViewHolder, position: Int) {
         if (position != -1) {
-            val currentItem = movieTabItems[position]
+            val currentItem = tvshowTabItems[position]
             bindMovie(holder, currentItem)
         }
     }
@@ -41,21 +41,21 @@ class MovieAdapter(
         currentItem: HomeUiState.HomeItem,
     ) {
         holder.binding.run {
-            setVariable(BR.movieType, currentItem)
-            if (currentItem.title == "Popular Movies") {
+            setVariable(BR.tvshowType, currentItem)
+            if (currentItem.title == "Popular Series") {
                 setVariable(
-                    BR.popularMoviesAdapterRecycler,
-                    PopularMovieMediaAdapter(
+                    BR.popularTvShowsAdapterRecycler,
+                    PopularTVShowMediaAdapter(
                         currentItem.items,
-                        listener as PopularMovieInteractionListener
+                        listener as PopularTvShowInteractionListener
                     )
                 )
             } else {
                 setVariable(
                     BR.adapterRecycler,
-                    MovieMediaAdapter(
+                    TVShowMediaAdapter(
                         currentItem.items,
-                        listener as MovieInteractionListener
+                        listener as TvShowInteractionListener
                     )
                 )
             }
@@ -64,8 +64,8 @@ class MovieAdapter(
     }
 
     override fun setItems(newItems: List<HomeUiState.HomeItem>) {
-        movieTabItems = newItems.toMutableList()
-        super.setItems(movieTabItems)
+        tvshowTabItems = newItems.toMutableList()
+        super.setItems(tvshowTabItems)
     }
 
     override fun areItemsTheSame(
@@ -82,9 +82,9 @@ class MovieAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (movieTabItems[position].title) {
-            "Popular Movies" -> R.layout.popular_movies_list
-            else -> R.layout.list_movie
+        return when (tvshowTabItems[position].title) {
+            "Popular Series" -> R.layout.popular_tvshows_list
+            else -> R.layout.list_tvshow
         }
     }
 }

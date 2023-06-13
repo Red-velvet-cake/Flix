@@ -7,7 +7,7 @@
 
         <variable
             name="popularMoviesAdapterRecycler"
-            type="com.red_velvet.flix.ui.home.adapter.PopularMovieMediaAdapter" />
+            type="com.red_velvet.flix.ui.home.adapters.PopularMovieMediaAdapter" />
 
         <variable
             name="movieType"

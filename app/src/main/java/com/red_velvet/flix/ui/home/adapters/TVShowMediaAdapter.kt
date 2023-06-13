@@ -1,4 +1,4 @@
-package com.red_velvet.flix.ui.home.adapter
+package com.red_velvet.flix.ui.home.adapters
 
 import com.red_velvet.flix.ui.base.BaseAdapter
 import com.red_velvet.flix.ui.base.BaseInteractionListener
