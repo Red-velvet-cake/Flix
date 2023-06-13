@@ -1,8 +1,10 @@
 package com.red_velvet.flix.repository
 
+import com.red_velvet.flix.domain.entity.PersonEntity
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
+import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
 import com.red_velvet.flix.repository.mapper.movie.toEntity
 import com.red_velvet.flix.repository.mapper.movie.toNowPlayingMovieDto
@@ -13,6 +15,7 @@ import com.red_velvet.flix.repository.mapper.movie.toTopRatedMovieDto
 import com.red_velvet.flix.repository.mapper.movie.toTopRatedMoviesEntity
 import com.red_velvet.flix.repository.mapper.movie.toUpComingMovieDto
 import com.red_velvet.flix.repository.mapper.movie.toUpcomingMoviesEntity
+import com.red_velvet.flix.repository.mapper.series.toEntity
 import com.red_velvet.flix.repository.mapper.toEntity
 import javax.inject.Inject
 
@@ -84,9 +87,20 @@ class MovieRepositoryImpl @Inject constructor(
         return remoteDataSource.search(query, page).toEntity()
     }
 
+    override suspend fun searchSeries(query: String, page: Int?): List<SeriesEntity> {
+        return remoteDataSource.searchSeries(query, page).toEntity()
+    }
+
+    override suspend fun searchPeople(query: String, page: Int?): List<PersonEntity> {
+        return remoteDataSource.searchPeople(query, page).items.toEntity()
+    }
+
+
     override suspend fun searchMovies(query: String, page: Int?): List<MovieEntity> {
         return remoteDataSource.searchMovies(query, page).toEntity()
     }
+
+
 
     override suspend fun getMoviesByKeyword(keywordId: Int, page: Int?): List<MovieEntity> {
         return remoteDataSource.getMoviesByKeyword(keywordId, page).toEntity()

@@ -1,9 +1,11 @@
 package com.red_velvet.flix.domain.repository
 
 
+import com.red_velvet.flix.domain.entity.PersonEntity
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
+import com.red_velvet.flix.domain.entity.series.SeriesEntity
 
 
 interface MovieRepository {
@@ -39,6 +41,10 @@ interface MovieRepository {
     suspend fun getFavoriteMovies(page: Int? = null): List<MovieEntity>
 
     suspend fun search(query: String, page: Int? = null): List<MovieEntity>
+
+
+    suspend fun searchSeries(query: String, page: Int?): List<SeriesEntity>
+    suspend fun searchPeople(query: String, page: Int?): List<PersonEntity>
 
     suspend fun searchMovies(query: String, page: Int?): List<MovieEntity>
 
