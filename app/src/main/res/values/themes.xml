@@ -18,6 +18,9 @@
     <style name="CardCorners.Medium">
         <item name="cornerSize">@dimen/radius_medium</item>
     </style>
+    <style name="CardCorners.TopCast">
+        <item name="cornerSize">35dp</item>
+    </style>
 
     <style name="Regular">
         <item name="android:fontFamily">@font/montserrat_regular</item>
