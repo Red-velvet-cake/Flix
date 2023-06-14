@@ -11,7 +11,7 @@ fun MovieDetailsResource.toEntity(): MovieDetailsEntity {
         id = id.orZero(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + backdropPath,
         adult = adult.orFalse(),
-        genres = genres?.joinToString { it?.name.orEmpty() }.orEmpty(),
+        genres = genres?.map{ it?.name.orEmpty() }.orEmpty(),
         imdbId = imdbId.orEmpty(),
         overview = overview.orEmpty(),
         date = releaseDate.orEmpty(),
