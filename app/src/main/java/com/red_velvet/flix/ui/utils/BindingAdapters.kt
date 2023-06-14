@@ -5,9 +5,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import com.google.android.material.textfield.TextInputLayout
 import com.bumptech.glide.Glide
 import com.red_velvet.flix.R
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -45,6 +45,10 @@ fun hideIfTrue(view: View, value: Boolean) {
     view.isVisible = !value
 }
 
+@BindingAdapter("setHelperText")
+fun TextInputLayout.setHelperText(helperText: String) {
+    this.helperText = helperText
+}
 
 @BindingAdapter("app:errorText")
 fun showErrorAsString(view: TextView, error: List<String>) {

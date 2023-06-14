@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.red_velvet.flix.ui.search.SearchViewModel" />
+
+        <variable
+            name="mediaTypes"
+            type="com.red_velvet.flix.ui.search.mediaSearchUiState.SearchTypes" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background">
+
+        <EditText
+            android:id="@+id/text_input_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_search_bar"
+            android:layout_marginHorizontal="@dimen/_16dp"
+            android:layout_marginVertical="@dimen/_16dp"
+            android:afterTextChanged="@{(text) -> viewModel.onChangeSearchTextFiled(text)}"
+            android:autofillHints="creditCardExpirationDate"
+            android:background="@drawable/search_bar_background"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="@dimen/_8dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="@string/hint_search_bar"
+            android:textSize="@dimen/_16sp"
+            android:importantForAutofill="yes"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingHorizontal="@dimen/_16dp"
+            android:text="@{viewModel.state.searchInput}"
+            android:textColor="@color/font_accent"
+            android:textColorHint="@color/font_accent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="LabelFor" />
+
+
+        <TextView
+            android:id="@+id/text_view_categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16dp"
+            android:text="@string/text_search_categories"
+            android:textColor="@color/font_primary"
+            android:textSize="@dimen/_16sp"
+            app:layout_constraintStart_toStartOf="@id/text_input_search"
+            app:layout_constraintTop_toBottomOf="@id/text_input_search" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_search_type"
+            style="@style/Widget.Material3.ChipGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8dp"
+            app:layout_constraintStart_toStartOf="@id/text_view_categories"
+            app:layout_constraintTop_toBottomOf="@id/text_view_categories"
+            app:selectionRequired="true"
+            app:showWhenSearch="@{viewModel.state.searchInput}"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_selection_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:checked="true"
+                android:onClick="@{() -> viewModel.onSearchForAll()}"
+                android:paddingHorizontal="@dimen/_8dp"
+                android:paddingVertical="@dimen/_8dp"
+                android:text="@string/text_chip_all"
+                android:textAlignment="center"
+                android:textColor="@color/font_primary"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/chip_backgournd"
+                app:chipCornerRadius="@dimen/_8dp"
+                app:chipStrokeColor="@color/on_secondary"
+                app:chipStrokeWidth="1dp" />
+
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_selection_movie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:onClick="@{() -> viewModel.onSearchForMovie()}"
+                android:paddingHorizontal="@dimen/_8dp"
+                android:paddingVertical="@dimen/_8dp"
+                android:text="@string/text_chip_movie"
+                android:textAlignment="center"
+                android:textColor="@color/font_primary"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/chip_backgournd"
+                app:chipCornerRadius="@dimen/_8dp"
+                app:chipStrokeColor="@color/on_secondary"
+                app:chipStrokeWidth="1dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_selection_person"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:onClick="@{() -> viewModel.onSearchForPerson()}"
+                android:paddingHorizontal="@dimen/_8dp"
+                android:paddingVertical="@dimen/_8dp"
+                android:text="@string/text_chip_person"
+                android:textAlignment="center"
+                android:textColor="@color/font_primary"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/chip_backgournd"
+                app:chipCornerRadius="@dimen/_8dp"
+                app:chipStrokeColor="@color/on_secondary"
+                app:chipStrokeWidth="1dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_selection_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:onClick="@{() -> viewModel.onSearchForTvShow()}"
+                android:paddingHorizontal="@dimen/_8dp"
+                android:paddingVertical="@dimen/_8dp"
+                android:text="@string/text_show_tv"
+                android:textAlignment="center"
+                android:textColor="@color/font_primary"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/chip_backgournd"
+                app:chipCornerRadius="@dimen/_8dp"
+                app:chipStrokeColor="@color/on_secondary"
+                app:chipStrokeWidth="1dp" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_search_result"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/_8dp"
+            android:layout_marginVertical="@dimen/_8dp"
+            android:layout_marginTop="@dimen/_4dp"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            app:items="@{viewModel.state.searchResult}"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chip_group_search_type"
+            app:spanCount="3"
+            tools:listitem="@layout/item_search" />
+
+        <ImageView
+            android:id="@+id/image_view_lost_connection"
+            android:layout_width="@dimen/_180dp"
+            android:layout_height="@dimen/_180dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:layout_marginBottom="@dimen/_8dp"
+            android:contentDescription="@string/lorem_ipsum"
+            android:src="@drawable/no_internet"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chip_group_search_type"
+            app:showWhenNoInternetError="@{viewModel.state.error}" />
+
+        <TextView
+            android:id="@+id/title_lost_connection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20dp"
+            android:text="@string/text_internet_is_not_available"
+            android:textColor="@color/font_secondary"
+            android:textSize="@dimen/_20sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_view_lost_connection"
+            app:showWhenNoInternetError="@{viewModel.state.error}" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/loading"
+            android:layout_width="@dimen/_158dp"
+            android:layout_height="@dimen/_158dp"
+            android:src="@drawable/loading"
+            android:visibility="invisible"
+            app:emptyResult="@{viewModel.state.searchResult.empty}"
+            app:error="@{viewModel.state.error}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chip_group_search_type"
+            app:loading="@{viewModel.state.loading}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_56dp"
+            android:layout_marginTop="@dimen/_8dp"
+            android:gravity="center"
+            android:text="@string/text_start_note"
+            android:textSize="@dimen/_16sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loading" />
+
+        <ImageView
+            android:id="@+id/image_view_error"
+            android:layout_width="@dimen/_180dp"
+            android:layout_height="@dimen/_180dp"
+            android:contentDescription="@string/lorem_ipsum"
+            android:src="@drawable/error"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chip_group_search_type"
+            app:showWhenError="@{viewModel.state.error}" />
+
+        <TextView
+            android:id="@+id/text_view_Not_Found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_not_found"
+            android:textColor="@color/font_secondary"
+            android:textSize="@dimen/_20sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_view_error"
+            app:showWhenError="@{viewModel.state.error}" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

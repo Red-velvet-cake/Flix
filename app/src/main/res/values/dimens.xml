@@ -19,6 +19,7 @@
     <dimen name="_26dp">26dp</dimen>
     <dimen name="_104dp">104dp</dimen>
     <dimen name="_200dp">200dp</dimen>
+    <dimen name="_220dp">220dp</dimen>
     <dimen name="_142dp">142dp</dimen>
     <dimen name="_166dp">166dp</dimen>
     <dimen name="_80dp">80dp</dimen>
@@ -73,7 +74,8 @@
     <dimen name="text_extra_large">20sp</dimen>
     <dimen name="text_large">16sp</dimen>
     <dimen name="text_small">12sp</dimen>
-
+    <dimen name="height_search_bar">48dp</dimen>
+    <dimen name="_14sp">14sp</dimen>
 
 
 </resources>
