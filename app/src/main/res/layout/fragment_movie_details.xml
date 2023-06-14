@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.red_velvet.flix.ui.movieDetails.MovieDetailsViewModel" />
     </data>
 
     <ScrollView
@@ -16,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/transition_image_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             >
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -24,9 +26,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_300dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/image4"
+                app:hideIfTrue="@{viewModel.state.loading}"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="0dp" />
+                tools:src="@drawable/image4"
+                />
+            <View
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="@dimen/_0dp"
+                android:background="@color/black"
+                android:alpha="0.32"
+                app:hideIfTrue="@{viewModel.state.loading}"
+                app:layout_constraintStart_toStartOf="@id/marquee_image"
+                app:layout_constraintEnd_toEndOf="@id/marquee_image"
+                app:layout_constraintTop_toTopOf="@id/marquee_image"
+                app:layout_constraintBottom_toBottomOf="@id/marquee_image"
+                />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/back_button"
@@ -34,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16dp"
                 android:layout_marginTop="@dimen/_44dp"
+                app:hideIfTrue="@{viewModel.state.loading}"
                 android:background="@drawable/ic_backbutton_movie_details"
                 app:layout_constraintStart_toStartOf="@id/marquee_image"
                 app:layout_constraintTop_toTopOf="@id/marquee_image"
@@ -44,6 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_16dp"
                 android:layout_marginTop="@dimen/_44dp"
+                app:hideIfTrue="@{viewModel.state.loading}"
                 android:background="@drawable/ic_favourate_movie_details"
                 app:layout_constraintEnd_toEndOf="@id/marquee_image"
                 app:layout_constraintTop_toTopOf="@id/marquee_image"
@@ -54,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_24dp"
                 android:layout_marginTop="@dimen/_44dp"
+                app:hideIfTrue="@{viewModel.state.loading}"
                 android:background="@drawable/ic_saved_movie_details"
                 app:layout_constraintEnd_toStartOf="@id/favorite_button"
                 app:layout_constraintTop_toTopOf="@id/marquee_image"
@@ -62,8 +79,9 @@
                 android:id="@+id/transition_image1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_16dp"
-                android:background="@drawable/ic_transition_images_indcator"
+                android:layout_marginBottom="@dimen/_32dp"
+                app:hideIfTrue="@{viewModel.state.loading}"
+                android:background="@drawable/ic_transition_images_indcator_selected"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/marquee_image"
@@ -72,8 +90,9 @@
                 android:id="@+id/transition_image2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_16dp"
+                android:layout_marginBottom="@dimen/_32dp"
                 android:layout_marginStart="@dimen/_8dp"
+                app:hideIfTrue="@{viewModel.state.loading}"
                 android:background="@drawable/ic_transition_images_indcator"
                 app:layout_constraintStart_toEndOf="@id/transition_image1"
                 app:layout_constraintBottom_toBottomOf="@id/marquee_image"
@@ -82,8 +101,9 @@
                 android:id="@+id/transition_image3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_16dp"
+                android:layout_marginBottom="@dimen/_32dp"
                 android:layout_marginStart="@dimen/_8dp"
+                app:hideIfTrue="@{viewModel.state.loading}"
                 android:background="@drawable/ic_transition_images_indcator"
                 app:layout_constraintStart_toEndOf="@id/transition_image2"
                 app:layout_constraintBottom_toBottomOf="@id/marquee_image"
@@ -93,20 +113,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/_16dp"
-                android:layout_marginTop="@dimen/_16dp"
                 android:paddingEnd="@dimen/_16dp"
-                app:layout_constraintTop_toBottomOf="@id/marquee_image"
+                android:layout_marginTop="@dimen/_16dp"
+                android:background="@drawable/background_down_card"
+                app:layout_constraintTop_toBottomOf="@id/transition_image1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 >
-                <androidx.appcompat.widget.AppCompatImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/movie_poster"
                     android:layout_width="@dimen/_104dp"
                     android:layout_height="@dimen/_130dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/image4"
+                    app:hideIfTrue="@{viewModel.state.loading}"
+                    android:layout_marginTop="@dimen/_16dp"
+                    app:shapeAppearanceOverlay="@style/CardCorners.Medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/image4"
                     />
                 <TextView
                     android:id="@+id/movie_title"
@@ -138,7 +162,8 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_time_movie_details"
                     android:layout_marginStart="@dimen/_12dp"
-                    android:layout_marginTop="@dimen/_8dp"
+                    android:layout_marginTop="@dimen/_12dp"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintStart_toEndOf="@id/movie_poster"
                     app:layout_constraintTop_toBottomOf="@id/movie_categories"
                     />
@@ -162,6 +187,7 @@
                     android:layout_marginTop="@dimen/_4dp"
                     android:src="@drawable/ic_language_movie_details"
                     android:layout_marginStart="@dimen/_12dp"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintStart_toEndOf="@id/movie_poster"
                     app:layout_constraintTop_toBottomOf="@id/ic_time"
                     />
@@ -184,6 +210,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_imdb_movie_rate"
                     android:layout_marginTop="@dimen/_26dp"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintTop_toBottomOf="@id/movie_poster"
                     app:layout_constraintStart_toStartOf="@id/movie_poster"
                     />
@@ -205,7 +232,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_user_movie_rate"
-                    android:layout_marginStart="@dimen/_12dp"
+                    android:layout_marginStart="@dimen/_16dp"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintTop_toTopOf="@id/imdb_rate"
                     app:layout_constraintStart_toEndOf="@id/imdb_rate"
                     app:layout_constraintBottom_toBottomOf="@id/imdb_rate"
@@ -260,16 +288,17 @@
                     app:layout_constraintBottom_toBottomOf="@id/top_cast_text"
                     tools:text="See All"
                     />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/top_cast_scroll_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_marginTop="@dimen/_8dp"
                     app:layout_constraintTop_toBottomOf="@id/top_cast_text"
-                    tools:listitem="@layout/item_top_cast_movie_details"
-                   />
+                    tools:listitem="@layout/item_top_cast_movie_details" />
+
                 <TextView
                     android:id="@+id/status_text"
                     android:layout_width="wrap_content"
@@ -288,6 +317,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/font_primary"
                     android:textSize="@dimen/_16sp"
+                    android:layout_marginTop="@dimen/_4dp"
                     android:fontFamily="@font/montserrat_semibold"
                     app:layout_constraintTop_toBottomOf="@id/status_text"
                     app:layout_constraintStart_toStartOf="parent"
@@ -311,6 +341,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/font_primary"
                     android:textSize="@dimen/_16sp"
+                    android:layout_marginTop="@dimen/_4dp"
                     android:fontFamily="@font/montserrat_semibold"
                     app:layout_constraintTop_toBottomOf="@id/released_date_text"
                     app:layout_constraintStart_toStartOf="parent"
@@ -328,12 +359,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     tools:text="Production Countries"
                     />
+
                 <TextView
                     android:id="@+id/production_countries"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/font_primary"
                     android:textSize="@dimen/_16sp"
+                    android:layout_marginTop="@dimen/_4dp"
                     android:fontFamily="@font/montserrat_semibold"
                     app:layout_constraintTop_toBottomOf="@id/production_countries_text"
                     app:layout_constraintStart_toStartOf="parent"
@@ -441,10 +474,10 @@
                     android:layout_height="@dimen/_150dp"
                     android:layout_marginTop="@dimen/_24dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/image4"
                     app:layout_constraintTop_toBottomOf="@id/Images_belong_to_movie_scroll"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    tools:src="@drawable/image4"
                     />
                 <TextView
                     android:layout_width="wrap_content"
@@ -530,6 +563,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     tools:listitem="@layout/item_movies_details"
                     />
+
+                <androidx.core.widget.ContentLoadingProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:hideIfTrue="@{!viewModel.state.loading}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                   />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
