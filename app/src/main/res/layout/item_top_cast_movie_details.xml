@@ -30,9 +30,8 @@
             android:id="@+id/media_movie_image"
             android:layout_width="@dimen/_70dp"
             android:layout_height="@dimen/_70dp"
-            android:layout_marginEnd="@dimen/spacing_small"
             android:scaleType="centerCrop"
-            app:layout_constraintDimensionRatio="1:1.4"
+            android:layout_marginEnd="@dimen/_8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:src="@drawable/image4"
@@ -46,11 +45,14 @@
             tools:text="Little marmaid"
             android:lines="1"
             android:ellipsize="end"
+            android:maxEms="4"
             android:layout_marginTop="@dimen/spacing_too_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{item.title}"
-            app:layout_constraintStart_toStartOf="@+id/media_movie_image"
-            app:layout_constraintTop_toBottomOf="@+id/media_movie_image"/>
+            app:layout_constraintStart_toStartOf="@id/media_movie_image"
+            app:layout_constraintTop_toBottomOf="@+id/media_movie_image"
+            app:layout_constraintEnd_toEndOf="@id/media_movie_image"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
