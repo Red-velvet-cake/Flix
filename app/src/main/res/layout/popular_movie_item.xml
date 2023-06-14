@@ -43,7 +43,7 @@
             android:layout_height="48dp"
             app:layout_constraintEnd_toEndOf="@+id/image_movie"
             app:layout_constraintStart_toStartOf="@+id/image_movie"
-            android:background="@drawable/rounded_corner"
+            android:background="#9811142D"
             app:layout_constraintBottom_toBottomOf="@+id/image_movie"
             />
 

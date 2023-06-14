@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="adapterRecycler"
+            name="adapterRecyclerMovie"
             type="com.red_velvet.flix.ui.home.adapters.MovieMediaAdapter" />
 
         <variable
@@ -39,7 +39,7 @@
             android:text="@string/see_all"
             android:textColor="@color/media_card_subtitle_color"
             app:layout_constraintBaseline_toBaselineOf="@+id/text_title"
-            android:onClick="@{() -> adapterRecycler.listener.onClickSeeAllMovie(movieType)}"
+            android:onClick="@{() -> adapterRecyclerMovie.listener.onClickSeeAllMovie(movieType)}"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginStart="@dimen/spacing_medium"
-            android:adapter="@{adapterRecycler}"
+            android:adapter="@{adapterRecyclerMovie}"
             android:clipToPadding="false"
             android:orientation="horizontal"
             android:overScrollMode="never"

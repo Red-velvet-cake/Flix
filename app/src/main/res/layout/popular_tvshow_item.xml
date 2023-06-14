@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent">
-<!--        android:onClick="@{()->listener.onClickPopularTvShow(item.id)}"-->
+        <!--        android:onClick="@{()->listener.onClickPopularTvShow(item.id)}"-->
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_movie"
@@ -41,7 +41,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@drawable/rounded_corner"
+            android:background="#9811142D"
             app:layout_constraintBottom_toBottomOf="@+id/image_movie"
             app:layout_constraintEnd_toEndOf="@+id/image_movie"
             app:layout_constraintStart_toStartOf="@+id/image_movie" />

@@ -8,6 +8,8 @@ import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
 import com.bumptech.glide.Glide
 import com.red_velvet.flix.R
+import com.red_velvet.flix.ui.base.ErrorUiState
+import com.red_velvet.flix.ui.home.HomeUiState
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -40,17 +42,51 @@ fun isVisible(view: View, isVisible: Boolean) {
     view.isVisible = isVisible
 }
 
-@BindingAdapter("app:hideIfTrue")
-fun hideIfTrue(view: View, value: Boolean) {
-    view.isVisible = !value
-}
-
 @BindingAdapter("setHelperText")
 fun TextInputLayout.setHelperText(helperText: String) {
     this.helperText = helperText
 }
 
-@BindingAdapter("app:errorText")
-fun showErrorAsString(view: TextView, error: List<String>) {
-    view.text = error.joinToString("\n")
+
+@BindingAdapter("app:showMovieContentOnSuccess")
+fun showMovieContentOnSuccess(view: View, state: HomeUiState?) {
+    if (state != null) {
+        if (state.isMovieLoading == false && state.movieError == null) {
+            view.isVisible = true
+        } else {
+            view.isVisible = false
+        }
+    }
+}
+
+
+@BindingAdapter("app:showSeriesContentOnSuccess")
+fun showSeriesContentOnSuccess(view: View, state: HomeUiState?) {
+    if (state != null) {
+        if (state.isSeriesLoading == false && state.seriesError == null) {
+            view.isVisible = true
+        } else {
+            view.isVisible = false
+        }
+    }
+}
+
+
+@BindingAdapter("app:showOnError")
+fun showOnError(view: View, error: ErrorUiState?) {
+    view.isVisible = error != null
+}
+
+
+@BindingAdapter("app:showLoading")
+fun showLoading(view: View, loading: Boolean?) {
+    view.isVisible = loading == true
+}
+
+
+@BindingAdapter("app:showWhenNoInternet")
+fun showWhenNoInternet(view: View, error: ErrorUiState?) {
+    if (error != null) {
+        view.isVisible = error.isNoInternet()
+    }
 }
