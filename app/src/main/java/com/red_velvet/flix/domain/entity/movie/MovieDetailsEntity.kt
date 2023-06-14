@@ -9,8 +9,11 @@ data class MovieDetailsEntity(
     val imdbId: String,
     val overview: String,
     val date: String,
-    val runtime: Int,
+    val runtime: String,
     val title: String,
     val video: Boolean,
     val voteAverage: Double,
+    val language : String,
+    val status : String,
+    val productionCountry : String,
 )
