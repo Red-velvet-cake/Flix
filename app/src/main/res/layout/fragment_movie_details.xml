@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_300dp"
                 android:scaleType="fitXY"
+                app:imageUrl="@{viewModel.state.imageUrl}"
                 app:hideIfTrue="@{viewModel.state.loading}"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/image4"
@@ -126,6 +127,7 @@
                     android:layout_height="@dimen/_130dp"
                     android:scaleType="fitXY"
                     app:hideIfTrue="@{viewModel.state.loading}"
+                    app:imageUrl="@{viewModel.state.imageUrl}"
                     android:layout_marginTop="@dimen/_16dp"
                     app:shapeAppearanceOverlay="@style/CardCorners.Medium"
                     app:layout_constraintStart_toStartOf="parent"
@@ -137,6 +139,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="The Little Mermaid"
+                    android:text="@{viewModel.state.movieName}"
                     android:textColor="@color/font_primary"
                     android:textSize="@dimen/_20sp"
                     android:fontFamily="@font/montserrat_semibold"
@@ -175,6 +178,7 @@
                     android:textSize="@dimen/_12sp"
                     android:fontFamily="@font/montserrat_medium"
                     android:textColor="@color/font_secondary"
+                    android:text="@{viewModel.state.movieTime}"
                     app:layout_constraintStart_toEndOf="@id/ic_time"
                     app:layout_constraintTop_toTopOf="@id/ic_time"
                     app:layout_constraintBottom_toBottomOf="@id/ic_time"
@@ -197,6 +201,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_4dp"
                     android:textSize="@dimen/_12sp"
+                    android:text="@{viewModel.state.movieLanguage}"
                     android:fontFamily="@font/montserrat_medium"
                     android:textColor="@color/font_secondary"
                     app:layout_constraintStart_toEndOf="@id/ic_language"
@@ -245,10 +250,11 @@
                     android:textSize="@dimen/_16sp"
                     android:layout_marginStart="@dimen/_4dp"
                     android:textColor="@color/font_secondary"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintStart_toEndOf="@id/ic_user_rate"
                     app:layout_constraintTop_toTopOf="@id/ic_user_rate"
                     app:layout_constraintBottom_toBottomOf="@id/ic_user_rate"
-                    tools:text="Rate This"
+                    android:text="Rate This"
                     />
                 <TextView
                     android:id="@+id/movie_description"
@@ -257,6 +263,7 @@
                     android:layout_marginTop="@dimen/_24dp"
                     android:textColor="@color/font_secondary"
                     android:textSize="@dimen/_12sp"
+                    android:text="@{viewModel.state.description}"
                     android:fontFamily="@font/montserrat_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -271,9 +278,10 @@
                     android:textColor="@color/font_primary"
                     android:textSize="@dimen/_20sp"
                     android:fontFamily="@font/montserrat_semibold"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintTop_toBottomOf="@id/movie_description"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="Top Cast"
+                    android:text="Top Cast"
                     />
                 <TextView
                     android:id="@+id/see_all_top_cast"
@@ -283,10 +291,11 @@
                     android:textSize="@dimen/_16sp"
                     android:layout_marginStart="@dimen/_4dp"
                     android:textColor="@color/font_accent"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/top_cast_text"
                     app:layout_constraintBottom_toBottomOf="@id/top_cast_text"
-                    tools:text="See All"
+                    android:text="See All"
                     />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -307,9 +316,10 @@
                     android:textColor="@color/font_secondary"
                     android:textSize="@dimen/_12sp"
                     android:fontFamily="@font/montserrat_regular"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintTop_toBottomOf="@id/top_cast_scroll_view"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="status"
+                    android:text="status"
                     />
                 <TextView
                     android:id="@+id/movie_status"
@@ -317,6 +327,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/font_primary"
                     android:textSize="@dimen/_16sp"
+                    android:text="@{viewModel.state.status}"
                     android:layout_marginTop="@dimen/_4dp"
                     android:fontFamily="@font/montserrat_semibold"
                     app:layout_constraintTop_toBottomOf="@id/status_text"
@@ -331,9 +342,10 @@
                     android:textColor="@color/font_secondary"
                     android:textSize="@dimen/_12sp"
                     android:fontFamily="@font/montserrat_regular"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintTop_toBottomOf="@id/movie_status"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="released date"
+                    android:text="released date"
                     />
                 <TextView
                     android:id="@+id/released_status"
@@ -341,6 +353,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/font_primary"
                     android:textSize="@dimen/_16sp"
+                    android:text="@{viewModel.state.releasedDate}"
                     android:layout_marginTop="@dimen/_4dp"
                     android:fontFamily="@font/montserrat_semibold"
                     app:layout_constraintTop_toBottomOf="@id/released_date_text"
@@ -355,9 +368,10 @@
                     android:textColor="@color/font_secondary"
                     android:textSize="@dimen/_12sp"
                     android:fontFamily="@font/montserrat_regular"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintTop_toBottomOf="@id/released_status"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="Production Countries"
+                    android:text="Production Countries"
                     />
 
                 <TextView
@@ -367,6 +381,7 @@
                     android:textColor="@color/font_primary"
                     android:textSize="@dimen/_16sp"
                     android:layout_marginTop="@dimen/_4dp"
+                    android:text="@{viewModel.state.productionCountries}"
                     android:fontFamily="@font/montserrat_semibold"
                     app:layout_constraintTop_toBottomOf="@id/production_countries_text"
                     app:layout_constraintStart_toStartOf="parent"
@@ -380,9 +395,10 @@
                     android:textColor="@color/font_primary"
                     android:textSize="@dimen/_16sp"
                     android:fontFamily="@font/montserrat_semibold"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintTop_toBottomOf="@id/production_countries"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="keywords"
+                    android:text="keywords"
                     />
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/keywords_scroll_view"
@@ -406,7 +422,8 @@
                     android:fontFamily="@font/montserrat_semibold"
                     app:layout_constraintTop_toBottomOf="@id/keywords_scroll_view"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="Similar Movies"
+                    app:hideIfTrue="@{viewModel.state.loading}"
+                    android:text="Similar Movies"
                     />
                 <TextView
                     android:id="@+id/see_all_similar_movies"
@@ -416,10 +433,11 @@
                     android:textSize="@dimen/_16sp"
                     android:layout_marginStart="@dimen/_4dp"
                     android:textColor="@color/font_accent"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/similar_movies_text"
                     app:layout_constraintBottom_toBottomOf="@id/similar_movies_text"
-                    tools:text="See All"
+                    android:text="See All"
                     />
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/similar_movies_scroll"
@@ -440,9 +458,10 @@
                     android:textColor="@color/font_primary"
                     android:textSize="@dimen/_20sp"
                     android:fontFamily="@font/montserrat_semibold"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintTop_toBottomOf="@id/similar_movies_scroll"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="Images belong a movie"
+                    android:text="Images belong a movie"
                     />
                 <TextView
                     android:id="@+id/see_all_Images_belong_to_movie"
@@ -452,10 +471,11 @@
                     android:textSize="@dimen/_16sp"
                     android:layout_marginStart="@dimen/_4dp"
                     android:textColor="@color/font_accent"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/Images_belong_to_movie_text"
                     app:layout_constraintBottom_toBottomOf="@id/Images_belong_to_movie_text"
-                    tools:text="See All"
+                    android:text="See All"
                     />
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/Images_belong_to_movie_scroll"
@@ -487,9 +507,10 @@
                     android:textColor="@color/font_primary"
                     android:layout_marginStart="@dimen/_12dp"
                     android:layout_marginTop="@dimen/_12dp"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintStart_toStartOf="@id/latest_image"
                     app:layout_constraintTop_toTopOf="@id/latest_image"
-                    tools:text="latest"
+                    android:text="latest"
                     />
                 <TextView
                     android:id="@+id/reviews_text"
@@ -499,9 +520,10 @@
                     android:textColor="@color/font_primary"
                     android:textSize="@dimen/_20sp"
                     android:fontFamily="@font/montserrat_semibold"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintTop_toBottomOf="@id/latest_image"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="Reviews"
+                    android:text="Reviews"
                     />
                 <TextView
                     android:id="@+id/see_all_reviews"
@@ -535,9 +557,10 @@
                     android:textColor="@color/font_primary"
                     android:textSize="@dimen/_20sp"
                     android:fontFamily="@font/montserrat_semibold"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintTop_toBottomOf="@id/reviews_scroll"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="Recommendations"
+                    android:text="Recommendations"
                     />
                 <TextView
                     android:id="@+id/see_all_Recommendations"
@@ -547,10 +570,11 @@
                     android:textSize="@dimen/_16sp"
                     android:layout_marginStart="@dimen/_4dp"
                     android:textColor="@color/font_accent"
+                    app:hideIfTrue="@{viewModel.state.loading}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/Recommendations_text"
                     app:layout_constraintBottom_toBottomOf="@id/Recommendations_text"
-                    tools:text="See All"
+                    android:text="See All"
                     />
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/Recommendations_scroll"
