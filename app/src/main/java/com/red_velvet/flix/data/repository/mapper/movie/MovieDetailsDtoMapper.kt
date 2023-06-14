@@ -15,9 +15,12 @@ fun MovieDetailsResource.toEntity(): MovieDetailsEntity {
         imdbId = imdbId.orEmpty(),
         overview = overview.orEmpty(),
         date = releaseDate.orEmpty(),
-        runtime = runtime.orZero(),
+        runtime = runtime.toString(),
         title = title.orEmpty(),
         video = video.orFalse(),
         voteAverage = voteAverage.orZero(),
+        language = originalLanguage.orEmpty(),
+        productionCountry = productionCountries?.get(0)?.name.orEmpty(),
+        status = status.orEmpty()
     )
 }
