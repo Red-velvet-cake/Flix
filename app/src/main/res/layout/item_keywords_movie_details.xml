@@ -7,7 +7,7 @@
     android:paddingVertical="@dimen/_8dp"
     android:paddingHorizontal="@dimen/_16dp"
     app:chipCornerRadius="@dimen/_8dp"
-    app:chipBackgroundColor="@color/Secondary"
+    app:chipBackgroundColor="@color/background"
     android:textColor="@color/font_primary"
     android:layout_marginEnd="@dimen/_8dp"
     />

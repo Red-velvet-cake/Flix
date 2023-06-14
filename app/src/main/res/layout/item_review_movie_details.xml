@@ -50,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/font_accent"
             android:ellipsize="end"
             android:layout_marginTop="@dimen/_8dp"
             android:text="Halle Bailey served a very good performance with a lot of charisma and passion, she also has an impressive voice. In some parts people were clapping from excitement and I shed a tear since I saw her performing her first song."
