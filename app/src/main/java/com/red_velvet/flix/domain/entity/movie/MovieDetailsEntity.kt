@@ -5,7 +5,7 @@ data class MovieDetailsEntity(
     val id: Int,
     val imageUrl: String,
     val adult: Boolean,
-    val genres: String,
+    val genres: List<String>,
     val imdbId: String,
     val overview: String,
     val date: String,
