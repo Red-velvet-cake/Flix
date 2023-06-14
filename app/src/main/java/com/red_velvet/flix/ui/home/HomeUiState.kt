@@ -1,6 +1,7 @@
 package com.red_velvet.flix.ui.home
 
 import com.red_velvet.flix.ui.base.BaseUiState
+import com.red_velvet.flix.ui.base.ErrorUiState
 
 data class HomeUiState(
     val popularMovies: List<MediaUiState> = emptyList(),
@@ -8,13 +9,13 @@ data class HomeUiState(
     val upcomingMovies: List<MediaUiState> = emptyList(),
     val topRatedMovies: List<MediaUiState> = emptyList(),
     val isMovieLoading: Boolean = false,
-    val movieError: List<String> = emptyList(),
+    val movieError: ErrorUiState? = null,
     val popularSeries: List<MediaUiState> = emptyList(),
     val airingTodaySeries: List<MediaUiState> = emptyList(),
     val onTVSeries: List<MediaUiState> = emptyList(),
     val topRatedSeries: List<MediaUiState> = emptyList(),
     val isSeriesLoading: Boolean = false,
-    val seriesError: List<String> = emptyList(),
+    val seriesError: ErrorUiState? = null
 
     ) : BaseUiState {
 

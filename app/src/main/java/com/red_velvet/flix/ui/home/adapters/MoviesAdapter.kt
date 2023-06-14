@@ -52,7 +52,7 @@ class MoviesAdapter(
                 )
             } else {
                 setVariable(
-                    BR.adapterRecycler,
+                    BR.adapterRecyclerMovie,
                     MovieMediaAdapter(
                         currentItem.items,
                         listener as MovieInteractionListener

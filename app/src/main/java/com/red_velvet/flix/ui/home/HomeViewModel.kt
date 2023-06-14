@@ -26,14 +26,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getPopularMoviesUsecase: GetPopularMoviesUseCase,
-    private val getNowPlayingMoviesUsecase: GetNowPlayingMoviesUseCase,
-    private val getUpcomingMoviesUsecase: GetUpcomingMoviesUseCase,
-    private val getTopRatedMoviesUsecase: GetTopRatedMoviesUseCase,
-    private val getPopularSeriesUseCase: GetPopularSeriesUseCase,
-    private val getAiringTodaySeriesUseCase: GetAiringTodaySeriesUseCase,
-    private val getOnTheAirSeriesUseCase: GetOnTheAirSeriesUseCase,
-    private val getTopRatedSeriesUseCase: GetTopRatedSeriesUseCase,
+    private val getPopularMovies: GetPopularMoviesUseCase,
+    private val getNowPlayingMovies: GetNowPlayingMoviesUseCase,
+    private val getUpcomingMovies: GetUpcomingMoviesUseCase,
+    private val getTopRatedMovies: GetTopRatedMoviesUseCase,
+    private val getPopularSeries: GetPopularSeriesUseCase,
+    private val getAiringTodaySeries: GetAiringTodaySeriesUseCase,
+    private val getOnTheAirSeries: GetOnTheAirSeriesUseCase,
+    private val getTopRatedSeries: GetTopRatedSeriesUseCase,
 
     ) : BaseViewModel<HomeUiState>(), MovieInteractionListener, PopularMovieInteractionListener,
     TvShowInteractionListener, PopularTvShowInteractionListener {
@@ -45,7 +45,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getMoviesPageData() {
-        _state.update { it.copy(isMovieLoading = true) }
+        _state.update { it.copy(movieError = null,isMovieLoading = true) }
         getPopularMovies()
         getNowPlayingMovies()
         getUpcomingMovies()
@@ -53,7 +53,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getTvShowsPageData() {
-        _state.update { it.copy(isSeriesLoading = true) }
+        _state.update { it.copy(seriesError = null, isSeriesLoading = true) }
         getPopularSeries()
         getAiringTodaySeries()
         getOnAirSeries()
@@ -63,7 +63,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getPopularMovies() {
         tryToExecute(
-            getPopularMoviesUsecase::invoke,
+            getPopularMovies::invoke,
             ::modifyPopularMoviesState,
             ::onMovieError
         )
@@ -82,7 +82,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getNowPlayingMovies() {
         tryToExecute(
-            getNowPlayingMoviesUsecase::invoke,
+            getNowPlayingMovies::invoke,
             ::modifyNowPlayingMoviesState, ::onMovieError
         )
 
@@ -96,7 +96,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getUpcomingMovies() {
         tryToExecute(
-            getUpcomingMoviesUsecase::invoke,
+            getUpcomingMovies::invoke,
             ::modifyUpcomingMoviesState, ::onMovieError
         )
 
@@ -110,7 +110,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getTopRatedMovies() {
         tryToExecute(
-            getTopRatedMoviesUsecase::invoke,
+            getTopRatedMovies::invoke,
             ::modifyTopRatedMoviesState, ::onMovieError
         )
 
@@ -124,14 +124,12 @@ class HomeViewModel @Inject constructor(
 
     private fun onMovieError(errorUiState: ErrorUiState) {
         Log.e("RESPONSE", "onMovieError: $errorUiState")
-        val errors = mutableListOf<String>()
-        errors.add(errorUiState.toString())
-        _state.update { it.copy(movieError = errors, isMovieLoading = false) }
+        _state.update { it.copy(movieError = errorUiState, isMovieLoading = false) }
     }
 
     private fun getPopularSeries() {
         tryToExecute(
-            getPopularSeriesUseCase::invoke,
+            getPopularSeries::invoke,
             ::modifyPopularSeriesState, ::onSeriesError
         )
     }
@@ -148,7 +146,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getAiringTodaySeries() {
         tryToExecute(
-            getAiringTodaySeriesUseCase::invoke,
+            getAiringTodaySeries::invoke,
             ::modifyAiringTodaySeriesState, ::onSeriesError
         )
     }
@@ -164,7 +162,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getOnAirSeries() {
         tryToExecute(
-            getOnTheAirSeriesUseCase::invoke,
+            getOnTheAirSeries::invoke,
             ::modifyOnAirSeriesState, ::onSeriesError
         )
     }
@@ -180,7 +178,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getTopRatedSeries() {
         tryToExecute(
-            getTopRatedSeriesUseCase::invoke,
+            getTopRatedSeries::invoke,
             ::modifyTopRatedSeriesState, ::onSeriesError
         )
     }
@@ -195,9 +193,7 @@ class HomeViewModel @Inject constructor(
 
 
     private fun onSeriesError(errorUiState: ErrorUiState) {
-        val errors = mutableListOf<String>()
-        errors.add(errorUiState.toString())
-        _state.update { it.copy(seriesError = errors, isSeriesLoading = false) }
+        _state.update { it.copy(seriesError = errorUiState, isSeriesLoading = false) }
     }
 
 

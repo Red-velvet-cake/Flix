@@ -1,6 +1,5 @@
 package com.red_velvet.flix.ui.home.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -45,18 +44,14 @@ class TvShowsAdapter(
             setVariable(BR.tvshowType, currentItem)
             if (currentItem.title == "Popular Series") {
                 setVariable(
-                    BR.popularTvShowsAdapterRecycler,
-                    PopularTVShowMediaAdapter(
-                        currentItem.items,
-                        listener as PopularTvShowInteractionListener
+                    BR.popularTvShowsAdapterRecycler, PopularTVShowMediaAdapter(
+                        currentItem.items, listener as PopularTvShowInteractionListener
                     )
                 )
             } else {
                 setVariable(
-                    BR.adapterRecycler,
-                    TVShowMediaAdapter(
-                        currentItem.items,
-                        listener as TvShowInteractionListener
+                    BR.adapterRecyclerTVShow, TVShowMediaAdapter(
+                        currentItem.items, listener as TvShowInteractionListener
                     )
                 )
             }
