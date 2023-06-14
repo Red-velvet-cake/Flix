@@ -73,7 +73,7 @@ interface MoviesService {
         @Path("movie_id") movieId: Int,
         @Query("language") language: String? = "en-US",
         @Query("append_to_response") appendToResponse: String? = null
-    ): Response<MovieResource>
+    ): Response<MovieDetailsResource>
 
     @GET("movie/latest")
     suspend fun getLatestMovie(): Response<MovieResource>
