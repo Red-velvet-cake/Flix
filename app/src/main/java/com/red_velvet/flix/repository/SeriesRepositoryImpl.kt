@@ -7,16 +7,13 @@ import com.red_velvet.flix.domain.entity.series.SeasonEntity
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.repository.SeriesRepository
 import com.red_velvet.flix.repository.mapper.series.toAiringTodaySeriesDto
-import com.red_velvet.flix.repository.mapper.series.toAiringTodaySeriesEntity
 import com.red_velvet.flix.repository.mapper.series.toEntity
 import com.red_velvet.flix.repository.mapper.series.toOnTheAirSeriesDto
-import com.red_velvet.flix.repository.mapper.series.toOnTheAirSeriesEntity
 import com.red_velvet.flix.repository.mapper.series.toPopularSeriesDto
-import com.red_velvet.flix.repository.mapper.series.toPopularSeriesEntity
 import com.red_velvet.flix.repository.mapper.series.toTopRatedSeriesDto
-import com.red_velvet.flix.repository.mapper.series.toTopRatedSeriesEntity
 import com.red_velvet.flix.repository.mapper.toEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class SeriesRepositoryImpl @Inject constructor(
@@ -105,19 +102,27 @@ class SeriesRepositoryImpl @Inject constructor(
 
 
     override suspend fun getLocalPopularSeries(): Flow<List<SeriesEntity>> {
-        return localDataSource.getPopularSeries().toPopularSeriesEntity()
+        return localDataSource.getPopularSeries().map {
+            it.toEntity()
+        }
     }
 
     override suspend fun getLocalTopRatedSeries(): Flow<List<SeriesEntity>> {
-        return localDataSource.getTopRatedSeries().toTopRatedSeriesEntity()
+        return localDataSource.getTopRatedSeries().map {
+            it.toEntity()
+        }
     }
 
     override suspend fun getLocalOnTheAirSeries(): Flow<List<SeriesEntity>> {
-        return localDataSource.getOnTheAirSeries().toOnTheAirSeriesEntity()
+        return localDataSource.getOnTheAirSeries().map {
+            it.toEntity()
+        }
     }
 
     override suspend fun getLocalAiringTodaySeries(): Flow<List<SeriesEntity>> {
-        return localDataSource.getAiringTodaySeries().toAiringTodaySeriesEntity()
+        return localDataSource.getAiringTodaySeries().map {
+            it.toEntity()
+        }
     }
 
     override suspend fun cachePopularSeries(series: List<SeriesEntity>) {

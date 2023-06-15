@@ -52,18 +52,18 @@ fun OnTheAirSeriesDto.toEntity(): SeriesEntity {
     )
 }
 
-fun List<PopularSeriesDto>.toPopularSeriesEntity(): List<SeriesEntity> {
+fun List<PopularSeriesDto>.toEntity(): List<SeriesEntity> {
     return map { it.toEntity() }
 }
 
-fun List<TopRatedSeriesDto>.toTopRatedSeriesEntity(): List<SeriesEntity> {
+fun List<TopRatedSeriesDto>.toEntity(): List<SeriesEntity> {
     return map { it.toEntity() }
 }
 
-fun List<AiringTodaySeriesDto>.toAiringTodaySeriesEntity(): List<SeriesEntity> {
+fun List<AiringTodaySeriesDto>.toEntity(): List<SeriesEntity> {
     return map { it.toEntity() }
 }
 
-fun List<OnTheAirSeriesDto>.toOnTheAirSeriesEntity(): List<SeriesEntity> {
+fun List<OnTheAirSeriesDto>.toEntity(): List<SeriesEntity> {
     return map { it.toEntity() }
 }

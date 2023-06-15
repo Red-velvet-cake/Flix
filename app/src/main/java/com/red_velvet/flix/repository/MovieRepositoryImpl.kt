@@ -8,16 +8,13 @@ import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
 import com.red_velvet.flix.repository.mapper.movie.toEntity
 import com.red_velvet.flix.repository.mapper.movie.toNowPlayingMovieDto
-import com.red_velvet.flix.repository.mapper.movie.toNowPlayingMoviesEntity
 import com.red_velvet.flix.repository.mapper.movie.toPopularMovieDto
-import com.red_velvet.flix.repository.mapper.movie.toPopularMoviesEntity
 import com.red_velvet.flix.repository.mapper.movie.toTopRatedMovieDto
-import com.red_velvet.flix.repository.mapper.movie.toTopRatedMoviesEntity
 import com.red_velvet.flix.repository.mapper.movie.toUpComingMovieDto
-import com.red_velvet.flix.repository.mapper.movie.toUpcomingMoviesEntity
 import com.red_velvet.flix.repository.mapper.series.toEntity
 import com.red_velvet.flix.repository.mapper.toEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
@@ -107,32 +104,33 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun discoverMovies(
-        page: Int?,
-        sortBy: String?,
-        rate: Float?,
-        year: Int?
+        page: Int?, sortBy: String?, rate: Float?, year: Int?
     ): List<MovieEntity> {
         return remoteDataSource.discoverMovies(page, sortBy, rate, year).toEntity()
     }
 
     override suspend fun getLocalPopularMovies(): Flow<List<MovieEntity>> {
-        return localDataSource.getPopularMovies()
-            .toPopularMoviesEntity()
+        return localDataSource.getPopularMovies().map {
+            it.toEntity()
+        }
     }
 
     override suspend fun getLocalUpcomingMovies(): Flow<List<MovieEntity>> {
-        return localDataSource.getUpcomingMovies()
-            .toUpcomingMoviesEntity()
+        return localDataSource.getUpcomingMovies().map {
+            it.toEntity()
+        }
     }
 
     override suspend fun getLocalNowPlayingMovies(): Flow<List<MovieEntity>> {
-        return localDataSource.getNowPlayingMovies()
-            .toNowPlayingMoviesEntity()
+        return localDataSource.getNowPlayingMovies().map {
+            it.toEntity()
+        }
     }
 
     override suspend fun getLocalTopRatedMovies(): Flow<List<MovieEntity>> {
-        return localDataSource.getTopRatedMovies()
-            .toTopRatedMoviesEntity()
+        return localDataSource.getTopRatedMovies().map {
+            it.toEntity()
+        }
     }
 
     override suspend fun cachePopularMovies(movies: List<MovieEntity>) {

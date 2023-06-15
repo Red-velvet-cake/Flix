@@ -55,18 +55,18 @@ fun NowPlayingMovieDto.toEntity(): MovieEntity {
     )
 }
 
-fun List<PopularMovieDto>.toPopularMoviesEntity(): List<MovieEntity> {
+fun List<PopularMovieDto>.toEntity(): List<MovieEntity> {
     return map { it.toEntity() }
 }
 
-fun List<UpcomingMovieDto>.toUpcomingMoviesEntity(): List<MovieEntity> {
+fun List<UpcomingMovieDto>.toEntity(): List<MovieEntity> {
     return map { it.toEntity() }
 }
 
-fun List<TopRatedMovieDto>.toTopRatedMoviesEntity(): List<MovieEntity> {
+fun List<TopRatedMovieDto>.toEntity(): List<MovieEntity> {
     return map { it.toEntity() }
 }
 
-fun List<NowPlayingMovieDto>.toNowPlayingMoviesEntity(): List<MovieEntity> {
+fun List<NowPlayingMovieDto>.toEntity(): List<MovieEntity> {
     return map { it.toEntity() }
 }

@@ -13,6 +13,7 @@ import com.red_velvet.flix.data.local.database.entity.TopRatedSeriesDto
 import com.red_velvet.flix.data.local.database.entity.UpcomingMovieDto
 import com.red_velvet.flix.data.local.database.entity.UserDto
 import com.red_velvet.flix.repository.LocalDataSource
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LocalDataSourceImpl @Inject constructor(
@@ -20,19 +21,19 @@ class LocalDataSourceImpl @Inject constructor(
     private val SeriesDao: SeriesDao,
     private val UserDao: UserDao
 ) : LocalDataSource {
-    override suspend fun getPopularMovies(): List<PopularMovieDto> {
+    override suspend fun getPopularMovies(): Flow<List<PopularMovieDto>> {
         return MovieDao.getPopularMovies()
     }
 
-    override suspend fun getTopRatedMovies(): List<TopRatedMovieDto> {
+    override suspend fun getTopRatedMovies(): Flow<List<TopRatedMovieDto>> {
         return MovieDao.getTopRatedMovies()
     }
 
-    override suspend fun getNowPlayingMovies(): List<NowPlayingMovieDto> {
+    override suspend fun getNowPlayingMovies(): Flow<List<NowPlayingMovieDto>> {
         return MovieDao.getNowPlayingMovies()
     }
 
-    override suspend fun getUpcomingMovies(): List<UpcomingMovieDto> {
+    override suspend fun getUpcomingMovies(): Flow<List<UpcomingMovieDto>> {
         return MovieDao.getUpcomingMovies()
     }
 
@@ -52,19 +53,19 @@ class LocalDataSourceImpl @Inject constructor(
         MovieDao.insertUpcomingMovies(upcomingMovies)
     }
 
-    override suspend fun getPopularSeries(): List<PopularSeriesDto> {
+    override suspend fun getPopularSeries(): Flow<List<PopularSeriesDto>> {
         return SeriesDao.getPopularSeries()
     }
 
-    override suspend fun getTopRatedSeries(): List<TopRatedSeriesDto> {
+    override suspend fun getTopRatedSeries(): Flow<List<TopRatedSeriesDto>> {
         return SeriesDao.getTopRatedSeries()
     }
 
-    override suspend fun getOnTheAirSeries(): List<OnTheAirSeriesDto> {
+    override suspend fun getOnTheAirSeries(): Flow<List<OnTheAirSeriesDto>> {
         return SeriesDao.getOnTheAirSeries()
     }
 
-    override suspend fun getAiringTodaySeries(): List<AiringTodaySeriesDto> {
+    override suspend fun getAiringTodaySeries(): Flow<List<AiringTodaySeriesDto>> {
         return SeriesDao.getAiringTodaySeries()
     }
 
