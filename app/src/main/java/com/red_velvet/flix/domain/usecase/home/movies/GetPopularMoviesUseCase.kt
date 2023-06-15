@@ -1,9 +1,11 @@
 package com.red_velvet.flix.domain.usecase.home.movies
 
+import android.util.Log
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEmpty
 
 class GetPopularMoviesUseCase @Inject constructor(

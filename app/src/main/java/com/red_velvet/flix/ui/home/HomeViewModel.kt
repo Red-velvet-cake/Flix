@@ -68,12 +68,12 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun modifyPopularMoviesState(movies: List<MovieEntity>) {
-        _state.update {
-            it.copy(
-                popularMovies = mutableListOf(movies.first()).toMovieUiState(),
-                isMovieLoading = false
-            )
+        _state.update { state ->
+            state.copy(popularMovies = movies.takeIf { it.isNotEmpty() }
+                ?.let { mutableListOf(it.first()).toMovieUiState() } ?: emptyList(),
+                isMovieLoading = false)
         }
+
     }
 
     private fun getNowPlayingMovies() {
@@ -125,11 +125,10 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun modifyPopularSeriesState(series: List<SeriesEntity>) {
-        _state.update {
-            it.copy(
-                popularSeries = mutableListOf(series.first()).toSeriesUiState(),
-                isSeriesLoading = false
-            )
+        _state.update { state ->
+            state.copy(popularSeries = series.takeIf { it.isNotEmpty() }
+                ?.let { mutableListOf(it.first()).toSeriesUiState() } ?: emptyList(),
+                isSeriesLoading = false)
         }
     }
 

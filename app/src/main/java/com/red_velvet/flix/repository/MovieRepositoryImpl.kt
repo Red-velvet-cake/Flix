@@ -8,9 +8,13 @@ import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
 import com.red_velvet.flix.repository.mapper.movie.toEntity
 import com.red_velvet.flix.repository.mapper.movie.toNowPlayingMovieDto
+import com.red_velvet.flix.repository.mapper.movie.toNowPlayingMoviesEntity
 import com.red_velvet.flix.repository.mapper.movie.toPopularMovieDto
+import com.red_velvet.flix.repository.mapper.movie.toPopularMoviesEntity
 import com.red_velvet.flix.repository.mapper.movie.toTopRatedMovieDto
+import com.red_velvet.flix.repository.mapper.movie.toTopRatedMoviesEntity
 import com.red_velvet.flix.repository.mapper.movie.toUpComingMovieDto
+import com.red_velvet.flix.repository.mapper.movie.toUpcomingMoviesEntity
 import com.red_velvet.flix.repository.mapper.series.toEntity
 import com.red_velvet.flix.repository.mapper.toEntity
 import kotlinx.coroutines.flow.Flow
@@ -111,25 +115,25 @@ class MovieRepositoryImpl @Inject constructor(
 
     override suspend fun getLocalPopularMovies(): Flow<List<MovieEntity>> {
         return localDataSource.getPopularMovies().map {
-            it.toEntity()
+            it.toPopularMoviesEntity()
         }
     }
 
     override suspend fun getLocalUpcomingMovies(): Flow<List<MovieEntity>> {
         return localDataSource.getUpcomingMovies().map {
-            it.toEntity()
+            it.toUpcomingMoviesEntity()
         }
     }
 
     override suspend fun getLocalNowPlayingMovies(): Flow<List<MovieEntity>> {
         return localDataSource.getNowPlayingMovies().map {
-            it.toEntity()
+            it.toNowPlayingMoviesEntity()
         }
     }
 
     override suspend fun getLocalTopRatedMovies(): Flow<List<MovieEntity>> {
         return localDataSource.getTopRatedMovies().map {
-            it.toEntity()
+            it.toTopRatedMoviesEntity()
         }
     }
 
