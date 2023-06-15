@@ -1,5 +1,6 @@
 package com.red_velvet.flix.ui.movieDetails
 
+import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.movie.MovieDetailsEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.ui.base.BaseUiState
@@ -28,7 +29,7 @@ data class MovieUiState(
     val seeAllSimilarMovies: Boolean = false,
     val similarMovies: List<MovieList> = emptyList(),
     val seeAllImagesBelongToMovie: Boolean = false,
-    val imageBelongToMovie: List<String> = emptyList(),
+    val imageBelongToMovie: List<ImageBelongToMovie> = emptyList(),
     val latest: String = "",
     val seeAllReviews: Boolean = false,
     val review: List<MovieReview> = emptyList(),
@@ -40,6 +41,15 @@ data class MovieUiState(
         val movieImageUrl: String,
         val movieName: String,
     )
+    data class ImageBelongToMovie(
+        val ImageBelongToMovieUrl:String
+    )
+
+    data class MovieReview(
+        val rating: Int,
+        val movieReviewer: String,
+        val movieReview: String,
+    )
 }
 
 data class TopCast(
@@ -47,18 +57,14 @@ data class TopCast(
     val actorName: String,
 )
 
-
-
-data class MovieReview(
-    val rating: Double,
-    val movieReviewer: String,
-    val movieReview: String,
-)
-
-/*data class MovieRecommendations(
-    val recommendedMovieName: String,
-    val recommendedMovieImageUrl: String,
-)*/
+fun ReviewEntity.toUiState():MovieUiState.MovieReview
+{
+    return MovieUiState.MovieReview(rating = rating , movieReview = content , movieReviewer = author.name)
+}
+fun List<ReviewEntity>.toUiState():List<MovieUiState.MovieReview>
+{
+    return map { it.toUiState() }
+}
 fun MovieDetailsEntity.toUiState(): MovieUiState {
     return MovieUiState(
         movieName = title
