@@ -227,11 +227,24 @@
                     android:textSize="@dimen/_16sp"
                     android:layout_marginStart="@dimen/_4dp"
                     android:textColor="@color/font_secondary"
+                    android:text="@{String.valueOf(viewModel.state.movieRating)}"
                     app:layout_constraintStart_toEndOf="@id/ic_imdb_rate"
                     app:layout_constraintTop_toTopOf="@id/ic_imdb_rate"
                     app:layout_constraintBottom_toBottomOf="@id/ic_imdb_rate"
-                    tools:text="7/10 Rating"
                     />
+                <TextView
+                    android:id="@+id/postfix_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textSize="@dimen/_16sp"
+                    android:textColor="@color/font_secondary"
+                    android:text="/10 Rating"
+                    app:layout_constraintStart_toEndOf="@id/imdb_rate"
+                    app:layout_constraintTop_toTopOf="@id/imdb_rate"
+                    app:layout_constraintBottom_toBottomOf="@id/imdb_rate"
+                    />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ic_user_rate"
                     android:layout_width="wrap_content"
@@ -239,9 +252,9 @@
                     android:src="@drawable/ic_user_movie_rate"
                     android:layout_marginStart="@dimen/_16dp"
                     app:hideIfTrue="@{viewModel.state.loading}"
-                    app:layout_constraintTop_toTopOf="@id/imdb_rate"
-                    app:layout_constraintStart_toEndOf="@id/imdb_rate"
-                    app:layout_constraintBottom_toBottomOf="@id/imdb_rate"
+                    app:layout_constraintTop_toTopOf="@id/postfix_rating"
+                    app:layout_constraintStart_toEndOf="@id/postfix_rating"
+                    app:layout_constraintBottom_toBottomOf="@id/postfix_rating"
                     />
                 <TextView
                     android:layout_width="wrap_content"
@@ -582,6 +595,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="@dimen/_8dp"
+                    app:items="@{viewModel.state.movieRecommendations}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/Recommendations_text"
                     app:layout_constraintStart_toStartOf="parent"
