@@ -1,16 +1,15 @@
 package com.red_velvet.flix.ui.home
 
-import android.util.Log
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
-import com.red_velvet.flix.domain.usecase.GetAiringTodaySeriesUseCase
-import com.red_velvet.flix.domain.usecase.GetNowPlayingMoviesUseCase
-import com.red_velvet.flix.domain.usecase.GetOnTheAirSeriesUseCase
-import com.red_velvet.flix.domain.usecase.GetPopularMoviesUseCase
-import com.red_velvet.flix.domain.usecase.GetPopularSeriesUseCase
-import com.red_velvet.flix.domain.usecase.GetTopRatedMoviesUseCase
-import com.red_velvet.flix.domain.usecase.GetTopRatedSeriesUseCase
-import com.red_velvet.flix.domain.usecase.GetUpcomingMoviesUseCase
+import com.red_velvet.flix.domain.usecase.home.tvshows.GetAiringTodaySeriesUseCase
+import com.red_velvet.flix.domain.usecase.home.movies.GetNowPlayingMoviesUseCase
+import com.red_velvet.flix.domain.usecase.home.tvshows.GetOnTheAirSeriesUseCase
+import com.red_velvet.flix.domain.usecase.home.movies.GetPopularMoviesUseCase
+import com.red_velvet.flix.domain.usecase.home.tvshows.GetPopularSeriesUseCase
+import com.red_velvet.flix.domain.usecase.home.movies.GetTopRatedMoviesUseCase
+import com.red_velvet.flix.domain.usecase.home.tvshows.GetTopRatedSeriesUseCase
+import com.red_velvet.flix.domain.usecase.home.movies.GetUpcomingMoviesUseCase
 import com.red_velvet.flix.ui.base.BaseViewModel
 import com.red_velvet.flix.ui.base.ErrorUiState
 import com.red_velvet.flix.ui.home.adapters.MovieInteractionListener
@@ -45,7 +44,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getMoviesPageData() {
-        _state.update { it.copy(movieError = null,isMovieLoading = true) }
+        _state.update { it.copy(movieError = null, isMovieLoading = true) }
         getPopularMovies()
         getNowPlayingMovies()
         getUpcomingMovies()
@@ -63,15 +62,12 @@ class HomeViewModel @Inject constructor(
 
     private fun getPopularMovies() {
         tryToExecute(
-            getPopularMovies::invoke,
-            ::modifyPopularMoviesState,
-            ::onMovieError
+            getPopularMovies::invoke, ::modifyPopularMoviesState, ::onMovieError
         )
 
     }
 
     private fun modifyPopularMoviesState(movies: List<MovieEntity>) {
-        Log.d("RESPONSE", "modifyPopularMoviesState: ${movies.size}")
         _state.update {
             it.copy(
                 popularMovies = mutableListOf(movies.first()).toMovieUiState(),
@@ -82,8 +78,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getNowPlayingMovies() {
         tryToExecute(
-            getNowPlayingMovies::invoke,
-            ::modifyNowPlayingMoviesState, ::onMovieError
+            getNowPlayingMovies::invoke, ::modifyNowPlayingMoviesState, ::onMovieError
         )
 
     }
@@ -96,8 +91,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getUpcomingMovies() {
         tryToExecute(
-            getUpcomingMovies::invoke,
-            ::modifyUpcomingMoviesState, ::onMovieError
+            getUpcomingMovies::invoke, ::modifyUpcomingMoviesState, ::onMovieError
         )
 
     }
@@ -110,10 +104,8 @@ class HomeViewModel @Inject constructor(
 
     private fun getTopRatedMovies() {
         tryToExecute(
-            getTopRatedMovies::invoke,
-            ::modifyTopRatedMoviesState, ::onMovieError
+            getTopRatedMovies::invoke, ::modifyTopRatedMoviesState, ::onMovieError
         )
-
     }
 
     private fun modifyTopRatedMoviesState(movies: List<MovieEntity>) {
@@ -123,14 +115,12 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun onMovieError(errorUiState: ErrorUiState) {
-        Log.e("RESPONSE", "onMovieError: $errorUiState")
         _state.update { it.copy(movieError = errorUiState, isMovieLoading = false) }
     }
 
     private fun getPopularSeries() {
         tryToExecute(
-            getPopularSeries::invoke,
-            ::modifyPopularSeriesState, ::onSeriesError
+            getPopularSeries::invoke, ::modifyPopularSeriesState, ::onSeriesError
         )
     }
 
@@ -146,8 +136,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getAiringTodaySeries() {
         tryToExecute(
-            getAiringTodaySeries::invoke,
-            ::modifyAiringTodaySeriesState, ::onSeriesError
+            getAiringTodaySeries::invoke, ::modifyAiringTodaySeriesState, ::onSeriesError
         )
     }
 
@@ -162,8 +151,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getOnAirSeries() {
         tryToExecute(
-            getOnTheAirSeries::invoke,
-            ::modifyOnAirSeriesState, ::onSeriesError
+            getOnTheAirSeries::invoke, ::modifyOnAirSeriesState, ::onSeriesError
         )
     }
 
@@ -178,8 +166,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getTopRatedSeries() {
         tryToExecute(
-            getTopRatedSeries::invoke,
-            ::modifyTopRatedSeriesState, ::onSeriesError
+            getTopRatedSeries::invoke, ::modifyTopRatedSeriesState, ::onSeriesError
         )
     }
 
