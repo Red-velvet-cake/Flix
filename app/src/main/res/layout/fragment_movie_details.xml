@@ -452,17 +452,19 @@
                     app:layout_constraintBottom_toBottomOf="@id/similar_movies_text"
                     android:text="See All"
                     />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/similar_movies_scroll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
                     android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/_8dp"
+                    app:items="@{viewModel.state.similarMovies}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@id/similar_movies_text"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:listitem="@layout/item_movies_details"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/similar_movies_text"
+                    tools:listitem="@layout/item_movies_details" />
+
                 <TextView
                     android:id="@+id/Images_belong_to_movie_text"
                     android:layout_width="wrap_content"
@@ -557,6 +559,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="@dimen/_8dp"
+                    app:itemsReview="@{viewModel.state.review}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/reviews_text"
                     app:layout_constraintStart_toStartOf="parent"
