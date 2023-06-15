@@ -6,6 +6,7 @@ import com.red_velvet.flix.domain.utils.FlixException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -16,7 +17,7 @@ abstract class BaseViewModel<T : BaseUiState> : ViewModel() {
     abstract val state: StateFlow<T>
 
     fun <T> tryToExecute(
-        call: suspend () -> T,
+        call: suspend () -> Flow<T>,
         onSuccess: (T) -> Unit,
         onError: (ErrorUiState) -> Unit,
         dispatcher: CoroutineDispatcher = Dispatchers.IO
@@ -24,8 +25,11 @@ abstract class BaseViewModel<T : BaseUiState> : ViewModel() {
         viewModelScope.launch(dispatcher) {
             try {
                 val result = call()
-                delay(1000)
-                onSuccess(result)
+                launch(Dispatchers.Main) {
+                    result.collect { data ->
+                        onSuccess(data)
+                    }
+                }
             } catch (e: FlixException.Unauthorized) {
                 onError(ErrorUiState.UnAuthorized)
             } catch (e: FlixException.ServerError) {
