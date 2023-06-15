@@ -25,15 +25,15 @@ interface MovieDao {
     suspend fun insertUpcomingMovies(upcomingMovies: List<UpcomingMovieDto>)
 
     @Query("SELECT * FROM POPULAR_MOVIES")
-    suspend fun getPopularMovies(): Flow<List<PopularMovieDto>>
+    fun getPopularMovies(): Flow<List<PopularMovieDto>>
 
     @Query("SELECT * FROM TOP_RATED_MOVIES")
-    suspend fun getTopRatedMovies(): Flow<List<TopRatedMovieDto>>
+    fun getTopRatedMovies(): Flow<List<TopRatedMovieDto>>
 
     @Query("SELECT * FROM NOW_PLAYING_MOVIES")
-    suspend fun getNowPlayingMovies(): Flow<List<NowPlayingMovieDto>>
+    fun getNowPlayingMovies(): Flow<List<NowPlayingMovieDto>>
 
     @Query("SELECT * FROM UPCOMING_MOVIES")
-    suspend fun getUpcomingMovies(): Flow<List<UpcomingMovieDto>>
+    fun getUpcomingMovies(): Flow<List<UpcomingMovieDto>>
 
 }

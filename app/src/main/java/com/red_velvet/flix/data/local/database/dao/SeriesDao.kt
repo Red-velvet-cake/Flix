@@ -25,14 +25,14 @@ interface SeriesDao {
     suspend fun insertAiringTodaySeries(airingTodaySeries: List<AiringTodaySeriesDto>)
 
     @Query("SELECT * FROM POPULAR_SERIES")
-    suspend fun getPopularSeries(): Flow<List<PopularSeriesDto>>
+     fun getPopularSeries(): Flow<List<PopularSeriesDto>>
 
     @Query("SELECT * FROM TOP_RATED_SERIES")
-    suspend fun getTopRatedSeries(): Flow<List<TopRatedSeriesDto>>
+     fun getTopRatedSeries(): Flow<List<TopRatedSeriesDto>>
 
     @Query("SELECT * FROM ON_THE_AIR_SERIES")
-    suspend fun getOnTheAirSeries(): Flow<List<OnTheAirSeriesDto>>
+     fun getOnTheAirSeries(): Flow<List<OnTheAirSeriesDto>>
 
     @Query("SELECT * FROM AIRING_TODAY_SERIES")
-    suspend fun getAiringTodaySeries(): Flow<List<AiringTodaySeriesDto>>
+     fun getAiringTodaySeries(): Flow<List<AiringTodaySeriesDto>>
 }
