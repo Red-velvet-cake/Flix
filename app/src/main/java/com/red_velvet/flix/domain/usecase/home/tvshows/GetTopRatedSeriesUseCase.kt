@@ -1,11 +1,11 @@
-package com.red_velvet.flix.domain.usecase
+package com.red_velvet.flix.domain.usecase.home.tvshows
 
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.repository.SeriesRepository
 import javax.inject.Inject
 
-class GetPopularSeriesUseCase @Inject constructor(private val seriesRepository: SeriesRepository) {
+class GetTopRatedSeriesUseCase @Inject constructor(private val seriesRepository: SeriesRepository) {
     suspend operator fun invoke(): List<SeriesEntity> {
-        return seriesRepository.getLocalPopularSeries()
+        return seriesRepository.getLocalTopRatedSeries()
     }
 }

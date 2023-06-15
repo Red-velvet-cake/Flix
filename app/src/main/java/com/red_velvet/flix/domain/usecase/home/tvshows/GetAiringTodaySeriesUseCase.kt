@@ -1,4 +1,4 @@
-package com.red_velvet.flix.domain.usecase
+package com.red_velvet.flix.domain.usecase.home.tvshows
 
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.repository.SeriesRepository
