@@ -17,6 +17,36 @@ abstract class BaseViewModel<T : BaseUiState> : ViewModel() {
     abstract val state: StateFlow<T>
 
     fun <T> tryToExecute(
+        call: suspend () -> T,
+        onSuccess: (T) -> Unit,
+        onError: (ErrorUiState) -> Unit,
+        dispatcher: CoroutineDispatcher = Dispatchers.IO
+    ) {
+        viewModelScope.launch(dispatcher) {
+            try {
+                val result = call()
+                onSuccess(result)
+            } catch (e: FlixException.Unauthorized) {
+                onError(ErrorUiState.UnAuthorized)
+            } catch (e: FlixException.ServerError) {
+                onError(ErrorUiState.ServerError)
+            } catch (e: FlixException.InvalidUsernameOrPassword) {
+                onError(ErrorUiState.InvalidUsernameOrPassword)
+            } catch (e: FlixException.EmailNotVerified) {
+                onError(ErrorUiState.EmailNotVerified)
+            } catch (e: FlixException.NoInternet) {
+                onError(ErrorUiState.NoInternet)
+            } catch (e: FlixException.TimeOut) {
+                onError(ErrorUiState.TimeOut)
+            } catch (e: Exception) {
+                onError(ErrorUiState.Unknown)
+            }
+        }
+
+
+    }
+
+    fun <T> tryToExecuteHome(
         call: suspend () -> Flow<T>,
         onSuccess: (T) -> Unit,
         onError: (ErrorUiState) -> Unit,
@@ -46,6 +76,10 @@ abstract class BaseViewModel<T : BaseUiState> : ViewModel() {
                 onError(ErrorUiState.Unknown)
             }
         }
+
+
     }
+
+
 }
 

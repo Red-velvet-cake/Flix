@@ -61,7 +61,7 @@ class HomeViewModel @Inject constructor(
 
 
     private fun getPopularMovies() {
-        tryToExecute(
+        tryToExecuteHome(
             getPopularMovies::invoke, ::modifyPopularMoviesState, ::onMovieError
         )
 
@@ -77,7 +77,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getNowPlayingMovies() {
-        tryToExecute(
+        tryToExecuteHome(
             getNowPlayingMovies::invoke, ::modifyNowPlayingMoviesState, ::onMovieError
         )
 
@@ -90,7 +90,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getUpcomingMovies() {
-        tryToExecute(
+        tryToExecuteHome(
             getUpcomingMovies::invoke, ::modifyUpcomingMoviesState, ::onMovieError
         )
 
@@ -103,7 +103,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getTopRatedMovies() {
-        tryToExecute(
+        tryToExecuteHome(
             getTopRatedMovies::invoke, ::modifyTopRatedMoviesState, ::onMovieError
         )
     }
@@ -119,7 +119,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getPopularSeries() {
-        tryToExecute(
+        tryToExecuteHome(
             getPopularSeries::invoke, ::modifyPopularSeriesState, ::onSeriesError
         )
     }
@@ -135,7 +135,7 @@ class HomeViewModel @Inject constructor(
 
 
     private fun getAiringTodaySeries() {
-        tryToExecute(
+        tryToExecuteHome(
             getAiringTodaySeries::invoke, ::modifyAiringTodaySeriesState, ::onSeriesError
         )
     }
@@ -150,7 +150,7 @@ class HomeViewModel @Inject constructor(
 
 
     private fun getOnAirSeries() {
-        tryToExecute(
+        tryToExecuteHome(
             getOnTheAirSeries::invoke, ::modifyOnAirSeriesState, ::onSeriesError
         )
     }
@@ -165,7 +165,7 @@ class HomeViewModel @Inject constructor(
 
 
     private fun getTopRatedSeries() {
-        tryToExecute(
+        tryToExecuteHome(
             getTopRatedSeries::invoke, ::modifyTopRatedSeriesState, ::onSeriesError
         )
     }
