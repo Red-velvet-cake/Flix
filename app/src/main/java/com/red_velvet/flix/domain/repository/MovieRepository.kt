@@ -52,10 +52,7 @@ interface MovieRepository {
     suspend fun getMoviesByKeyword(keywordId: Int, page: Int? = null): List<MovieEntity>
 
     suspend fun discoverMovies(
-        page: Int?,
-        sortBy: String?,
-        rate: Float?,
-        year: Int?
+        page: Int?, sortBy: String?, rate: Float?, year: Int?
     ): List<MovieEntity>
 
 

@@ -16,6 +16,7 @@ import com.red_velvet.flix.repository.mapper.series.toPopularSeriesEntity
 import com.red_velvet.flix.repository.mapper.series.toTopRatedSeriesDto
 import com.red_velvet.flix.repository.mapper.series.toTopRatedSeriesEntity
 import com.red_velvet.flix.repository.mapper.toEntity
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SeriesRepositoryImpl @Inject constructor(
@@ -71,9 +72,7 @@ class SeriesRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getEpisodeDetails(
-        seriesId: Int,
-        season: Int,
-        episode: Int
+        seriesId: Int, season: Int, episode: Int
     ): EpisodeEntity {
         return remoteDataSource.getEpisodeDetails(seriesId, season, episode).toEntity()
     }
@@ -83,9 +82,7 @@ class SeriesRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getEpisodeTrailers(
-        seriesId: Int,
-        season: Int,
-        episode: Int
+        seriesId: Int, season: Int, episode: Int
     ): List<TrailerEntity> {
         return remoteDataSource.getEpisodeTrailers(seriesId, season, episode).toEntity()
     }
@@ -107,24 +104,20 @@ class SeriesRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun getLocalPopularSeries(): List<SeriesEntity> {
-        return localDataSource.getPopularSeries()
-            .toPopularSeriesEntity()
+    override suspend fun getLocalPopularSeries(): Flow<List<SeriesEntity>> {
+        return localDataSource.getPopularSeries().toPopularSeriesEntity()
     }
 
-    override suspend fun getLocalTopRatedSeries(): List<SeriesEntity> {
-        return localDataSource.getTopRatedSeries()
-            .toTopRatedSeriesEntity()
+    override suspend fun getLocalTopRatedSeries(): Flow<List<SeriesEntity>> {
+        return localDataSource.getTopRatedSeries().toTopRatedSeriesEntity()
     }
 
-    override suspend fun getLocalOnTheAirSeries(): List<SeriesEntity> {
-        return localDataSource.getOnTheAirSeries()
-            .toOnTheAirSeriesEntity()
+    override suspend fun getLocalOnTheAirSeries(): Flow<List<SeriesEntity>> {
+        return localDataSource.getOnTheAirSeries().toOnTheAirSeriesEntity()
     }
 
-    override suspend fun getLocalAiringTodaySeries(): List<SeriesEntity> {
-        return localDataSource.getAiringTodaySeries()
-            .toAiringTodaySeriesEntity()
+    override suspend fun getLocalAiringTodaySeries(): Flow<List<SeriesEntity>> {
+        return localDataSource.getAiringTodaySeries().toAiringTodaySeriesEntity()
     }
 
     override suspend fun cachePopularSeries(series: List<SeriesEntity>) {
