@@ -1,6 +1,5 @@
 package com.red_velvet.flix.data.local
 
-import android.util.Log
 import com.red_velvet.flix.data.local.database.dao.MovieDao
 import com.red_velvet.flix.data.local.database.dao.SeriesDao
 import com.red_velvet.flix.data.local.database.dao.UserDao
@@ -18,80 +17,77 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LocalDataSourceImpl @Inject constructor(
-    private val MovieDao: MovieDao,
-    private val SeriesDao: SeriesDao,
-    private val UserDao: UserDao
+    private val movieDao: MovieDao, private val seriesDao: SeriesDao, private val userDao: UserDao
 ) : LocalDataSource {
-    override suspend fun getPopularMovies(): Flow<List<PopularMovieDto>> {
-        return MovieDao.getPopularMovies()
+    override fun getPopularMovies(): Flow<List<PopularMovieDto>> {
+        return movieDao.getPopularMovies()
     }
 
-    override suspend fun getTopRatedMovies(): Flow<List<TopRatedMovieDto>> {
-        return MovieDao.getTopRatedMovies()
+    override fun getTopRatedMovies(): Flow<List<TopRatedMovieDto>> {
+        return movieDao.getTopRatedMovies()
     }
 
-    override suspend fun getNowPlayingMovies(): Flow<List<NowPlayingMovieDto>> {
-        Log.i("TAG", "getNowPlayingMovies: ${MovieDao.getNowPlayingMovies().collect{it}}")
-        return MovieDao.getNowPlayingMovies()
+    override fun getNowPlayingMovies(): Flow<List<NowPlayingMovieDto>> {
+        return movieDao.getNowPlayingMovies()
     }
 
-    override suspend fun getUpcomingMovies(): Flow<List<UpcomingMovieDto>> {
-        return MovieDao.getUpcomingMovies()
+    override fun getUpcomingMovies(): Flow<List<UpcomingMovieDto>> {
+        return movieDao.getUpcomingMovies()
     }
 
     override suspend fun insertPopularMovies(popularMovies: List<PopularMovieDto>) {
-        MovieDao.insertPopularMovies(popularMovies)
+        movieDao.insertPopularMovies(popularMovies)
     }
 
     override suspend fun insertTopRatedMovies(topRatedMovies: List<TopRatedMovieDto>) {
-        MovieDao.insertTopRatedMovies(topRatedMovies)
+        movieDao.insertTopRatedMovies(topRatedMovies)
     }
 
     override suspend fun insertNowPlayingMovies(nowPlayingMovies: List<NowPlayingMovieDto>) {
-        MovieDao.insertNowPlayingMovies(nowPlayingMovies)
+        movieDao.insertNowPlayingMovies(nowPlayingMovies)
     }
 
     override suspend fun insertUpcomingMovies(upcomingMovies: List<UpcomingMovieDto>) {
-        MovieDao.insertUpcomingMovies(upcomingMovies)
+        movieDao.insertUpcomingMovies(upcomingMovies)
     }
 
-    override suspend fun getPopularSeries(): Flow<List<PopularSeriesDto>> {
-        return SeriesDao.getPopularSeries()
+    override fun getPopularSeries(): Flow<List<PopularSeriesDto>> {
+        return seriesDao.getPopularSeries()
     }
 
-    override suspend fun getTopRatedSeries(): Flow<List<TopRatedSeriesDto>> {
-        return SeriesDao.getTopRatedSeries()
+    override fun getTopRatedSeries(): Flow<List<TopRatedSeriesDto>> {
+        return seriesDao.getTopRatedSeries()
     }
 
-    override suspend fun getOnTheAirSeries(): Flow<List<OnTheAirSeriesDto>> {
-        return SeriesDao.getOnTheAirSeries()
+    override fun getOnTheAirSeries(): Flow<List<OnTheAirSeriesDto>> {
+        return seriesDao.getOnTheAirSeries()
     }
 
-    override suspend fun getAiringTodaySeries(): Flow<List<AiringTodaySeriesDto>> {
-        return SeriesDao.getAiringTodaySeries()
+    override fun getAiringTodaySeries(): Flow<List<AiringTodaySeriesDto>> {
+        return seriesDao.getAiringTodaySeries()
     }
 
     override suspend fun insertPopularSeries(popularSeries: List<PopularSeriesDto>) {
-        SeriesDao.insertPopularSeries(popularSeries)
+        seriesDao.insertPopularSeries(popularSeries)
     }
 
     override suspend fun insertTopRatedSeries(topRatedSeries: List<TopRatedSeriesDto>) {
-        SeriesDao.insertTopRatedSeries(topRatedSeries)
+        seriesDao.insertTopRatedSeries(topRatedSeries)
     }
 
     override suspend fun insertOnTheAirSeries(onTheAirSeries: List<OnTheAirSeriesDto>) {
-        SeriesDao.insertOnTheAirSeries(onTheAirSeries)
+        seriesDao.insertOnTheAirSeries(onTheAirSeries)
     }
 
     override suspend fun insertAiringTodaySeries(airingTodaySeries: List<AiringTodaySeriesDto>) {
-        SeriesDao.insertAiringTodaySeries(airingTodaySeries)
+        seriesDao.insertAiringTodaySeries(airingTodaySeries)
     }
 
     override suspend fun getUserData(): UserDto {
-        return UserDao.getUserData()
+        return userDao.getUserData()
     }
 
     override suspend fun insertUserData(userDto: UserDto) {
-        UserDao.insertUserData(userDto)
+        userDao.insertUserData(userDto)
     }
 }
