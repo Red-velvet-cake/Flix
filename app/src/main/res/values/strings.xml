@@ -59,4 +59,6 @@
     <string name="text_chip_movie">Movie</string>
     <string name="text_start_note">Search for your favorite movies and TV shows that you love.</string>
     <string name="hint_search_bar">What do you want to Watch?</string>
+    <string name="text_start_search">Search in Media</string>
+    <string name="text_lost_connection_note">Please make sure you are connected to the internet and try again</string>
 </resources>
