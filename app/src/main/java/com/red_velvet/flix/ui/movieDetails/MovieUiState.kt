@@ -1,8 +1,10 @@
 package com.red_velvet.flix.ui.movieDetails
 
 import com.red_velvet.flix.domain.entity.ReviewEntity
+import com.red_velvet.flix.domain.entity.movie.MovieCastEntity
 import com.red_velvet.flix.domain.entity.movie.MovieDetailsEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
+import com.red_velvet.flix.domain.entity.movie.MovieImageEntity
 import com.red_velvet.flix.ui.base.BaseUiState
 
 data class MovieUiState(
@@ -42,7 +44,7 @@ data class MovieUiState(
         val movieName: String,
     )
     data class ImageBelongToMovie(
-        val ImageBelongToMovieUrl:String
+        val imageBelongToMovieUrl:String
     )
 
     data class MovieReview(
@@ -50,27 +52,20 @@ data class MovieUiState(
         val movieReviewer: String,
         val movieReview: String,
     )
-}
-
-data class TopCast(
-    val actorImageUrl: String,
-    val actorName: String,
-)
-
-fun ReviewEntity.toUiState():MovieUiState.MovieReview
-{
-    return MovieUiState.MovieReview(rating = rating , movieReview = content , movieReviewer = author.name)
-}
-fun List<ReviewEntity>.toUiState():List<MovieUiState.MovieReview>
-{
-    return map { it.toUiState() }
-}
-fun MovieDetailsEntity.toUiState(): MovieUiState {
-    return MovieUiState(
-        movieName = title
+    data class TopCast(
+        val imageUrl: String,
+        val name: String
     )
 }
 
+fun ReviewEntity.toReviewUiState():MovieUiState.MovieReview
+{
+    return MovieUiState.MovieReview(rating = rating , movieReview = content , movieReviewer = author.name)
+}
+fun List<ReviewEntity>.toReviewUiState():List<MovieUiState.MovieReview>
+{
+    return map { it.toReviewUiState() }
+}
 fun List<MovieEntity>.toListOfMovies(): List<MovieUiState.MovieList> {
     return map { it.toMoviesUiState() }
 }
@@ -80,4 +75,21 @@ fun MovieEntity.toMoviesUiState(): MovieUiState.MovieList {
         movieName = title,
         movieImageUrl = imageUrl
     )
+}
+fun MovieImageEntity.toImagesUiState():MovieUiState.ImageBelongToMovie{
+    return MovieUiState.ImageBelongToMovie(
+        imageBelongToMovieUrl = filePath
+    )
+}
+fun List<MovieImageEntity>.toImagesUiState():List<MovieUiState.ImageBelongToMovie> {
+    return map { it.toImagesUiState() }
+}
+fun MovieCastEntity.toTopCast():MovieUiState.TopCast{
+    return MovieUiState.TopCast(
+        name = name,
+        imageUrl = imageUrl
+    )
+}
+fun List<MovieCastEntity>.toTopCast():List<MovieUiState.TopCast>{
+    return map { it.toTopCast() }
 }
