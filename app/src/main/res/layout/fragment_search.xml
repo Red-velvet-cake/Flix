@@ -161,7 +161,6 @@
             android:layout_marginTop="@dimen/_4dp"
             android:clipToPadding="false"
             android:orientation="vertical"
-            android:visibility="visible"
             app:items="@{viewModel.state.searchResult}"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -228,7 +227,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chip_group_search_type"
-             app:loading="@{viewModel.state.loading}"/>
+            app:loading="@{viewModel.state.loading}" />
 
         <TextView
             android:id="@+id/text_start_search"
@@ -247,7 +246,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/loading"
-            app:loading="@{viewModel.state.loading}"/>
+            app:loading="@{viewModel.state.loading}" />
 
         <TextView
             android:id="@+id/text_start_note"
@@ -265,42 +264,57 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_start_search"
-             app:loading="@{viewModel.state.loading}"/>
+            app:loading="@{viewModel.state.loading}" />
 
 
         <ImageView
             android:id="@+id/image_view_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_180dp"
+            android:layout_height="@dimen/_128dp"
             android:layout_marginTop="@dimen/_180dp"
             android:contentDescription="@string/lorem_ipsum"
-            android:src="@drawable/error"
+            android:src="@drawable/image_error"
             android:visibility="invisible"
             app:emptyResult="@{viewModel.state.searchResult.empty}"
-            app:searchInput="@{viewModel.state.searchInput}"
             app:errorNoResult="@{viewModel.state.error}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chip_group_search_type"
-            />
+            app:searchInput="@{viewModel.state.searchInput}" />
 
         <TextView
-            android:id="@+id/text_view_Not_Found"
+            android:id="@+id/text_view_not_found"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8dp"
+            android:layout_marginTop="@dimen/_4dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/text_not_found"
             android:textColor="@color/font_secondary"
             android:textSize="@dimen/_20sp"
             android:visibility="invisible"
             app:emptyResult="@{viewModel.state.searchResult.empty}"
-            app:searchInput="@{viewModel.state.searchInput}"
             app:errorNoResult="@{viewModel.state.error}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image_view_error"
-            />
+            app:searchInput="@{viewModel.state.searchInput}" />
+
+        <TextView
+            android:id="@+id/text_view_not_found_note"
+            android:layout_width="@dimen/_180dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="center"
+            android:text="@string/text_not_found_note"
+            android:textColor="@color/font_accent"
+            android:textSize="@dimen/_12sp"
+            android:visibility="invisible"
+            app:emptyResult="@{viewModel.state.searchResult.empty}"
+            app:errorNoResult="@{viewModel.state.error}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_not_found"
+            app:searchInput="@{viewModel.state.searchInput}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
