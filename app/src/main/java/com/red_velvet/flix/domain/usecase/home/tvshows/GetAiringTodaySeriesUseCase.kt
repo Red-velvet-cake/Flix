@@ -2,25 +2,30 @@ package com.red_velvet.flix.domain.usecase.home.tvshows
 
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.repository.SeriesRepository
+import com.red_velvet.flix.domain.usecase.caching.ShouldCacheApiResponseUseCase
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.onEmpty
 import javax.inject.Inject
 
+
 class GetAiringTodaySeriesUseCase @Inject constructor(
-    private val seriesRepository: SeriesRepository
+    private val seriesRepository: SeriesRepository,
+    private val shouldCacheApiResponseUseCase: ShouldCacheApiResponseUseCase
 ) {
 
     suspend operator fun invoke(): Flow<List<SeriesEntity>> {
-        return seriesRepository.getLocalAiringTodaySeries().onEmpty {
-            saveAiringTodaySeriesLocal()
+        if (shouldCacheApiResponseUseCase("airing_today_series")) {
+            refreshLocalAiringTodaySeries()
         }
-    }
-
-    private suspend fun saveAiringTodaySeriesLocal() {
-        seriesRepository.cacheAiringTodaySeries(getAiringTodaySeries())
+        return seriesRepository.getLocalAiringTodaySeries()
     }
 
     private suspend fun getAiringTodaySeries(): List<SeriesEntity> {
         return seriesRepository.getAiringTodaySeries()
     }
+
+    private suspend fun refreshLocalAiringTodaySeries() {
+        val airingTodaySeries = getAiringTodaySeries()
+        seriesRepository.cacheAiringTodaySeries(airingTodaySeries)
+    }
+
 }
