@@ -2,7 +2,7 @@ package com.red_velvet.flix.domain.usecase.home.movies
 
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
-import com.red_velvet.flix.domain.usecase.caching.ShouldCacheApiResponseUseCase
+import com.red_velvet.flix.domain.usecase.cachingTimeStamps.ShouldCacheApiResponseUseCase
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 

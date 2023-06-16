@@ -1,4 +1,4 @@
-package com.red_velvet.flix.domain.usecase.caching
+package com.red_velvet.flix.domain.usecase.cachingTimeStamps
 
 import java.util.Date
 import javax.inject.Inject
