@@ -65,4 +65,6 @@
     <string name="retry">retry</string>
     <string name="movies">Movies</string>
     <string name="tvshows">TVShows</string>
+    <string name="text_start_search">Search in Media</string>
+    <string name="text_lost_connection_note">Please make sure you are connected to the internet and try again</string>
 </resources>

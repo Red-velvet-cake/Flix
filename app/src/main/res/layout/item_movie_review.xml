@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.red_velvet.flix.ui.review.ReviewUiState.MovieReview" />
+
+        <variable
+            name="listener"
+            type="com.red_velvet.flix.ui.review.ReviewMovieInteractionListener" />
+
+    </data>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view_movie_review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_16dp"
+        android:layout_marginVertical="@dimen/_8dp"
+        android:background="@color/background_color"
+        android:paddingHorizontal="@dimen/_16dp"
+        android:paddingTop="@dimen/_8dp"
+        app:cardCornerRadius="@dimen/_8dp"
+        app:cardElevation="4dp"
+        app:strokeColor="@color/background">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Secondary">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageview_review_star"
+                android:layout_width="@dimen/_12dp"
+                android:layout_height="@dimen/_12dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/_4dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toStartOf="@id/textview_number"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/vector" />
+
+            <TextView
+                android:id="@+id/textview_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:rating="@{item.rating}"
+                android:textColor="@color/font_primary"
+                app:layout_constraintBottom_toBottomOf="@+id/imageview_review_star"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageview_review_star"
+                tools:text="2" />
+
+            <TextView
+                android:id="@+id/text_view_author_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12dp"
+                android:layout_marginTop="@dimen/_12dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@{item.name}"
+                android:textColor="@color/font_primary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Written by MSB" />
+
+            <TextView
+                android:id="@+id/text_view_publish_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12dp"
+                android:layout_marginTop="@dimen/_4dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@{item.createDate}"
+                android:textColor="@color/font_secondary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_author_name"
+                tools:text="May 31,2023" />
+
+            <TextView
+                android:id="@+id/text_view_content"
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/_12dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:paddingBottom="@dimen/_12dp"
+                android:text="@{item.content}"
+                android:textColor="@color/font_accent"
+                app:animDuration="500"
+                app:collapsedLines="5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_publish_date"
+                app:readLessText=""
+                app:readMoreText="Read more"
+                tools:text="Halle Bailey served a very good performance with a lot of charisma and passion, she also has an impressive voice. in some parts people were clapping from excitement and i shed a tear since i saw performing her first song...." />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
