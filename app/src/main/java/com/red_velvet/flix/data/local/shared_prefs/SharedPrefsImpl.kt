@@ -1,6 +1,8 @@
 package com.red_velvet.flix.data.local.shared_prefs
 
 import android.content.SharedPreferences
+import android.provider.Settings.Global.putLong
+import androidx.core.content.edit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -12,9 +14,7 @@ class SharedPrefsImpl @Inject constructor(
 
     override suspend fun setToken(value: String) {
         withContext(Dispatchers.IO) {
-            sharedPreferences.edit()
-                .putString(TOKEN, value)
-                .apply()
+            sharedPreferences.edit().putString(TOKEN, value).apply()
         }
     }
 
@@ -26,9 +26,7 @@ class SharedPrefsImpl @Inject constructor(
 
     override suspend fun setSessionId(value: String) {
         withContext(Dispatchers.IO) {
-            sharedPreferences.edit()
-                .putString(SESSION_ID, value)
-                .apply()
+            sharedPreferences.edit().putString(SESSION_ID, value).apply()
         }
     }
 
@@ -39,9 +37,17 @@ class SharedPrefsImpl @Inject constructor(
     }
 
     override suspend fun clearSessionId() {
-        sharedPreferences.edit()
-            .clear()
-            .apply()
+        sharedPreferences.edit().clear().apply()
+    }
+
+    override fun setLong(key: String, time: Long) {
+        sharedPreferences.edit {
+            putLong(key, time)
+        }
+    }
+
+    override fun getLong(key: String, defaultValue: Long): Long {
+        return sharedPreferences.getLong(key, 0)
     }
 
     private companion object {

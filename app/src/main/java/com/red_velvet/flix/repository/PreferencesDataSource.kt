@@ -7,4 +7,9 @@ interface PreferencesDataSource {
     fun getSessionId(): String?
     suspend fun clearSession()
     suspend fun isUserLoggedIn(): Boolean
+
+    fun saveLastCachingTimeStamp(key: String, time: Long)
+
+    fun getLastCachingTime(key: String): Long
+
 }

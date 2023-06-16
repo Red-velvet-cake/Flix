@@ -10,4 +10,8 @@ interface SharedPrefs {
     fun getSessionId(): String?
 
     suspend fun clearSessionId()
+
+    fun setLong(key: String, time: Long)
+
+    fun getLong(key: String, defaultValue: Long): Long
 }

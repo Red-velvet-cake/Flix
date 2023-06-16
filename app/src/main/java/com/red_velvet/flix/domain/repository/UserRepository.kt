@@ -37,4 +37,9 @@ interface UserRepository {
     suspend fun getStoredRequestToken(): String?
     suspend fun clearSession()
     suspend fun isUserLoggedIn(): Boolean
+
+    suspend fun saveCachingTimeStamp(key: String, cachingTime: Long)
+
+    suspend fun getLastCachingTimeStamp(key: String): Long
+
 }
