@@ -10,7 +10,7 @@ import com.red_velvet.flix.ui.base.ErrorUiState
 data class MediaSearchUiState(
     val searchInput: String = "",
     val searchTypes: SearchTypes = SearchTypes.ALL,
-    val searchResult: List<Any> = emptyList(),
+    val searchResult: List<MediaUiState> = emptyList(),
     val isLoading: Boolean = false,
     val isEmpty: Boolean = false,
     val error: ErrorUiState? = null
