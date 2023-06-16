@@ -10,8 +10,7 @@ import com.red_velvet.flix.R
 import com.red_velvet.flix.databinding.FragmentMoviesByKeywordBinding
 import com.red_velvet.flix.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MoviesByKeywordFragment : BaseFragment<FragmentMoviesByKeywordBinding>() {
@@ -30,7 +29,7 @@ class MoviesByKeywordFragment : BaseFragment<FragmentMoviesByKeywordBinding>() {
     }
 
     private fun navigateTo() {
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.uiEvent.collect { event ->
                 when (event) {
                     is UIEventMoviesByKeyword.NavigateToMovieDetail -> {
