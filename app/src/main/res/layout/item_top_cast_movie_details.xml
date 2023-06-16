@@ -2,27 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
-
-        <variable
-            name="listener"
-            type="com.red_velvet.flix.ui.home.adapter.MovieInteractionListener"/>
-
         <variable
             name="item"
-            type="com.red_velvet.flix.ui.home.homeUiState.MediaUiState"/>
-
-        <variable
-            name="type"
-            type="com.red_velvet.flix.ui.home.HomeItemsType"/>
-
+            type="com.red_velvet.flix.ui.movieDetails.MovieUiState.TopCast"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="@{()->listener.onClickMovie(item.id)}"
         android:background="@color/background_color"
         >
 
@@ -34,6 +22,7 @@
             android:layout_marginEnd="@dimen/_8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:imageUrl="@{item.imageUrl}"
             tools:src="@drawable/image4"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/CardCorners.TopCast"/>
@@ -49,7 +38,7 @@
             android:layout_marginTop="@dimen/spacing_too_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item.title}"
+            android:text="@{item.name}"
             app:layout_constraintStart_toStartOf="@id/media_movie_image"
             app:layout_constraintTop_toBottomOf="@+id/media_movie_image"
             app:layout_constraintEnd_toEndOf="@id/media_movie_image"
