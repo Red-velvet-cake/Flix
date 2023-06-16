@@ -21,27 +21,6 @@ fun showWhenSearch(view: View, text: String) {
     view.isVisible = text.isNotBlank()
 }
 
-@BindingAdapter(value = ["app:hideWhenSearch"])
-fun hideWhenSearch(view: View, text: String) {
-    view.isVisible = text.isBlank()
-}
-
-@BindingAdapter(value = ["app:hideWhenBlankSearch"])
-fun hideWhenBlankSearch(view: View, text: String) {
-    if (text.isBlank()) {
-        view.visibility = View.INVISIBLE
-    }
-}
-
-
-@BindingAdapter(value = ["app:searchInput", "app:errorSearch", "app:loadingSearch"])
-fun <T> hideWhenSuccessSearch(view: View, text: String, error: List<T>?, loading: Boolean) {
-    view.visibility = if (text.isNotBlank() && error.isNullOrEmpty() && !loading) {
-        View.VISIBLE
-    } else {
-        View.INVISIBLE
-    }
-}
 
 @BindingAdapter(value = ["app:imageURL"])
 fun setImage(view: ImageView, imageUrl: String?) {
@@ -58,10 +37,6 @@ fun isVisible(view: View, isVisible: Boolean) {
     view.isVisible = isVisible
 }
 
-@BindingAdapter("app:isListEmpty")
-fun showWhenDoneLoadingAndListIsEmpty(view: View, emptyList: Boolean) {
-    view.isVisible = emptyList
-}
 
 @BindingAdapter("app:showWhenNoInternetError")
 fun showWhenErrorNoInternetError(view: View, error: ErrorUiState?) {
@@ -72,23 +47,25 @@ fun showWhenErrorNoInternetError(view: View, error: ErrorUiState?) {
     }
 }
 
-@BindingAdapter("app:showWhenError")
-fun showWhenError(view: View, error: ErrorUiState?) {
-    if (error != null && error.isServerError() && error.isTimeOut()) {
+@BindingAdapter(value = ["app:emptyResult", "app:searchInput", "app:errorNoResult"])
+fun showEmptySearchResultError(view: View, emptyResult: Boolean, text: String, error: ErrorUiState?) {
+    if (emptyResult && text.isNotBlank() && error == null) {
         view.visibility = View.VISIBLE
     } else {
         view.visibility = View.GONE
     }
 }
 
-@BindingAdapter(value = ["app:error", "app:loading", "app:emptyResult"])
+
+
+@BindingAdapter(value = ["app:errorNoInput", "app:emptyInput", "app:loading"])
 fun showWhenStart(
     view: View,
     error: ErrorUiState?,
-    loading: Boolean,
-    emptyResult: Boolean
+    emptyInput: Boolean,
+    loading: Boolean
 ) {
-    if (error == null && !loading && emptyResult) {
+    if (error == null && emptyInput && !loading) {
         view.visibility = View.VISIBLE
 
     } else {
