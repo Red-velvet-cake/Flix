@@ -105,25 +105,25 @@ class SeriesRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun getLocalPopularSeries(): Flow<List<SeriesEntity>> {
+    override fun getLocalPopularSeries(): Flow<List<SeriesEntity>> {
         return localDataSource.getPopularSeries().map {
             it.toPopularSeriesEntity()
         }
     }
 
-    override suspend fun getLocalTopRatedSeries(): Flow<List<SeriesEntity>> {
+    override fun getLocalTopRatedSeries(): Flow<List<SeriesEntity>> {
         return localDataSource.getTopRatedSeries().map {
             it.toTopRatedSeriesEntity()
         }
     }
 
-    override suspend fun getLocalOnTheAirSeries(): Flow<List<SeriesEntity>> {
+    override fun getLocalOnTheAirSeries(): Flow<List<SeriesEntity>> {
         return localDataSource.getOnTheAirSeries().map {
             it.toOnTheAirSeriesEntity()
         }
     }
 
-    override suspend fun getLocalAiringTodaySeries(): Flow<List<SeriesEntity>> {
+    override fun getLocalAiringTodaySeries(): Flow<List<SeriesEntity>> {
         return localDataSource.getAiringTodaySeries().map {
             it.toAiringTodaySeriesEntity()
         }

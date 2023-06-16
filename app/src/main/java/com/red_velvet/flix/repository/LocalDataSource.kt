@@ -12,19 +12,19 @@ import com.red_velvet.flix.data.local.database.entity.UserDto
 import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
-    suspend fun getPopularMovies(): Flow<List<PopularMovieDto>>
-    suspend fun getTopRatedMovies(): Flow<List<TopRatedMovieDto>>
-    suspend fun getNowPlayingMovies(): Flow<List<NowPlayingMovieDto>>
-    suspend fun getUpcomingMovies(): Flow<List<UpcomingMovieDto>>
+    fun getPopularMovies(): Flow<List<PopularMovieDto>>
+    fun getTopRatedMovies(): Flow<List<TopRatedMovieDto>>
+    fun getNowPlayingMovies(): Flow<List<NowPlayingMovieDto>>
+    fun getUpcomingMovies(): Flow<List<UpcomingMovieDto>>
     suspend fun insertPopularMovies(popularMovies: List<PopularMovieDto>)
     suspend fun insertTopRatedMovies(topRatedMovies: List<TopRatedMovieDto>)
     suspend fun insertNowPlayingMovies(nowPlayingMovies: List<NowPlayingMovieDto>)
     suspend fun insertUpcomingMovies(upcomingMovies: List<UpcomingMovieDto>)
 
-    suspend fun getPopularSeries(): Flow<List<PopularSeriesDto>>
-    suspend fun getTopRatedSeries(): Flow<List<TopRatedSeriesDto>>
-    suspend fun getOnTheAirSeries(): Flow<List<OnTheAirSeriesDto>>
-    suspend fun getAiringTodaySeries(): Flow<List<AiringTodaySeriesDto>>
+    fun getPopularSeries(): Flow<List<PopularSeriesDto>>
+    fun getTopRatedSeries(): Flow<List<TopRatedSeriesDto>>
+    fun getOnTheAirSeries(): Flow<List<OnTheAirSeriesDto>>
+    fun getAiringTodaySeries(): Flow<List<AiringTodaySeriesDto>>
     suspend fun insertPopularSeries(popularSeries: List<PopularSeriesDto>)
     suspend fun insertTopRatedSeries(topRatedSeries: List<TopRatedSeriesDto>)
     suspend fun insertOnTheAirSeries(onTheAirSeries: List<OnTheAirSeriesDto>)

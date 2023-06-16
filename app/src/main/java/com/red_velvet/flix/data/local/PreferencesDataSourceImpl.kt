@@ -31,4 +31,13 @@ class PreferencesDataSourceImpl @Inject constructor(
         return sharedPreferences.getSessionId() != null
     }
 
+    override fun saveLastCachingTimeStamp(key: String, time: Long) {
+        return sharedPreferences.setLong(key, time)
+    }
+
+    override fun getLastCachingTime(key: String): Long {
+        return sharedPreferences.getLong(key, 0)
+    }
+
+
 }

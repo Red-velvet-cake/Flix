@@ -1,7 +1,5 @@
 package com.red_velvet.flix.repository
 
-import android.util.Log
-import com.red_velvet.flix.data.local.database.entity.NowPlayingMovieDto
 import com.red_velvet.flix.domain.entity.PersonEntity
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
@@ -115,34 +113,25 @@ class MovieRepositoryImpl @Inject constructor(
         return remoteDataSource.discoverMovies(page, sortBy, rate, year).toEntity()
     }
 
-    override suspend fun getLocalPopularMovies(): Flow<List<MovieEntity>> {
+    override fun getLocalPopularMovies(): Flow<List<MovieEntity>> {
         return localDataSource.getPopularMovies().map {
             it.toPopularMoviesEntity()
         }
     }
 
-    override suspend fun getLocalUpcomingMovies(): Flow<List<MovieEntity>> {
+    override fun getLocalUpcomingMovies(): Flow<List<MovieEntity>> {
         return localDataSource.getUpcomingMovies().map {
             it.toUpcomingMoviesEntity()
         }
     }
 
-    override suspend fun getLocalNowPlayingMovies(): Flow<List<MovieEntity>> {
-        Log.d("TAG", "getLocalNowPlayingMovies: ${localDataSource.getNowPlayingMovies().collect { it }}")
-        return localDataSource.getNowPlayingMovies().map { it1 ->
-                Log.d("TAG", "getLocalNowPlayingMovies: $it1")
-                it1.map { it.toEntity() }
-            }
-
-//            .map(List<NowPlayingMovieDto>::toNowPlayingMoviesEntity)
-
-//        return localDataSource.getNowPlayingMovies().map {
-//            Log.d("TAG", "getLocalNowPlayingMovies: $it")
-//            it.toNowPlayingMoviesEntity()
-//        }
+    override fun getLocalNowPlayingMovies(): Flow<List<MovieEntity>> {
+        return localDataSource.getNowPlayingMovies().map {
+            it.toNowPlayingMoviesEntity()
+        }
     }
 
-    override suspend fun getLocalTopRatedMovies(): Flow<List<MovieEntity>> {
+    override fun getLocalTopRatedMovies(): Flow<List<MovieEntity>> {
         return localDataSource.getTopRatedMovies().map {
             it.toTopRatedMoviesEntity()
         }

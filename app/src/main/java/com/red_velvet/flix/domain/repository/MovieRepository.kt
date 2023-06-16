@@ -56,13 +56,13 @@ interface MovieRepository {
     ): List<MovieEntity>
 
 
-    suspend fun getLocalPopularMovies(): Flow<List<MovieEntity>>
+    fun getLocalPopularMovies(): Flow<List<MovieEntity>>
 
-    suspend fun getLocalUpcomingMovies(): Flow<List<MovieEntity>>
+    fun getLocalUpcomingMovies(): Flow<List<MovieEntity>>
 
-    suspend fun getLocalNowPlayingMovies(): Flow<List<MovieEntity>>
+    fun getLocalNowPlayingMovies(): Flow<List<MovieEntity>>
 
-    suspend fun getLocalTopRatedMovies(): Flow<List<MovieEntity>>
+    fun getLocalTopRatedMovies(): Flow<List<MovieEntity>>
 
     suspend fun cachePopularMovies(movies: List<MovieEntity>)
 
