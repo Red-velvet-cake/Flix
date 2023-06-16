@@ -1,10 +1,13 @@
 package com.red_velvet.flix.data.repository
 
+import android.util.Log
 import com.red_velvet.flix.data.local.database.dao.MovieDao
 import com.red_velvet.flix.data.remote.APIErrorHandler
 import com.red_velvet.flix.data.remote.MoviesService
 import com.red_velvet.flix.data.remote.recoures.movie.MovieDetailsResource
 import com.red_velvet.flix.data.repository.mapper.movie.toEntity
+import com.red_velvet.flix.data.repository.mapper.movie.toMovieCastEntity
+import com.red_velvet.flix.data.repository.mapper.movie.toMovieImagesEntity
 import com.red_velvet.flix.data.repository.mapper.movie.toNowPlayingMovieDto
 import com.red_velvet.flix.data.repository.mapper.movie.toNowPlayingMoviesEntity
 import com.red_velvet.flix.data.repository.mapper.movie.toPopularMovieDto
@@ -13,11 +16,14 @@ import com.red_velvet.flix.data.repository.mapper.movie.toTopRatedMovieDto
 import com.red_velvet.flix.data.repository.mapper.movie.toTopRatedMoviesEntity
 import com.red_velvet.flix.data.repository.mapper.movie.toUpComingMovieDto
 import com.red_velvet.flix.data.repository.mapper.movie.toUpcomingMoviesEntity
+import com.red_velvet.flix.data.repository.mapper.series.toEntity
 import com.red_velvet.flix.data.repository.mapper.toEntity
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
+import com.red_velvet.flix.domain.entity.movie.MovieCastEntity
 import com.red_velvet.flix.domain.entity.movie.MovieDetailsEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
+import com.red_velvet.flix.domain.entity.movie.MovieImagesEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
 import javax.inject.Inject
 
@@ -186,6 +192,20 @@ class MovieRepositoryImpl @Inject constructor(
             )
         }
             .items.toEntity()
+    }
+
+    override suspend fun getMovieCredits(movieId: Int): List<MovieCastEntity> {
+        return wrapApiCall {
+            moviesService.getMoviesCredits(movieId)
+        }.cast.orEmpty().toMovieCastEntity()
+    }
+
+    override suspend fun getMovieImages(movieId: Int): MovieImagesEntity {
+        return wrapApiCall {
+            moviesService.getMoviesImages(
+                movieId = movieId
+            )
+        }.toMovieImagesEntity()
     }
 
     override suspend fun getLocalPopularMovies(): List<MovieEntity> {
