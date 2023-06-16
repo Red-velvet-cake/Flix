@@ -11,7 +11,7 @@ class GetNowPlayingMoviesUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
 
-    suspend operator fun invoke(): Flow<List<MovieEntity>> {
+     suspend operator fun invoke(): Flow<List<MovieEntity>> {
         return movieRepository.getLocalNowPlayingMovies().onEmpty {
             saveNowPlayingMoviesLocal()
         }

@@ -1,5 +1,6 @@
 package com.red_velvet.flix.data.local
 
+import android.util.Log
 import com.red_velvet.flix.data.local.database.dao.MovieDao
 import com.red_velvet.flix.data.local.database.dao.SeriesDao
 import com.red_velvet.flix.data.local.database.dao.UserDao
@@ -30,6 +31,7 @@ class LocalDataSourceImpl @Inject constructor(
     }
 
     override suspend fun getNowPlayingMovies(): Flow<List<NowPlayingMovieDto>> {
+        Log.i("TAG", "getNowPlayingMovies: ${MovieDao.getNowPlayingMovies().collect{it}}")
         return MovieDao.getNowPlayingMovies()
     }
 
