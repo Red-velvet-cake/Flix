@@ -1,28 +1,31 @@
 package com.red_velvet.flix.domain.usecase.home.movies
 
-import android.util.Log
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
+import com.red_velvet.flix.domain.usecase.caching.ShouldCacheApiResponseUseCase
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEmpty
+
 
 class GetPopularMoviesUseCase @Inject constructor(
-    private val movieRepository: MovieRepository
+    private val movieRepository: MovieRepository,
+    private val shouldCacheApiResponseUseCase: ShouldCacheApiResponseUseCase
 ) {
 
     suspend operator fun invoke(): Flow<List<MovieEntity>> {
-        return movieRepository.getLocalPopularMovies().onEmpty {
-            savePopularMoviesLocal()
+        if (shouldCacheApiResponseUseCase("popular_movies")) {
+            refreshLocalPopularMovies()
         }
-    }
-
-    private suspend fun savePopularMoviesLocal() {
-        movieRepository.cachePopularMovies(getPopularMovies())
+        return movieRepository.getLocalPopularMovies()
     }
 
     private suspend fun getPopularMovies(): List<MovieEntity> {
         return movieRepository.getPopularMovies()
     }
+
+    private suspend fun refreshLocalPopularMovies() {
+        val popularMovies = getPopularMovies()
+        movieRepository.cachePopularMovies(popularMovies)
+    }
+
 }
