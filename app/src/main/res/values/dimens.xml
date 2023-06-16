@@ -74,6 +74,9 @@
     <dimen name="text_small">12sp</dimen>
     <dimen name="height_search_bar">48dp</dimen>
     <dimen name="_14sp">14sp</dimen>
+    <dimen name="stroke_chip_search">1dp</dimen>
+    <dimen name="_120dp">120dp</dimen>
+    <dimen name="_100dp">100dp</dimen>
 
 
 </resources>

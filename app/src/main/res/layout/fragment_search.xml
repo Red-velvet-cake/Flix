@@ -33,15 +33,16 @@
             android:drawablePadding="@dimen/_8dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
+            android:fontFamily="@font/montserrat_regular"
             android:hint="@string/hint_search_bar"
-            android:textSize="@dimen/_16sp"
             android:importantForAutofill="yes"
             android:inputType="text"
             android:maxLines="1"
             android:paddingHorizontal="@dimen/_16dp"
             android:text="@{viewModel.state.searchInput}"
-            android:textColor="@color/font_accent"
+            android:textColor="@color/font_secondary"
             android:textColorHint="@color/font_accent"
+            android:textSize="@dimen/_16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -53,8 +54,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16dp"
+            android:fontFamily="@font/montserrat_medium"
             android:text="@string/text_search_categories"
-            android:textColor="@color/font_primary"
+            android:textColor="@color/font_secondary"
             android:textSize="@dimen/_16sp"
             app:layout_constraintStart_toStartOf="@id/text_input_search"
             app:layout_constraintTop_toBottomOf="@id/text_input_search" />
@@ -77,17 +79,19 @@
                 android:layout_height="wrap_content"
                 android:checkable="true"
                 android:checked="true"
+                android:fontFamily="@font/montserrat_regular"
                 android:onClick="@{() -> viewModel.onSearchForAll()}"
                 android:paddingHorizontal="@dimen/_8dp"
                 android:paddingVertical="@dimen/_8dp"
                 android:text="@string/text_chip_all"
                 android:textAlignment="center"
-                android:textColor="@color/font_primary"
+                android:textColor="@color/font_secondary"
+                android:textSize="@dimen/_16sp"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/chip_backgournd"
-                app:chipCornerRadius="@dimen/_8dp"
+                app:chipCornerRadius="@dimen/_16dp"
                 app:chipStrokeColor="@color/on_secondary"
-                app:chipStrokeWidth="1dp" />
+                app:chipStrokeWidth="@dimen/stroke_chip_search" />
 
 
             <com.google.android.material.chip.Chip
@@ -95,34 +99,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checkable="true"
+                android:fontFamily="@font/montserrat_regular"
                 android:onClick="@{() -> viewModel.onSearchForMovie()}"
                 android:paddingHorizontal="@dimen/_8dp"
                 android:paddingVertical="@dimen/_8dp"
                 android:text="@string/text_chip_movie"
                 android:textAlignment="center"
-                android:textColor="@color/font_primary"
+                android:textColor="@color/font_secondary"
+                android:textSize="@dimen/_16sp"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/chip_backgournd"
-                app:chipCornerRadius="@dimen/_8dp"
+                app:chipCornerRadius="@dimen/_16dp"
                 app:chipStrokeColor="@color/on_secondary"
-                app:chipStrokeWidth="1dp" />
+                app:chipStrokeWidth="@dimen/stroke_chip_search" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_selection_person"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checkable="true"
+                android:fontFamily="@font/montserrat_regular"
                 android:onClick="@{() -> viewModel.onSearchForPerson()}"
                 android:paddingHorizontal="@dimen/_8dp"
                 android:paddingVertical="@dimen/_8dp"
                 android:text="@string/text_chip_person"
                 android:textAlignment="center"
-                android:textColor="@color/font_primary"
+                android:textColor="@color/font_secondary"
+                android:textSize="@dimen/_16sp"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/chip_backgournd"
-                app:chipCornerRadius="@dimen/_8dp"
+                app:chipCornerRadius="@dimen/_16dp"
                 app:chipStrokeColor="@color/on_secondary"
-                app:chipStrokeWidth="1dp" />
+                app:chipStrokeWidth="@dimen/stroke_chip_search" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_selection_tv"
@@ -134,12 +142,13 @@
                 android:paddingVertical="@dimen/_8dp"
                 android:text="@string/text_show_tv"
                 android:textAlignment="center"
-                android:textColor="@color/font_primary"
+                android:textColor="@color/font_secondary"
+                android:textSize="@dimen/_16sp"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/chip_backgournd"
-                app:chipCornerRadius="@dimen/_8dp"
+                app:chipCornerRadius="@dimen/_16dp"
                 app:chipStrokeColor="@color/on_secondary"
-                app:chipStrokeWidth="1dp" />
+                app:chipStrokeWidth="@dimen/stroke_chip_search" />
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -152,6 +161,7 @@
             android:layout_marginTop="@dimen/_4dp"
             android:clipToPadding="false"
             android:orientation="vertical"
+            android:visibility="visible"
             app:items="@{viewModel.state.searchResult}"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -163,14 +173,12 @@
 
         <ImageView
             android:id="@+id/image_view_lost_connection"
-            android:layout_width="@dimen/_180dp"
-            android:layout_height="@dimen/_180dp"
-            android:layout_marginTop="@dimen/_24dp"
-            android:layout_marginBottom="@dimen/_8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_180dp"
             android:contentDescription="@string/lorem_ipsum"
             android:src="@drawable/no_internet"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chip_group_search_type"
@@ -180,7 +188,8 @@
             android:id="@+id/title_lost_connection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20dp"
+            android:layout_marginTop="@dimen/_8dp"
+            android:fontFamily="@font/montserrat_medium"
             android:text="@string/text_internet_is_not_available"
             android:textColor="@color/font_secondary"
             android:textSize="@dimen/_20sp"
@@ -190,58 +199,108 @@
             app:layout_constraintTop_toBottomOf="@id/image_view_lost_connection"
             app:showWhenNoInternetError="@{viewModel.state.error}" />
 
+        <TextView
+            android:id="@+id/lost_connection_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_100dp"
+            android:layout_marginTop="@dimen/_4dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:text="@string/text_lost_connection_note"
+            android:textColor="@color/font_accent"
+            android:textSize="@dimen/_12sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_lost_connection"
+            app:showWhenNoInternetError="@{viewModel.state.error}" />
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/loading"
-            android:layout_width="@dimen/_158dp"
-            android:layout_height="@dimen/_158dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_180dp"
             android:src="@drawable/loading"
             android:visibility="invisible"
-            app:emptyResult="@{viewModel.state.searchResult.empty}"
-            app:error="@{viewModel.state.error}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:emptyInput="@{viewModel.state.searchInput.empty}"
+            app:errorNoInput="@{viewModel.state.error}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chip_group_search_type"
-            app:loading="@{viewModel.state.loading}" />
+             app:loading="@{viewModel.state.loading}"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/text_start_search"
+            android:layout_width="@dimen/_180dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_56dp"
             android:layout_marginTop="@dimen/_8dp"
+            android:fontFamily="@font/montserrat_medium"
             android:gravity="center"
-            android:text="@string/text_start_note"
-            android:textSize="@dimen/_16sp"
+            android:text="@string/text_start_search"
+            android:textColor="@color/font_secondary"
+            android:textSize="@dimen/_20sp"
             android:visibility="invisible"
+            app:emptyInput="@{viewModel.state.searchInput.empty}"
+            app:errorNoInput="@{viewModel.state.error}"
+            app:layout_constraintBottom_toTopOf="@id/text_start_note"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/loading" />
+            app:layout_constraintTop_toBottomOf="@id/loading"
+            app:loading="@{viewModel.state.loading}"/>
+
+        <TextView
+            android:id="@+id/text_start_note"
+            android:layout_width="@dimen/_158dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="center"
+            android:text="@string/text_start_note"
+            android:textColor="@color/font_accent"
+            android:textSize="@dimen/_12sp"
+            android:visibility="invisible"
+            app:emptyInput="@{viewModel.state.searchInput.empty}"
+            app:errorNoInput="@{viewModel.state.error}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_start_search"
+             app:loading="@{viewModel.state.loading}"/>
+
 
         <ImageView
             android:id="@+id/image_view_error"
-            android:layout_width="@dimen/_180dp"
-            android:layout_height="@dimen/_180dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_180dp"
             android:contentDescription="@string/lorem_ipsum"
             android:src="@drawable/error"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:emptyResult="@{viewModel.state.searchResult.empty}"
+            app:searchInput="@{viewModel.state.searchInput}"
+            app:errorNoResult="@{viewModel.state.error}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chip_group_search_type"
-            app:showWhenError="@{viewModel.state.error}" />
+            />
 
         <TextView
             android:id="@+id/text_view_Not_Found"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8dp"
+            android:fontFamily="@font/montserrat_medium"
             android:text="@string/text_not_found"
             android:textColor="@color/font_secondary"
             android:textSize="@dimen/_20sp"
             android:visibility="invisible"
+            app:emptyResult="@{viewModel.state.searchResult.empty}"
+            app:searchInput="@{viewModel.state.searchInput}"
+            app:errorNoResult="@{viewModel.state.error}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image_view_error"
-            app:showWhenError="@{viewModel.state.error}" />
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

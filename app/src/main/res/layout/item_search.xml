@@ -17,7 +17,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_220dp"
+        android:layout_height="@dimen/_200dp"
         android:layout_margin="@dimen/_4dp"
         android:layout_marginHorizontal="@dimen/_4dp"
         android:layout_marginVertical="@dimen/_4dp"
@@ -69,11 +69,11 @@
                 android:layout_marginHorizontal="@dimen/_8dp"
                 android:ellipsize="end"
                 android:gravity="center|start"
-                android:layout_marginTop="@dimen/_8dp"
+                android:layout_marginTop="@dimen/_4dp"
                 android:maxLines="1"
                 android:text="@{item.mediaReleaseDate}"
                 android:textColor="@color/font_accent"
-                android:textSize="@dimen/_16sp"
+                android:textSize="@dimen/_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_view_title"
