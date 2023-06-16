@@ -1,9 +1,11 @@
 package com.red_velvet.flix.data.remote
 
+import android.util.Log
 import com.red_velvet.flix.data.remote.recoures.*
 import com.red_velvet.flix.data.remote.recoures.account.*
 import com.red_velvet.flix.data.remote.recoures.auth.*
 import com.red_velvet.flix.data.remote.recoures.image.ImagesResource
+import com.red_velvet.flix.data.remote.recoures.image.MovieImagesResource
 import com.red_velvet.flix.data.remote.recoures.list.*
 import com.red_velvet.flix.data.remote.recoures.movie.*
 import com.red_velvet.flix.data.remote.recoures.person.PersonResource
@@ -397,4 +399,15 @@ interface MoviesService {
         @Query("page") page: Int? = 1,
         @Query("sort_by") sortBy: String? = "created_at.asc"
     ): Response<PaginationResource<MovieResource>>
+    @GET("movie/{movie_id}/images")
+    suspend fun getMoviesImages(
+        @Path("movie_id") movieId: Int,
+        @Query("language") language: String? = "en-US",
+        @Query("include_image_language") includeImageLanguage: String? = null
+    ): Response<MovieImagesResource>
+    @GET("movie/{movie_id}/credits")
+    suspend fun getMoviesCredits(
+        @Path("movie_id") movieId: Int,
+        @Query("language") language: String? = "en-US",
+    ): Response<MovieCreditsResource>
 }
