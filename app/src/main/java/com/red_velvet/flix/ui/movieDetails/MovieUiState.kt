@@ -1,5 +1,6 @@
 package com.red_velvet.flix.ui.movieDetails
 
+import com.red_velvet.flix.domain.entity.KeywordEntity
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.movie.MovieCastEntity
 import com.red_velvet.flix.domain.entity.movie.MovieDetailsEntity
@@ -27,7 +28,7 @@ data class MovieUiState(
     val status: String = "",
     val releasedDate: String = "",
     val productionCountries: String = "",
-    val keyWords: List<String> = emptyList(),
+    val keyWords: List<MovieKeywords> = emptyList(),
     val seeAllSimilarMovies: Boolean = false,
     val similarMovies: List<MovieList> = emptyList(),
     val seeAllImagesBelongToMovie: Boolean = false,
@@ -56,6 +57,9 @@ data class MovieUiState(
         val imageUrl: String,
         val name: String
     )
+    data class MovieKeywords(
+        val keyword:String
+    )
 }
 
 fun ReviewEntity.toReviewUiState():MovieUiState.MovieReview
@@ -71,25 +75,23 @@ fun List<MovieEntity>.toListOfMovies(): List<MovieUiState.MovieList> {
 }
 
 fun MovieEntity.toMoviesUiState(): MovieUiState.MovieList {
-    return MovieUiState.MovieList(
-        movieName = title,
-        movieImageUrl = imageUrl
-    )
+    return MovieUiState.MovieList(movieName = title, movieImageUrl = imageUrl)
 }
 fun MovieImageEntity.toImagesUiState():MovieUiState.ImageBelongToMovie{
-    return MovieUiState.ImageBelongToMovie(
-        imageBelongToMovieUrl = filePath
-    )
+    return MovieUiState.ImageBelongToMovie(imageBelongToMovieUrl = filePath)
 }
 fun List<MovieImageEntity>.toImagesUiState():List<MovieUiState.ImageBelongToMovie> {
     return map { it.toImagesUiState() }
 }
 fun MovieCastEntity.toTopCast():MovieUiState.TopCast{
-    return MovieUiState.TopCast(
-        name = name,
-        imageUrl = imageUrl
-    )
+    return MovieUiState.TopCast(name = name, imageUrl = imageUrl)
 }
 fun List<MovieCastEntity>.toTopCast():List<MovieUiState.TopCast>{
     return map { it.toTopCast() }
+}
+fun String.toMovieKeyword():MovieUiState.MovieKeywords{
+    return MovieUiState.MovieKeywords(keyword = this)
+}
+fun List<String>.toMovieKeyword():List<MovieUiState.MovieKeywords>{
+    return map { it.toMovieKeyword()}
 }
