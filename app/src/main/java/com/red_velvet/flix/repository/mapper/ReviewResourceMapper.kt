@@ -25,7 +25,7 @@ fun AuthorDetailsResource.toEntity(): AuthorDetailsEntity {
     return AuthorDetailsEntity(
         avatarPath = avatarPath.orEmpty(),
         name = name.orEmpty(),
-        rating = rating.orZero(),
+        rating = rating,
         username = username.orEmpty(),
     )
 }

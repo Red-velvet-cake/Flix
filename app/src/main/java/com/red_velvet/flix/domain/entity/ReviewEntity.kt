@@ -4,7 +4,7 @@ import com.red_velvet.flix.domain.entity.movie.AuthorDetailsEntity
 
 
 data class ReviewEntity(
-    val id: Int,
+    val id: String,
     val author: AuthorDetailsEntity,
     val content: String,
     val createdAt: String,

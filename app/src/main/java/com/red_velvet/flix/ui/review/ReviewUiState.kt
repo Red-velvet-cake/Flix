@@ -24,7 +24,7 @@ data class ReviewUiState(
 
 internal fun ReviewEntity.toUiState(): ReviewUiState.MovieReview {
     return ReviewUiState.MovieReview(
-        reviewID = id,
+        reviewID = id.toInt(),
         content = content,
         createDate = createdAt,
         rating = rating,

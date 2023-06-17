@@ -96,14 +96,10 @@
                 android:paddingBottom="@dimen/_12dp"
                 android:text="@{item.content}"
                 android:textColor="@color/font_accent"
-                app:animDuration="500"
-                app:collapsedLines="5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_publish_date"
-                app:readLessText=""
-                app:readMoreText="Read more"
                 tools:text="Halle Bailey served a very good performance with a lot of charisma and passion, she also has an impressive voice. in some parts people were clapping from excitement and i shed a tear since i saw performing her first song...." />
 
 
