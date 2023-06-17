@@ -33,7 +33,6 @@ class GetOnTheAirSeriesUseCase @Inject constructor(
 
     private suspend fun refreshLocalOnTheAirSeries() {
         val onTheAirSeries = getOnTheAirSeries()
-        seriesRepository.cacheOnTheAirSeries(onTheAirSeries)
+            seriesRepository.cacheOnTheAirSeries(onTheAirSeries)
     }
-
 }

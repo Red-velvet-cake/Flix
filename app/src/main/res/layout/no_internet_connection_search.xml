@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20dp"
-            android:text="Internet is not available"
+            android:text="@string/internet_is_not_available"
             android:textColor="@color/font_secondary"
             android:textSize="@dimen/_20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -50,14 +50,12 @@
             android:layout_marginTop="@dimen/_16dp"
             android:layout_marginEnd="@dimen/_56dp"
             android:gravity="center"
-            android:text="Please make sure you are connected to the internet and try again"
+            android:text="@string/please_make_sure_you_are_connected_to_the_internet_and_try_again"
             android:textColor="@color/font_accent"
             android:textSize="@dimen/_16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title_lost_connection" />
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,7 +32,7 @@ class GetTopRatedSeriesUseCase @Inject constructor(
 
     private suspend fun refreshLocalTopRatedSeries() {
         val topRatedSeries = getTopRatedSeries()
-        seriesRepository.cacheTopRatedSeries(topRatedSeries)
-    }
+            seriesRepository.cacheTopRatedSeries(topRatedSeries)
 
+    }
 }

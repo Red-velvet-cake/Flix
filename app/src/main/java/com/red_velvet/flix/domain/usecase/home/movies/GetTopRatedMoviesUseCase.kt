@@ -33,7 +33,10 @@ class GetTopRatedMoviesUseCase @Inject constructor(
 
     private suspend fun refreshLocalTopRatedMovies() {
         val topRatedMovies = getTopRatedMovies()
-        movieRepository.cacheTopRatedMovies(topRatedMovies)
+        if (topRatedMovies.isNotEmpty()) {
+
+            movieRepository.cacheTopRatedMovies(topRatedMovies)
+        }
     }
 
 }

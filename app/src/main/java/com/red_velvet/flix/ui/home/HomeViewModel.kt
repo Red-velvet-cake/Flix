@@ -1,5 +1,6 @@
 package com.red_velvet.flix.ui.home
 
+import android.util.Log
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.usecase.home.tvshows.GetAiringTodaySeriesUseCase
@@ -64,10 +65,10 @@ class HomeViewModel @Inject constructor(
         tryToExecuteHome(
             getPopularMovies::invoke, ::modifyPopularMoviesState, ::onMovieError
         )
-
     }
 
     private fun modifyPopularMoviesState(movies: List<MovieEntity>) {
+        Log.d("HomeViewModel", "modifyPopularMoviesState: $movies")
         _state.update { state ->
             state.copy(popularMovies = movies.takeIf { it.isNotEmpty() }
                 ?.let { mutableListOf(it.first()).toMovieUiState() } ?: emptyList(),
@@ -125,6 +126,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun modifyPopularSeriesState(series: List<SeriesEntity>) {
+        Log.d("HomeViewModel", "modifyPopularSeriesState: $series")
         _state.update { state ->
             state.copy(popularSeries = series.takeIf { it.isNotEmpty() }
                 ?.let { mutableListOf(it.first()).toSeriesUiState() } ?: emptyList(),

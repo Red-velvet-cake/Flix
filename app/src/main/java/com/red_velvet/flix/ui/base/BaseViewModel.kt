@@ -1,5 +1,6 @@
 package com.red_velvet.flix.ui.base
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.red_velvet.flix.domain.utils.FlixException

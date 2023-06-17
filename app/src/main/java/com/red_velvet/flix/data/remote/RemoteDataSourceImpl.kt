@@ -1,5 +1,6 @@
 package com.red_velvet.flix.data.remote
 
+import android.util.Log
 import com.red_velvet.flix.data.remote.recoures.ApiResponse
 import com.red_velvet.flix.data.remote.recoures.KeywordResource
 import com.red_velvet.flix.data.remote.recoures.Pagination

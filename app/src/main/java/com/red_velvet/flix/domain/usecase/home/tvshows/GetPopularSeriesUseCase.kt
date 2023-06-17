@@ -1,5 +1,6 @@
 package com.red_velvet.flix.domain.usecase.home.tvshows
 
+import android.util.Log
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.repository.SeriesRepository
 import com.red_velvet.flix.domain.usecase.FormatMediaDateAndCountryCodeUsecase
@@ -33,7 +34,7 @@ class GetPopularSeriesUseCase @Inject constructor(
 
     private suspend fun refreshLocalPopularSeries() {
         val popularSeries = getPopularSeries()
-        seriesRepository.cachePopularSeries(popularSeries)
+            seriesRepository.cachePopularSeries(popularSeries)
     }
 
 }

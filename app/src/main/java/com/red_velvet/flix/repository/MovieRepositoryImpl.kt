@@ -1,5 +1,6 @@
 package com.red_velvet.flix.repository
 
+import android.util.Log
 import com.red_velvet.flix.domain.entity.PersonEntity
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity

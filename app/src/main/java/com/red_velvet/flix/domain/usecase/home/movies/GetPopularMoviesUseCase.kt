@@ -33,7 +33,9 @@ class GetPopularMoviesUseCase @Inject constructor(
 
     private suspend fun refreshLocalPopularMovies() {
         val popularMovies = getPopularMovies()
-        movieRepository.cachePopularMovies(popularMovies)
+        if (popularMovies.isNotEmpty()) {
+            movieRepository.cachePopularMovies(popularMovies)
+        }
     }
 
 }

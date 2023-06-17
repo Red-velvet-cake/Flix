@@ -23,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_rawRes="@raw/error_animation"
-            app:showWhenNoInternet="@{viewModel.state.movieError}" />
+            app:showOnError="@{viewModel.state.movieError}" />
 
         <TextView
             android:id="@+id/title_error"
@@ -36,20 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showWhenNoInternet="@{viewModel.state.movieError}" />
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/description_error"-->
-        <!--            style="@style/Regular.Large"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="@dimen/spacing_medium"-->
-        <!--            android:gravity="center"-->
-        <!--            android:textColor="@color/brand_color"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/title_error"-->
-        <!--            app:showErrorAsString="@{viewModel.state.movieError}" />-->
+            app:showOnError="@{viewModel.state.movieError}" />
 
         <Button
             android:id="@+id/button_retry"
@@ -61,14 +48,18 @@
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_error" />
+            app:layout_constraintTop_toBottomOf="@+id/title_error"
+            app:showOnError="@{viewModel.state.movieError}" />
 
 
-        <!--        <androidx.constraintlayout.widget.Group-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:constraint_referenced_ids="title_error,error_animation,button_retry" />-->
-
+        <!--        <include-->
+        <!--            android:id="@+id/no_internet_error"-->
+        <!--            layout="@layout/no_internet_connection_search"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:showWhenNoInternet="@{viewModel.state.movieError}" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:overScrollMode="never"
+            android:paddingBottom="24dp"
             android:scrollbars="none"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -48,7 +49,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:showOnError="@{viewModel.state.seriesError}"
             app:viewModel="@{viewModel}" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

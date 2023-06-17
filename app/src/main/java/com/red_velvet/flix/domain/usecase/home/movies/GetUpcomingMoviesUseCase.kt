@@ -33,7 +33,7 @@ class GetUpcomingMoviesUseCase @Inject constructor(
 
     private suspend fun refreshLocalUpcomingMovies() {
         val upcomingMovies = getUpcomingMovies()
-        movieRepository.cacheUpcomingMovies(upcomingMovies)
-    }
+            movieRepository.cacheUpcomingMovies(upcomingMovies)
 
+    }
 }

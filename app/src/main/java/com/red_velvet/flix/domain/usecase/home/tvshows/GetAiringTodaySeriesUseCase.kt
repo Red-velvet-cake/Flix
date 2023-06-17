@@ -33,7 +33,9 @@ class GetAiringTodaySeriesUseCase @Inject constructor(
 
     private suspend fun refreshLocalAiringTodaySeries() {
         val airingTodaySeries = getAiringTodaySeries()
-        seriesRepository.cacheAiringTodaySeries(airingTodaySeries)
+        if (airingTodaySeries.isEmpty()) {
+            seriesRepository.cacheAiringTodaySeries(airingTodaySeries)
+        }
     }
 
 }

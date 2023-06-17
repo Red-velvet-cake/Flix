@@ -2,7 +2,6 @@ package com.red_velvet.flix.ui.utils
 
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
@@ -10,12 +9,10 @@ import com.bumptech.glide.Glide
 import com.red_velvet.flix.R
 import com.red_velvet.flix.ui.base.ErrorUiState
 import com.red_velvet.flix.ui.home.HomeUiState
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 @BindingAdapter("app:posterImage")
 fun bindMovieImage(image: ImageView, imageURL: String?) {
-    imageURL?.let {
+    imageURL.let {
         Glide.with(image.context).load(imageURL).placeholder(R.drawable.ic_loading)
             .error(R.drawable.ic_media_background).into(image)
     }
@@ -32,15 +29,10 @@ fun TextInputLayout.setHelperText(helperText: String) {
     this.helperText = helperText
 }
 
-
 @BindingAdapter("app:showMovieContentOnSuccess")
 fun showMovieContentOnSuccess(view: View, state: HomeUiState?) {
     if (state != null) {
-        if (state.isMovieLoading == false && state.movieError == null) {
-            view.isVisible = true
-        } else {
-            view.isVisible = false
-        }
+        view.isVisible = state.isMovieLoading == false && state.movieError == null
     }
 }
 
@@ -48,18 +40,19 @@ fun showMovieContentOnSuccess(view: View, state: HomeUiState?) {
 @BindingAdapter("app:showSeriesContentOnSuccess")
 fun showSeriesContentOnSuccess(view: View, state: HomeUiState?) {
     if (state != null) {
-        if (state.isSeriesLoading == false && state.seriesError == null) {
-            view.isVisible = true
-        } else {
-            view.isVisible = false
-        }
+        view.isVisible = state.isSeriesLoading == false && state.seriesError == null
     }
 }
 
 
 @BindingAdapter("app:showOnError")
 fun showOnError(view: View, error: ErrorUiState?) {
-    view.isVisible = error != null
+    if (error != null) {
+        view.isVisible = !error.isNoInternet()
+    } else {
+        view.isVisible = false
+    }
+
 }
 
 

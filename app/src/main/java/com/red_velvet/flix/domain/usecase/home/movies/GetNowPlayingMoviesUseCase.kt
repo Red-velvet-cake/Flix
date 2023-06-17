@@ -1,5 +1,6 @@
 package com.red_velvet.flix.domain.usecase.home.movies
 
+import android.util.Log
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.repository.MovieRepository
 import com.red_velvet.flix.domain.usecase.FormatMediaDateAndCountryCodeUsecase
@@ -33,7 +34,10 @@ class GetNowPlayingMoviesUseCase @Inject constructor(
 
     private suspend fun refreshLocalNowPlayingMovies() {
         val nowPlayingMovies = getNowPlayingMovies()
-        movieRepository.cacheNowPlayingMovies(nowPlayingMovies)
+        if (nowPlayingMovies.isNotEmpty()) {
+            movieRepository.cacheNowPlayingMovies(nowPlayingMovies)
+        }
     }
+
 
 }

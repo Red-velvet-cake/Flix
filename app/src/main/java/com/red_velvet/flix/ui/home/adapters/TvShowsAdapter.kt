@@ -1,5 +1,6 @@
 package com.red_velvet.flix.ui.home.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -40,6 +41,7 @@ class TvShowsAdapter(
         holder: ItemViewHolder,
         currentItem: HomeUiState.HomeItem,
     ) {
+        Log.d("TvShowsAdapter", "TvShowsAdapter $currentItem")
         holder.binding.run {
             setVariable(BR.tvshowType, currentItem)
             if (currentItem.title == "Popular Series") {
