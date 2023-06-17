@@ -11,3 +11,6 @@ class MovieDetailsAdapter
     BaseAdapter<MovieUiState.MovieList>(movieDetailsItems,listener) {
     override val layoutId: Int = R.layout.item_movies_details
 }
+interface ItemMovieInteractionListener:BaseInteractionListener{
+    fun onMovieItemClick(movieId: Int)
+}
