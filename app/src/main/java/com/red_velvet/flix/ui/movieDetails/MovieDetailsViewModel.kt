@@ -2,6 +2,7 @@ package com.red_velvet.flix.ui.movieDetails
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.red_velvet.flix.domain.entity.KeywordEntity
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.movie.MovieCastEntity
 import com.red_velvet.flix.domain.entity.movie.MovieDetailsEntity
@@ -11,6 +12,7 @@ import com.red_velvet.flix.domain.usecase.GetLatestMovieUseCase
 import com.red_velvet.flix.domain.usecase.GetMovieCastUseCase
 import com.red_velvet.flix.domain.usecase.GetMovieDetailsUseCase
 import com.red_velvet.flix.domain.usecase.GetMovieImagesUseCase
+import com.red_velvet.flix.domain.usecase.GetMovieKeywordsUseCase
 import com.red_velvet.flix.domain.usecase.GetMovieReviewsUseCase
 import com.red_velvet.flix.domain.usecase.GetMoviesRecommendationsUseCase
 import com.red_velvet.flix.domain.usecase.GetSimilarMoviesUseCase
@@ -32,7 +34,8 @@ class MovieDetailsViewModel @Inject constructor(
     private val getMovieReviewsUseCase: GetMovieReviewsUseCase,
     private val getLatestMovieUseCase: GetLatestMovieUseCase,
     private val getMovieImagesUseCase: GetMovieImagesUseCase,
-    private val getMovieCastUseCase: GetMovieCastUseCase
+    private val getMovieCastUseCase: GetMovieCastUseCase,
+    private val getMovieKeywordsUseCase: GetMovieKeywordsUseCase
 ) : BaseViewModel<MovieUiState>(), MovieDetailsInteractionListener, BaseInteractionListener {
     override val _state: MutableStateFlow<MovieUiState> = MutableStateFlow(MovieUiState())
     override val state: StateFlow<MovieUiState> = _state
@@ -50,6 +53,7 @@ class MovieDetailsViewModel @Inject constructor(
             tryToExecute({getLatestMovieUseCase.invoke()},::onSuccessLatestMovie,::onError)
             tryToExecute({getMovieImagesUseCase.invoke(MOVIE_ID)},::onSuccessMovieImages,::onError)
             tryToExecute({getMovieCastUseCase.invoke(MOVIE_ID)},::onSuccessMovieCast,::onError)
+            tryToExecute({getMovieKeywordsUseCase.invoke(MOVIE_ID)},::onSuccessMovieKeywords,::onError)
         }
     }
 
@@ -93,7 +97,10 @@ class MovieDetailsViewModel @Inject constructor(
     private fun onSuccessMovieCast(cast: List<MovieCastEntity>)
     {
         _state.update { it.copy(topCast = cast.toTopCast()) }
-
+    }
+    private fun onSuccessMovieKeywords(keywords: List<String>)
+    {
+        _state.update { it.copy(keyWords = keywords.toMovieKeyword()) }
     }
 
     private fun onError(error: ErrorUiState) {
