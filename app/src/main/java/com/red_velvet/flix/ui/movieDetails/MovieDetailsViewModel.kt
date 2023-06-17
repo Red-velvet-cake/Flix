@@ -35,7 +35,7 @@ class MovieDetailsViewModel @Inject constructor(
     private val getLatestMovieUseCase: GetLatestMovieUseCase,
     private val getMovieImagesUseCase: GetMovieImagesUseCase,
     private val getMovieCastUseCase: GetMovieCastUseCase,
-    private val getMovieKeywordsUseCase: GetMovieKeywordsUseCase
+    private val getMovieKeywordsUseCase: GetMovieKeywordsUseCase,
 ) : BaseViewModel<MovieUiState>(), MovieDetailsInteractionListener, BaseInteractionListener {
     override val _state: MutableStateFlow<MovieUiState> = MutableStateFlow(MovieUiState())
     override val state: StateFlow<MovieUiState> = _state
@@ -70,6 +70,7 @@ class MovieDetailsViewModel @Inject constructor(
                 releasedDate = movieDetails.date,
                 productionCountries = movieDetails.productionCountry,
                 movieRating = movieDetails.voteAverage.toInt(),
+                movieCategories = movieDetails.genres.toMovieKeyword()
             )
         }
     }
@@ -106,9 +107,6 @@ class MovieDetailsViewModel @Inject constructor(
     private fun onError(error: ErrorUiState) {
     }
 
-    companion object {
-        const val MOVIE_ID = 603692
-    }
 
     override fun onBackButtonClick() {
     }
@@ -145,5 +143,8 @@ class MovieDetailsViewModel @Inject constructor(
 
     override fun onRecommendationMovieItemClick(movieId: Int) {
 
+    }
+    companion object {
+        const val MOVIE_ID = 603692
     }
 }

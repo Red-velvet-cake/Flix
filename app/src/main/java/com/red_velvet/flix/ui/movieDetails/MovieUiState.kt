@@ -17,7 +17,7 @@ data class MovieUiState(
     val watchTrailer: Boolean = false,
     val movieName: String = "",
     val imageUrl: String = "",
-    val movieCategories: List<String> = emptyList(),
+    val movieCategories: List<MovieKeywords> = emptyList(),
     val movieTime: String = "",
     val movieLanguage: String = "",
     val movieRating: Int = 0,
