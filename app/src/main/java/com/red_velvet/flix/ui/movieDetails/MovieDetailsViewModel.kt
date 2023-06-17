@@ -36,7 +36,7 @@ class MovieDetailsViewModel @Inject constructor(
     private val getMovieImagesUseCase: GetMovieImagesUseCase,
     private val getMovieCastUseCase: GetMovieCastUseCase,
     private val getMovieKeywordsUseCase: GetMovieKeywordsUseCase,
-) : BaseViewModel<MovieUiState>(), MovieDetailsInteractionListener, BaseInteractionListener {
+) : BaseViewModel<MovieUiState>(), MovieDetailsInteractionListener, BaseInteractionListener,MovieKeywordsInteractionListener {
     override val _state: MutableStateFlow<MovieUiState> = MutableStateFlow(MovieUiState())
     override val state: StateFlow<MovieUiState> = _state
 
@@ -143,6 +143,10 @@ class MovieDetailsViewModel @Inject constructor(
 
     override fun onRecommendationMovieItemClick(movieId: Int) {
 
+    }
+
+    override fun onKeywordClick(keyword: String) {
+        Log.i("jalal","keyword : $keyword")
     }
     companion object {
         const val MOVIE_ID = 603692
