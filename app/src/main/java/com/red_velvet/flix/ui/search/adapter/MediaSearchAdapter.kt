@@ -13,4 +13,5 @@ class MediaSearchAdapter(items: List<MediaUiState>, listener: MediaSearchInterac
 
 interface MediaSearchInteractionListener : BaseInteractionListener {
     fun onClickMediaResult(media: MediaUiState)
+    fun onClickPersonResult(personId: Int, name:String)
 }
