@@ -37,12 +37,16 @@ class SearchViewModel @Inject constructor(
     override val _state = MutableStateFlow(MediaSearchUiState())
     override val state: StateFlow<MediaSearchUiState> = _state.asStateFlow()
 
+    private val _searchUIEvent = MutableStateFlow<SearchUIEvent?>(null)
+    val searchUIEvent = _searchUIEvent.asStateFlow()
 
-//    private val _searchUIEvent = MutableStateFlow<Event<SearchUIEvent?>>(EventLog.Event(null))
-//    val searchUIEvent = _searchUIEvent.asStateFlow()
 
     override fun onClickMediaResult(media: MediaUiState) {
-        TODO("Not yet implemented")
+        _searchUIEvent.update { SearchUIEvent.ClickMediaEvent(media) }
+    }
+
+    override fun onClickPersonResult(personId: Int, name: String) {
+        _searchUIEvent.update { SearchUIEvent.ClickPersonEvent(personId) }
     }
 
 
@@ -148,7 +152,7 @@ class SearchViewModel @Inject constructor(
                 error = null
             )
         }
-        Log.i("mustafa",_state.value.searchResult.toString())
+        Log.i("mustafa", _state.value.searchResult.toString())
     }
 
     private fun onError(error: ErrorUiState) {
