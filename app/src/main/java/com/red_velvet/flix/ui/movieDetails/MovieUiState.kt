@@ -41,6 +41,7 @@ data class MovieUiState(
 ) : BaseUiState
 {
     data class MovieList(
+        val id:Int,
         val movieImageUrl: String,
         val movieName: String,
     )
@@ -75,7 +76,7 @@ fun List<MovieEntity>.toListOfMovies(): List<MovieUiState.MovieList> {
 }
 
 fun MovieEntity.toMoviesUiState(): MovieUiState.MovieList {
-    return MovieUiState.MovieList(movieName = title, movieImageUrl = imageUrl)
+    return MovieUiState.MovieList(movieName = title, movieImageUrl = imageUrl, id = id)
 }
 fun MovieImageEntity.toImagesUiState():MovieUiState.ImageBelongToMovie{
     return MovieUiState.ImageBelongToMovie(imageBelongToMovieUrl = filePath)
