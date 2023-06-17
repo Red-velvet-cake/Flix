@@ -6,12 +6,16 @@
 <variable
     name="item"
     type="com.red_velvet.flix.ui.movieDetails.MovieUiState.MovieReview" />
+        <variable
+            name="listener"
+            type="com.red_velvet.flix.ui.movieDetails.OnMovieReviewInteractionListener" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="@dimen/_270dp"
         android:layout_height="@dimen/_142dp"
         android:layout_marginEnd="@dimen/_8dp"
+        android:onClick="@{()->listener.onMovieReviewClick(item.id)}"
         app:cardBackgroundColor="@color/Secondary"
         app:cardCornerRadius="@dimen/_16dp">
 
