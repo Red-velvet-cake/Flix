@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:text="Adventures"
-    android:paddingVertical="@dimen/_4dp"
-    android:paddingHorizontal="@dimen/_8dp"
-    android:background="@drawable/bg_categories_movie_details"
-    android:textColor="@color/font_primary"
-    android:textSize="@dimen/_12sp"
-    android:layout_marginEnd="@dimen/_4dp"
-    />
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+<variable
+    name="item"
+    type="com.red_velvet.flix.ui.movieDetails.MovieUiState.MovieKeywords" />
+    </data>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{item.keyword}"
+        android:paddingVertical="@dimen/_4dp"
+        android:paddingHorizontal="@dimen/_8dp"
+        android:background="@drawable/bg_categories_movie_details"
+        android:textColor="@color/font_primary"
+        android:textSize="@dimen/_12sp"
+        android:layout_marginEnd="@dimen/_4dp" />
+</layout>
