@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:text="Musical"
-    android:paddingVertical="@dimen/_8dp"
-    android:paddingHorizontal="@dimen/_16dp"
-    app:chipCornerRadius="@dimen/_8dp"
-    app:chipBackgroundColor="@color/background"
-    android:textColor="@color/font_primary"
-    android:layout_marginEnd="@dimen/_8dp"
-    />
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="com.red_velvet.flix.ui.movieDetails.MovieUiState.MovieKeywords" />
+    </data>
+
+    <com.google.android.material.chip.Chip
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{item.keyword}"
+        android:paddingVertical="@dimen/_8dp"
+        android:paddingHorizontal="@dimen/_16dp"
+        app:chipCornerRadius="@dimen/_8dp"
+        app:chipBackgroundColor="@color/background"
+        android:textColor="@color/font_primary"
+        android:layout_marginEnd="@dimen/_8dp" />
+</layout>
