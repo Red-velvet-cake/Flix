@@ -7,12 +7,16 @@
         <variable
             name="item"
             type="com.red_velvet.flix.ui.movieDetails.MovieUiState.MovieList"/>
+        <variable
+            name="listener"
+            type="com.red_velvet.flix.ui.movieDetails.ItemMovieInteractionListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/background_color"
+        android:onClick="@{()->listener.onMovieItemClick(item.id)}"
         >
 
         <com.google.android.material.imageview.ShapeableImageView
