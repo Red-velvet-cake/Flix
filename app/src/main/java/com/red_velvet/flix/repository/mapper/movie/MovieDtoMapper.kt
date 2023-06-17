@@ -15,7 +15,8 @@ fun PopularMovieDto.toEntity(): MovieEntity {
         popularity = 0.0,
         releaseDate = date,
         voteAverage = 0.0,
-        originalLanguage = originalLanguage
+        originalLanguage = originalLanguage,
+        formattedDate = formattedDate
     )
 }
 
@@ -27,7 +28,8 @@ fun UpcomingMovieDto.toEntity(): MovieEntity {
         popularity = 0.0,
         releaseDate = date,
         voteAverage = 0.0,
-        originalLanguage = originalLanguage
+        originalLanguage = originalLanguage,
+        formattedDate = formattedDate
     )
 }
 
@@ -39,7 +41,8 @@ fun TopRatedMovieDto.toEntity(): MovieEntity {
         popularity = 0.0,
         releaseDate = date,
         voteAverage = 0.0,
-        originalLanguage = originalLanguage
+        originalLanguage = originalLanguage,
+        formattedDate = formattedDate
     )
 }
 
@@ -51,7 +54,8 @@ fun NowPlayingMovieDto.toEntity(): MovieEntity {
         popularity = 0.0,
         releaseDate = date,
         voteAverage = 0.0,
-        originalLanguage = originalLanguage
+        originalLanguage = originalLanguage,
+        formattedDate = formattedDate
     )
 }
 

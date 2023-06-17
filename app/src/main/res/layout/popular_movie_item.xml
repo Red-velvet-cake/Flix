@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent">
-<!--        android:onClick="@{()->listener.onClickPopularMovie(item.id)}"-->
+        <!--        android:onClick="@{()->listener.onClickPopularMovie(item.id)}"-->
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_movie"
@@ -40,11 +40,10 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            app:layout_constraintEnd_toEndOf="@+id/image_movie"
-            app:layout_constraintStart_toStartOf="@+id/image_movie"
             android:background="#9811142D"
             app:layout_constraintBottom_toBottomOf="@+id/image_movie"
-            />
+            app:layout_constraintEnd_toEndOf="@+id/image_movie"
+            app:layout_constraintStart_toStartOf="@+id/image_movie" />
 
 
         <TextView
@@ -71,7 +70,7 @@
             android:layout_marginBottom="3dp"
             android:gravity="start"
             android:maxWidth="240dp"
-            android:text="@{item.date}"
+            android:text="@{item.formattedDate}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/movie_title"
             tools:text="The Flash" />

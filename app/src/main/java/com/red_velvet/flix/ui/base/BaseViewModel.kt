@@ -1,6 +1,5 @@
 package com.red_velvet.flix.ui.base
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.red_velvet.flix.domain.utils.FlixException
@@ -56,6 +55,7 @@ abstract class BaseViewModel<T : BaseUiState> : ViewModel() {
         viewModelScope.launch(dispatcher) {
             try {
                 val result = call()
+                delay(1000)
                 launch(Dispatchers.Main) {
                     result.collect { data ->
                         onSuccess(data)

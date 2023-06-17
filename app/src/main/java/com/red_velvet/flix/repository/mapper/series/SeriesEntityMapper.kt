@@ -15,7 +15,8 @@ fun SeriesEntity.toPopularSeriesDto(): PopularSeriesDto {
         imageUrl = imageUrl,
         date = firstAirDate,
         popularity = popularity,
-        voteAverage = voteAverage
+        voteAverage = voteAverage,
+        formattedDate = formattedDate
     )
 }
 
@@ -32,7 +33,8 @@ fun SeriesEntity.toTopRatedSeriesDto(): TopRatedSeriesDto {
         imageUrl = imageUrl,
         date = firstAirDate,
         popularity = popularity,
-        voteAverage = voteAverage
+        voteAverage = voteAverage,
+        formattedDate = formattedDate
     )
 }
 
@@ -49,7 +51,8 @@ fun SeriesEntity.toOnTheAirSeriesDto(): OnTheAirSeriesDto {
         imageUrl = imageUrl,
         date = firstAirDate,
         popularity = popularity,
-        voteAverage = voteAverage
+        voteAverage = voteAverage,
+        formattedDate = formattedDate
     )
 }
 
@@ -66,7 +69,8 @@ fun SeriesEntity.toAiringTodaySeriesDto(): AiringTodaySeriesDto {
         imageUrl = imageUrl,
         date = firstAirDate,
         popularity = popularity,
-        voteAverage = voteAverage
+        voteAverage = voteAverage,
+        formattedDate = formattedDate
     )
 }
 

@@ -15,6 +15,7 @@ fun PopularSeriesDto.toEntity(): SeriesEntity {
         firstAirDate = date.orEmpty(),
         popularity = 0.0,
         voteAverage = 0.0,
+        formattedDate = formattedDate
     )
 }
 
@@ -26,6 +27,7 @@ fun TopRatedSeriesDto.toEntity(): SeriesEntity {
         firstAirDate = date.orEmpty(),
         popularity = 0.0,
         voteAverage = 0.0,
+        formattedDate = formattedDate
     )
 }
 
@@ -38,6 +40,7 @@ fun AiringTodaySeriesDto.toEntity(): SeriesEntity {
         firstAirDate = date.orEmpty(),
         popularity = 0.0,
         voteAverage = 0.0,
+        formattedDate = formattedDate
     )
 }
 
@@ -49,6 +52,7 @@ fun OnTheAirSeriesDto.toEntity(): SeriesEntity {
         firstAirDate = date.orEmpty(),
         popularity = 0.0,
         voteAverage = 0.0,
+        formattedDate = formattedDate
     )
 }
 

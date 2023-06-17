@@ -60,7 +60,7 @@
             android:layout_marginTop="@dimen/spacing_extra_small"
             android:ellipsize="end"
             android:lines="1"
-            android:text="@{item.date}"
+            android:text="@{item.formattedDate}"
             app:layout_constraintStart_toStartOf="@+id/media_movie_image"
             app:layout_constraintTop_toBottomOf="@+id/media_movie_title"
             tools:text="Now Streaming" />

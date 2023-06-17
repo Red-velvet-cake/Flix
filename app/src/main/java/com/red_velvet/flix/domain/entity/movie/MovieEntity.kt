@@ -9,5 +9,5 @@ data class MovieEntity(
     val releaseDate: String,
     val voteAverage: Double,
     val originalLanguage: String,
-
+    val formattedDate: String,
     )

@@ -12,6 +12,7 @@ internal fun List<MovieEntity>.toMovieUiState(): List<HomeUiState.MediaUiState> 
             title = it.title,
             date = it.releaseDate,
             originalLanguage = it.originalLanguage,
+            formattedDate = it.formattedDate,
         )
     }
 }
@@ -26,6 +27,7 @@ internal fun List<SeriesEntity>.toSeriesUiState(): List<HomeUiState.MediaUiState
             date = it.firstAirDate,
             popularity = it.popularity,
             voteAverage = it.voteAverage,
+            formattedDate = it.formattedDate,
         )
     }
 }

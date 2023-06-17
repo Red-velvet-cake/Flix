@@ -2,6 +2,7 @@ package com.red_velvet.flix.domain.usecase.home.tvshows
 
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
 import com.red_velvet.flix.domain.repository.SeriesRepository
+import com.red_velvet.flix.domain.usecase.FormatMediaDateAndCountryCodeUsecase
 import com.red_velvet.flix.domain.usecase.cachingTimeStamps.ShouldCacheApiResponseUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -9,7 +10,8 @@ import javax.inject.Inject
 
 class GetPopularSeriesUseCase @Inject constructor(
     private val seriesRepository: SeriesRepository,
-    private val shouldCacheApiResponseUseCase: ShouldCacheApiResponseUseCase
+    private val shouldCacheApiResponseUseCase: ShouldCacheApiResponseUseCase,
+    private val formatMediaDateAndCountryCodeUsecase: FormatMediaDateAndCountryCodeUsecase,
 ) {
 
     suspend operator fun invoke(): Flow<List<SeriesEntity>> {
@@ -20,7 +22,13 @@ class GetPopularSeriesUseCase @Inject constructor(
     }
 
     private suspend fun getPopularSeries(): List<SeriesEntity> {
-        return seriesRepository.getPopularSeries()
+        return seriesRepository.getPopularSeries().map {
+            it.copy(
+                formattedDate = formatMediaDateAndCountryCodeUsecase.getFormattedSeriesDate(
+                    it.firstAirDate
+                ),
+            )
+        }
     }
 
     private suspend fun refreshLocalPopularSeries() {

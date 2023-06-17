@@ -13,21 +13,6 @@ import com.red_velvet.flix.ui.home.HomeUiState
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-@BindingAdapter("app:formattedDate", "app:language", requireAll = true)
-fun bindFormattedDateWithCountryCode(view: TextView, rawDate: String?, languageCode: String?) {
-    if (rawDate.isNullOrEmpty() || languageCode.isNullOrEmpty()) {
-        view.text = ""
-        return
-    }
-    val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-    val date = inputFormat.parse(rawDate)
-    val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
-    val formattedDate = outputFormat.format(date!!)
-
-    view.text = "$formattedDate (${languageCode.uppercase()})"
-}
-
-
 @BindingAdapter("app:posterImage")
 fun bindMovieImage(image: ImageView, imageURL: String?) {
     imageURL?.let {

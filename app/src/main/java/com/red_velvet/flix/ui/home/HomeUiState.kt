@@ -17,7 +17,7 @@ data class HomeUiState(
     val isSeriesLoading: Boolean = false,
     val seriesError: ErrorUiState? = null
 
-    ) : BaseUiState {
+) : BaseUiState {
 
     data class HomeItem(
         val title: String = "",
@@ -32,6 +32,7 @@ data class HomeUiState(
         val originalLanguage: String = "",
         val popularity: Double = 0.0,
         val voteAverage: Double = 0.0,
+        val formattedDate: String = "",
     )
 }
 

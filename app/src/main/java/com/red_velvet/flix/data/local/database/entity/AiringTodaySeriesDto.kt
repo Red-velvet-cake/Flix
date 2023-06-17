@@ -13,4 +13,5 @@ data class AiringTodaySeriesDto(
     val date: String,
     val popularity: Double,
     val voteAverage: Double,
-)
+    val formattedDate: String,
+    )

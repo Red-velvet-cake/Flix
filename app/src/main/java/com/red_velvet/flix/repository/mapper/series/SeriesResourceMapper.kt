@@ -17,7 +17,8 @@ fun SeriesResource.toEntity(): SeriesEntity {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
         firstAirDate = firstAirDate.orEmpty(),
         popularity = popularity.orZero(),
-        voteAverage = voteAverage.orZero()
+        voteAverage = voteAverage.orZero(),
+        formattedDate = ""
     )
 }
 
@@ -34,7 +35,8 @@ fun SeriesResource.toPopularSeriesDto(): PopularSeriesDto {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
         date = firstAirDate.orEmpty(),
         popularity = popularity.orZero(),
-        voteAverage = voteAverage.orZero()
+        voteAverage = voteAverage.orZero(),
+        formattedDate = ""
     )
 }
 
@@ -51,7 +53,8 @@ fun SeriesResource.toTopRatedSeriesDto(): TopRatedSeriesDto {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
         date = firstAirDate.orEmpty(),
         popularity = popularity.orZero(),
-        voteAverage = voteAverage.orZero()
+        voteAverage = voteAverage.orZero(),
+        formattedDate = ""
     )
 }
 
@@ -68,7 +71,8 @@ fun SeriesResource.toAiringTodaySeriesDto(): AiringTodaySeriesDto {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
         date = firstAirDate.orEmpty(),
         popularity = popularity.orZero(),
-        voteAverage = voteAverage.orZero()
+        voteAverage = voteAverage.orZero(),
+        formattedDate = ""
 
     )
 }
@@ -86,7 +90,8 @@ fun SeriesResource.toOnTheAirSeriesDto(): OnTheAirSeriesDto {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
         date = firstAirDate.orEmpty(),
         popularity = popularity.orZero(),
-        voteAverage = voteAverage.orZero()
+        voteAverage = voteAverage.orZero(),
+        formattedDate = ""
     )
 }
 
