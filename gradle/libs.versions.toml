@@ -31,6 +31,7 @@ mockito-core = "4.2.0"
 mockito-inline = "3.12.4"
 kotlinx-coroutines-test = "1.6.4"
 mockito-kotlin = "3.2.0"
+swiperefreshlayout = "1.1.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -67,6 +68,7 @@ junit-vintage-engine = { module = "org.junit.vintage:junit-vintage-engine", vers
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito-core" }
 mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockito-inline" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

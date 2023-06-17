@@ -3,6 +3,7 @@ package com.red_velvet.flix.ui.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -19,6 +20,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         assignPagesToTabs()
+        onRefresh()
     }
 
     private fun assignPagesToTabs() {
@@ -35,6 +37,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         }.attach()
     }
+
+    private fun onRefresh() {
+        val swipeRefreshLayout: SwipeRefreshLayout = binding.swipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.getMoviesPageData()
+            viewModel.getTvShowsPageData()
+            swipeRefreshLayout.isRefreshing = false
+        }
+
+    }
+
 }
 
 
