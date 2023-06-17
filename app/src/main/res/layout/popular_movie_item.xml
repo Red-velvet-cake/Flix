@@ -19,7 +19,6 @@
         android:id="@+id/popular_movie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_small"
         android:background="@color/background_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +49,7 @@
 
         <TextView
             android:id="@+id/movie_title"
-            style="@style/SemiBold.Large"
+            style="@style/Medium.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_semi_small"
@@ -72,8 +71,7 @@
             android:layout_marginBottom="3dp"
             android:gravity="start"
             android:maxWidth="240dp"
-            app:formattedDate="@{item.date}"
-            app:language="@{item.originalLanguage}"
+            android:text="@{item.date}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/movie_title"
             tools:text="The Flash" />

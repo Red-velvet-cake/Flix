@@ -15,19 +15,19 @@
         android:layout_height="match_parent"
         android:background="@color/background_color">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/movies_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:overScrollMode="never"
-                android:scrollbars="none"
-                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:showMovieContentOnSuccess="@{viewModel.state}"
-                app:spanCount="1" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/movies_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showMovieContentOnSuccess="@{viewModel.state}"
+            app:spanCount="1" />
 
 
         <include

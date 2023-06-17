@@ -23,8 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/background_color"
-        >
-<!--        android:onClick="@{()->listener.onClickMovie(item.id)}"-->
+        android:onClick="@{()->listener.onClickMovie(item.id)}">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/media_movie_image"
@@ -42,7 +41,7 @@
 
         <TextView
             android:id="@+id/media_movie_title"
-            style="@style/Medium.Small"
+            style="@style/Medium.Large"
             android:layout_width="@dimen/media_card_width"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_too_small"
@@ -61,8 +60,7 @@
             android:layout_marginTop="@dimen/spacing_extra_small"
             android:ellipsize="end"
             android:lines="1"
-            app:formattedDate="@{item.date}"
-            app:language="@{item.originalLanguage}"
+            android:text="@{item.date}"
             app:layout_constraintStart_toStartOf="@+id/media_movie_image"
             app:layout_constraintTop_toBottomOf="@+id/media_movie_title"
             tools:text="Now Streaming" />
