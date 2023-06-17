@@ -2,7 +2,6 @@ package com.red_velvet.flix.ui.movieDetails
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.red_velvet.flix.domain.entity.KeywordEntity
 import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.movie.MovieCastEntity
 import com.red_velvet.flix.domain.entity.movie.MovieDetailsEntity
@@ -36,7 +35,11 @@ class MovieDetailsViewModel @Inject constructor(
     private val getMovieImagesUseCase: GetMovieImagesUseCase,
     private val getMovieCastUseCase: GetMovieCastUseCase,
     private val getMovieKeywordsUseCase: GetMovieKeywordsUseCase,
-) : BaseViewModel<MovieUiState>(), MovieDetailsInteractionListener, BaseInteractionListener,MovieKeywordsInteractionListener {
+) : BaseViewModel<MovieUiState>(),
+    MovieDetailsInteractionListener,
+    BaseInteractionListener,
+    MovieKeywordsInteractionListener,
+    ItemMovieInteractionListener{
     override val _state: MutableStateFlow<MovieUiState> = MutableStateFlow(MovieUiState())
     override val state: StateFlow<MovieUiState> = _state
 
@@ -146,7 +149,10 @@ class MovieDetailsViewModel @Inject constructor(
     }
 
     override fun onKeywordClick(keyword: String) {
-        Log.i("jalal","keyword : $keyword")
+    }
+
+    override fun onMovieItemClick(movieId: Int) {
+        Log.i("jalal","keyword : $movieId")
     }
     companion object {
         const val MOVIE_ID = 603692
