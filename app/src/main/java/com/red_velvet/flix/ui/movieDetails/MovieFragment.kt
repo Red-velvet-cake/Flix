@@ -18,6 +18,7 @@ class MovieFragment : BaseFragment<FragmentMovieDetailsBinding>(){
     private lateinit var movieDetailsReviewAdapter: ReviewMovieDetailsAdapter
     private lateinit var movieDetailsImagesAdapter: MovieImagesAdapter
     private lateinit var movieTopCastAdapter: MovieTopCastAdapter
+    private lateinit var movieKeywordsAdapter: MovieKeywordsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,10 +27,12 @@ class MovieFragment : BaseFragment<FragmentMovieDetailsBinding>(){
         movieDetailsReviewAdapter = ReviewMovieDetailsAdapter(mutableListOf(),viewModel)
         movieDetailsImagesAdapter = MovieImagesAdapter(mutableListOf(),viewModel)
         movieTopCastAdapter = MovieTopCastAdapter(mutableListOf(),viewModel)
+        movieKeywordsAdapter = MovieKeywordsAdapter(mutableListOf(),viewModel)
         binding.RecommendationsScroll.adapter = adapter
         binding.similarMoviesScroll.adapter = similarMovieAdapter
         binding.reviewsScroll.adapter = movieDetailsReviewAdapter
         binding.ImagesBelongToMovieScroll.adapter = movieDetailsImagesAdapter
         binding.topCastScrollView.adapter = movieTopCastAdapter
+        binding.keywordsScrollView.adapter = movieKeywordsAdapter
         }
     }
