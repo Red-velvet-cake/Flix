@@ -50,6 +50,7 @@ data class MovieUiState(
     )
 
     data class MovieReview(
+        val id: String,
         val rating: Int,
         val movieReviewer: String,
         val movieReview: String,
@@ -65,7 +66,7 @@ data class MovieUiState(
 
 fun ReviewEntity.toReviewUiState():MovieUiState.MovieReview
 {
-    return MovieUiState.MovieReview(rating = rating , movieReview = content , movieReviewer = author.name)
+    return MovieUiState.MovieReview(rating = rating , movieReview = content , movieReviewer = author.name, id = id)
 }
 fun List<ReviewEntity>.toReviewUiState():List<MovieUiState.MovieReview>
 {
