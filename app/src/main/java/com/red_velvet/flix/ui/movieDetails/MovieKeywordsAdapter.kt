@@ -10,3 +10,7 @@ class MovieKeywordsAdapter(
 ):BaseAdapter<MovieUiState.MovieKeywords>(keywords,listener) {
     override val layoutId: Int = R.layout.item_keywords_movie_details
 }
+interface MovieKeywordsInteractionListener:BaseInteractionListener
+{
+    fun onKeywordClick(keyword:String)
+}
