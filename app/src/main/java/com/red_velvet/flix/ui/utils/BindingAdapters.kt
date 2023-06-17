@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.red_velvet.flix.ui.movieDetails.MovieImagesAdapter
 import com.red_velvet.flix.ui.movieDetails.MovieDetailsAdapter
+import com.red_velvet.flix.ui.movieDetails.MovieKeywordsAdapter
 import com.red_velvet.flix.ui.movieDetails.MovieTopCastAdapter
 import com.red_velvet.flix.ui.movieDetails.MovieUiState
 import com.red_velvet.flix.ui.movieDetails.ReviewMovieDetailsAdapter
@@ -39,3 +40,9 @@ fun setRecyclerViewItemsImages(view: RecyclerView , items : List<MovieUiState.Im
 fun setRecyclerViewItemsTopCast(view: RecyclerView , items : List<MovieUiState.TopCast>?){
     items?.let { (view.adapter as MovieTopCastAdapter).setItems(items)}
 }
+@BindingAdapter(value = ["app:itemsMovieKeyword"])
+fun setRecyclerViewItemsMovieKeywords(view: RecyclerView , items : List<MovieUiState.MovieKeywords>?){
+    items?.let { (view.adapter as MovieKeywordsAdapter).setItems(items)}
+}
+
+
