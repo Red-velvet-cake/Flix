@@ -6,12 +6,16 @@
         <variable
             name="item"
             type="com.red_velvet.flix.ui.movieDetails.MovieUiState.MovieKeywords" />
+    <variable
+        name="listener"
+        type="com.red_velvet.flix.ui.movieDetails.MovieKeywordsInteractionListener" />
     </data>
 
     <com.google.android.material.chip.Chip
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@{item.keyword}"
+        android:onClick="@{()->listener.onKeywordClick(item.keyword)}"
         android:paddingVertical="@dimen/_8dp"
         android:paddingHorizontal="@dimen/_16dp"
         app:chipCornerRadius="@dimen/_8dp"
