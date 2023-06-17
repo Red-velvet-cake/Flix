@@ -10,3 +10,6 @@ class ReviewMovieDetailsAdapter(
     BaseAdapter<MovieUiState.MovieReview>(items = reviews , listener = listener) {
     override val layoutId: Int = R.layout.item_review_movie_details
 }
+interface OnMovieReviewInteractionListener:BaseInteractionListener{
+    fun onMovieReviewClick(reviewId:String)
+}
