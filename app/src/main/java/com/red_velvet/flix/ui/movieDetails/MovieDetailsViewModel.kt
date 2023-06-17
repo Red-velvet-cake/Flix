@@ -39,7 +39,8 @@ class MovieDetailsViewModel @Inject constructor(
     MovieDetailsInteractionListener,
     BaseInteractionListener,
     MovieKeywordsInteractionListener,
-    ItemMovieInteractionListener{
+    OnMovieReviewInteractionListener,
+    ItemMovieInteractionListener {
     override val _state: MutableStateFlow<MovieUiState> = MutableStateFlow(MovieUiState())
     override val state: StateFlow<MovieUiState> = _state
 
@@ -152,7 +153,10 @@ class MovieDetailsViewModel @Inject constructor(
     }
 
     override fun onMovieItemClick(movieId: Int) {
-        Log.i("jalal","keyword : $movieId")
+    }
+
+    override fun onMovieReviewClick(reviewId: String) {
+        Log.i("jalal","keyword : $reviewId")
     }
     companion object {
         const val MOVIE_ID = 603692
