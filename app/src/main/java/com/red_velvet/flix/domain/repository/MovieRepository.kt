@@ -6,6 +6,7 @@ import com.red_velvet.flix.domain.entity.ReviewEntity
 import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.movie.MovieEntity
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
+import kotlinx.coroutines.flow.Flow
 
 
 interface MovieRepository {
@@ -51,20 +52,17 @@ interface MovieRepository {
     suspend fun getMoviesByKeyword(keywordId: Int, page: Int? = null): List<MovieEntity>
 
     suspend fun discoverMovies(
-        page: Int?,
-        sortBy: String?,
-        rate: Float?,
-        year: Int?
+        page: Int?, sortBy: String?, rate: Float?, year: Int?
     ): List<MovieEntity>
 
 
-    suspend fun getLocalPopularMovies(): List<MovieEntity>
+    fun getLocalPopularMovies(): Flow<List<MovieEntity>>
 
-    suspend fun getLocalUpcomingMovies(): List<MovieEntity>
+    fun getLocalUpcomingMovies(): Flow<List<MovieEntity>>
 
-    suspend fun getLocalNowPlayingMovies(): List<MovieEntity>
+    fun getLocalNowPlayingMovies(): Flow<List<MovieEntity>>
 
-    suspend fun getLocalTopRatedMovies(): List<MovieEntity>
+    fun getLocalTopRatedMovies(): Flow<List<MovieEntity>>
 
     suspend fun cachePopularMovies(movies: List<MovieEntity>)
 

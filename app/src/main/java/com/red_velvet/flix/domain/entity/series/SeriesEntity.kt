@@ -8,4 +8,5 @@ data class SeriesEntity(
     val firstAirDate: String,
     val popularity: Double,
     val voteAverage: Double,
-)
+    val formattedDate: String,
+    )

@@ -5,6 +5,7 @@ import com.red_velvet.flix.domain.entity.TrailerEntity
 import com.red_velvet.flix.domain.entity.series.EpisodeEntity
 import com.red_velvet.flix.domain.entity.series.SeasonEntity
 import com.red_velvet.flix.domain.entity.series.SeriesEntity
+import kotlinx.coroutines.flow.Flow
 
 interface SeriesRepository {
 
@@ -28,10 +29,10 @@ interface SeriesRepository {
     suspend fun getSeriesImages(seriesId: Int): List<String>
     suspend fun getSimilarSeries(seriesId: Int, page: Int?): List<SeriesEntity>
 
-    suspend fun getLocalPopularSeries(): List<SeriesEntity>
-    suspend fun getLocalTopRatedSeries(): List<SeriesEntity>
-    suspend fun getLocalOnTheAirSeries(): List<SeriesEntity>
-    suspend fun getLocalAiringTodaySeries(): List<SeriesEntity>
+    fun getLocalPopularSeries(): Flow<List<SeriesEntity>>
+    fun getLocalTopRatedSeries(): Flow<List<SeriesEntity>>
+    fun getLocalOnTheAirSeries(): Flow<List<SeriesEntity>>
+    fun getLocalAiringTodaySeries(): Flow<List<SeriesEntity>>
     suspend fun cachePopularSeries(series: List<SeriesEntity>)
     suspend fun cacheTopRatedSeries(series: List<SeriesEntity>)
     suspend fun cacheOnTheAirSeries(series: List<SeriesEntity>)

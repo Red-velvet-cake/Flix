@@ -17,7 +17,9 @@ fun MovieResource.toEntity(): MovieEntity {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
         popularity = popularity.orZero(),
         releaseDate = releaseDate.orEmpty(),
-        voteAverage = voteAverage.orZero()
+        voteAverage = voteAverage.orZero(),
+        originalLanguage = originalLanguage.orEmpty(),
+        formattedDate = ""
     )
 }
 
@@ -32,7 +34,8 @@ fun MovieResource.toPopularMovieDto(): PopularMovieDto {
         originalLanguage = originalLanguage.orEmpty(),
         overview = overview.orEmpty(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
-        date = releaseDate.orEmpty()
+        date = releaseDate.orEmpty(),
+        formattedDate = ""
     )
 }
 
@@ -48,7 +51,8 @@ fun MovieResource.toUpcomingMovieDto(): UpcomingMovieDto {
         originalLanguage = originalLanguage.orEmpty(),
         overview = overview.orEmpty(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
-        date = releaseDate.orEmpty()
+        date = releaseDate.orEmpty(),
+        formattedDate = ""
     )
 }
 
@@ -63,7 +67,8 @@ fun MovieResource.toTopRatedMovieDto(): TopRatedMovieDto {
         originalLanguage = originalLanguage.orEmpty(),
         overview = overview.orEmpty(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
-        date = releaseDate.orEmpty()
+        date = releaseDate.orEmpty(),
+        formattedDate = ""
     )
 }
 
@@ -78,7 +83,8 @@ fun MovieResource.toNowPlayingMovieDto(): NowPlayingMovieDto {
         originalLanguage = originalLanguage.orEmpty(),
         overview = overview.orEmpty(),
         imageUrl = BuildConfig.IMAGE_BASE_PATH + posterPath,
-        date = releaseDate.orEmpty()
+        date = releaseDate.orEmpty(),
+        formattedDate = ""
     )
 }
 

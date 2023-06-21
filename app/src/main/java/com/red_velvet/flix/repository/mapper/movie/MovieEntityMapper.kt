@@ -14,6 +14,7 @@ fun MovieEntity.toPopularMovieDto(): PopularMovieDto {
         overview = "overview",
         imageUrl = imageUrl,
         date = releaseDate,
+        formattedDate = formattedDate,
     )
 }
 
@@ -29,6 +30,7 @@ fun MovieEntity.toNowPlayingMovieDto(): NowPlayingMovieDto {
         overview = "overview",
         imageUrl = imageUrl,
         date = releaseDate,
+        formattedDate = formattedDate,
     )
 }
 
@@ -44,6 +46,7 @@ fun MovieEntity.toTopRatedMovieDto(): TopRatedMovieDto {
         overview = "overview",
         imageUrl = imageUrl,
         date = releaseDate,
+        formattedDate = formattedDate,
     )
 }
 
@@ -59,6 +62,7 @@ fun MovieEntity.toUpComingMovieDto(): UpcomingMovieDto {
         overview = "overview",
         imageUrl = imageUrl,
         date = releaseDate,
+        formattedDate = formattedDate,
     )
 }
 

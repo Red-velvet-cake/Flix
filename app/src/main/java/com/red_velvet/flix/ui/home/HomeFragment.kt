@@ -3,41 +3,51 @@ package com.red_velvet.flix.ui.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.red_velvet.flix.R
 import com.red_velvet.flix.databinding.FragmentHomeBinding
 import com.red_velvet.flix.ui.base.BaseFragment
-import com.red_velvet.flix.ui.home.adapter.HomeAdapter
+import com.red_velvet.flix.ui.home.pages.ViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override val layoutIdFragment = R.layout.fragment_home
     override val viewModel: HomeViewModel by viewModels()
-    private lateinit var homeAdapter: HomeAdapter
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setAdapter()
-//        collectHomeData()
+        assignPagesToTabs()
+        onRefresh()
     }
 
-    private fun setAdapter() {
-        homeAdapter = HomeAdapter(mutableListOf(), viewModel)
-        binding.recyclerView.adapter = homeAdapter
+    private fun assignPagesToTabs() {
+        val viewPager = view?.findViewById<ViewPager2>(R.id.view_pager)
+        viewPager?.adapter = ViewPagerAdapter(this, viewModel)
+        viewPager?.isUserInputEnabled = false
+
+        val tabLayout = view?.findViewById<TabLayout>(R.id.tab_layout)
+        TabLayoutMediator(tabLayout!!, viewPager!!) { tab, position ->
+            tab.text = when (position) {
+                0 -> "Movies"
+                1 -> "TV Shows"
+                else -> throw IllegalStateException("Invalid position")
+            }
+        }.attach()
     }
 
-//    private fun collectHomeData() {
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewModel.homeUiState.collect {
-//                homeAdapter.setItems(
-//                    mutableListOf(
-//                        it.popularMovies,
-//                        it.nowPlayingMovies,
-//                        it.upcomingMovies,
-//                        it.topRatedMovies,
-//                    )
-//                )
-//            }
-//        }
-//    }
+    private fun onRefresh() {
+        val swipeRefreshLayout: SwipeRefreshLayout = binding.swipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.getMoviesPageData()
+            viewModel.getTvShowsPageData()
+            swipeRefreshLayout.isRefreshing = false
+        }
+
+    }
+
 }
+
+

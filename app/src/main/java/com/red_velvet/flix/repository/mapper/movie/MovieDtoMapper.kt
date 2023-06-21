@@ -14,7 +14,9 @@ fun PopularMovieDto.toEntity(): MovieEntity {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + imageUrl,
         popularity = 0.0,
         releaseDate = date,
-        voteAverage = 0.0
+        voteAverage = 0.0,
+        originalLanguage = originalLanguage,
+        formattedDate = formattedDate
     )
 }
 
@@ -25,7 +27,9 @@ fun UpcomingMovieDto.toEntity(): MovieEntity {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + imageUrl,
         popularity = 0.0,
         releaseDate = date,
-        voteAverage = 0.0
+        voteAverage = 0.0,
+        originalLanguage = originalLanguage,
+        formattedDate = formattedDate
     )
 }
 
@@ -36,7 +40,9 @@ fun TopRatedMovieDto.toEntity(): MovieEntity {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + imageUrl,
         popularity = 0.0,
         releaseDate = date,
-        voteAverage = 0.0
+        voteAverage = 0.0,
+        originalLanguage = originalLanguage,
+        formattedDate = formattedDate
     )
 }
 
@@ -47,7 +53,9 @@ fun NowPlayingMovieDto.toEntity(): MovieEntity {
         imageUrl = BuildConfig.IMAGE_BASE_PATH + imageUrl,
         popularity = 0.0,
         releaseDate = date,
-        voteAverage = 0.0
+        voteAverage = 0.0,
+        originalLanguage = originalLanguage,
+        formattedDate = formattedDate
     )
 }
 

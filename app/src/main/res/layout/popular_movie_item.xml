@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="listener"
+            type="com.red_velvet.flix.ui.home.adapters.PopularMovieInteractionListener" />
+
+        <variable
+            name="item"
+            type="com.red_velvet.flix.ui.home.HomeUiState.MediaUiState" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/popular_movie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
+        <!--        android:onClick="@{()->listener.onClickPopularMovie(item.id)}"-->
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_movie"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="1.75:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:posterImage="@{item.imageUrl}"
+            app:shapeAppearanceOverlay="@style/CardCorners.Medium" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#9811142D"
+            app:layout_constraintBottom_toBottomOf="@+id/image_movie"
+            app:layout_constraintEnd_toEndOf="@+id/image_movie"
+            app:layout_constraintStart_toStartOf="@+id/image_movie" />
+
+
+        <TextView
+            android:id="@+id/movie_title"
+            style="@style/Medium.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_semi_small"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="@dimen/spacing_too_small"
+            android:ellipsize="end"
+            android:lines="1"
+            android:maxWidth="240dp"
+            android:text="@{item.title}"
+            app:layout_constraintBottom_toTopOf="@+id/movie_date"
+            app:layout_constraintStart_toStartOf="@+id/image_movie"
+            tools:text="The Flash" />
+
+        <TextView
+            android:id="@+id/movie_date"
+            style="@style/Regular.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:gravity="start"
+            android:maxWidth="240dp"
+            android:text="@{item.formattedDate}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/movie_title"
+            tools:text="The Flash" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

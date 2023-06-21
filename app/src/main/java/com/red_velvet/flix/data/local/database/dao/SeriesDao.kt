@@ -8,6 +8,7 @@ import com.red_velvet.flix.data.local.database.entity.AiringTodaySeriesDto
 import com.red_velvet.flix.data.local.database.entity.OnTheAirSeriesDto
 import com.red_velvet.flix.data.local.database.entity.PopularSeriesDto
 import com.red_velvet.flix.data.local.database.entity.TopRatedSeriesDto
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SeriesDao {
@@ -24,14 +25,14 @@ interface SeriesDao {
     suspend fun insertAiringTodaySeries(airingTodaySeries: List<AiringTodaySeriesDto>)
 
     @Query("SELECT * FROM POPULAR_SERIES")
-    suspend fun getPopularSeries(): List<PopularSeriesDto>
+     fun getPopularSeries(): Flow<List<PopularSeriesDto>>
 
     @Query("SELECT * FROM TOP_RATED_SERIES")
-    suspend fun getTopRatedSeries(): List<TopRatedSeriesDto>
+     fun getTopRatedSeries(): Flow<List<TopRatedSeriesDto>>
 
     @Query("SELECT * FROM ON_THE_AIR_SERIES")
-    suspend fun getOnTheAirSeries(): List<OnTheAirSeriesDto>
+     fun getOnTheAirSeries(): Flow<List<OnTheAirSeriesDto>>
 
     @Query("SELECT * FROM AIRING_TODAY_SERIES")
-    suspend fun getAiringTodaySeries(): List<AiringTodaySeriesDto>
+     fun getAiringTodaySeries(): Flow<List<AiringTodaySeriesDto>>
 }

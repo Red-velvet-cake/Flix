@@ -11,4 +11,5 @@ data class UpcomingMovieDto(
     val overview: String,
     val imageUrl: String,
     val date: String,
+    val formattedDate: String,
 )

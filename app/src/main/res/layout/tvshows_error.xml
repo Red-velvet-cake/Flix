@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.red_velvet.flix.ui.home.HomeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/error_animation"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_marginBottom="@dimen/spacing_small"
+            app:layout_constraintBottom_toTopOf="@+id/title_error"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/error_animation"
+            app:showOnError="@{viewModel.state.seriesError}" />
+
+        <TextView
+            android:id="@+id/title_error"
+            style="@style/SemiBold.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_extra_large"
+            android:text="@string/oops"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showOnError="@{viewModel.state.seriesError}" />
+
+        <Button
+            android:id="@+id/button_retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:onClick="@{() -> viewModel.getTvShowsPageData()}"
+            android:text="@string/retry"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_error"
+            app:showOnError="@{viewModel.state.seriesError}" />
+
+        <include
+            android:id="@+id/no_internet_error"
+            layout="@layout/no_internet_connection_search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showWhenNoInternet="@{viewModel.state.seriesError}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

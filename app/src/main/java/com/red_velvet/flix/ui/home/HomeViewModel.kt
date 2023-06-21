@@ -1,146 +1,187 @@
 package com.red_velvet.flix.ui.home
 
-import com.red_velvet.flix.domain.usecase.GetNowPlayingMoviesUseCase
-import com.red_velvet.flix.domain.usecase.GetPopularMoviesUseCase
-import com.red_velvet.flix.domain.usecase.GetTopRatedMoviesUseCase
-import com.red_velvet.flix.domain.usecase.GetUpcomingMoviesUseCase
+import android.util.Log
+import com.red_velvet.flix.domain.entity.movie.MovieEntity
+import com.red_velvet.flix.domain.entity.series.SeriesEntity
+import com.red_velvet.flix.domain.usecase.home.tvshows.GetAiringTodaySeriesUseCase
+import com.red_velvet.flix.domain.usecase.home.movies.GetNowPlayingMoviesUseCase
+import com.red_velvet.flix.domain.usecase.home.tvshows.GetOnTheAirSeriesUseCase
+import com.red_velvet.flix.domain.usecase.home.movies.GetPopularMoviesUseCase
+import com.red_velvet.flix.domain.usecase.home.tvshows.GetPopularSeriesUseCase
+import com.red_velvet.flix.domain.usecase.home.movies.GetTopRatedMoviesUseCase
+import com.red_velvet.flix.domain.usecase.home.tvshows.GetTopRatedSeriesUseCase
+import com.red_velvet.flix.domain.usecase.home.movies.GetUpcomingMoviesUseCase
 import com.red_velvet.flix.ui.base.BaseViewModel
-import com.red_velvet.flix.ui.home.adapter.MovieInteractionListener
-import com.red_velvet.flix.ui.home.homeUiState.HomeUiState
+import com.red_velvet.flix.ui.base.ErrorUiState
+import com.red_velvet.flix.ui.home.adapters.MovieInteractionListener
+import com.red_velvet.flix.ui.home.adapters.PopularMovieInteractionListener
+import com.red_velvet.flix.ui.home.adapters.PopularTvShowInteractionListener
+import com.red_velvet.flix.ui.home.adapters.TvShowInteractionListener
+import com.red_velvet.flix.ui.utils.toMovieUiState
+import com.red_velvet.flix.ui.utils.toSeriesUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    private val getPopularMovies: GetPopularMoviesUseCase,
+    private val getNowPlayingMovies: GetNowPlayingMoviesUseCase,
+    private val getUpcomingMovies: GetUpcomingMoviesUseCase,
+    private val getTopRatedMovies: GetTopRatedMoviesUseCase,
+    private val getPopularSeries: GetPopularSeriesUseCase,
+    private val getAiringTodaySeries: GetAiringTodaySeriesUseCase,
+    private val getOnTheAirSeries: GetOnTheAirSeriesUseCase,
+    private val getTopRatedSeries: GetTopRatedSeriesUseCase,
 
-    private val getPopularMoviesUsecase: GetPopularMoviesUseCase,
-    private val getNowPlayingMoviesUsecase: GetNowPlayingMoviesUseCase,
-    private val getUpcomingMoviesUsecase: GetUpcomingMoviesUseCase,
-    private val getTopRatedMoviesUsecase: GetTopRatedMoviesUseCase,
-) : BaseViewModel<HomeUiState>(), MovieInteractionListener {
+    ) : BaseViewModel<HomeUiState>(), MovieInteractionListener, PopularMovieInteractionListener,
+    TvShowInteractionListener, PopularTvShowInteractionListener {
     override val _state: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState())
-    override val state: StateFlow<HomeUiState> = _state.asStateFlow()
+    override val state = _state
 
     init {
-        getHomeData()
+        getMoviesPageData()
     }
 
-    private fun getHomeData() {
-//        _homeUiState.update { it.copy(isLoading = true) }
+    fun getMoviesPageData() {
+        _state.update { it.copy(movieError = null, isMovieLoading = true) }
         getPopularMovies()
         getNowPlayingMovies()
         getUpcomingMovies()
         getTopRatedMovies()
     }
 
+    fun getTvShowsPageData() {
+        _state.update { it.copy(seriesError = null, isSeriesLoading = true) }
+        getPopularSeries()
+        getAiringTodaySeries()
+        getOnAirSeries()
+        getTopRatedSeries()
+    }
+
 
     private fun getPopularMovies() {
-//        viewModelScope.launch {
-//            try {
-//                getPopularMoviesUsecase(
-//                    page = 1,
-//                    region = "US",
-//                    language = "en-US"
-//
-//                ).collect { list ->
-//                    Log.i("HomeViewModel", "getPopularMovies: $list")
-//                    if (list.isNotEmpty()) {
-//                        val items = list.toUiState()
-//                        _homeUiState.update {
-//                            it.copy(
-//                                popularMovies = HomeItem.Popular(items),
-//                                isLoading = false
-//                            )
-//                        }
-//                    }
-//                }
-//            } catch (th: Throwable) {
-//                onError(th.message.toString())
-//            }
-//        }
+        tryToExecuteHome(
+            getPopularMovies::invoke, ::modifyPopularMoviesState, ::onMovieError
+        )
+    }
+
+    private fun modifyPopularMoviesState(movies: List<MovieEntity>) {
+        Log.d("HomeViewModel", "modifyPopularMoviesState: $movies")
+        _state.update { state ->
+            state.copy(popularMovies = movies.takeIf { it.isNotEmpty() }
+                ?.let { mutableListOf(it.first()).toMovieUiState() } ?: emptyList(),
+                isMovieLoading = false)
+        }
+
     }
 
     private fun getNowPlayingMovies() {
-//        viewModelScope.launch {
-//            try {
-//                getNowPlayingMoviesUsecase(
-//                    page = 1
-//
-//                ).collect { list ->
-//                        Log.i("HomeViewModel", "getNowPlayingMovies: $list")
-//                    if (list.isNotEmpty()) {
-//                        val items = list.toUiState()
-//
-//                        _homeUiState.update {
-//                            it.copy(
-//                                nowPlayingMovies = HomeItem.NowPlaying(items),
-//                                isLoading = false
-//                            )
-//                        }
-//                    }
-//                }
-//            } catch (th: Throwable) {
-//                onError(th.message.toString())
-//            }
-//        }
+        tryToExecuteHome(
+            getNowPlayingMovies::invoke, ::modifyNowPlayingMoviesState, ::onMovieError
+        )
+
+    }
+
+    private fun modifyNowPlayingMoviesState(movies: List<MovieEntity>) {
+        _state.update {
+            it.copy(nowPlayingMovies = movies.toMovieUiState(), isMovieLoading = false)
+        }
     }
 
     private fun getUpcomingMovies() {
-//        viewModelScope.launch {
-//            try {
-//                getUpcomingMoviesUsecase(
-//                    page = 1
-//                ).collect { list ->
-//                    Log.i("HomeViewModel", "getUpcomingMovies: $list")
-//                    if (list.isNotEmpty()) {
-//                        val items = list.toUiState()
-//                        _homeUiState.update {
-//                            it.copy(
-//                                upcomingMovies = HomeItem.Upcoming(items),
-//                                isLoading = false
-//                            )
-//                        }
-//                    }
-//                }
-//            } catch (th: Throwable) {
-//                onError(th.message.toString())
-//            }
-//        }
+        tryToExecuteHome(
+            getUpcomingMovies::invoke, ::modifyUpcomingMoviesState, ::onMovieError
+        )
+
+    }
+
+    private fun modifyUpcomingMoviesState(movies: List<MovieEntity>) {
+        _state.update {
+            it.copy(upcomingMovies = movies.toMovieUiState(), isMovieLoading = false)
+        }
     }
 
     private fun getTopRatedMovies() {
-//        viewModelScope.launch {
-//            try {
-//                getTopRatedMoviesUsecase(
-//                    page = 1
-//
-//                ).collect { list ->
-//                    Log.i("HomeViewModel", "getTopRatedMovies: $list")
-//                    if (list.isNotEmpty()) {
-//                        val items = list.toUiState()
-//                        _homeUiState.update {
-//                            it.copy(
-//                                topRatedMovies = HomeItem.TopRated(items),
-//                                isLoading = false
-//                            )
-//                        }
-//                    }
-//                }
-//            } catch (th: Throwable) {
-//                onError(th.message.toString())
-//            }
-//        }
+        tryToExecuteHome(
+            getTopRatedMovies::invoke, ::modifyTopRatedMoviesState, ::onMovieError
+        )
+    }
+
+    private fun modifyTopRatedMoviesState(movies: List<MovieEntity>) {
+        _state.update {
+            it.copy(topRatedMovies = movies.toMovieUiState(), isMovieLoading = false)
+        }
+    }
+
+    private fun onMovieError(errorUiState: ErrorUiState) {
+        _state.update { it.copy(movieError = errorUiState, isMovieLoading = false) }
+    }
+
+    private fun getPopularSeries() {
+        tryToExecuteHome(
+            getPopularSeries::invoke, ::modifyPopularSeriesState, ::onSeriesError
+        )
+    }
+
+    private fun modifyPopularSeriesState(series: List<SeriesEntity>) {
+        Log.d("HomeViewModel", "modifyPopularSeriesState: $series")
+        _state.update { state ->
+            state.copy(popularSeries = series.takeIf { it.isNotEmpty() }
+                ?.let { mutableListOf(it.first()).toSeriesUiState() } ?: emptyList(),
+                isSeriesLoading = false)
+        }
     }
 
 
-    private fun onError(message: String) {
-        val errors = _state.value.error.toMutableList()
-        errors.add(message)
-        _state.update { it.copy(error = errors, isLoading = false) }
+    private fun getAiringTodaySeries() {
+        tryToExecuteHome(
+            getAiringTodaySeries::invoke, ::modifyAiringTodaySeriesState, ::onSeriesError
+        )
+    }
+
+    private fun modifyAiringTodaySeriesState(series: List<SeriesEntity>) {
+        _state.update {
+            it.copy(
+                airingTodaySeries = series.toSeriesUiState(), isSeriesLoading = false
+            )
+        }
+    }
+
+
+    private fun getOnAirSeries() {
+        tryToExecuteHome(
+            getOnTheAirSeries::invoke, ::modifyOnAirSeriesState, ::onSeriesError
+        )
+    }
+
+    private fun modifyOnAirSeriesState(series: List<SeriesEntity>) {
+        _state.update {
+            it.copy(
+                onTVSeries = series.toSeriesUiState(), isSeriesLoading = false
+            )
+        }
+    }
+
+
+    private fun getTopRatedSeries() {
+        tryToExecuteHome(
+            getTopRatedSeries::invoke, ::modifyTopRatedSeriesState, ::onSeriesError
+        )
+    }
+
+    private fun modifyTopRatedSeriesState(series: List<SeriesEntity>) {
+        _state.update {
+            it.copy(
+                topRatedSeries = series.toSeriesUiState(), isSeriesLoading = false
+            )
+        }
+    }
+
+
+    private fun onSeriesError(errorUiState: ErrorUiState) {
+        _state.update { it.copy(seriesError = errorUiState, isSeriesLoading = false) }
     }
 
 
@@ -148,7 +189,32 @@ class HomeViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun onClickSeeAllMovie(homeItemsType: HomeItemsType) {
+    override fun onClickSeeAllMovie(homeItem: HomeUiState.HomeItem) {
         TODO("Not yet implemented")
     }
+
+    override fun onClickPopularMovie(movieId: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClickSeeAllPopularMovies(homeItem: HomeUiState.HomeItem) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClickTvShow(tvshowId: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClickSeeAllTvShows(homeItem: HomeUiState.HomeItem) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClickPopularTvShow(tvshowId: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClickSeeAllPopularTvShows(homeItem: HomeUiState.HomeItem) {
+        TODO("Not yet implemented")
+    }
+
 }

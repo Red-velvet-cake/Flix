@@ -16,25 +16,28 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true">
+            android:fitsSystemWindows="true"
+            app:elevation="4dp">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize" />
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/background_color"
+                android:textSize="20sp"
+                app:title="@string/app_name"
+                app:titleCentered="true"
+                app:titleTextColor="@color/white" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#14FFFFFF" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <include layout="@layout/content_main" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="@dimen/fab_margin"
-            android:layout_marginBottom="16dp"
-            app:srcCompat="@android:drawable/ic_dialog_email" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -117,4 +117,12 @@ class UserRepositoryImp @Inject constructor(
         return preferencesDataSource.isUserLoggedIn()
     }
 
+    override suspend fun saveCachingTimeStamp(key: String, cachingTime: Long) {
+        preferencesDataSource.saveLastCachingTimeStamp(key, cachingTime)
+    }
+
+    override suspend fun getLastCachingTimeStamp(key: String): Long {
+        return preferencesDataSource.getLastCachingTime(key)
+    }
+
 }
